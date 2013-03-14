@@ -68,16 +68,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 1. ##### MOC
 	"The Api"
 	- Init the library
-	- Provide adapter access (eg. Api:: ...)
+	- Provide adapter access
 
+	And MOC said: "Let there be ligh... ähm.. Api:: !"
 
 2. ##### Adapter
 	Your window into a better world
 	- Starting point of the chain
-	- Provide Core/Extension/Module/Plugin access (eg. Api::Module() ...)
+	- Provide Core/Extension/Module/Plugin access
 
+	... and MOC devided the ::Core() from the ::Module() ... and it was good
 
-3. ##### Core
+3. ##### Core (God)
 	Contains secret internal operations ;-)
 	- Error handling
 	- Session handling
@@ -86,23 +88,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	You should never use this one directly in your application
 
-
-4. ##### Extension
+4. ##### Extension (The tree of life)
 	Add power to the system
 	- Defines a common interface for 3rd party applications
 
 	And again: You should never use this one directly in your application
 
-
-5. ##### Module
+5. ##### Module (The tree of knowledge)
 	Make the hole thing shiny
 	- Add in the functionality
 	- Defines a seamless interface to extensions
 
 	You will need this one - and ONLY this one - for your application
 
-
-6. ##### Plugin
+6. ##### Plugin (The snake)
 	Up to your imagination
 
 	I had an idea but... never mind... -.-
