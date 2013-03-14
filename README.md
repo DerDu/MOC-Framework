@@ -4,31 +4,7 @@
 ### Modular - Object - Chaining
 The easy way to OOP
 
-### Purpose
-
-
-### Design
-
-#### MOC - "The Api"
-
-- Init the Library
-- Provide Adapter-Access
-
-#### Adapter
-Your window into a better world
-
-#### Core
-Contains secret internal operations ;-)
-
-#### Extension
-Add power to the system
-
-#### Module
-Make the hole thing shiny
-
-#### Plugin
-Up to your imagination
-
+------------------------------------------------------------------------------------------------------------------------
 
 ### Usage
 
@@ -84,6 +60,30 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+------------------------------------------------------------------------------------------------------------------------
+
+### Design
+
+#### MOC - "The Api"
+
+- Init the Library
+- Provide Adapter-Access
+
+#### Adapter
+Your window into a better world
+
+#### Core
+Contains secret internal operations ;-)
+
+#### Extension
+Add power to the system
+
+#### Module
+Make the hole thing shiny
+
+#### Plugin
+Up to your imagination
 
 ------------------------------------------------------------------------------------------------------------------------
 
