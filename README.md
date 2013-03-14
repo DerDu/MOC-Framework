@@ -65,33 +65,48 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Design
 
-1. #### MOC
+1. ##### MOC
 
 	"The Api"
 	- Init the library
-	- Provide adapter access (Api:: ...)
+	- Provide adapter access (eg. Api:: ...)
 
 2. ##### Adapter
 
 	Your window into a better world
 	- Starting point of the chain
-	-
+	- Provide Core/Extension/Module/Plugin access (eg. Api::Module() ...)
 
-3. #### Core
+3. ##### Core
 
 	Contains secret internal operations ;-)
+	- Error handling
+	- Session handling
+	- Cache handling
+	- ...
 
-4. #### Extension
+	You should never use this one directly in your application
+
+4. ##### Extension
 
 	Add power to the system
+	- Defines a common interface for 3rd party applications
 
-5. #### Module
+	And again: You should never use this one directly in your application
+
+5. ##### Module
 
 	Make the hole thing shiny
+	- Add in the functionality
+	- Defines a seamless interface to extensions
 
-6. #### Plugin
+	You will need this one - and ONLY this one - for your application
+
+6. ##### Plugin
 
 	Up to your imagination
+
+	I had an idea but... never mind... -.-
 
 ------------------------------------------------------------------------------------------------------------------------
 
