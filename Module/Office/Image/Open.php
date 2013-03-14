@@ -36,7 +36,7 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Image;
-use \MOC\Api;
+use MOC\Api;
 /**
  *
  */

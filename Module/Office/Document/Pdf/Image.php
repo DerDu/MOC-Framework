@@ -36,11 +36,14 @@
  * 27.02.2013 18:32
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Image implements \MOC\Generic\Device\Module {
+class Image implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -75,12 +78,12 @@ class Image implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 * @param null                   $Width
 	 * @param null                   $Height
 	 * @return \MOC\Module\Office\Document\Pdf
 	 */
-	public function File( \MOC\Module\Drive\File $File, $Width = null, $Height = null ) {
+	public function File( File $File, $Width = null, $Height = null ) {
 		Api::Extension()->Pdf()->Current()->Image(
 			$File->GetLocation(),
 			Api::Extension()->Pdf()->Current()->GetX(),

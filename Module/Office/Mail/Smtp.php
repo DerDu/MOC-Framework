@@ -36,11 +36,13 @@
  * 11.02.2013 12:59
  */
 namespace MOC\Module\Office\Mail;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Smtp implements \MOC\Generic\Device\Module {
+class Smtp implements Module {
 
 	/**
 	 * Get Singleton/Instance

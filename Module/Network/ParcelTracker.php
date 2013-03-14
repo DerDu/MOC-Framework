@@ -36,19 +36,21 @@
  * 30.01.2013 11:13
  */
 namespace MOC\Module\Network;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class ParcelTracker implements \MOC\Generic\Device\Module {
+class ParcelTracker implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\ParcelTracker
+	 * @return ParcelTracker
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\ParcelTracker();
+		return new ParcelTracker();
 	}
 
 	/**
@@ -78,39 +80,39 @@ class ParcelTracker implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\DHLGermany
+	 * @return ParcelTracker\Carrier\DHLGermany
 	 */
 	public function DHLGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\DHLGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\DHLGermany::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\UPSGermany
+	 * @return ParcelTracker\Carrier\UPSGermany
 	 */
 	public function UPSGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\UPSGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\UPSGermany::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\DPDGermany
+	 * @return ParcelTracker\Carrier\DPDGermany
 	 */
 	public function DPDGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\DPDGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\DPDGermany::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\GLSGermany
+	 * @return ParcelTracker\Carrier\GLSGermany
 	 */
 	public function GLSGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\GLSGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\GLSGermany::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\TOFGermany
+	 * @return ParcelTracker\Carrier\TOFGermany
 	 */
 	public function TOFGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\TOFGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\TOFGermany::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Network\ParcelTracker\Carrier\HermesGermany
+	 * @return ParcelTracker\Carrier\HermesGermany
 	 */
 	public function HermesGermany() {
-		return \MOC\Module\Network\ParcelTracker\Carrier\HermesGermany::InterfaceInstance();
+		return ParcelTracker\Carrier\HermesGermany::InterfaceInstance();
 	}
 }

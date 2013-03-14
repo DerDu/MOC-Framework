@@ -36,19 +36,21 @@
  * 16.10.2012 09:02
  */
 namespace MOC\Module\Network\Ftp\Transport;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class RawData implements \MOC\Generic\Device\Module {
+class RawData implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Ftp\Transport\RawData
+	 * @return RawData
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\Ftp\Transport\RawData();
+		return new RawData();
 	}
 
 	/**

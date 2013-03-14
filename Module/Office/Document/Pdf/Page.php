@@ -36,11 +36,13 @@
  * 27.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Page implements \MOC\Generic\Device\Module {
+class Page implements Module {
 	/**
 	 * Get Changelog
 	 *

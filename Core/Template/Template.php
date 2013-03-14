@@ -36,11 +36,13 @@
  * 28.12.2012 15:05
  */
 namespace MOC\Core\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Template implements \MOC\Generic\Device\Core {
+class Template implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -67,11 +69,11 @@ class Template implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template\Template
+	 * @return Template
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template\Template();
+		return new Template();
 	}
 
 
@@ -80,7 +82,7 @@ class Template implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $FileLocation
 	 *
-	 * @return \MOC\Core\Template\Template
+	 * @return Template
 	 */
 	public function AssignFile( $FileLocation ) {
 		$this->Content = file_get_contents( $FileLocation );
@@ -90,7 +92,7 @@ class Template implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Content
 	 *
-	 * @return \MOC\Core\Template\Template
+	 * @return Template
 	 */
 	public function AssignContent( $Content ) {
 		$this->Content = $Content;

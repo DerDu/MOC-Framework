@@ -36,11 +36,13 @@
  * 31.07.2012 17:40
  */
 namespace MOC\Core\Error\Register;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Shutdown implements \MOC\Generic\Common {
+class Shutdown implements Common {
 	/** @var null|Shutdown $Singleton */
 	private static $Singleton = null;
 

@@ -36,11 +36,13 @@
  * 14.02.2013 11:32
  */
 namespace MOC\Module\Office\Mail\Address;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class From implements \MOC\Generic\Device\Module {
+class From implements Module {
 
 	/**
 	 * Get Dependencies

@@ -36,11 +36,11 @@
  * 13.09.2012 23:20
  */
 namespace MOC\Module\Image;
-use \MOC\Api;
+use MOC\Api;
 /**
  *
  */
-class Filter implements \MOC\Implement\Common {
+class Filter implements \MOC\Generic\Device\Module {
 	/**
 	 * Get Singleton/Instance
 	 *

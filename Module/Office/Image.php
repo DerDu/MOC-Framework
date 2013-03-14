@@ -36,11 +36,13 @@
  * 13.02.2013 13:39
  */
 namespace MOC\Module\Office;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Image implements \MOC\Generic\Device\Module{
+class Image implements Module{
 
 	/** @var Image $Singleton */
 	private static $Singleton = null;

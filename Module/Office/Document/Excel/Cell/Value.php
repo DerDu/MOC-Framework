@@ -36,11 +36,14 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Excel\Cell;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Value implements \MOC\Generic\Device\Module {
+class Value implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -129,14 +132,14 @@ class Value implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $Image
+	 * @param File $Image
 	 * @param int                    $Width
 	 * @param int                    $Height
 	 * @param int                    $OffsetX
 	 * @param int                    $OffsetY
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Image( \MOC\Module\Drive\File $Image, $Width = 100, $Height = 0, $OffsetX = 0, $OffsetY = 0 ) {
+	public function Image( File $Image, $Width = 100, $Height = 0, $OffsetX = 0, $OffsetY = 0 ) {
 		// Reset Cell-Format
 		$this->getNumberFormat()->setFormatCode( \PHPExcel_Style_NumberFormat::FORMAT_GENERAL );
 

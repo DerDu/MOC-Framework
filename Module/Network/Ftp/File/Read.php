@@ -36,11 +36,13 @@
  * 16.10.2012 11:23
  */
 namespace MOC\Module\Network\Ftp\File;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  * File-Read
  */
-class Read extends \MOC\Module\Network\Ftp\File\Write implements \MOC\Generic\Device\Module {
+class Read extends Write implements Module {
 	/**
 	 * Get Changelog
 	 *

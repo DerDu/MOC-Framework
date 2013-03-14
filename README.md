@@ -1,8 +1,30 @@
-MOC-Framework
-========================================================================================================================
+# MOC-Framework
+===============
 
-Modular - Object - Chaining
+### Modular - Object - Chaining
 The easy way to OOP
+
+------------------------------------------------------------------------------------------------------------------------
+
+### Usage
+
+1. Get in the MOC
+
+	```php
+	require('MOC.php');
+	```
+2. Start your Engine
+
+	```php
+	use MOC\Api;
+	```
+3. Put the pedal to the metal.
+
+	```php
+	var_dump(
+		Api::Module()->Drive()->File()->Open('README.md')->Read()
+	);
+	```
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -38,4 +60,89 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 ------------------------------------------------------------------------------------------------------------------------
+
+### Design
+
+1. ##### MOC
+	"The Api"
+	- Init the library
+	- Provide adapter access
+
+	And MOC said: "Let there be ligh... ähm.. ```Api::``` !"
+
+2. ##### Adapter
+	Your window into a better world
+	- Starting point of the chain
+	- Provide Core/Extension/Module/Plugin access
+
+	... and MOC devided the ```::Core()``` from the ```::Module()``` ... and it was good
+
+3. ##### Core (God)
+	Contains secret internal operations ;-)
+	- Error handling
+	- Session handling
+	- Cache handling
+	- ...
+
+	You should never use this one directly in your application
+
+4. ##### Extension (The tree of life)
+	Add power to the system
+	- Defines a common interface for 3rd party applications
+
+	And again: You should never use this one directly in your application
+
+5. ##### Module (The tree of knowledge)
+	Make the hole thing shiny
+	- Add in the functionality
+	- Defines a seamless interface to extensions
+
+	You will need this one - and ONLY this one - for your application
+
+6. ##### Plugin (The snake)
+	Up to your imagination
+
+	I had an idea but... never mind... -.-
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+### Used 3rd Party Applications
+==========================
+
+#### apigen
+Used to create the MOC-Documentation
+- License: BSD
+- Project: http://apigen.org
+
+#### YUICompressor
+Add Packer:Script/Style capability
+- License: BSD
+- Project: http://yui.github.com/yuicompressor
+
+#### PHPExcel
+Add Office:Document:Excel capability
+- License: LGPL
+- Project: http://phpexcel.codeplex.com
+
+#### PHPWord
+Add Office:Document:Word capability
+- License: LGPL
+- Project: http://phpword.codeplex.com
+
+#### tFPDF
+Add Office:Document:PDF capability
+- License: LGPL
+- Project: http://fpdf.org/fr/script/script92.php
+
+#### PHPMailer
+Add Office:Mail:Smtp capability
+- License: LGPL
+- Project: http://sourceforge.net/projects/phpmailer
+
+#### PclZip
+Add Packer:Zip capability
+- License: LGPL
+- Project: http://www.phpconcept.net

@@ -36,19 +36,21 @@
  * 14.09.2012 08:33
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Page1 implements \MOC\Generic\Device\Module {
+class Page1 implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Office\Document\Pdf\Page();
+		return new Page();
 	}
 
 	/**
@@ -89,7 +91,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page|string
+	 * @return Page|string
 	 */
 	public function Orientation( $Value = null ) {
 		if( null !== $Value ) {
@@ -107,7 +109,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page|string
+	 * @return Page|string
 	 */
 	public function Size( $Value = null ) {
 		if( null !== $Value ) {
@@ -117,7 +119,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public function Create() {
 		Api::Extension()->Pdf()->Current()->SetMargins( $this->MarginLeft, $this->MarginTop, $this->MarginRight );
@@ -128,7 +130,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return int|\MOC\Module\Office\Document\Pdf\Page
+	 * @return int|Page
 	 */
 	public function MarginTop( $Value = null ) {
 		if( null !== $Value ) {
@@ -140,7 +142,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return int|\MOC\Module\Office\Document\Pdf\Page
+	 * @return int|Page
 	 */
 	public function MarginRight( $Value = null ) {
 		if( null !== $Value ) {
@@ -152,7 +154,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return int|\MOC\Module\Office\Document\Pdf\Page
+	 * @return int|Page
 	 */
 	public function MarginLeft( $Value = null ) {
 		if( null !== $Value ) {
@@ -164,7 +166,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public function PositionX( $Value = null ) {
 		if( null !== $Value ) {
@@ -176,7 +178,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param null $Value
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */public function PositionY( $Value = null ) {
 		if( null !== $Value ) {
 			Api::Extension()->Pdf()->Current()->SetY( $Value );
@@ -187,7 +189,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	/**
 	 * @param $Value
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public function LineFeed( $Value ) {
 		Api::Extension()->Pdf()->Current()->Ln( $Value );
@@ -226,7 +228,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	 * @param      $Value
 	 * @param bool $Force
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public function SetX( $Value, $Force = false ) {
 		if( $Value < $this->MarginLeft() ) {
@@ -247,7 +249,7 @@ class Page1 implements \MOC\Generic\Device\Module {
 	 * @param      $Value
 	 * @param bool $Force
 	 *
-	 * @return \MOC\Module\Office\Document\Pdf\Page
+	 * @return Page
 	 */
 	public function SetY( $Value, $Force = false ) {
 		if( $Value < $this->MarginTop() ) {

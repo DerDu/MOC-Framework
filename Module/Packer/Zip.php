@@ -36,7 +36,9 @@
  * 30.08.2012 23:11
  */
 namespace MOC\Module\Packer;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  * Zip-Compression
  *
@@ -47,16 +49,16 @@ use \MOC\Api;
  * @license LGPL
  * @see http://www.phpconcept.net
  */
-class Zip implements \MOC\Generic\Device\Module {
+class Zip implements Module {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Packer\Zip
+	 * @return Zip
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Packer\Zip();
+		return new Zip();
 	}
 
 	/**
@@ -80,15 +82,15 @@ class Zip implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Packer\Zip\Encoder
+	 * @return Zip\Encoder
 	 */
 	public function Encoder() {
-		return \MOC\Module\Packer\Zip\Encoder::InterfaceInstance();
+		return Zip\Encoder::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Packer\Zip\Decoder
+	 * @return Zip\Decoder
 	 */
 	public function Decoder() {
-		return \MOC\Module\Packer\Zip\Decoder::InterfaceInstance();
+		return Zip\Decoder::InterfaceInstance();
 	}
 }

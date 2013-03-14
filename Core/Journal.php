@@ -36,23 +36,25 @@
  * 30.08.2012 18:26
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Journal implements \MOC\Generic\Device\Core {
-	/** @var \MOC\Core\Journal $Singleton */
+class Journal implements Core {
+	/** @var Journal $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Journal
+	 * @return Journal
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Journal();
+			self::$Singleton = new Journal();
 		} return self::$Singleton;
 	}
 
@@ -78,9 +80,9 @@ class Journal implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @return \MOC\Core\Journal\Write
+	 * @return Journal\Write
 	 */
 	public function Write() {
-		return \MOC\Core\Journal\Write::InterfaceInstance();
+		return Journal\Write::InterfaceInstance();
 	}
 }

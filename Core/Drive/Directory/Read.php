@@ -36,7 +36,9 @@
  * 31.07.2012 16:48
  */
 namespace MOC\Core\Drive\Directory;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Drive;
+
 /**
  * Directory-Read
  */
@@ -81,7 +83,7 @@ class Read extends Write {
 	 * @return \MOC\Core\Drive\File
 	 */
 	public function File( $Name ) {
-		return \MOC\Core\Drive::InterfaceInstance()->File()->Handle( $this->Location().DIRECTORY_SEPARATOR.$Name );
+		return Drive::InterfaceInstance()->File()->Handle( $this->Location().DIRECTORY_SEPARATOR.$Name );
 	}
 
 	/**
@@ -95,7 +97,7 @@ class Read extends Write {
 					if( $Item != '.' && $Item != '..' ) {
 						$Item = $this->UpdateSyntax( $this->Location() . DIRECTORY_SEPARATOR . $Item );
 						if( !is_dir( $Item ) ) {
-							array_push( $List, \MOC\Core\Drive::InterfaceInstance()->File()->Handle( $Item ) );
+							array_push( $List, Drive::InterfaceInstance()->File()->Handle( $Item ) );
 						}
 					}
 				}
@@ -118,10 +120,10 @@ class Read extends Write {
 					if( $Item != '.' && $Item != '..' ) {
 						$Item = $this->UpdateSyntax($this->Location() . DIRECTORY_SEPARATOR . $Item );
 						if( is_dir( $Item ) ) {
-							$Recursive = \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $Item );
+							$Recursive = Drive::InterfaceInstance()->Directory()->Handle( $Item );
 							$List = array_merge( $List, $Recursive->FileListRecursive() );
 						} else {
-							array_push( $List, \MOC\Core\Drive::InterfaceInstance()->File()->Handle( $Item ) );
+							array_push( $List, Drive::InterfaceInstance()->File()->Handle( $Item ) );
 						}
 					}
 				}
@@ -144,7 +146,7 @@ class Read extends Write {
 					if( $Item != '.' && $Item != '..' ) {
 						$Item = $this->UpdateSyntax( $this->Location() . DIRECTORY_SEPARATOR . $Item );
 						if( is_dir( $Item ) ) {
-							array_push( $List, \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $Item ) );
+							array_push( $List, Drive::InterfaceInstance()->Directory()->Handle( $Item ) );
 						}
 					}
 				}
@@ -167,8 +169,8 @@ class Read extends Write {
 					if( $Item != '.' && $Item != '..' ) {
 						$Item = $this->UpdateSyntax( $this->Location() . DIRECTORY_SEPARATOR . $Item );
 						if( is_dir( $Item ) ) {
-							$Recursive = \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $Item );
-							array_push( $List, \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $Item ) );
+							$Recursive = Drive::InterfaceInstance()->Directory()->Handle( $Item );
+							array_push( $List, Drive::InterfaceInstance()->Directory()->Handle( $Item ) );
 							$List = array_merge( $List, $Recursive->DirectoryListRecursive() );
 						}
 					}

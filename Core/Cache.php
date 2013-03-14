@@ -36,11 +36,13 @@
  * 11.09.2012 12:32
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Cache implements \MOC\Generic\Device\Core {
+class Cache implements Core {
 	/**
 	 * Get Singleton/Instance
 	 *

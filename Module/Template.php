@@ -36,11 +36,13 @@
  * 26.02.2013 19:52
  */
 namespace MOC\Module;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Template implements \MOC\Generic\Device\Module {
+class Template implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *

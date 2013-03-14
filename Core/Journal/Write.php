@@ -36,11 +36,16 @@
  * 01.08.2012 12:15
  */
 namespace MOC\Core\Journal;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Drive;
+use MOC\Core\Session;
+use MOC\Core\Version;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Write implements \MOC\Generic\Common {
+class Write implements Common {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -60,8 +65,8 @@ class Write implements \MOC\Generic\Common {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', \MOC\Core\Version::InterfaceInstance()->Build(1) )
-			->Package( '\MOC\Core\Session', \MOC\Core\Version::InterfaceInstance()->Build(1) );
+			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1) )
+			->Package( '\MOC\Core\Session', Version::InterfaceInstance()->Build(1) );
 	}
 
 	/**
@@ -85,7 +90,7 @@ class Write implements \MOC\Generic\Common {
 		$this->Name = 'Common';
 		$this->Location = __DIR__ . '/../../Data/Journal';
 
-		$Directory = \MOC\Core\Drive::InterfaceInstance()->Directory();
+		$Directory = Drive::InterfaceInstance()->Directory();
 		$Directory->Handle( $this->Location );
 
 		$this->Location = $Directory->Location();
@@ -109,7 +114,7 @@ class Write implements \MOC\Generic\Common {
 	public function Content( $Content ) {
 		$Journal = $this->Location.'/Journal.'.$this->Name.'.txt';
 
-		$File = \MOC\Core\Drive::InterfaceInstance()->File();
+		$File = Drive::InterfaceInstance()->File();
 		$File->Handle( $Journal );
 
 		if( date( 'Ymd', $File->Time() ) < date('Ymd') ) {
@@ -120,7 +125,7 @@ class Write implements \MOC\Generic\Common {
 		$Content = ( $File->Size() != 0 ? "\n" : '' )
 				.str_repeat('-',50)."\n"
 				.date("d.m.Y H:i:s",time())." SID:".strtoupper(
-					\MOC\Core\Session::InterfaceInstance()->Id()
+					Session::InterfaceInstance()->Id()
 				)."\n"
 				.str_repeat('-',50)."\n"
 				.print_r( $Content, true )."\n";

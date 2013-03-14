@@ -36,19 +36,21 @@
  * 13.02.2013 21:01
  */
 namespace MOC\Module\Office\Document;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Pdf implements \MOC\Generic\Device\Module{
+class Pdf implements Module{
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Office\Document\Pdf
+	 * @return Pdf
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Office\Document\Pdf();
+		return new Pdf();
 	}
 
 	/**
@@ -82,28 +84,28 @@ class Pdf implements \MOC\Generic\Device\Module{
 	 * @return Pdf\Page
 	 */
 	public function Page() {
-		return \MOC\Module\Office\Document\Pdf\Page::InterfaceInstance();
+		return Pdf\Page::InterfaceInstance();
 	}
 
 	/**
 	 * @return Pdf\Font
 	 */
 	public function Font() {
-		return \MOC\Module\Office\Document\Pdf\Font::InterfaceInstance();
+		return Pdf\Font::InterfaceInstance();
 	}
 
 	/**
 	 * @return Pdf\Text
 	 */
 	public function Text() {
-		return \MOC\Module\Office\Document\Pdf\Text::InterfaceInstance();
+		return Pdf\Text::InterfaceInstance();
 	}
 
 	/**
 	 * @return Pdf\Image
 	 */
 	public function Image() {
-		return \MOC\Module\Office\Document\Pdf\Image::InterfaceInstance();
+		return Pdf\Image::InterfaceInstance();
 	}
 
 	/**

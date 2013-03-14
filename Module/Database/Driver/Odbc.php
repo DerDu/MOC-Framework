@@ -36,10 +36,12 @@
  * 14.01.2013 20:33
  */
 namespace MOC\Module\Database\Driver;
+use MOC\Module\Database\Driver;
+
 /**
  *
  */
-class Odbc extends \MOC\Module\Database\Driver {
+class Odbc extends Driver {
 
 	public function Open( $DSN, $User, $Password, $Database = null ){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );

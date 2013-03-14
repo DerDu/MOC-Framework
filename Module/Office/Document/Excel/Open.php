@@ -36,11 +36,14 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Excel;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Open implements \MOC\Generic\Device\Module {
+class Open implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -83,10 +86,10 @@ class Open implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function File( \MOC\Module\Drive\File $File ){
+	public function File( File $File ){
 		Api::Extension()->Excel()->Create();
 		Api::Extension()->Excel()->Destroy();
 		Api::Extension()->Excel()->Define(

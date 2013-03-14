@@ -36,7 +36,7 @@
  * 11.02.2013 14:33
  */
 namespace MOC\Module\Image\Font;
-use \MOC\Api;
+use MOC\Api;
 /**
  *
  */

@@ -51,13 +51,13 @@ class Api {
 		spl_autoload_register( array(__CLASS__,'AutoLoader') );
 
 		// Register Error-Handler
-		\MOC\Core\Error::InterfaceInstance()->Register()->Error()->SetHandler();
+		Core\Error::InterfaceInstance()->Register()->Error()->SetHandler();
 		// Register Exception-Handler
-		\MOC\Core\Error::InterfaceInstance()->Register()->Exception()->SetHandler();
+		Core\Error::InterfaceInstance()->Register()->Exception()->SetHandler();
 		// Register Shutdown-Handler
-		\MOC\Core\Error::InterfaceInstance()->Register()->Shutdown()->SetHandler();
+		Core\Error::InterfaceInstance()->Register()->Shutdown()->SetHandler();
 		// Set Reporting-Level
-		\MOC\Core\Error::InterfaceInstance()->Reporting()->Level( E_ALL )->Display( true )->Debug( true )->Apply();
+		Core\Error::InterfaceInstance()->Reporting()->Level( E_ALL )->Display( true )->Debug( true )->Apply();
 	}
 
 	/**
@@ -86,32 +86,32 @@ class Api {
 	}
 
 	/**
-	 * @return \MOC\Adapter\Core
+	 * @return Adapter\Core
 	 */
 	public static function Core() {
-		return \MOC\Adapter\Core::InterfaceInstance();
+		return Adapter\Core::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Adapter\Extension
+	 * @return Adapter\Extension
 	 */
 	public static function Extension() {
-		return \MOC\Adapter\Extension::InterfaceInstance();
+		return Adapter\Extension::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Adapter\Module
+	 * @return Adapter\Module
 	 */
 	public static function Module() {
-		return \MOC\Adapter\Module::InterfaceInstance();
+		return Adapter\Module::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Adapter\Plugin
+	 * @return Adapter\Plugin
 	 */
 	public static function Plugin() {
-		return \MOC\Adapter\Plugin::InterfaceInstance();
+		return Adapter\Plugin::InterfaceInstance();
 	}
 }
 
 /**
- * Startup COF-API
+ * Startup MOC-API
  */
 Api::Setup();

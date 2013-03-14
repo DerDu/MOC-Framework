@@ -36,11 +36,13 @@
  * 14.02.2013 11:25
  */
 namespace MOC\Extension\Mail;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -71,7 +73,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
 			->Build()->Clearance( '18.02.2013 11:22', 'Alpha' )
-			;
+		;
 	}
 
 	/**
@@ -123,4 +125,48 @@ class Instance implements \MOC\Generic\Device\Extension {
 		}
 		return $this;
 	}
+
+	/**
+	 * Set external Extension-Instance
+	 *
+	 * Contains:
+	 * - Set new (extern created) 3rdParty Instance to Current
+	 *
+	 * @param $Instance
+	 *
+	 * @return Extension
+	 */
+	public function Define( $Instance ) {
+		// TODO: Implement Define() method.
+	}
+
+	/**
+	 * Select Index as active 3rdParty Instance
+	 *
+	 * @param int $Index
+	 *
+	 * @return Extension
+	 */
+	public function Select( $Index ) {
+		// TODO: Implement Select() method.
+	}
+
+	/**
+	 * Get Index for Select() from Current() 3rdParty Instance
+	 *
+	 * @return int
+	 */
+	public function Index() {
+		// TODO: Implement Index() method.
+	}
+
+	/**
+	 * Destroy active 3rdParty Instance
+	 *
+	 * @return Extension
+	 */
+	public function Destroy() {
+		// TODO: Implement Destroy() method.
+	}
+
 }

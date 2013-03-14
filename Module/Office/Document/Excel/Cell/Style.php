@@ -36,11 +36,13 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Excel\Cell;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Style implements \MOC\Generic\Device\Module {
+class Style implements Module {
 	/**
 	 * Get Changelog
 	 *

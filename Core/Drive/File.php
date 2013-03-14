@@ -36,11 +36,13 @@
  * 30.08.2012 13:37
  */
 namespace MOC\Core\Drive;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common\Instance;
+
 /**
  *
  */
-class File extends \MOC\Core\Drive\File\Read implements \MOC\Generic\Common\Instance {
+class File extends File\Read implements Instance {
 
 	/**
 	 * Get Singleton/Instance
@@ -139,31 +141,18 @@ class File extends \MOC\Core\Drive\File\Read implements \MOC\Generic\Common\Inst
 
 
 	/**
-	 * FIX: File-Name Special-Chars
-	 */
-
-	const FILE_NAME_ENCODING_UTF8 = 'utf-8';
-
-	/**
-	 * @param string $Encoding
-	 *
 	 * @return File
 	 */
-	public function SetFileNameEncoding( $Encoding = self::FILE_NAME_ENCODING_UTF8 ) {
-		// Alles klein schreiben
-		//$FileName = mb_strtolower( $this->Name(), $Encoding );
+	public function SetFileNameEncoding() {
 		$FileName = self::MixedToUtf8( $this->Name() );
 
-		// Alle deutschen Umlaute und Sonderfälle austauschen
 		$FileName = str_replace(
 			array('ä', 'ö', 'ü', 'ß', 'ó', 'è', 'é'),
 			array('ae', 'oe', 'ue', 'ss', 'o', 'e', 'e'),
 		$FileName );
 
-		// Alle restlichen Leerzeichen zu Bindestrichen
 		$FileName = preg_replace( '/\s/s', '-', $FileName );
 
-		// Alles löschen, was nicht alphanumerisch ist
 		$FileName = preg_replace('/[^a-z0-9_-]/isU', '', $FileName);
 
 		$FileName = trim($FileName);
@@ -191,7 +180,8 @@ class File extends \MOC\Core\Drive\File\Read implements \MOC\Generic\Common\Inst
 	 * @param string $Text
 	 *
 	 * @return string
-	 */public static function MixedToLatin1( $Text ) {
+	 */
+	public static function MixedToLatin1( $Text ) {
 		self::BuildDictionary();
 		foreach ( self::$DictionaryUtf8ToLatin1 as $Key => $Val) {
 			$Text = str_replace( $Key, $Val, $Text );
@@ -203,7 +193,8 @@ class File extends \MOC\Core\Drive\File\Read implements \MOC\Generic\Common\Inst
 	 * @param string $Text
 	 *
 	 * @return string
-	 */public static function MixedToUtf8( $Text ) {
+	 */
+	public static function MixedToUtf8( $Text ) {
 		self::BuildDictionary();
 		return utf8_encode( self::MixedToLatin1( $Text ) );
 	}

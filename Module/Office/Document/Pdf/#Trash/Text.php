@@ -36,19 +36,21 @@
  * 14.09.2012 08:30
  */
 namespace MOC\Module\Office\Document\Pdf;#
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Text1 implements \MOC\Generic\Device\Module {
+class Text1 implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Office\Document\Pdf\Text
+	 * @return Text
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Office\Document\Pdf\Text();
+		return new Text();
 	}
 
 	/**
@@ -71,7 +73,7 @@ class Text1 implements \MOC\Generic\Device\Module {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
-	/** @var null|\MOC\Module\Office\Document\Pdf\Font $Font */
+	/** @var null|Font $Font */
 	private $Font = null;
 
 	private $Align = 'L';
@@ -81,7 +83,7 @@ class Text1 implements \MOC\Generic\Device\Module {
 	 *
 	 * @return Font|Text|null
 	 */
-	public function Font( \MOC\Module\Office\Document\Pdf\Font $Font = null ) {
+	public function Font( Font $Font = null ) {
 		if( null !== $Font ) {
 			$this->Font = $Font;
 			return $this;

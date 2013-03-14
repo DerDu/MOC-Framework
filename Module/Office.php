@@ -36,11 +36,13 @@
  * 11.02.2013 12:34
  */
 namespace MOC\Module;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Office implements \MOC\Generic\Device\Module {
+class Office implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
