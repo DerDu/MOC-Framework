@@ -36,11 +36,13 @@
  * 14.02.2013 11:25
  */
 namespace MOC\Extension\Mail;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -132,7 +134,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param $Instance
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Define( $Instance ) {
 		// TODO: Implement Define() method.
@@ -143,7 +145,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param int $Index
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Select( $Index ) {
 		// TODO: Implement Select() method.
@@ -161,7 +163,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	/**
 	 * Destroy active 3rdParty Instance
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Destroy() {
 		// TODO: Implement Destroy() method.

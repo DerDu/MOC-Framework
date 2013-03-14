@@ -36,7 +36,8 @@
  * 31.07.2012 16:49
  */
 namespace MOC\Core\Drive\File;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Drive;
 use MOC\Core\Error;
 /**
  * File-Write
@@ -215,7 +216,7 @@ class Write extends Property {
 			default: {
 
 			// OPEN CACHE
-			$CacheFile = \MOC\Core\Drive::InterfaceInstance()->File()->Handle( $this->Cache() );
+			$CacheFile = Drive::InterfaceInstance()->File()->Handle( $this->Cache() );
 			if( ( $CacheHandler = fopen( $CacheFile->Location(), $Mode ) ) === false	) {
 				Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Cache-Access failed!' );
 			}

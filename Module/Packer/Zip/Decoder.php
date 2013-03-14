@@ -36,20 +36,23 @@
  * 30.08.2012 22:42
  */
 namespace MOC\Module\Packer\Zip;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Decoder implements \MOC\Generic\Device\Module {
+class Decoder implements Module {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Packer\Zip\Decoder
+	 * @return Decoder
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Packer\Zip\Decoder();
+		return new Decoder();
 	}
 
 	/**
@@ -73,11 +76,11 @@ class Decoder implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
-	 * @return \MOC\Module\Drive\File[]
+	 * @return File[]
 	 */
-	public function Open( \MOC\Module\Drive\File $File ) {
+	public function Open( File $File ) {
 		Api::Extension()->Zip()->Create( $File );
 
 		if( $File->Exists() ) {

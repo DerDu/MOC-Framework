@@ -36,11 +36,13 @@
  * 18.02.2013 20:56
  */
 namespace MOC\Module\Network\Http;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Get implements \MOC\Generic\Device\Module {
+class Get implements Module {
 	/**
 	 * Get Changelog
 	 *

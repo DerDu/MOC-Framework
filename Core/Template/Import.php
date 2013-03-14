@@ -36,11 +36,13 @@
  * 28.12.2012 15:03
  */
 namespace MOC\Core\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Import implements \MOC\Generic\Device\Core {
+class Import implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -67,11 +69,11 @@ class Import implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template\Import
+	 * @return Import
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template\Import();
+		return new Import();
 	}
 
 
@@ -80,24 +82,24 @@ class Import implements \MOC\Generic\Device\Core {
 
 	/** @var string $Identifier */
 	private $Identifier = '';
-	/** @var null|\MOC\Core\Template\Template $Template */
+	/** @var null|Template $Template */
 	private $Template = null;
 
 	/**
 	 * @param string $Identifier
 	 *
-	 * @return \MOC\Core\Template\Import
+	 * @return Import
 	 */
 	function SetIdentifier( $Identifier ) {
 		$this->Identifier = $Identifier;
 		return $this;
 	}
 	/**
-	 * @param \MOC\Core\Template\Template $Template
+	 * @param Template $Template
 	 *
 	 * @return Import
 	 */
-	public function AssignTemplate( \MOC\Core\Template\Template $Template ) {
+	public function AssignTemplate( Template $Template ) {
 		$this->Template = $Template;
 		return $this;
 	}

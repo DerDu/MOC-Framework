@@ -36,11 +36,15 @@
  * 30.01.2013 10:25
  */
 namespace MOC\Module\Network\ParcelTracker\Carrier;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\ParcelTracker\Carrier;
+use MOC\Module\Network\ParcelTracker\Parcel;
+
 /**
  *
  */
-class DPDGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \MOC\Generic\Device\Module {
+class DPDGermany extends Carrier implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -48,7 +52,7 @@ class DPDGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 	 * @return object
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\ParcelTracker\Carrier\DPDGermany();
+		return new DPDGermany();
 	}
 
 	/**
@@ -74,7 +78,7 @@ class DPDGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 	/**
 	 * @param int $TrackingNumber
 	 *
-	 * @return \MOC\Module\Network\ParcelTracker\Parcel
+	 * @return Parcel
 	 */
 	function GetStatus( $TrackingNumber ) {
 		$this->SetTarget( 'https://tracking.dpd.de/cgi-bin/delistrack?pknr='.$TrackingNumber.'&typ=1&lang=de' );
@@ -96,7 +100,7 @@ class DPDGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 			}
 		}
 
-		$Parcel = new \MOC\Module\Network\ParcelTracker\Parcel( $TrackingNumber, $this->GetTarget() );
+		$Parcel = new Parcel( $TrackingNumber, $this->GetTarget() );
 
 		if( $StatusTableObject ) {
 			// Find Status-Row

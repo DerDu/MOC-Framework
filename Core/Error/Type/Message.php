@@ -36,12 +36,15 @@
  * 13.08.2012 12:40
  */
 namespace MOC\Core\Error\Type;
-use \MOC\Api;
-use \MOC\Core\Error\Reporting;
+use MOC\Api;
+use MOC\Core\Error\Reporting;
+use MOC\Core\Journal;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Message implements \MOC\Generic\Common {
+class Message implements Common {
 	/** @var null|Message $Singleton */
 	private static $Singleton = null;
 
@@ -106,6 +109,6 @@ class Message implements \MOC\Generic\Common {
 	 * @param $Content
 	 */
 	private function Journal( $Content ) {
-		\MOC\Core\Journal::InterfaceInstance()->Write()->Name( __CLASS__ )->Content( $Content );
+		Journal::InterfaceInstance()->Write()->Name( __CLASS__ )->Content( $Content );
 	}
 }

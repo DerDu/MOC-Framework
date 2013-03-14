@@ -36,11 +36,14 @@
  * 28.12.2012 15:09
  */
 namespace MOC\Core\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Template;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Complex implements \MOC\Generic\Device\Core {
+class Complex implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -67,11 +70,11 @@ class Complex implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template\Complex
+	 * @return Complex
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template\Complex();
+		return new Complex();
 	}
 
 	const REGEX_PATTERN_LEFT = '!(\$\[(';
@@ -79,7 +82,7 @@ class Complex implements \MOC\Generic\Device\Core {
 
 	/** @var string $Identifier */
 	private $Identifier = '';
-	/** @var \MOC\Core\Template|null $TplEngine */
+	/** @var Template|null $TplEngine */
 	private $Engine = null;
 
 	/**
@@ -93,11 +96,11 @@ class Complex implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @param \MOC\Core\Template $Engine
+	 * @param Template $Engine
 	 *
 	 * @return Complex
 	 */
-	public function AssignEngine( \MOC\Core\Template $Engine = null ) {
+	public function AssignEngine( Template $Engine = null ) {
 		$this->Engine = $Engine;
 		return $this;
 	}

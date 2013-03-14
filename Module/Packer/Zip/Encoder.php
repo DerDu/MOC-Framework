@@ -36,20 +36,23 @@
  * 04.09.2012 14:20
  */
 namespace MOC\Module\Packer\Zip;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Encoder implements \MOC\Generic\Device\Module {
+class Encoder implements Module {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Packer\Zip\Encoder
+	 * @return Encoder
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Packer\Zip\Encoder();
+		return new Encoder();
 	}
 
 	/**
@@ -72,27 +75,27 @@ class Encoder implements \MOC\Generic\Device\Module {
 		return Api::Core()->Depending();
 	}
 
-	/** @var \MOC\Module\Drive\File $File */
+	/** @var File $File */
 	private $File = null;
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return Encoder
 	 */
-	public function Open( \MOC\Module\Drive\File $File ) {
+	public function Open( File $File ) {
 		Api::Extension()->Zip()->Create( $File );
 		$this->File = $File;
 		return $this;
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 * @param null|string $Base
 	 *
 	 * @return Encoder
 	 */
-	public function Content( \MOC\Module\Drive\File $File, $Base = null ) {
+	public function Content( File $File, $Base = null ) {
 
 		if( $this->File->Exists() ) {
 			if( $Base === null ) {

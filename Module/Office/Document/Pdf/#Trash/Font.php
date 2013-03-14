@@ -36,19 +36,22 @@
  * 14.09.2012 08:30
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Font1 implements \MOC\Generic\Device\Module {
+class Font1 implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Office\Document\Pdf\Font
+	 * @return Font
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Office\Document\Pdf\Font();
+		return new Font();
 	}
 
 
@@ -72,17 +75,17 @@ class Font1 implements \MOC\Generic\Device\Module {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
-	/** @var null|\MOC\Module\Drive\File $Family */
+	/** @var null|File $Family */
 	private $Family = null;
 	private $Size = 10;
 	private $Color = '000000';
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
-	 * @return \MOC\Module\Drive\File|Font|null
+	 * @return File|Font|null
 	 */
-	public function Family( \MOC\Module\Drive\File $File = null ) {
+	public function Family( File $File = null ) {
 		if( null !== $File ) {
 			Api::Extension()->Pdf()->Current()->fontpath = realpath( $File->GetPath() ).DIRECTORY_SEPARATOR;
 			if( !file_exists( $File->GetPath().DIRECTORY_SEPARATOR.$File->GetName().'.php' ) ) {

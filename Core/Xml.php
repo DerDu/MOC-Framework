@@ -36,23 +36,25 @@
  * 11.09.2012 13:52
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Xml implements \MOC\Generic\Device\Core {
-	/** @var \MOC\Core\Xml $Singleton */
+class Xml implements Core {
+	/** @var Xml $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Xml
+	 * @return Xml
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Xml();
+			self::$Singleton = new Xml();
 		} return self::$Singleton;
 	}
 
@@ -79,10 +81,10 @@ class Xml implements \MOC\Generic\Device\Core {
 	/**
 	 * @param string|\MOC\Core\Xml\Token $Name
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Xml\Node
 	 */
 	public function Create( $Name ) {
-		return \MOC\Core\Xml\Node::InterfaceInstance()
+		return Xml\Node::InterfaceInstance()
 			->Setup( $Name );
 	}
 
@@ -92,8 +94,8 @@ class Xml implements \MOC\Generic\Device\Core {
 	 * @return Xml\Node|null
 	 */
 	public function Parse( $Content ) {
-		return \MOC\Core\Xml\Parser::InterfaceInstance()->Setup(
-			\MOC\Core\Xml\Tokenizer::InterfaceInstance()->Setup( $Content )
+		return Xml\Parser::InterfaceInstance()->Setup(
+			Xml\Tokenizer::InterfaceInstance()->Setup( $Content )
 		)->GetResult();
 	}
 }

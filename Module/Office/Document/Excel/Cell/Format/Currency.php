@@ -36,11 +36,13 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Excel\Cell\Format;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Currency implements \MOC\Generic\Device\Module {
+class Currency implements Module {
 	/**
 	 * Get Changelog
 	 *

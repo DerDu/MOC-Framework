@@ -36,11 +36,13 @@
  * 30.01.2013 10:09
  */
 namespace MOC\Module\Network\ParcelTracker;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Package;
+
 /**
  *
  */
-abstract class Carrier  implements \MOC\Generic\Package {
+abstract class Carrier  implements Package {
 	/**
 	 * Get Dependencies
 	 *

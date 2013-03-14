@@ -36,23 +36,25 @@
  * 30.08.2012 16:56
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Session implements \MOC\Generic\Device\Core {
-	/** @var \MOC\Core\Session $Singleton */
+class Session implements Core {
+	/** @var Session $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Session
+	 * @return Session
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Session();
+			self::$Singleton = new Session();
 		} return self::$Singleton;
 	}
 

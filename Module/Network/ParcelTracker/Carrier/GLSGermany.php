@@ -36,11 +36,15 @@
  * 30.01.2013 10:25
  */
 namespace MOC\Module\Network\ParcelTracker\Carrier;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\ParcelTracker\Carrier;
+use MOC\Module\Network\ParcelTracker\Parcel;
+
 /**
  *
  */
-class GLSGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \MOC\Generic\Device\Module {
+class GLSGermany extends Carrier implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -48,7 +52,7 @@ class GLSGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 	 * @return object
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\ParcelTracker\Carrier\GLSGermany();
+		return new GLSGermany();
 	}
 
 	/**
@@ -74,7 +78,7 @@ class GLSGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 	/**
 	 * @param int $TrackingNumber
 	 *
-	 * @return \MOC\Module\Network\ParcelTracker\Parcel
+	 * @return Parcel
 	 */
 	function GetStatus( $TrackingNumber ) {
 
@@ -85,7 +89,7 @@ class GLSGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \M
 		// Set Target back to original location
 		$this->SetTarget( 'https://gls-group.eu/DE/de/paketverfolgung?match='.$TrackingNumber );
 
-		$Parcel = new \MOC\Module\Network\ParcelTracker\Parcel( $TrackingNumber, $this->GetTarget() );
+		$Parcel = new Parcel( $TrackingNumber, $this->GetTarget() );
 
 		foreach( (array)$HistoryList as $History ) {
 			$TrackingLocation = $History->address->city .', '.$History->address->countryDescription;

@@ -36,11 +36,14 @@
  * 16.10.2012 11:23
  */
 namespace MOC\Module\Network\Ftp\File;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\Ftp\Transport\Connection;
+
 /**
  * File-Property
  */
-class Property implements \MOC\Generic\Device\Module {
+class Property implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -74,15 +77,15 @@ class Property implements \MOC\Generic\Device\Module {
 		return new Property();
 	}
 
-	/** @var null|\MOC\Module\Network\Ftp\Transport\Connection $Connection */
+	/** @var null|Connection $Connection */
 	private $Connection = null;
 
 	/**
-	 * @param null|\MOC\Module\Network\Ftp\Transport\Connection $Connection
+	 * @param null|Connection $Connection
 	 *
-	 * @return null|\MOC\Module\Network\Ftp\Transport\Connection|\MOC\Module\Network\Ftp\File
+	 * @return null|Connection|\MOC\Module\Network\Ftp\File
 	 */
-	public function Connection( \MOC\Module\Network\Ftp\Transport\Connection $Connection = null ) {
+	public function Connection( Connection $Connection = null ) {
 		if( $Connection !== null ) {
 			$this->Connection = $Connection;
 			return $this;

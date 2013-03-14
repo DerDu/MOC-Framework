@@ -36,24 +36,33 @@
  * 29.08.2012 15:26
  */
 namespace MOC\Adapter;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Adapter;
+use MOC\Module\Database;
+use MOC\Module\Drive;
+use MOC\Module\Installer;
+use MOC\Module\Network;
+use MOC\Module\Office;
+use MOC\Module\Packer;
+use MOC\Module\Template;
+
 /**
  *
  */
-class Module implements \MOC\Generic\Device\Adapter {
+class Module implements Adapter {
 
-	/** @var \MOC\Adapter\Module $Singleton */
+	/** @var Module $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return  \MOC\Adapter\Module
+	 * @return  Module
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Adapter\Module();
+			self::$Singleton = new Module();
 		} return self::$Singleton;
 	}
 
@@ -88,51 +97,51 @@ class Module implements \MOC\Generic\Device\Adapter {
 	}
 
 	/**
-	 * @return \MOC\Module\Drive
+	 * @return Drive
 	 */
 	public function Drive() {
-		return \MOC\Module\Drive::InterfaceInstance();
+		return Drive::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Network
+	 * @return Network
 	 */
 	public function Network() {
-		return \MOC\Module\Network::InterfaceInstance();
+		return Network::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Office
+	 * @return Office
 	 */
 	public function Office() {
-		return \MOC\Module\Office::InterfaceInstance();
+		return Office::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Packer
+	 * @return Packer
 	 */
 	public function Packer() {
-		return \MOC\Module\Packer::InterfaceInstance();
+		return Packer::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Template
+	 * @return Template
 	 */
 	public function Template() {
-		return \MOC\Module\Template::InterfaceInstance();
+		return Template::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Database
+	 * @return Database
 	 */
 	public function Database() {
-		return \MOC\Module\Database::InterfaceInstance();
+		return Database::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Module\Installer
+	 * @return Installer
 	 */
 	public function Installer() {
-		return \MOC\Module\Installer::InterfaceInstance();
+		return Installer::InterfaceInstance();
 	}
 }

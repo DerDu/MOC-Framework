@@ -36,12 +36,14 @@
  * 06.01.2013 15:37
  */
 namespace MOC\Core\Xml;
-use \MOC\Api;
+use MOC\Api;
 use MOC\Core\Xml\Token;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Tokenizer implements \MOC\Generic\Device\Core {
+class Tokenizer implements Core {
 	/**
 	 * Get Dependencies
 	 *
@@ -57,11 +59,11 @@ class Tokenizer implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Xml\Tokenizer
+	 * @return Tokenizer
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Xml\Tokenizer();
+		return new Tokenizer();
 	}
 
 	/**
@@ -85,7 +87,7 @@ class Tokenizer implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Content
 	 *
-	 * @return \MOC\Core\Xml\Tokenizer
+	 * @return Tokenizer
 	 */
 	public function Setup( $Content ) {
 		$this->Content = $Content;

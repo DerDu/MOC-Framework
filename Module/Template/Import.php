@@ -36,11 +36,14 @@
  * 26.02.2013 19:52
  */
 namespace MOC\Module\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Import implements \MOC\Generic\Device\Module {
+class Import implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -79,7 +82,7 @@ class Import implements \MOC\Generic\Device\Module {
 		return $this;
 	}
 
-	public function File( \MOC\Module\Drive\File $File ) {
+	public function File( File $File ) {
 		$this->Content = $File->Read();
 		return $this;
 	}

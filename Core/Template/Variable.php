@@ -36,11 +36,13 @@
  * 28.12.2012 14:56
  */
 namespace MOC\Core\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Variable implements \MOC\Generic\Device\Core {
+class Variable implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -67,11 +69,11 @@ class Variable implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template\Variable
+	 * @return Variable
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template\Variable();
+		return new Variable();
 	}
 
 	const REGEX_PATTERN_LEFT = '!(\$\{(';
@@ -81,14 +83,14 @@ class Variable implements \MOC\Generic\Device\Core {
 	private $Identifier = '';
 	/** @var string $Value */
 	private $Value = '';
-	/** @var \MOC\Core\Template\Format|null $Format */
+	/** @var Format|null $Format */
 	private $Format = null;
 
 	/**
 	 * @param $Identifier
 	 * @param $Value
 	 *
-	 * @return \MOC\Core\Template\Variable
+	 * @return Variable
 	 */
 	function SetData( $Identifier, $Value ) {
 		$this->Identifier = $Identifier;
@@ -97,11 +99,11 @@ class Variable implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @param \MOC\Core\Template\Format $TplFormat
+	 * @param Format $TplFormat
 	 *
 	 * @return Variable
 	 */
-	public function AssignFormat( \MOC\Core\Template\Format $TplFormat = null ) {
+	public function AssignFormat( Format $TplFormat = null ) {
 		$this->Format = $TplFormat;
 		return $this;
 	}

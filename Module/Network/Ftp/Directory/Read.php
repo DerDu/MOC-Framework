@@ -36,11 +36,16 @@
  * 16.10.2012 10:42
  */
 namespace MOC\Module\Network\Ftp\Directory;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\Ftp\Directory;
+use MOC\Module\Network\Ftp\File;
+use MOC\Module\Network\Ftp\Transport\RawData;
+
 /**
  * Directory-Read
  */
-class Read extends \MOC\Module\Network\Ftp\Directory\Write implements \MOC\Generic\Device\Module {
+class Read extends Write implements Module {
 
 	/**
 	 * Get Changelog
@@ -78,14 +83,14 @@ class Read extends \MOC\Module\Network\Ftp\Directory\Write implements \MOC\Gener
 	/**
 	 * @param $Name
 	 *
-	 * @return \MOC\Module\Network\Ftp\File
+	 * @return File
 	 */
 /*	public function File( $Name ) {
 		return \MOC\Core\Drive::InterfaceInstance()->File()->Handle( $this->Location().DIRECTORY_SEPARATOR.$Name );
 	}
 */
 	/**
-	 * @return \MOC\Module\Network\Ftp\File[]
+	 * @return File[]
 	 */
 	public function FileList() {
 		// Select Current-Directory as Work-Directory
@@ -93,13 +98,13 @@ class Read extends \MOC\Module\Network\Ftp\Directory\Write implements \MOC\Gener
 		// Get Raw-File-List
 		if( false !== ( $FileList = ftp_rawlist( $this->Connection()->Handler(), $this->Location() ) ) ) {
 			$List = array();
-			$RawData = \MOC\Module\Network\Ftp\Transport\RawData::InterfaceInstance();
+			$RawData = RawData::InterfaceInstance();
 			foreach( (array)$FileList as $File ) {
 				$RawData->Determine( $File );
 				var_dump( $File );
 				if( $RawData->RawDataType() == $RawData::RAW_DATA_TYPE_FILE ) {
-					array_push( $List, \MOC\Module\Network\Ftp\File::InterfaceInstance() );
-					/** @var \MOC\Module\Network\Ftp\File $Current */
+					array_push( $List, File::InterfaceInstance() );
+					/** @var File $Current */
 					$Current = end( $List );
 					$Current->Connection( $this->Connection() );
 					$Current->Handle( $this->Location().'/'.$RawData->RawDataName() );
@@ -147,12 +152,12 @@ class Read extends \MOC\Module\Network\Ftp\Directory\Write implements \MOC\Gener
 		// Get Raw-Directory-List
 		if( false !== ( $DirectoryList = ftp_rawlist( $this->Connection()->Handler(), $this->Location() ) ) ) {
 			$List = array();
-			$RawData = \MOC\Module\Network\Ftp\Transport\RawData::InterfaceInstance();
+			$RawData = RawData::InterfaceInstance();
 			foreach( (array)$DirectoryList as $Directory ) {
 				$RawData->Determine( $Directory );
 				if( $RawData->RawDataType() == $RawData::RAW_DATA_TYPE_DIRECTORY ) {
-					array_push( $List, \MOC\Module\Network\Ftp\Directory::InterfaceInstance() );
-					/** @var \MOC\Module\Network\Ftp\Directory $Current */
+					array_push( $List, Directory::InterfaceInstance() );
+					/** @var Directory $Current */
 					$Current = end( $List );
 					$Current->Connection( $this->Connection() );
 					$Current->Handle( $this->Location().'/'.$RawData->RawDataName() );

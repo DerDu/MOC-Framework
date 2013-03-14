@@ -36,7 +36,7 @@
  * 31.07.2012 16:49
  */
 namespace MOC\Core\Drive\File;
-use \MOC\Api;
+use MOC\Api;
 /**
  * File-Read
  */

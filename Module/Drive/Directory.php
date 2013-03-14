@@ -37,10 +37,12 @@
  */
 namespace MOC\Module\Drive;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Directory implements \MOC\Generic\Device\Module {
+class Directory implements Module {
 
 	/** @var null|\MOC\Core\Drive\Directory $Resource */
 	private $Resource = null;

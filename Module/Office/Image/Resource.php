@@ -36,7 +36,7 @@
  * 13.09.2012 22:44
  */
 namespace MOC\Module\Image;
-use \MOC\Api;
+use MOC\Api;
 /**
  *
  */

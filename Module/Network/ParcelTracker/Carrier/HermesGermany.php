@@ -36,11 +36,15 @@
  * 30.01.2013 10:25
  */
 namespace MOC\Module\Network\ParcelTracker\Carrier;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\ParcelTracker\Carrier;
+use MOC\Module\Network\ParcelTracker\Parcel;
+
 /**
  *
  */
-class HermesGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements \MOC\Generic\Device\Module {
+class HermesGermany extends Carrier implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -48,7 +52,7 @@ class HermesGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements
 	 * @return object
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\ParcelTracker\Carrier\HermesGermany();
+		return new HermesGermany();
 	}
 
 	/**
@@ -74,7 +78,7 @@ class HermesGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements
 	/**
 	 * @param int $TrackingNumber
 	 *
-	 * @return \MOC\Module\Network\ParcelTracker\Parcel
+	 * @return Parcel
 	 */
 	function GetStatus( $TrackingNumber ) {
 
@@ -136,7 +140,7 @@ class HermesGermany extends \MOC\Module\Network\ParcelTracker\Carrier implements
 			}
 		}
 
-		$Parcel = new \MOC\Module\Network\ParcelTracker\Parcel( $TrackingNumber, $this->GetTarget() );
+		$Parcel = new Parcel( $TrackingNumber, $this->GetTarget() );
 
 		if( $StatusTableObject ) {
 			// Find Status-Row

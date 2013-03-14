@@ -36,11 +36,13 @@
  * 31.07.2012 16:47
  */
 namespace MOC\Core\Drive\Directory;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  * Directory-Property
  */
-class Property implements \MOC\Generic\Device\Core {
+class Property implements Core {
 	/**
 	 * Get Dependencies
 	 *

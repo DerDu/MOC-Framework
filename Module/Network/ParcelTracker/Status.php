@@ -36,11 +36,13 @@
  * 30.01.2013 13:44
  */
 namespace MOC\Module\Network\ParcelTracker;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Package;
+
 /**
  *
  */
-class Status implements \MOC\Generic\Package {
+class Status implements Package {
 	/**
 	 * Get Dependencies
 	 *

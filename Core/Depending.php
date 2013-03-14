@@ -36,11 +36,13 @@
  * 31.08.2012 12:50
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Depending implements \MOC\Generic\Device\Core {
+class Depending implements Core {
 	/** @var array $Dependencies */
 	public $Dependencies = array();
 

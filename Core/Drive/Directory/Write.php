@@ -36,7 +36,10 @@
  * 31.07.2012 16:48
  */
 namespace MOC\Core\Drive\Directory;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Drive;
+use MOC\Core\Error;
+
 /**
  * Directory-Write
  */
@@ -85,12 +88,12 @@ class Write extends Property {
 		$Directory = $this->UpdateSyntax( $this->Location() . DIRECTORY_SEPARATOR . $Directory );
 		if( !is_dir( $Directory ) && !is_file( $Directory ) ) {
 			if( false === mkdir( $Directory ) ) {
-				\MOC\Core\Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Unable to create directory!' );
+				Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Unable to create directory!' );
 			} else {
-				return \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $Directory );
+				return Drive::InterfaceInstance()->Directory()->Handle( $Directory );
 			}
 		} else {
-			\MOC\Core\Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Directory or file exists already!' );
+			Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Directory or file exists already!' );
 		}
 		return null;
 	}
@@ -101,7 +104,7 @@ class Write extends Property {
 	 */
 	public function Remove() {
 		if( false === rmdir( $this->Location() ) ) {
-			\MOC\Core\Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Unable to remove directory!' );
+			Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Unable to remove directory!' );
 		} return true;
 	}
 
@@ -112,7 +115,7 @@ class Write extends Property {
 	 */
 	public function Copy( /** @noinspection PhpUnusedParameterInspection */
 		$Directory ) {
-		\MOC\Core\Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Not yet implemented!' );
+		Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Not yet implemented!' );
 	}
 
 	/**
@@ -122,6 +125,6 @@ class Write extends Property {
 	 */
 	public function Move( /** @noinspection PhpUnusedParameterInspection */
 		$Directory ) {
-		\MOC\Core\Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Not yet implemented!' );
+		Error::InterfaceInstance()->Type()->Exception()->Trigger( 'Not yet implemented!' );
 	}
 }

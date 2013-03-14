@@ -36,10 +36,12 @@
  * 14.01.2013 20:33
  */
 namespace MOC\Module\Database\Driver;
+use MOC\Module\Database\Driver;
+
 /**
  *
  */
-class Mysql extends \MOC\Module\Database\Driver {
+class Mysql extends Driver {
 
 	function __construct() {
 		$this->OptionQuote("'");

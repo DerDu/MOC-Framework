@@ -36,11 +36,14 @@
  * 31.08.2012 13:46
  */
 namespace MOC\Core\Depending;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Version;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Result implements \MOC\Generic\Device\Core {
+class Result implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -81,11 +84,11 @@ class Result implements \MOC\Generic\Device\Core {
 	/**
 	 * @param null              $Namespace
 	 * @param null              $Class
-	 * @param \MOC\Core\Version $Version
+	 * @param Version $Version
 	 *
 	 * @return array
 	 */
-	public function Install( $Namespace = null, $Class = null, \MOC\Core\Version $Version = null ) {
+	public function Install( $Namespace = null, $Class = null, Version $Version = null ) {
 		if( $Namespace !== null && $Class !== null && $Version !== null ) {
 			$this->Install[$Namespace][$Class] = $Version;
 		} return $this->Install;
@@ -94,11 +97,11 @@ class Result implements \MOC\Generic\Device\Core {
 	/**
 	 * @param null              $Namespace
 	 * @param null              $Class
-	 * @param \MOC\Core\Version $Version
+	 * @param Version $Version
 	 *
 	 * @return array
 	 */
-	public function Update( $Namespace = null, $Class = null, \MOC\Core\Version $Version = null ) {
+	public function Update( $Namespace = null, $Class = null, Version $Version = null ) {
 		if( $Namespace !== null && $Class !== null && $Version !== null ) {
 			$this->Update[$Namespace][$Class] = $Version;
 		} return $this->Update;

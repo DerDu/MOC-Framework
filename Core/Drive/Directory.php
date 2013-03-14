@@ -36,19 +36,21 @@
  * 30.08.2012 14:58
  */
 namespace MOC\Core\Drive;
+use MOC\Generic\Common\Instance;
+
 /**
  *
  */
-class Directory extends \MOC\Core\Drive\Directory\Read implements \MOC\Generic\Common\Instance {
+class Directory extends Directory\Read implements Instance {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Drive\Directory
+	 * @return Directory
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Drive\Directory();
+		return new Directory();
 	}
 
 	/**
@@ -56,7 +58,7 @@ class Directory extends \MOC\Core\Drive\Directory\Read implements \MOC\Generic\C
 	 *
 	 * @param string $Location
 	 *
-	 * @return \MOC\Core\Drive\Directory
+	 * @return Directory
 	 */
 	public function Handle( $Location ) {
 		$this->Location( $Location );

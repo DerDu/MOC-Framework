@@ -36,19 +36,21 @@
  * 15.10.2012 15:38
  */
 namespace MOC\Module\Network\Ftp;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class File extends \MOC\Module\Network\Ftp\File\Read implements \MOC\Generic\Device\Module {
+class File extends File\Read implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Ftp\File
+	 * @return File
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\Ftp\File();
+		return new File();
 	}
 
 	/**
@@ -76,7 +78,7 @@ class File extends \MOC\Module\Network\Ftp\File\Read implements \MOC\Generic\Dev
 	 *
 	 * @param string $Location
 	 *
-	 * @return \MOC\Module\Network\FTP\File
+	 * @return File
 	 */
 	public function Handle( $Location ) {
 		$this->Location( $Location );
@@ -128,33 +130,19 @@ class File extends \MOC\Module\Network\Ftp\File\Read implements \MOC\Generic\Dev
 		return ( file_exists( $this->Location() ) ? sha1_file( $this->Location() ) : sha1( $this->Location() ) );
 	}
 
-
 	/**
-	 * FIX: File-Name Special-Chars
-	 */
-
-	const FILE_NAME_ENCODING_UTF8 = 'utf-8';
-
-	/**
-	 * @param string $Encoding
-	 *
 	 * @return File
 	 */
-	public function SetFileNameEncoding( $Encoding = self::FILE_NAME_ENCODING_UTF8 ) {
-		// Alles klein schreiben
-		//$FileName = mb_strtolower( $this->Name(), $Encoding );
+	public function SetFileNameEncoding() {
 		$FileName = self::MixedToUtf8( $this->Name() );
 
-		// Alle deutschen Umlaute und Sonderfälle austauschen
 		$FileName = str_replace(
 			array('ä', 'ö', 'ü', 'ß', 'ó', 'è', 'é'),
 			array('ae', 'oe', 'ue', 'ss', 'o', 'e', 'e'),
 			$FileName );
 
-		// Alle restlichen Leerzeichen zu Bindestrichen
 		$FileName = preg_replace( '/\s/s', '-', $FileName );
 
-		// Alles löschen, was nicht alphanumerisch ist
 		$FileName = preg_replace('/[^a-z0-9_-]/isU', '', $FileName);
 
 		$FileName = trim($FileName);
@@ -182,7 +170,8 @@ class File extends \MOC\Module\Network\Ftp\File\Read implements \MOC\Generic\Dev
 	 * @param $Text
 	 *
 	 * @return mixed
-	 */public static function MixedToLatin1( $Text ) {
+	 */
+	public static function MixedToLatin1( $Text ) {
 		self::BuildDictionary();
 		foreach ( self::$DictionaryUtf8ToLatin1 as $Key => $Val) {
 			$Text = str_replace( $Key, $Val, $Text );
@@ -194,7 +183,8 @@ class File extends \MOC\Module\Network\Ftp\File\Read implements \MOC\Generic\Dev
 	 * @param $Text
 	 *
 	 * @return string
-	 */public static function MixedToUtf8( $Text ) {
+	 */
+	public static function MixedToUtf8( $Text ) {
 		self::BuildDictionary();
 		return utf8_encode( self::MixedToLatin1( $Text ) );
 	}

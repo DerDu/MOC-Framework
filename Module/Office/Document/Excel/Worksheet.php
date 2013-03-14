@@ -36,11 +36,13 @@
  * 25.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Excel;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Worksheet implements \MOC\Generic\Device\Module {
+class Worksheet implements Module {
 	/**
 	 * Get Changelog
 	 *

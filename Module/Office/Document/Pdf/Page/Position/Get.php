@@ -36,11 +36,13 @@
  * 27.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Pdf\Page\Position;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Get implements \MOC\Generic\Device\Module {
+class Get implements Module {
 	/**
 	 * Get Changelog
 	 *

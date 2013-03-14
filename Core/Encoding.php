@@ -36,11 +36,13 @@
  * 11.02.2013 14:36
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Encoding implements \MOC\Generic\Device\Core {
+class Encoding implements Core {
 	/** @var Encoding $Singleton */
 	private static $Singleton = null;
 

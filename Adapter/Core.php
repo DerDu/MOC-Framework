@@ -36,24 +36,38 @@
  * 29.08.2012 15:25
  */
 namespace MOC\Adapter;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Cache;
+use MOC\Core\Changelog;
+use MOC\Core\Depending;
+use MOC\Core\Drive;
+use MOC\Core\Encoding;
+use MOC\Core\Error;
+use MOC\Core\Journal;
+use MOC\Core\Proxy;
+use MOC\Core\Session;
+use MOC\Core\Template;
+use MOC\Core\Version;
+use MOC\Core\Xml;
+use MOC\Generic\Device\Adapter;
+
 /**
  *
  */
-class Core implements \MOC\Generic\Device\Adapter {
+class Core implements Adapter {
 
-	/** @var \MOC\Adapter\Core $Singleton */
+	/** @var Core $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return  \MOC\Adapter\Core
+	 * @return  Core
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Adapter\Core();
+			self::$Singleton = new Core();
 		} return self::$Singleton;
 	}
 
@@ -61,7 +75,7 @@ class Core implements \MOC\Generic\Device\Adapter {
 	 * Get Dependencies
 	 *
 	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
@@ -81,7 +95,7 @@ class Core implements \MOC\Generic\Device\Adapter {
 	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Changelog
+	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
@@ -94,85 +108,85 @@ class Core implements \MOC\Generic\Device\Adapter {
 
 	// ========================================================================================================== //
 	/**
-	 * @return \MOC\Core\Depending
+	 * @return Depending
 	 */
 	public function Depending() {
-		return \MOC\Core\Depending::InterfaceInstance();
+		return Depending::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Core\Version
+	 * @return Version
 	 */
 	public function Version() {
-		return \MOC\Core\Version::InterfaceInstance();
+		return Version::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Core\Changelog
+	 * @return Changelog
 	 */
 	public function Changelog() {
-		return \MOC\Core\Changelog::InterfaceInstance();
+		return Changelog::InterfaceInstance();
 	}
     // ========================================================================================================== //
 
 	/**
-	 * @return \MOC\Core\Cache
+	 * @return Cache
 	 */
 	public function Cache() {
-		return \MOC\Core\Cache::InterfaceInstance();
+		return Cache::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Drive
+	 * @return Drive
 	 */
 	public function Drive() {
-		return \MOC\Core\Drive::InterfaceInstance();
+		return Drive::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Encoding
+	 * @return Encoding
 	 */
 	public function Encoding() {
-		return \MOC\Core\Encoding::InterfaceInstance();
+		return Encoding::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Error
+	 * @return Error
 	 */
 	public function Error() {
-		return \MOC\Core\Error::InterfaceInstance();
+		return Error::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Journal
+	 * @return Journal
 	 */
 	public function Journal() {
-		return \MOC\Core\Journal::InterfaceInstance();
+		return Journal::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Proxy
+	 * @return Proxy
 	 */
 	public function Proxy() {
-		return \MOC\Core\Proxy::InterfaceInstance();
+		return Proxy::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Session
+	 * @return Session
 	 */
 	public function Session() {
-		return \MOC\Core\Session::InterfaceInstance();
+		return Session::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Xml
+	 * @return Xml
 	 */
 	public function Xml() {
-		return \MOC\Core\Xml::InterfaceInstance();
+		return Xml::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Core\Template
+	 * @return Template
 	 */
 	public function Template() {
-		return \MOC\Core\Template::InterfaceInstance();
+		return Template::InterfaceInstance();
 	}
 }

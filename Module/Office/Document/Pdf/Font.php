@@ -36,11 +36,14 @@
  * 27.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Font implements \MOC\Generic\Device\Module {
+class Font implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -75,12 +78,12 @@ class Font implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 * @param null|string $Name
 	 *
 	 * @return \MOC\Module\Office\Document\Pdf
 	 */
-	public function Register( \MOC\Module\Drive\File $File = null, $Name = null ) {
+	public function Register( File $File = null, $Name = null ) {
 		Api::Extension()->Pdf()->Current()->fontpath = realpath( $File->GetPath() ).DIRECTORY_SEPARATOR;
 		if( !file_exists( $File->GetPath().DIRECTORY_SEPARATOR.$File->GetName().'.php' ) ) {
 			MakeFont( $File->GetLocation() );

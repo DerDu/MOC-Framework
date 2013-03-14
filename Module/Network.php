@@ -36,11 +36,13 @@
  * 13.02.2013 09:33
  */
 namespace MOC\Module;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Network implements \MOC\Generic\Device\Module {
+class Network implements Module {
 
 	/**
 	 * Get Singleton/Instance

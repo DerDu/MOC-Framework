@@ -36,23 +36,25 @@
  * 02.09.2012 16:20
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Proxy implements \MOC\Generic\Device\Core {
-	/** @var \MOC\Core\Proxy $Singleton */
+class Proxy implements Core {
+	/** @var Proxy $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Proxy
+	 * @return Proxy
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Proxy();
+			self::$Singleton = new Proxy();
 		} return self::$Singleton;
 	}
 
@@ -74,16 +76,16 @@ class Proxy implements \MOC\Generic\Device\Core {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', \MOC\Core\Version::InterfaceInstance()->Build(1)->Update(2)->Fix(1) );
+			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1)->Update(2)->Fix(1) );
 	}
 
 	const PROXY_NONE = 0;
 	const PROXY_RELAY = 1;
 	const PROXY_BASIC = 2;
 
-	/** @var null|\MOC\Core\Proxy\Server $Server */
+	/** @var null|Proxy\Server $Server */
 	private $Server = null;
-	/** @var null|\MOC\Core\Proxy\Credentials $Credentials */
+	/** @var null|Proxy\Credentials $Credentials */
 	private $Credentials = null;
 
 	private $Timeout = 5;
@@ -92,11 +94,11 @@ class Proxy implements \MOC\Generic\Device\Core {
 	private $ProxyType = self::PROXY_NONE;
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param Drive\File $File
 	 * @return string
 	 */
-	public function Url( \MOC\Core\Drive\File $File ) {
-		return \MOC\Core\Proxy\Seo::InterfaceInstance()->Url( $File );
+	public function Url( Drive\File $File ) {
+		return Proxy\Seo::InterfaceInstance()->Url( $File );
 	}
 
 	/**
@@ -105,7 +107,7 @@ class Proxy implements \MOC\Generic\Device\Core {
 	 *
 	 * @return Proxy
 	 */
-	public function Open( \MOC\Core\Proxy\Server $Server, \MOC\Core\Proxy\Credentials $Credentials = null ) {
+	public function Open( Proxy\Server $Server, Proxy\Credentials $Credentials = null ) {
 
 		$this->Server = $Server;
 		$this->Credentials = $Credentials;
@@ -136,14 +138,14 @@ class Proxy implements \MOC\Generic\Device\Core {
 	 * @return Proxy\Server
 	 */
 	public function Server() {
-		return \MOC\Core\Proxy\Server::InterfaceInstance();
+		return Proxy\Server::InterfaceInstance();
 	}
 
 	/**
 	 * @return Proxy\Credentials
 	 */
 	public function Credentials() {
-		return \MOC\Core\Proxy\Credentials::InterfaceInstance();
+		return Proxy\Credentials::InterfaceInstance();
 	}
 	/**
 	 * @param string $Url
@@ -187,7 +189,7 @@ class Proxy implements \MOC\Generic\Device\Core {
 	 *
 	 * @return null|string
 	 */private function ProxyNone( $Url, $Status ) {
-		$this->Server = \MOC\Core\Proxy\Server::InterfaceInstance();
+		$this->Server = Proxy\Server::InterfaceInstance();
 		$this->Server->Host( parse_url( $Url, PHP_URL_HOST ) );
 		if( parse_url( $Url, PHP_URL_PORT ) === null ) {
 			switch( strtoupper( parse_url( $Url, PHP_URL_SCHEME ) ) ) {

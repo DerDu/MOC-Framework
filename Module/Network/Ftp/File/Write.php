@@ -36,11 +36,14 @@
  * 16.10.2012 11:23
  */
 namespace MOC\Module\Network\Ftp\File;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Network\Ftp\File;
+
 /**
  * File-Write
  */
-class Write extends \MOC\Module\Network\Ftp\File\Property implements \MOC\Generic\Device\Module {
+class Write extends Property implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -83,10 +86,10 @@ class Write extends \MOC\Module\Network\Ftp\File\Property implements \MOC\Generi
 	 */
 	public function Copy( $Path ) {
 		if( ftp_mdtm( $this->Connection()->Handler(), $this->Location() ) > -1 ) {
-			$Source = \MOC\Module\Network\Ftp\File::InterfaceInstance();
+			$Source = File::InterfaceInstance();
 			$Source->Connection( $this->Connection() );
 			$Source->Handle( $this->Location() );
-			$Target = \MOC\Module\Network\Ftp\File::InterfaceInstance();
+			$Target = File::InterfaceInstance();
 			$Target->Connection( $this->Connection() );
 			$Target->Handle( $Path.'/'.basename($this->Location()) );
 			$Target->Content( $Source->Content() );

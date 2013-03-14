@@ -36,12 +36,15 @@
  * 31.07.2012 17:00
  */
 namespace MOC\Core\Error\Type;
-use \MOC\Api;
-use \MOC\Core\Error\Reporting;
+use MOC\Api;
+use MOC\Core\Error\Reporting;
+use MOC\Core\Journal;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Shutdown implements \MOC\Generic\Common {
+class Shutdown implements Common {
 	/** @var null|Shutdown $Singleton */
 	private static $Singleton = null;
 
@@ -107,7 +110,7 @@ class Shutdown implements \MOC\Generic\Common {
 	 * @param $Content
 	 */
 	private function Journal( $Content ) {
-		\MOC\Core\Journal::InterfaceInstance()->Write()->Name( __CLASS__ )->Content( $Content );
+		Journal::InterfaceInstance()->Write()->Name( __CLASS__ )->Content( $Content );
 	}
 
 }

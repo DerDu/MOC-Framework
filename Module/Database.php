@@ -36,11 +36,13 @@
  * 26.02.2013 19:52
  */
 namespace MOC\Module;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Database implements \MOC\Generic\Device\Module {
+class Database implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
@@ -71,9 +73,9 @@ class Database implements \MOC\Generic\Device\Module {
 		return Api::Core()->Depending();
 	}
 
-	/** @var \MOC\Module\Database\Driver[] $Queue */
+	/** @var Database\Driver $Queue */
 	private $Queue = array();
-	/** @var \MOC\Module\Database\Driver $Current */
+	/** @var Database\Driver $Current */
 	private $Current = null;
 
 	const DRIVER_MYSQL = 10;
@@ -83,15 +85,15 @@ class Database implements \MOC\Generic\Device\Module {
 	public function Driver( $DRIVER = self::DRIVER_ODBC_MSSQL ) {
 		switch( $DRIVER ) {
 			case self::DRIVER_MYSQL: {
-				$this->_openResource( new \MOC\Module\Database\Driver\Mysql() );
+				$this->_openResource( new Database\Driver\Mysql() );
 				break;
 			}
 			case self::DRIVER_ODBC_MSSQL: {
-				$this->_openResource( new \MOC\Module\Database\Driver\OdbcMssql() );
+				$this->_openResource( new Database\Driver\OdbcMssql() );
 				break;
 			}
 			case self::DRIVER_ODBC_ORACLE: {
-				$this->_openResource( new \MOC\Module\Database\Driver\OdbcOracle() );
+				$this->_openResource( new Database\Driver\OdbcOracle() );
 				break;
 			}
 		}
@@ -111,16 +113,16 @@ class Database implements \MOC\Generic\Device\Module {
 		$this->_getResource()->Statement( $SqlTemplate );
 		return $this;
 	}
-	public function Parameter( $Value, $Key = null, $Type = \MOC\Module\Database\Driver::PARAM_TYPE_NONE ) {
+	public function Parameter( $Value, $Key = null, $Type = Database\Driver::PARAM_TYPE_NONE ) {
 		$this->_getResource()->Parameter( $Value, $Key, $Type );
 		return $this;
 	}
-	public function Execute( $FETCH_AS = \MOC\Module\Database\Driver::RESULT_AS_ARRAY_ASSOC ) {
+	public function Execute( $FETCH_AS = Database\Driver::RESULT_AS_ARRAY_ASSOC ) {
 		return $this->_getResource()->Execute( $FETCH_AS );
 	}
 
 	/**
-	 * @param \MOC\Module\Database\Driver $Resource
+	 * @param Database\Driver $Resource
 	 *
 	 * @return Database
 	 */
@@ -141,7 +143,7 @@ class Database implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Database\Driver
+	 * @return Database\Driver
 	 */
 	public function _getResource() {
 		return $this->Current;
