@@ -43,9 +43,17 @@ use MOC\Module\Database\Driver;
  */
 class Odbc extends Driver {
 
+	/**
+	 * @param string $DSN
+	 * @param string $User
+	 * @param string $Password
+	 * @param null|string $Database
+	 *
+	 * @return bool
+	 */
 	public function Open( $DSN, $User, $Password, $Database = null ){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false == ( $Resource = @odbc_connect( $DSN, $User, $Password ) ) ) {
+		if( false == ( $Resource = odbc_connect( $DSN, $User, $Password ) ) ) {
 			if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
 			return false;
 		} else {
@@ -54,12 +62,17 @@ class Odbc extends Driver {
 		}
 	}
 
+	/**
+	 * @param int $FETCH_AS
+	 *
+	 * @return array|bool
+	 */
 	public function Execute( $FETCH_AS = self::RESULT_AS_ARRAY_ASSOC ) {
 		if( !$this->GetResource() ) {
 			return false;
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false === ( $Result = @odbc_exec( $this->GetResource(), $this->GetQuery() ) ) ) {
+		if( false === ( $Result = odbc_exec( $this->GetResource(), $this->GetQuery() ) ) ) {
 			if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error."\n\n".$this->GetQuery() ); }
 			return false;
 		}
@@ -73,36 +86,47 @@ class Odbc extends Driver {
 		}
 	}
 
+	/**
+	 * @param resource $Result
+	 *
+	 * @return array
+	 */
 	protected function FetchAsArray( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = @odbc_num_rows( $Result );
-		while( false !== ( $Row = @odbc_fetch_array( $Result ) ) ) {
+		$RowCount = odbc_num_rows( $Result );
+		while( false !== ( $Row = odbc_fetch_array( $Result ) ) ) {
 			//if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
 			array_push( $Return, array_values( $Row ) );
 		}
-		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = @odbc_num_rows( $Result ) : $RowCount ) );
+		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = odbc_num_rows( $Result ) : $RowCount ) );
 		$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
-		@odbc_free_result( $Result );
+		odbc_free_result( $Result );
 		return $Return;
 	}
+
+	/**
+	 * @param resource $Result
+	 *
+	 * @return array
+	 */
 	protected function FetchAsArrayAssoc( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = @odbc_num_rows( $Result );
-		while( false !== ( $Row = @odbc_fetch_array( $Result ) ) ) {
+		$RowCount = odbc_num_rows( $Result );
+		while( false !== ( $Row = odbc_fetch_array( $Result ) ) ) {
 			//if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
 			array_push( $Return, $Row );
 		}
-		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = @odbc_num_rows( $Result ) : $RowCount ) );
+		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = odbc_num_rows( $Result ) : $RowCount ) );
 		//$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
-		@odbc_free_result( $Result );
+		odbc_free_result( $Result );
 		return $Return;
 	}
 
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		@odbc_close( $this->GetResource() );
+		odbc_close( $this->GetResource() );
 		$this->SetResource(null);
 	}
 
