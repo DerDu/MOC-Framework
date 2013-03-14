@@ -70,10 +70,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	- Init the library
 	- Provide adapter access (eg. Api:: ...)
 
+
 2. ##### Adapter
 	Your window into a better world
 	- Starting point of the chain
 	- Provide Core/Extension/Module/Plugin access (eg. Api::Module() ...)
+
 
 3. ##### Core
 	Contains secret internal operations ;-)
@@ -84,11 +86,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	You should never use this one directly in your application
 
+
 4. ##### Extension
 	Add power to the system
 	- Defines a common interface for 3rd party applications
 
 	And again: You should never use this one directly in your application
+
 
 5. ##### Module
 	Make the hole thing shiny
@@ -97,10 +101,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 	You will need this one - and ONLY this one - for your application
 
+
 6. ##### Plugin
 	Up to your imagination
 
 	I had an idea but... never mind... -.-
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
