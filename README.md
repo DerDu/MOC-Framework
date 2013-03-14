@@ -2,8 +2,55 @@
 ===============
 
 ### Modular - Object - Chaining
+The easy way to OOP
 
-#### The easy way to OOP
+### Purpose
+
+
+### Design
+
+#### MOC - "The Api"
+
+- Init the Library
+- Provide Adapter-Access
+
+#### Adapter
+Your window into a better world
+
+#### Core
+Contains secret internal operations ;-)
+
+#### Extension
+Add power to the system
+
+#### Module
+Make the hole thing shiny
+
+#### Plugin
+Up to your imagination
+
+
+### Usage
+
+1. Get in the MOC
+
+```php
+require('MOC.php');
+```
+
+2. Start your Engine
+
+```php
+use MOC\Api;
+```
+
+3. Put the pedal to the metal.
+
+```php
+var_dump(
+	Api::Module()->Drive()->File()->Open('README.md')->Read()
+);
+```
 
 ------------------------------------------------------------------------------------------------------------------------
 
