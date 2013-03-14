@@ -179,7 +179,8 @@ class Page1 implements Module {
 	 * @param null $Value
 	 *
 	 * @return Page
-	 */public function PositionY( $Value = null ) {
+	 */
+	public function PositionY( $Value = null ) {
 		if( null !== $Value ) {
 			Api::Extension()->Pdf()->Current()->SetY( $Value );
 			return $this;
