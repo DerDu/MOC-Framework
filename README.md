@@ -70,7 +70,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	- Init the library
 	- Provide adapter access
 
-	And MOC said: "Let there be ligh... ähm.. Api:: !"
+	And MOC said: "Let there be ligh... ähm.. `Api::` !"
 
 2. ##### Adapter
 	Your window into a better world
