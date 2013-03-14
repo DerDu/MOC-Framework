@@ -36,11 +36,13 @@
  * 16.10.2012 10:42
  */
 namespace MOC\Module\Network\Ftp\Directory;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  * Directory-Write
  */
-class Write extends \MOC\Module\Network\Ftp\Directory\Property implements \MOC\Generic\Device\Module {
+class Write extends Property implements Module {
 	/**
 	 * Get Changelog
 	 *

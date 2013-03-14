@@ -36,23 +36,25 @@
  * 31.07.2012 18:09
  */
 namespace MOC\Core\Error;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Reporting implements \MOC\Generic\Common {
-	/** @var \MOC\Core\Error\Reporting $Singleton */
+class Reporting implements Common {
+	/** @var Reporting $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Error\Reporting
+	 * @return Reporting
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Error\Reporting();
+			self::$Singleton = new Reporting();
 		} return self::$Singleton;
 	}
 
@@ -112,7 +114,7 @@ class Reporting implements \MOC\Generic\Common {
 	/**
 	 * @param int $E_LEVEL
 	 *
-	 * @return \MOC\Core\Error\Reporting
+	 * @return Reporting
 	 */
 	public function Level( $E_LEVEL = null ) {
 		if( null !== $E_LEVEL ) {
@@ -123,7 +125,7 @@ class Reporting implements \MOC\Generic\Common {
 	/**
 	 * @param bool $Toggle
 	 *
-	 * @return \MOC\Core\Error\Reporting
+	 * @return Reporting
 	 */
 	public function Display( $Toggle = null ) {
 		if( null !== $Toggle ) {
@@ -134,7 +136,7 @@ class Reporting implements \MOC\Generic\Common {
 	/**
 	 * @param bool $Toggle
 	 *
-	 * @return \MOC\Core\Error\Reporting
+	 * @return Reporting
 	 */
 	public function Debug( $Toggle = null ) {
 		if( null !== $Toggle ) {

@@ -36,12 +36,14 @@
  * 30.08.2012 14:11
  */
 namespace MOC\Core\Error;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Register implements \MOC\Generic\Common {
-	/** @var \MOC\Core\Error\Register $Singleton */
+class Register implements Common {
+	/** @var Register $Singleton */
 	private static $Singleton = null;
 
 	/**
@@ -49,7 +51,7 @@ class Register implements \MOC\Generic\Common {
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Error\Register();
+			self::$Singleton = new Register();
 		} return self::$Singleton;
 	}
 
@@ -81,20 +83,20 @@ class Register implements \MOC\Generic\Common {
 	 * @return Register\Error|null
 	 */
 	public function Error() {
-		return \MOC\Core\Error\Register\Error::InterfaceInstance();
+		return Register\Error::InterfaceInstance();
 	}
 
 	/**
 	 * @return Register\Shutdown|null
 	 */
 	public function Shutdown() {
-		return \MOC\Core\Error\Register\Shutdown::InterfaceInstance();
+		return Register\Shutdown::InterfaceInstance();
 	}
 
 	/**
 	 * @return Register\Exception|null
 	 */
 	public function Exception() {
-		return \MOC\Core\Error\Register\Exception::InterfaceInstance();
+		return Register\Exception::InterfaceInstance();
 	}
 }

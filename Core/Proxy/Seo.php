@@ -36,19 +36,23 @@
  * 08.09.2012 14:51
  */
 namespace MOC\Core\Proxy;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Core\Drive\File;
+use MOC\Core\Drive;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Seo implements \MOC\Generic\Common {
+class Seo implements Common {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Proxy\Seo;
+	 * @return Seo;
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Proxy\Seo();
+		return new Seo();
 	}
 
 	/**
@@ -75,15 +79,15 @@ class Seo implements \MOC\Generic\Common {
 		;
 	}
 
-	/** @var \MOC\Core\Drive\File $SeoFile */
+	/** @var File $SeoFile */
 	private $SeoFile = null;
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return string
 	 */
-	public function Url( \MOC\Core\Drive\File $File ) {
+	public function Url( File $File ) {
 		$this->SeoFile = $File;
 		return $this->UrlScheme().$this->UrlHost().( $this->UrlPort()?':'.$this->UrlPort():'' ).'/'.$this->UrlPath().'/'.basename( $File->Location() );
 	}
@@ -93,7 +97,7 @@ class Seo implements \MOC\Generic\Common {
 	 * @return mixed
 	 */
 	private function UrlPath() {
-		$Directory = \MOC\Core\Drive::InterfaceInstance()->Directory()->Handle( $this->SeoFile->Path() );
+		$Directory = Drive::InterfaceInstance()->Directory()->Handle( $this->SeoFile->Path() );
 //		$Directory->Handle( trim( trim( str_replace( $Directory->DirectoryRoot(), '', $Directory->Location() ), '\\'), '/' ) );
 //		return str_replace( '\\', '/', $Directory->Location() );
 		return str_replace( '\\', '/', trim( trim( str_replace( $Directory->DirectoryRoot(), '', $Directory->Location() ), '\\'), '/' ) );

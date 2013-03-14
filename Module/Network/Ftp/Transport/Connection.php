@@ -36,19 +36,21 @@
  * 15.10.2012 15:38
  */
 namespace MOC\Module\Network\Ftp\Transport;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Connection implements \MOC\Generic\Device\Module {
+class Connection implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Ftp\Transport\Connection
+	 * @return Connection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\Ftp\Transport\Connection();
+		return new Connection();
 	}
 
 	/**

@@ -36,11 +36,13 @@
  * 30.08.2012 14:28
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Drive implements \MOC\Generic\Device\Core {
+class Drive implements Core {
 	/** @var Drive $Singleton */
 	private static $Singleton = null;
 

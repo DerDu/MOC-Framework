@@ -36,11 +36,13 @@
  * 27.02.2013 16:06
  */
 namespace MOC\Module\Office\Document\Pdf\Page\Margin;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Top implements \MOC\Generic\Device\Module {
+class Top implements Module {
 	/**
 	 * Get Changelog
 	 *

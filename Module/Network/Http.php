@@ -36,24 +36,26 @@
  * 15.10.2012 15:36
  */
 namespace MOC\Module\Network;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Http implements \MOC\Generic\Device\Module {
+class Http implements Module {
 
-	/** @var \MOC\Module\Network\Http $Singleton */
+	/** @var Http $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Http
+	 * @return Http
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Module\Network\Http();
+			self::$Singleton = new Http();
 		} return self::$Singleton;
 	}
 
@@ -80,9 +82,9 @@ class Http implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Network\Http\Post
+	 * @return Http\Post
 	 */
 	public function Post() {
-		return \MOC\Module\Network\Http\Post::InterfaceInstance();
+		return Http\Post::InterfaceInstance();
 	}
 }

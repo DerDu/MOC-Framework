@@ -36,24 +36,26 @@
  * 29.08.2012 15:26
  */
 namespace MOC\Adapter;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Adapter;
+
 /**
  *
  */
-class Extension implements \MOC\Generic\Device\Adapter {
+class Extension implements Adapter {
 
-	/** @var \MOC\Adapter\Extension $Singleton */
+	/** @var Extension $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return  \MOC\Adapter\Extension
+	 * @return  Extension
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Adapter\Extension();
+			self::$Singleton = new Extension();
 		} return self::$Singleton;
 	}
 
@@ -93,6 +95,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\Excel\Instance
 	 */
 	public function Excel() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\Excel\Instance::InterfaceInstance();
 	}
 
@@ -100,6 +103,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\Mail\Instance
 	 */
 	public function Mail() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\Mail\Instance::InterfaceInstance();
 	}
 
@@ -107,6 +111,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\Pdf\Instance
 	 */
 	public function Pdf() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\Pdf\Instance::InterfaceInstance();
 	}
 
@@ -114,6 +119,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\Word\Instance
 	 */
 	public function Word() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\Word\Instance::InterfaceInstance();
 	}
 
@@ -121,6 +127,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\Zip\Instance
 	 */
 	public function Zip() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\Zip\Instance::InterfaceInstance();
 	}
 
@@ -128,6 +135,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\ApiGen\Instance
 	 */
 	public function ApiGen() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\ApiGen\Instance::InterfaceInstance();
 	}
 
@@ -135,6 +143,7 @@ class Extension implements \MOC\Generic\Device\Adapter {
 	 * @return \MOC\Extension\YUICompressor\Instance
 	 */
 	public function YUICompressor() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\YUICompressor\Instance::InterfaceInstance();
 	}
 }

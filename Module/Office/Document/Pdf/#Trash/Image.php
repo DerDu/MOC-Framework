@@ -36,19 +36,22 @@
  * 14.09.2012 08:30
  */
 namespace MOC\Module\Office\Document\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Image1 implements \MOC\Generic\Device\Module {
+class Image1 implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Office\Document\Pdf\Image
+	 * @return Image
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Office\Document\Pdf\Image();
+		return new Image();
 	}
 
 	/**
@@ -71,7 +74,7 @@ class Image1 implements \MOC\Generic\Device\Module {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
-	/** @var null|\MOC\Module\Drive\File $File */
+	/** @var null|File $File */
 	private $File = null;
 	/** @var int $Width */
 	private $Width = 0;
@@ -79,11 +82,11 @@ class Image1 implements \MOC\Generic\Device\Module {
 	private $Height = 0;
 
 	/**
-	 * @param \MOC\Module\Drive\File $Image
+	 * @param File $Image
 	 *
-	 * @return \MOC\Module\Drive\File|Image|null
+	 * @return File|Image|null
 	 */
-	public function File( \MOC\Module\Drive\File $Image = null ) {
+	public function File( File $Image = null ) {
 		if( null !== $Image ) {
 			$this->File = $Image;
 			$this->Width = 0;

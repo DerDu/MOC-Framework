@@ -36,11 +36,13 @@
  * 18.02.2013 08:19
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Changelog implements \MOC\Generic\Device\Core {
+class Changelog implements Core {
 	/** @var Changelog $Singleton */
 	private static $Singleton = null;
 

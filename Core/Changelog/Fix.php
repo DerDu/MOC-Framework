@@ -36,11 +36,13 @@
  * 18.02.2013 08:38
  */
 namespace MOC\Core\Changelog;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Fix implements \MOC\Generic\Device\Core {
+class Fix implements Core {
 	/**
 	 * Get Dependencies
 	 *

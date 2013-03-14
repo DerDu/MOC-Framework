@@ -36,11 +36,13 @@
  * 06.01.2013 15:09
  */
 namespace MOC\Core\Xml;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Node implements \MOC\Generic\Device\Core {
+class Node implements Core {
 	/**
 	 * Get Dependencies
 	 *
@@ -56,11 +58,11 @@ class Node implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Xml\Node();
+		return new Node();
 	}
 
 	/**
@@ -92,7 +94,7 @@ class Node implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $NameOrToken
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function Setup( $NameOrToken ) {
 		if( is_object( $NameOrToken ) && $NameOrToken instanceof Token ) {
@@ -110,7 +112,7 @@ class Node implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function SetType( $Value ) {
 		$this->Type = $Value;
@@ -127,7 +129,7 @@ class Node implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function SetPosition( $Value ) {
 		$this->Position = $Value;
@@ -142,11 +144,11 @@ class Node implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @param \MOC\Core\Xml\Node $Value
+	 * @param Node $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
-	public function SetParent( \MOC\Core\Xml\Node $Value ) {
+	public function SetParent( Node $Value ) {
 		$this->Parent = $Value;
 		return $this;
 	}
@@ -159,11 +161,11 @@ class Node implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @param \MOC\Core\Xml\Node $Value
+	 * @param Node $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
-	public function AddChild( \MOC\Core\Xml\Node $Value ) {
+	public function AddChild( Node $Value ) {
 		$Value->SetParent( $this );
 		array_push( $this->ChildList, $Value );
 		$this->Content = null;
@@ -177,10 +179,10 @@ class Node implements \MOC\Generic\Device\Core {
 	 * @param null $Index
 	 * @param bool $Recursive
 	 *
-	 * @return bool|\MOC\Core\Xml\Node|object
+	 * @return bool|Node|object
 	 */
 	public function GetChild( $Name, $AttributeList = null, $Index = null, $Recursive = true ) {
-		/** @var \MOC\Core\Xml\Node $Node */
+		/** @var Node $Node */
 		foreach( $this->ChildList as $Node ) {
 			if( $Node->GetName() == $Name ) {
 				if( $AttributeList === null && $Index === null ) {
@@ -230,7 +232,7 @@ class Node implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function SetName( $Value ) {
 		$this->Name = $Value;
@@ -247,7 +249,7 @@ class Node implements \MOC\Generic\Device\Core {
 	/**
 	 * @param null $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function SetContent( $Value = null ) {
 		if( preg_match( '![<>&]!is', $Value ) ) {
@@ -275,7 +277,7 @@ class Node implements \MOC\Generic\Device\Core {
 	 * @param      $Name
 	 * @param null $Value
 	 *
-	 * @return \MOC\Core\Xml\Node
+	 * @return Node
 	 */
 	public function SetAttribute( $Name, $Value = null ) {
 		if( $Value === null ) {
@@ -351,7 +353,7 @@ class Node implements \MOC\Generic\Device\Core {
 		}
 		else if( $this->GetType() == self::TYPE_STRUCTURE ) {
 			$Result .= '>';
-			/** @var \MOC\Core\Xml\Node $Node */
+			/** @var Node $Node */
 			foreach( $this->ChildList as $Node ) {
 				$Result .= $Node->Code(true, $FuncArgs[1] + 1 );
 			}
@@ -362,7 +364,7 @@ class Node implements \MOC\Generic\Device\Core {
 	}
 
 	public function __destruct() {
-		/** @var \MOC\Core\Xml\Node $Node */
+		/** @var Node $Node */
 		unset( $this->Parent );
 		foreach( (array)$this->ChildList as $Node ) {
 			$Node->__destruct();

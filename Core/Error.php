@@ -36,11 +36,13 @@
  * 30.08.2012 13:38
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Error implements \MOC\Generic\Device\Core {
+class Error implements Core {
 	/** @var Error $Singleton */
 	private static $Singleton = null;
 

@@ -36,11 +36,13 @@
  * 31.07.2012 17:39
  */
 namespace MOC\Core\Error\Register;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Exception implements \MOC\Generic\Common {
+class Exception implements Common {
 	/** @var null|Exception $Singleton */
 	private static $Singleton = null;
 

@@ -36,11 +36,13 @@
  * 06.01.2013 14:37
  */
 namespace MOC\Core\Xml;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Parser implements \MOC\Generic\Device\Core {
+class Parser implements Core {
 	/**
 	 * Get Dependencies
 	 *
@@ -56,11 +58,11 @@ class Parser implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Xml\Parser
+	 * @return Parser
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Xml\Parser();
+		return new Parser();
 	}
 
 	/**
@@ -88,7 +90,7 @@ class Parser implements \MOC\Generic\Device\Core {
 	/**
 	 * @param Tokenizer $Tokenizer
 	 *
-	 * @return \MOC\Core\Xml\Parser
+	 * @return Parser
 	 */
 	public function Setup( Tokenizer $Tokenizer ) {
 		$this->Stack = array();

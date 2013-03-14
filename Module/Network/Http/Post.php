@@ -36,11 +36,13 @@
  * 18.02.2013 20:56
  */
 namespace MOC\Module\Network\Http;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Post implements \MOC\Generic\Device\Module {
+class Post implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -163,7 +165,7 @@ class Post implements \MOC\Generic\Device\Module {
 /**
  *
  */
-class UriQuery implements \MOC\Generic\Device\Module {
+class UriQuery implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -237,7 +239,7 @@ class UriQuery implements \MOC\Generic\Device\Module {
 /**
  *
  */
-class UriScheme implements \MOC\Generic\Device\Module {
+class UriScheme implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -306,7 +308,7 @@ class UriScheme implements \MOC\Generic\Device\Module {
 /**
  *
  */
-class Uri implements \MOC\Generic\Device\Module {
+class Uri implements Module {
 
 	/**
 	 * Get Changelog

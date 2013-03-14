@@ -36,20 +36,23 @@
  * 13.03.2013 10:55
  */
 namespace MOC\Module\Packer\Yui;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Style implements \MOC\Generic\Device\Module {
+class Style implements Module {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Packer\Yui\Style
+	 * @return Style
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Packer\Yui\Style();
+		return new Style();
 	}
 
 	/**
@@ -79,11 +82,11 @@ class Style implements \MOC\Generic\Device\Module {
 		$this->Content .= $Content;
 		return $this;
 	}
-	public function AddFile( \MOC\Module\Drive\File $File ) {
+	public function AddFile( File $File ) {
 		$this->Content .= $File->Read();
 		return $this;
 	}
-	public function SaveAs( \MOC\Module\Drive\File $File ) {
+	public function SaveAs( File $File ) {
 		$Yui = Api::Extension()->YUICompressor()->Create()->Current();
 		$Yui->setOption( 'type', 'css' );
 		$Yui->setOption( 'linebreak', false );

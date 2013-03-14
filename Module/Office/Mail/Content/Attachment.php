@@ -36,11 +36,14 @@
  * 14.02.2013 11:32
  */
 namespace MOC\Module\Office\Mail\Content;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Attachment implements \MOC\Generic\Device\Module {
+class Attachment implements Module {
 
 	/**
 	 * Get Dependencies
@@ -76,11 +79,11 @@ class Attachment implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return Attachment
 	 */
-	public function File( \MOC\Module\Drive\File $File ) {
+	public function File( File $File ) {
 		Api::Extension()->Mail()->Current()->AddAttachment( $File->GetLocation() );
 		return $this;
 	}

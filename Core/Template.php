@@ -36,11 +36,13 @@
  * 28.12.2012 15:11
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Template implements \MOC\Generic\Device\Core {
+class Template implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -69,43 +71,43 @@ class Template implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template
+	 * @return Template
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template();
+		return new Template();
 	}
 
-	/** @var null|\MOC\Core\Template\Template $Template */
+	/** @var null|Template\Template $Template */
 	private $Template = null;
 	/** @var string $Content */
 	private $Content = '';
 
 	/**
-	 * @param \MOC\Core\Template\Template $Template
+	 * @param Template\Template $Template
 	 *
 	 * @return Template
 	 */
-	public function ApplyTemplate( \MOC\Core\Template\Template $Template ) {
+	public function ApplyTemplate( Template\Template $Template ) {
 		$this->Template = $Template;
 		$this->Content = $this->Template->GetPayload();
 		return $this;
 	}
 
 	/**
-	 * @return \MOC\Core\Template\Template
+	 * @return Template\Template
 	 */
 	public function CreateTemplate() {
-		return \MOC\Core\Template\Template::InterfaceInstance();
+		return Template\Template::InterfaceInstance();
 	}
 
 	/**
-	 * @param \MOC\Core\Template\Variable $Variable
+	 * @param Template\Variable $Variable
 	 * @param $Limit
 	 *
 	 * @return Template
 	 */
-	public function ApplyVariable( \MOC\Core\Template\Variable $Variable, $Limit = -1 ) {
+	public function ApplyVariable( Template\Variable $Variable, $Limit = -1 ) {
 		$this->Content = preg_replace(
 			$Variable::REGEX_PATTERN_LEFT
 				.$Variable->GetIdentifier()
@@ -118,19 +120,19 @@ class Template implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @return \MOC\Core\Template\Variable
+	 * @return Template\Variable
 	 */
 	public function CreateVariable() {
-		return \MOC\Core\Template\Variable::InterfaceInstance();
+		return Template\Variable::InterfaceInstance();
 	}
 
 	/**
-	 * @param \MOC\Core\Template\Import $Include
+	 * @param Template\Import $Include
 	 * @param $Limit
 	 *
 	 * @return Template
 	 */
-	public function ApplyImport( \MOC\Core\Template\Import $Include, $Limit = -1 ) {
+	public function ApplyImport( Template\Import $Include, $Limit = -1 ) {
 		$this->Content = preg_replace(
 			$Include::REGEX_PATTERN_LEFT
 				.$Include->GetIdentifier()
@@ -143,19 +145,19 @@ class Template implements \MOC\Generic\Device\Core {
 	}
 
 	/**
-	 * @return \MOC\Core\Template\Import
+	 * @return Template\Import
 	 */
 	public function CreateImport() {
-		return \MOC\Core\Template\Import::InterfaceInstance();
+		return Template\Import::InterfaceInstance();
 	}
 
 	/**
-	 * @param \MOC\Core\Template\Complex $Complex
+	 * @param Template\Complex $Complex
 	 * @param $Limit
 	 *
 	 * @return Template
 	 */
-	public function ApplyComplex( \MOC\Core\Template\Complex $Complex, $Limit = -1 ) {
+	public function ApplyComplex( Template\Complex $Complex, $Limit = -1 ) {
 		$this->Content = preg_replace(
 			$Complex::REGEX_PATTERN_LEFT
 				.$Complex->GetIdentifier()
@@ -175,18 +177,18 @@ class Template implements \MOC\Generic\Device\Core {
 	public function GetPayload( $doCleanUp = false ) {
 		if( $doCleanUp ) {
 			$this->Content = preg_replace(
-				\MOC\Core\Template\Complex::REGEX_PATTERN_LEFT.'.*?'
-					.\MOC\Core\Template\Complex::REGEX_PATTERN_RIGHT, '',
+				Template\Complex::REGEX_PATTERN_LEFT.'.*?'
+					.Template\Complex::REGEX_PATTERN_RIGHT, '',
 				$this->Content
 			);
 			$this->Content = preg_replace(
-				\MOC\Core\Template\Variable::REGEX_PATTERN_LEFT.'.*?'
-					.\MOC\Core\Template\Variable::REGEX_PATTERN_RIGHT, '',
+				Template\Variable::REGEX_PATTERN_LEFT.'.*?'
+					.Template\Variable::REGEX_PATTERN_RIGHT, '',
 				$this->Content
 			);
 			$this->Content = preg_replace(
-				\MOC\Core\Template\Import::REGEX_PATTERN_LEFT.'.*?'
-					.\MOC\Core\Template\Import::REGEX_PATTERN_RIGHT, '',
+				Template\Import::REGEX_PATTERN_LEFT.'.*?'
+					.Template\Import::REGEX_PATTERN_RIGHT, '',
 				$this->Content
 			);
 		}

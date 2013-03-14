@@ -36,11 +36,13 @@
  * 02.09.2012 16:21
  */
 namespace MOC\Core\Proxy;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-class Server implements \MOC\Generic\Common {
+class Server implements Common {
 	/**
 	 * Get Singleton/Instance
 	 *

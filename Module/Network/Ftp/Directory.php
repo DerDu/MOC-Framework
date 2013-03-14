@@ -36,19 +36,21 @@
  * 15.10.2012 15:38
  */
 namespace MOC\Module\Network\Ftp;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Directory extends \MOC\Module\Network\Ftp\Directory\Read implements \MOC\Generic\Device\Module {
+class Directory extends Directory\Read implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Ftp\Directory
+	 * @return Directory
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Network\Ftp\Directory();
+		return new Directory();
 	}
 
 	/**
@@ -76,7 +78,7 @@ class Directory extends \MOC\Module\Network\Ftp\Directory\Read implements \MOC\G
 	 *
 	 * @param string $Location
 	 *
-	 * @return \MOC\Module\Network\Ftp\Directory
+	 * @return Directory
 	 */
 	public function Handle( $Location ) {
 		$this->Location( $Location );

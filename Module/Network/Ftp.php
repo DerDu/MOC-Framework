@@ -36,24 +36,26 @@
  * 15.10.2012 15:36
  */
 namespace MOC\Module\Network;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Ftp implements \MOC\Generic\Device\Module {
+class Ftp implements Module {
 
-	/** @var \MOC\Module\Network\Ftp $Singleton */
+	/** @var Ftp $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Network\Ftp
+	 * @return Ftp
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Module\Network\Ftp();
+			self::$Singleton = new Ftp();
 		} return self::$Singleton;
 	}
 
@@ -84,7 +86,7 @@ class Ftp implements \MOC\Generic\Device\Module {
 	 * @param int $Port
 	 * @param int $TimeOut
 	 *
-	 * @return \MOC\Module\Network\Ftp
+	 * @return Ftp
 	 */
 	public function Open( $ServerName, $Port = 21, $TimeOut = 15 ) {
 		$this->Connection()->Open( $ServerName, $Port, $TimeOut );
@@ -95,7 +97,7 @@ class Ftp implements \MOC\Generic\Device\Module {
 	 * @param string $UserName
 	 * @param string $Password
 	 *
-	 * @return \MOC\Module\Network\Ftp
+	 * @return Ftp
 	 */
 	public function Login( $UserName, $Password ) {
 		$this->Connection()->Login( $UserName, $Password );
@@ -103,26 +105,26 @@ class Ftp implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Network\Ftp\Transport\Connection
+	 * @return Ftp\Transport\Connection
 	 */
 	private function Connection() {
 		if( $this->Connection === null ) {
-			$this->Connection = \MOC\Module\Network\Ftp\Transport\Connection::InterfaceInstance();
+			$this->Connection = Ftp\Transport\Connection::InterfaceInstance();
 		}
 		return $this->Connection;
 	}
 
 	/**
-	 * @return \MOC\Module\Network\Ftp\Transport\Connection|\MOC\Module\Network\Ftp\Directory|null
+	 * @return Ftp\Transport\Connection|Ftp\Directory|null
 	 */
 	public function Directory() {
-		return \MOC\Module\Network\Ftp\Directory::InterfaceInstance()->Connection( $this->Connection() );
+		return Ftp\Directory::InterfaceInstance()->Connection( $this->Connection() );
 	}
 
 	/**
-	 * @return \MOC\Module\Network\Ftp\Transport\Connection|\MOC\Module\Network\Ftp\File|null
+	 * @return Ftp\Transport\Connection|Ftp\File|null
 	 */
 	public function File() {
-		return \MOC\Module\Network\Ftp\File::InterfaceInstance()->Connection( $this->Connection() );
+		return Ftp\File::InterfaceInstance()->Connection( $this->Connection() );
 	}
 }

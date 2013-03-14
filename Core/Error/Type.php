@@ -36,12 +36,14 @@
  * 30.08.2012 14:08
  */
 namespace MOC\Core\Error;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Type implements \MOC\Generic\Device\Core {
-	/** @var \MOC\Core\Error\Type $Singleton */
+class Type implements Core {
+	/** @var Type $Singleton */
 	private static $Singleton = null;
 
 	/**
@@ -49,7 +51,7 @@ class Type implements \MOC\Generic\Device\Core {
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Core\Error\Type();
+			self::$Singleton = new Type();
 		} return self::$Singleton;
 	}
 
@@ -79,27 +81,27 @@ class Type implements \MOC\Generic\Device\Core {
 	 * @return Type\Error|null
 	 */
 	public function Error() {
-		return \MOC\Core\Error\Type\Error::InterfaceInstance();
+		return Type\Error::InterfaceInstance();
 	}
 
 	/**
 	 * @return Type\Shutdown|null
 	 */
 	public function Shutdown() {
-		return \MOC\Core\Error\Type\Shutdown::InterfaceInstance();
+		return Type\Shutdown::InterfaceInstance();
 	}
 
 	/**
 	 * @return Type\Exception|null
 	 */
 	public function Exception() {
-		return \MOC\Core\Error\Type\Exception::InterfaceInstance();
+		return Type\Exception::InterfaceInstance();
 	}
 
 	/**
 	 * @return Type\Message|null
 	 */
 	public function Message() {
-		return \MOC\Core\Error\Type\Message::InterfaceInstance();
+		return Type\Message::InterfaceInstance();
 	}
 }

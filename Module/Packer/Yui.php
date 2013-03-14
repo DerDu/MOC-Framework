@@ -36,20 +36,22 @@
  * 13.03.2013 10:44
  */
 namespace MOC\Module\Packer;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Yui implements \MOC\Generic\Device\Module {
+class Yui implements Module {
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Packer\Yui
+	 * @return Yui
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Packer\Yui();
+		return new Yui();
 	}
 
 	/**
@@ -73,15 +75,15 @@ class Yui implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @return \MOC\Module\Packer\Yui\Script
+	 * @return Yui\Script
 	 */
 	public function Script() {
-		return \MOC\Module\Packer\Yui\Script::InterfaceInstance();
+		return Yui\Script::InterfaceInstance();
 	}
 	/**
-	 * @return \MOC\Module\Packer\Yui\Style
+	 * @return Yui\Style
 	 */
 	public function Style() {
-		return \MOC\Module\Packer\Yui\Style::InterfaceInstance();
+		return Yui\Style::InterfaceInstance();
 	}
 }

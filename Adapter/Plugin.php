@@ -36,24 +36,27 @@
  * 19.02.2013 09:04
  */
 namespace MOC\Adapter;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Adapter;
+use MOC\Plugin\Documentation;
+
 /**
  *
  */
-class Plugin implements \MOC\Generic\Device\Adapter {
+class Plugin implements Adapter {
 
-	/** @var \MOC\Adapter\Plugin $Singleton */
+	/** @var Plugin $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return  \MOC\Adapter\Plugin
+	 * @return  Plugin
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new \MOC\Adapter\Plugin();
+			self::$Singleton = new Plugin();
 		} return self::$Singleton;
 	}
 
@@ -82,9 +85,9 @@ class Plugin implements \MOC\Generic\Device\Adapter {
 	}
 
 	/**
-	 * @return \MOC\Plugin\Documentation
+	 * @return Documentation
 	 */
 	public function Documentation() {
-		return \MOC\Plugin\Documentation::InterfaceInstance();
+		return Documentation::InterfaceInstance();
 	}
 }

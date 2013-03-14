@@ -36,11 +36,13 @@
  * 30.08.2012 13:47
  */
 namespace MOC\Core;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Version implements \MOC\Generic\Device\Core {
+class Version implements Core {
 
 	/** @var int $Release Official Changelog (Only for Major-Changes and Initial-Release */
 	private $Release = 0;
@@ -55,10 +57,10 @@ class Version implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Version
+	 * @return Version
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Version();
+		return new Version();
 	}
 	/**
 	 * Get Changelog
@@ -169,12 +171,12 @@ class Version implements \MOC\Generic\Device\Core {
 	 * false - is older Changelog
 	 * null - both Versions are equal
 	 *
-	 * @param \MOC\Core\Version $From
-	 * @param \MOC\Core\Version $To
+	 * @param Version $From
+	 * @param Version $To
 	 *
 	 * @return bool|null
 	 */
-	public function Compare( \MOC\Core\Version $From, \MOC\Core\Version $To ) {
+	public function Compare( Version $From, Version $To ) {
 		if( $To->Release() - $From->Release() > 0 ) { return true; }
 		if( $To->Release() - $From->Release() < 0 ) { return false; }
 		if( $To->Build() - $From->Build() > 0 ) { return true; }

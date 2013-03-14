@@ -36,11 +36,13 @@
  * 28.12.2012 14:50
  */
 namespace MOC\Core\Template;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Format implements \MOC\Generic\Device\Core {
+class Format implements Core {
 	/**
 	 * Get Changelog
 	 *
@@ -67,11 +69,11 @@ class Format implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Template\Format
+	 * @return Format
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Template\Format();
+		return new Format();
 	}
 
 
@@ -82,7 +84,7 @@ class Format implements \MOC\Generic\Device\Core {
 	 * @param $RegExSearch
 	 * @param $RegExFormat
 	 *
-	 * @return \MOC\Core\Template\Format
+	 * @return Format
 	 */
 	function SetPattern( $RegExSearch, $RegExFormat ) {
 		$this->RegExSearch = $RegExSearch;

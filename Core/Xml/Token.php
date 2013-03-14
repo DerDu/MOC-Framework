@@ -36,11 +36,13 @@
  * 06.01.2013 15:28
  */
 namespace MOC\Core\Xml;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Core;
+
 /**
  *
  */
-class Token implements \MOC\Generic\Device\Core {
+class Token implements Core {
 	/**
 	 * Get Dependencies
 	 *
@@ -56,11 +58,11 @@ class Token implements \MOC\Generic\Device\Core {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Xml\Token
+	 * @return Token
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Core\Xml\Token();
+		return new Token();
 	}
 
 	/**
@@ -95,7 +97,7 @@ class Token implements \MOC\Generic\Device\Core {
 	/**
 	 * @param $Content
 	 *
-	 * @return \MOC\Core\Xml\Token
+	 * @return Token
 	 */
 	public function Setup( &$Content ) {
 		$this->Read( $Content );
