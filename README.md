@@ -33,24 +33,19 @@ Up to your imagination
 ### Usage
 
 1. Get in the MOC
-
-```php
-require('MOC.php');
-```
-
+	```php
+	require('MOC.php');
+	```
 2. Start your Engine
-
-```php
-use MOC\Api;
-```
-
+	```php
+	use MOC\Api;
+	```
 3. Put the pedal to the metal.
-
-```php
-var_dump(
-	Api::Module()->Drive()->File()->Open('README.md')->Read()
-);
-```
+	```php
+	var_dump(
+		Api::Module()->Drive()->File()->Open('README.md')->Read()
+	);
+	```
 
 ------------------------------------------------------------------------------------------------------------------------
 
