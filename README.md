@@ -70,14 +70,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	- Init the library
 	- Provide adapter access
 
-	And MOC said: "Let there be ligh... ähm.. ```php Api::``` !"
+	And MOC said: "Let there be ligh... ähm.. ```Api::``` !"
 
 2. ##### Adapter
 	Your window into a better world
 	- Starting point of the chain
 	- Provide Core/Extension/Module/Plugin access
 
-	... and MOC devided the ```php ::Core()``` from the ```php ::Module()``` ... and it was good
+	... and MOC devided the ```::Core()``` from the ```::Module()``` ... and it was good
 
 3. ##### Core (God)
 	Contains secret internal operations ;-)
