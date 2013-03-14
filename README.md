@@ -1,8 +1,9 @@
 # MOC-Framework
 ===============
 
-## Modular - Object - Chaining
-### The easy way to OOP
+### Modular - Object - Chaining
+
+#### The easy way to OOP
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -41,5 +42,40 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### 3rd Party Applications
+### Used 3rd Party Applications
 ==========================
+
+#### apigen
+Used to create the MOC-Documentation
+- License: BSD
+- Project: http://apigen.org
+
+#### YUICompressor
+Add Packer:Script/Style capability
+- License: BSD
+- Project: http://yui.github.com/yuicompressor
+
+#### PHPExcel
+Add Office:Document:Excel capability
+- License: LGPL
+- Project: http://phpexcel.codeplex.com
+
+#### PHPWord
+Add Office:Document:Word capability
+- License: LGPL
+- Project: http://phpword.codeplex.com
+
+#### tFPDF
+Add Office:Document:PDF capability
+- License: LGPL
+- Project: http://fpdf.org/fr/script/script92.php
+
+#### PHPMailer
+Add Office:Mail:Smtp capability
+- License: LGPL
+- Project: http://sourceforge.net/projects/phpmailer
+
+#### PclZip
+Add Packer:Zip capability
+- License: LGPL
+- Project: http://www.phpconcept.net
