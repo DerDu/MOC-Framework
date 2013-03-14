@@ -77,7 +77,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	- Starting point of the chain
 	- Provide Core/Extension/Module/Plugin access
 
-	... and MOC devided the ::Core() from the ::Module() ... and it was good
+	... and MOC devided the ```php ::Core()``` from the ```php ::Module()``` ... and it was good
 
 3. ##### Core (God)
 	Contains secret internal operations ;-)
