@@ -65,25 +65,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ### Design
 
-#### MOC - "The Api"
+1. #### MOC
 
-- Init the Library
-- Provide Adapter-Access
+	"The Api"
+	- Init the library
+	- Provide adapter access (Api:: ...)
 
-#### Adapter
-Your window into a better world
+2. ##### Adapter
 
-#### Core
-Contains secret internal operations ;-)
+	Your window into a better world
+	- Starting point of the chain
+	-
 
-#### Extension
-Add power to the system
+3. #### Core
 
-#### Module
-Make the hole thing shiny
+	Contains secret internal operations ;-)
 
-#### Plugin
-Up to your imagination
+4. #### Extension
+
+	Add power to the system
+
+5. #### Module
+
+	Make the hole thing shiny
+
+6. #### Plugin
+
+	Up to your imagination
 
 ------------------------------------------------------------------------------------------------------------------------
 
