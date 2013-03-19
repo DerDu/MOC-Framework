@@ -36,11 +36,14 @@
  * 19.02.2013 08:23
  */
 namespace MOC\Plugin;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Plugin;
+use Nette\Config\Adapters\NeonAdapter;
+
 /**
  *
  */
-class Documentation implements \MOC\Generic\Device\Plugin {
+class Documentation implements Plugin {
 	/**
 	 * Get Changelog
 	 *
@@ -157,7 +160,7 @@ class Documentation implements \MOC\Generic\Device\Plugin {
 			'debug' => false
 		);
 
-		$Neon = new \Nette\Config\Adapters\NeonAdapter();
+		$Neon = new NeonAdapter();
 
 		$Configuration->Write( $Neon->dump( $Config ) );
 
