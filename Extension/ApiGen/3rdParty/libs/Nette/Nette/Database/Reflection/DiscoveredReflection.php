@@ -33,7 +33,11 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 	protected $connection;
 
 	/** @var array */
-	protected $structure = array();
+	protected $structure = array(
+		'primary' => array(),
+		'hasMany' => array(),
+		'belongsTo' => array(),
+	);
 
 
 
@@ -70,7 +74,7 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 
 	public function getPrimary($table)
 	{
-		$primary = & $this->structure['primary'][strtolower($table)];
+		$primary = & $this->structure['primary'][$table];
 		if (isset($primary)) {
 			return empty($primary) ? NULL : $primary;
 		}
@@ -96,32 +100,15 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 
 	public function getHasManyReference($table, $key, $refresh = TRUE)
 	{
-		$table = strtolower($table);
-		$reference = & $this->structure['hasMany'];
+		$reference = $this->structure['hasMany'];
 		if (!empty($reference[$table])) {
-			$candidates = array();
-			$subStringCandidatesCount = 0;
-			foreach ($reference[$table] as $targetPair) {
-				list($targetColumn, $targetTable) = $targetPair;
+			foreach ($reference[$table] as $targetTable => $targetColumn) {
 				if (stripos($targetTable, $key) !== FALSE) {
-					$candidates[] = array($targetTable, $targetColumn);
-					if (stripos($targetColumn, $table) !== FALSE) {
-						$subStringCandidatesCount++;
-						$candidate = array($targetTable, $targetColumn);
-						if ($targetTable === $key) {
-							$candidates = array($candidate);
-							break;
-						}
-					}
+					return array(
+						$targetTable,
+						$targetColumn,
+					);
 				}
-			}
-
-			if (count($candidates) === 1) {
-				return $candidates[0];
-			} elseif ($subStringCandidatesCount === 1) {
-				return $candidate;
-			} elseif (!empty($candidates)) {
-				throw new \PDOException('Ambiguous joining column in related call.');
 			}
 		}
 
@@ -137,8 +124,7 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 
 	public function getBelongsToReference($table, $key, $refresh = TRUE)
 	{
-		$table = strtolower($table);
-		$reference = & $this->structure['belongsTo'];
+		$reference = $this->structure['belongsTo'];
 		if (!empty($reference[$table])) {
 			foreach ($reference[$table] as $column => $targetTable) {
 				if (stripos($column, $key) !== FALSE) {
@@ -181,7 +167,7 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 	{
 		foreach ($this->connection->getSupplementalDriver()->getForeignKeys($table) as $row) {
 			$this->structure['belongsTo'][$table][$row['local']] = $row['table'];
-			$this->structure['hasMany'][strtolower($row['table'])][$row['local'] . $table] = array($row['local'], $table);
+			$this->structure['hasMany'][$row['table']][$table] = $row['local'];
 		}
 
 		if (isset($this->structure['belongsTo'][$table])) {

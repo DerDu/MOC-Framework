@@ -243,9 +243,9 @@ final class Rules extends Nette\Object implements \IteratorAggregate
 	{
 		$op = $rule->operation;
 		if (is_string($op) && strncmp($op, ':', 1) === 0) {
-			return new Nette\Callback(get_class($rule->control), self::VALIDATE_PREFIX . ltrim($op, ':'));
+			return callback(get_class($rule->control), self::VALIDATE_PREFIX . ltrim($op, ':'));
 		} else {
-			return new Nette\Callback($op);
+			return callback($op);
 		}
 	}
 

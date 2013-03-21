@@ -16,7 +16,7 @@ use Nette;
 
 
 /**
- * Defines method that must implement form renderer.
+ * Defines method that must implement form rendered.
  *
  * @author     David Grudl
  */

@@ -83,7 +83,7 @@ class Parameter extends \ReflectionParameter
 
 
 	/**
-	 * @return Method|GlobalFunction
+	 * @return Method | FunctionReflection
 	 */
 	public function getDeclaringFunction()
 	{

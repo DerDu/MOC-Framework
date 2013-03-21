@@ -43,25 +43,25 @@ class ClassType extends Nette\Object
 	/** @var bool */
 	public $abstract;
 
-	/** @var string[] */
+	/** @var array of string */
 	public $extends = array();
 
-	/** @var string[] */
+	/** @var array of string */
 	public $implements = array();
 
-	/** @var string[] */
+	/** @var array of string */
 	public $traits = array();
 
-	/** @var string[] */
+	/** @var array of string */
 	public $documents = array();
 
-	/** @var mixed[] name => value */
+	/** @var array of name => value */
 	public $consts = array();
 
-	/** @var Property[] name => Property */
+	/** @var array of name => Property */
 	public $properties = array();
 
-	/** @var Method[] name => Method */
+	/** @var array of name => Method */
 	public $methods = array();
 
 
@@ -121,7 +121,7 @@ class ClassType extends Nette\Object
 		$properties = array();
 		foreach ($this->properties as $property) {
 			$properties[] = ($property->documents ? str_replace("\n", "\n * ", "/**\n" . implode("\n", (array) $property->documents)) . "\n */\n" : '')
-				. $property->visibility . ($property->static ? ' static' : '') . ' $' . $property->name
+				. $property->visibility . ' $' . $property->name
 				. ($property->value === NULL ? '' : ' = ' . Helpers::dump($property->value))
 				. ";\n";
 		}

@@ -199,8 +199,7 @@ class CoreMacros extends MacroSet
 	 */
 	public function macroUse(MacroNode $node, PhpWriter $writer)
 	{
-		Nette\Callback::create($node->tokenizer->fetchWord(), 'install')
-			->invoke($this->getCompiler())
+		callback($node->tokenizer->fetchWord(), 'install')->invoke($this->getCompiler())
 			->initialize();
 	}
 

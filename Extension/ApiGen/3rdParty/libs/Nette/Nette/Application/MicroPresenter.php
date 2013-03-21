@@ -75,8 +75,8 @@ class MicroPresenter extends Nette\Object implements Application\IPresenter
 			return;
 		}
 		$params['presenter'] = $this;
-		$callback = new Nette\Callback($params['callback']);
-		$response = $callback->invokeArgs(Application\UI\PresenterComponentReflection::combineArgs($callback->toReflection(), $params));
+		$method = callback($params['callback'])->toReflection();
+		$response = $method->invokeArgs(Application\UI\PresenterComponentReflection::combineArgs($method, $params));
 
 		if (is_string($response)) {
 			$response = array($response, array());

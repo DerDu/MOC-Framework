@@ -75,9 +75,7 @@ class Form extends Nette\Forms\Form implements ISignalReceiver
 			// fill-in the form with HTTP data
 			if ($this->isSubmitted()) {
 				foreach ($this->getControls() as $control) {
-					if (!$control->isDisabled()) {
-						$control->loadHttpData();
-					}
+					$control->loadHttpData();
 				}
 			}
 		}

@@ -183,7 +183,7 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 
 
 	/**
-	 * Adds the specified component to the IContainer.
+	 * Adds the specified component to the IComponentContainer.
 	 * @param  IComponent
 	 * @param  string
 	 * @param  string

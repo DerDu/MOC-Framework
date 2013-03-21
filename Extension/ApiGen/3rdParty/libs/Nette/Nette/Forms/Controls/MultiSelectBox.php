@@ -30,7 +30,11 @@ class MultiSelectBox extends SelectBox
 	 */
 	public function getValue()
 	{
-		return array_intersect($this->getRawValue(), array_keys($this->allowed));
+		$allowed = array_keys($this->allowed);
+		if ($this->getPrompt()) {
+			unset($allowed[0]);
+		}
+		return array_intersect($this->getRawValue(), $allowed);
 	}
 
 
@@ -42,17 +46,22 @@ class MultiSelectBox extends SelectBox
 	public function getRawValue()
 	{
 		if (is_scalar($this->value)) {
-			return array($this->value);
+			$value = array($this->value);
+
+		} elseif (!is_array($this->value)) {
+			$value = array();
 
 		} else {
-			$res = array();
-			foreach ((array) $this->value as $val) {
-				if (is_scalar($val)) {
-					$res[] = $val;
-				}
-			}
-			return $res;
+			$value = $this->value;
 		}
+
+		$res = array();
+		foreach ($value as $val) {
+			if (is_scalar($val)) {
+				$res[] = $val;
+			}
+		}
+		return $res;
 	}
 
 
@@ -63,9 +72,16 @@ class MultiSelectBox extends SelectBox
 	 */
 	public function getSelectedItem()
 	{
-		return $this->areKeysUsed()
-			? array_intersect_key($this->allowed, array_flip($this->getValue()))
-			: $this->getValue();
+		if (!$this->areKeysUsed()) {
+			return $this->getValue();
+
+		} else {
+			$res = array();
+			foreach ($this->getValue() as $value) {
+				$res[$value] = $this->allowed[$value];
+			}
+			return $res;
+		}
 	}
 
 
@@ -87,7 +103,9 @@ class MultiSelectBox extends SelectBox
 	 */
 	public function getControl()
 	{
-		return parent::getControl()->multiple(TRUE);
+		$control = parent::getControl();
+		$control->multiple = TRUE;
+		return $control;
 	}
 
 

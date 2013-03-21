@@ -32,17 +32,17 @@ class PresenterFactory implements IPresenterFactory
 	private $cache = array();
 
 	/** @var Nette\DI\Container */
-	private $container;
+	private $context;
 
 
 
 	/**
 	 * @param  string
 	 */
-	public function __construct($baseDir, Nette\DI\Container $container)
+	public function __construct($baseDir, Nette\DI\Container $context)
 	{
 		$this->baseDir = $baseDir;
-		$this->container = $container;
+		$this->context = $context;
 	}
 
 
@@ -54,18 +54,9 @@ class PresenterFactory implements IPresenterFactory
 	 */
 	public function createPresenter($name)
 	{
-		$presenter = $this->container->createInstance($this->getPresenterClass($name));
+		$presenter = $this->context->createInstance($this->getPresenterClass($name));
 		if (method_exists($presenter, 'setContext')) {
-			$this->container->callMethod(array($presenter, 'setContext'));
-		}
-		foreach (array_reverse(get_class_methods($presenter)) as $method) {
-			if (substr($method, 0, 6) === 'inject') {
-				$this->container->callMethod(array($presenter, $method));
-			}
-		}
-
-		if ($presenter instanceof UI\Presenter && $presenter->invalidLinkMode === NULL) {
-			$presenter->invalidLinkMode = $this->container->parameters['debugMode'] ? UI\Presenter::INVALID_LINK_WARNING : UI\Presenter::INVALID_LINK_SILENT;
+			$this->context->callMethod(array($presenter, 'setContext'));
 		}
 		return $presenter;
 	}

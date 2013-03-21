@@ -27,10 +27,10 @@ class Neon extends Nette\Object
 	/** @var array */
 	private static $patterns = array(
 		'\'[^\'\n]*\'|"(?:\\\\.|[^"\\\\\n])*"', // string
-		'-(?=\s|$)|:(?=[\s,\]})]|$)|[,=[\]{}()]', // symbol
+		'[:-](?=\s|$)|[,=[\]{}()]', // symbol
 		'?:#.*', // comment
 		'\n[\t ]*', // new line + indent
-		'[^#"\',=[\]{}()\x00-\x20!`](?:[^#,:=\]})(\x00-\x1F]+|:(?![\s,\]})]|$)|(?<!\s)#)*(?<!\s)', // literal / boolean / integer / float
+		'[^#"\',=[\]{}()<>\x00-\x20!`](?:[^#,:=\]})>(\x00-\x1F]+|:(?!\s|$)|(?<!\s)#)*(?<!\s)', // literal / boolean / integer / float
 		'?:[\t ]+', // whitespace
 	);
 
@@ -162,10 +162,10 @@ class Neon extends Nette\Object
 			$t = $tokens[$n];
 
 			if ($t === ',') { // ArrayEntry separator
-				if ((!$hasKey && !$hasValue) || !$inlineParser) {
+				if (!$hasValue || !$inlineParser) {
 					$this->error();
 				}
-				$this->addValue($result, $hasKey, $key, $hasValue ? $value : NULL);
+				$this->addValue($result, $hasKey, $key, $value);
 				$hasKey = $hasValue = FALSE;
 
 			} elseif ($t === ':' || $t === '=') { // KeyValuePair separator
@@ -213,8 +213,8 @@ class Neon extends Nette\Object
 
 			} elseif ($t[0] === "\n") { // Indent
 				if ($inlineParser) {
-					if ($hasKey || $hasValue) {
-						$this->addValue($result, $hasKey, $key, $hasValue ? $value : NULL);
+					if ($hasValue) {
+						$this->addValue($result, $hasKey, $key, $value);
 						$hasKey = $hasValue = FALSE;
 					}
 
@@ -291,8 +291,10 @@ class Neon extends Nette\Object
 		}
 
 		if ($inlineParser) {
-			if ($hasKey || $hasValue) {
-				$this->addValue($result, $hasKey, $key, $hasValue ? $value : NULL);
+			if ($hasValue) {
+				$this->addValue($result, $hasKey, $key, $value);
+			} elseif ($hasKey) {
+				$this->error();
 			}
 		} else {
 			if ($hasValue && !$hasKey) { // block items must have "key"

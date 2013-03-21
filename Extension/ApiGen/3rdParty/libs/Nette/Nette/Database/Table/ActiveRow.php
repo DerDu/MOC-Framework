@@ -46,17 +46,6 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 	 * @internal
 	 * @ignore
 	 */
-	public function setTable(Selection $table)
-	{
-		$this->table = $table;
-	}
-
-
-
-	/**
-	 * @internal
-	 * @ignore
-	 */
 	public function getTable()
 	{
 		return $this->table;
@@ -121,17 +110,18 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 	 * Returns referencing rows.
 	 * @param  string
 	 * @param  string
+	 * @param  bool
 	 * @return GroupedSelection
 	 */
-	public function related($key, $throughColumn = NULL)
+	public function related($key, $throughColumn = NULL, $forceNewInstance = FALSE)
 	{
 		if (strpos($key, '.') !== FALSE) {
 			list($key, $throughColumn) = explode('.', $key);
-		} elseif (!$throughColumn) {
+		} elseif (!is_string($throughColumn)) {
 			list($key, $throughColumn) = $this->table->getConnection()->getDatabaseReflection()->getHasManyReference($this->table->getName(), $key);
 		}
 
-		return $this->table->getReferencingTable($key, $throughColumn, $this[$this->table->getPrimary()]);
+		return $this->table->getReferencingTable($key, $throughColumn, $this[$this->table->getPrimary()], $forceNewInstance);
 	}
 
 

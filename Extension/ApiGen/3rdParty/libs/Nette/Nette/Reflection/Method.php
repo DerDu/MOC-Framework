@@ -24,8 +24,8 @@ use Nette,
  * @property-read ClassType $declaringClass
  * @property-read Method $prototype
  * @property-read Extension $extension
- * @property-read Parameter[] $parameters
- * @property-read IAnnotation[][] $annotations
+ * @property-read array $parameters
+ * @property-read array $annotations
  * @property-read string $description
  * @property-read bool $public
  * @property-read bool $private
@@ -73,7 +73,7 @@ class Method extends \ReflectionMethod
 	 */
 	public function toCallback()
 	{
-		return new Nette\Callback(parent::getDeclaringClass()->getName(), $this->getName());
+		return new Nette\Callback(array(parent::getDeclaringClass()->getName(), $this->getName()));
 	}
 
 
@@ -120,9 +120,6 @@ class Method extends \ReflectionMethod
 
 
 
-	/**
-	 * @return Parameter[]
-	 */
 	public function getParameters()
 	{
 		$me = array(parent::getDeclaringClass()->getName(), $this->getName());
@@ -166,7 +163,7 @@ class Method extends \ReflectionMethod
 
 	/**
 	 * Returns all annotations.
-	 * @return IAnnotation[][]
+	 * @return array
 	 */
 	public function getAnnotations()
 	{

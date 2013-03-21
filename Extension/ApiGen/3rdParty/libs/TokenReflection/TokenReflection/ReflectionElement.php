@@ -2,7 +2,7 @@
 /**
  * PHP Token Reflection
  *
- * Version 1.3.1
+ * Version 1.3.0
  *
  * LICENSE
  *
@@ -71,7 +71,7 @@ abstract class ReflectionElement extends ReflectionBase
 	 *
 	 * @var integer
 	 */
-	protected $startPosition;
+	private $startPosition;
 
 	/**
 	 * End position in the file token stream.

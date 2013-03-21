@@ -170,7 +170,7 @@ class Template extends Nette\Object implements ITemplate
 	 */
 	public function registerFilter($callback)
 	{
-		$callback = new Nette\Callback($callback);
+		$callback = callback($callback);
 		if (in_array($callback, $this->filters)) {
 			throw new Nette\InvalidStateException("Filter '$callback' was registered twice.");
 		}
@@ -199,7 +199,7 @@ class Template extends Nette\Object implements ITemplate
 	 */
 	public function registerHelper($name, $callback)
 	{
-		$this->helpers[strtolower($name)] = new Nette\Callback($callback);
+		$this->helpers[strtolower($name)] = callback($callback);
 		return $this;
 	}
 
@@ -212,7 +212,7 @@ class Template extends Nette\Object implements ITemplate
 	 */
 	public function registerHelperLoader($callback)
 	{
-		$this->helperLoaders[] = new Nette\Callback($callback);
+		$this->helperLoaders[] = callback($callback);
 		return $this;
 	}
 
@@ -448,10 +448,7 @@ class Template extends Nette\Object implements ITemplate
 					continue;
 
 				} elseif ($token[0] === T_CLOSE_TAG) {
-					if ($php !== $res) { // not <?xml
-						$res .= str_repeat("\n", substr_count($php, "\n"));
-					}
-					$res .= $token[1];
+					$res .= str_repeat("\n", substr_count($php, "\n")) . $token[1];
 					continue;
 
 				} elseif ($token[0] === T_OPEN_TAG && $token[1] === '<?' && isset($tokens[$n+1][1]) && $tokens[$n+1][1] === 'xml') {

@@ -2,7 +2,7 @@
 /**
  * PHP Token Reflection
  *
- * Version 1.3.1
+ * Version 1.3.0
  *
  * LICENSE
  *
@@ -120,23 +120,6 @@ class ReflectionFileNamespace extends ReflectionElement
 	}
 
 	/**
-	 * Find the appropriate docblock.
-	 *
-	 * @param \TokenReflection\Stream\StreamBase $tokenStream Token substream
-	 * @param \TokenReflection\IReflection $parent Parent reflection
-	 * @return \TokenReflection\ReflectionElement
-	 */
-	protected function parseDocComment(Stream $tokenStream, IReflection $parent)
-	{
-		if (!$tokenStream->is(T_NAMESPACE)) {
-			$this->docComment = new ReflectionAnnotation($this);
-			return $this;
-		} else {
-			return parent::parseDocComment($tokenStream, $parent);
-		}
-	}
-
-	/**
 	 * Parses the namespace name.
 	 *
 	 * @param \TokenReflection\Stream\StreamBase $tokenStream Token substream
@@ -198,8 +181,6 @@ class ReflectionFileNamespace extends ReflectionElement
 	{
 		static $skipped = array(T_WHITESPACE => true, T_COMMENT => true, T_DOC_COMMENT => true);
 		$depth = 0;
-
-		$firstChild = null;
 
 		while (true) {
 			switch ($tokenStream->getType()) {
@@ -297,8 +278,6 @@ class ReflectionFileNamespace extends ReflectionElement
 				case T_TRAIT:
 				case T_INTERFACE:
 					$class = new ReflectionClass($tokenStream, $this->getBroker(), $this);
-					$firstChild = $firstChild ?: $class;
-
 					$className = $class->getName();
 					if (isset($this->classes[$className])) {
 						if (!$this->classes[$className] instanceof Invalid\ReflectionClass) {
@@ -322,8 +301,6 @@ class ReflectionFileNamespace extends ReflectionElement
 					$tokenStream->skipWhitespaces(true);
 					do {
 						$constant = new ReflectionConstant($tokenStream, $this->getBroker(), $this);
-						$firstChild = $firstChild ?: $constant;
-
 						$constantName = $constant->getName();
 						if (isset($this->constants[$constantName])) {
 							if (!$this->constants[$constantName] instanceof Invalid\ReflectionConstant) {
@@ -376,8 +353,6 @@ class ReflectionFileNamespace extends ReflectionElement
 					}
 
 					$function = new ReflectionFunction($tokenStream, $this->getBroker(), $this);
-					$firstChild = $firstChild ?: $function;
-
 					$functionName = $function->getName();
 					if (isset($this->functions[$functionName])) {
 						if (!$this->functions[$functionName] instanceof Invalid\ReflectionFunction) {
@@ -401,10 +376,6 @@ class ReflectionFileNamespace extends ReflectionElement
 					$tokenStream->next();
 					break;
 			}
-		}
-
-		if ($firstChild) {
-			$this->startPosition = min($this->startPosition, $firstChild->getStartPosition());
 		}
 
 		return $this;

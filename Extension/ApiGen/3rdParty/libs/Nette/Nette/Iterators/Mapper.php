@@ -34,7 +34,7 @@ class Mapper extends \IteratorIterator
 	public function __construct(\Traversable $iterator, $callback)
 	{
 		parent::__construct($iterator);
-		$this->callback = new Nette\Callback($callback);
+		$this->callback = callback($callback);
 	}
 
 

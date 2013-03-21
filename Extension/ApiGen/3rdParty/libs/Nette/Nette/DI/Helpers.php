@@ -119,13 +119,13 @@ final class Helpers
 				unset($arguments[$parameter->getName()]);
 				$optCount = 0;
 
-			} elseif ($class = $parameter->getClassName()) { // has object type hint
+			} elseif ($class = $parameter->getClassName()) { // has object typehint
 				$res[$num] = $container->getByType($class, FALSE);
 				if ($res[$num] === NULL) {
 					if ($parameter->allowsNull()) {
 						$optCount++;
 					} else {
-						throw new ServiceCreationException("No service of type {$class} found. Make sure the type hint in $method is written correctly and service of this type is registered.");
+						throw new Nette\InvalidArgumentException("No service of type {$class} found");
 					}
 				} else {
 					if ($container instanceof ContainerBuilder) {
@@ -140,7 +140,7 @@ final class Helpers
 				$optCount++;
 
 			} else {
-				throw new ServiceCreationException("Parameter $parameter has no type hint, so its value must be specified.");
+				throw new Nette\InvalidArgumentException("$parameter is missing.");
 			}
 		}
 
@@ -151,7 +151,7 @@ final class Helpers
 			$optCount = 0;
 		}
 		if ($arguments) {
-			throw new ServiceCreationException("Unable to pass specified arguments to $method.");
+			throw new Nette\InvalidArgumentException("Unable to pass specified arguments to $method.");
 		}
 
 		return $optCount ? array_slice($res, 0, -$optCount) : $res;

@@ -63,7 +63,7 @@ class Logger extends Nette\Object
 			&& @filemtime($this->directory . '/email-sent') + self::$emailSnooze < time() // @ - file may not exist
 			&& @file_put_contents($this->directory . '/email-sent', 'sent') // @ - file may not be writable
 		) {
-			Nette\Callback::create($this->mailer)->invoke($message, $this->email);
+			callback($this->mailer)->invoke($message, $this->email);
 		}
 		return $res;
 	}
@@ -78,7 +78,7 @@ class Logger extends Nette\Object
 	 */
 	public static function defaultMailer($message, $email)
 	{
-		$host = php_uname('n');
+		$host = '';
 		foreach (array('HTTP_HOST','SERVER_NAME', 'HOSTNAME') as $item) {
 			if (isset($_SERVER[$item])) {
 				$host = $_SERVER[$item]; break;
@@ -89,12 +89,7 @@ class Logger extends Nette\Object
 			array("\r\n", "\n"),
 			array("\n", PHP_EOL),
 			array(
-				'headers' => implode("\n", array(
-					"From: noreply@$host",
-					'X-Mailer: Nette Framework',
-					'Content-Type: text/plain; charset=UTF-8',
-					'Content-Transfer-Encoding: 8bit',
-				)) . "\n",
+				'headers' => "From: noreply@$host\nX-Mailer: Nette Framework\n",
 				'subject' => "PHP: An error occurred on the server $host",
 				'body' => "[" . @date('Y-m-d H:i:s') . "] $message", // @ - timezone may not be set
 			)

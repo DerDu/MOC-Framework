@@ -200,6 +200,7 @@ class NetteExtension extends Nette\Config\CompilerExtension
 			$container->addDefinition($this->prefix('mailer'))
 				->setClass('Nette\Mail\SendmailMailer');
 		} else {
+			Validators::assertField($config, 'mailer', 'array');
 			$container->addDefinition($this->prefix('mailer'))
 				->setClass('Nette\Mail\SmtpMailer', array($config['mailer']));
 		}
@@ -235,10 +236,6 @@ class NetteExtension extends Nette\Config\CompilerExtension
 		// database
 		$container->addDefinition($this->prefix('database'))
 				->setClass('Nette\DI\NestedAccessor', array('@container', $this->prefix('database')));
-
-		if (isset($config['database']['dsn'])) {
-			$config['database'] = array('default' => $config['database']);
-		}
 
 		$autowired = TRUE;
 		foreach ((array) $config['database'] as $name => $info) {

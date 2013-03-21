@@ -40,7 +40,9 @@ class PHPExcel_Writer_PDF {
 	/**
 	 * Create a new PHPExcel_Writer_PDF
 	 *
-	 * @param 	PHPExcel	$phpExcel	PHPExcel object
+	 * @param     PHPExcel    $phpExcel    PHPExcel object
+	 *
+	 * @throws Exception
 	 */
 	public function __construct(PHPExcel $phpExcel) {
 

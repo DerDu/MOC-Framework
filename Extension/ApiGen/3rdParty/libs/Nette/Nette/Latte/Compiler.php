@@ -47,19 +47,19 @@ class Compiler extends Nette\Object
 	/** @var MacroNode[] */
 	private $macroNodes = array();
 
-	/** @var string[] */
+	/** @var array of string */
 	private $attrCodes = array();
 
 	/** @var string */
 	private $contentType;
 
-	/** @var array [context, subcontext] */
+	/** @var array */
 	private $context;
 
 	/** @var string */
 	private $templateId;
 
-	/** Context-aware escaping content types */
+	/** Context-aware escaping states */
 	const CONTENT_HTML = 'html',
 		CONTENT_XHTML = 'xhtml',
 		CONTENT_XML = 'xml',
@@ -68,7 +68,7 @@ class Compiler extends Nette\Object
 		CONTENT_ICAL = 'ical',
 		CONTENT_TEXT = 'text';
 
-	/** @internal Context-aware escaping HTML contexts */
+	/** @internal Context-aware escaping states */
 	const CONTEXT_COMMENT = 'comment',
 		CONTEXT_SINGLE_QUOTED = "'",
 		CONTEXT_DOUBLE_QUOTED = '"';
@@ -97,7 +97,7 @@ class Compiler extends Nette\Object
 
 	/**
 	 * Compiles tokens to PHP code.
-	 * @param  Token[]
+	 * @param  array
 	 * @return string
 	 */
 	public function compile(array $tokens)
@@ -131,9 +131,6 @@ class Compiler extends Nette\Object
 
 				} elseif ($token->type === Token::HTML_ATTRIBUTE) {
 					$this->processHtmlAttribute($token);
-
-				} elseif ($token->type === Token::COMMENT) {
-					$this->processComment($token);
 				}
 			}
 		} catch (CompileException $e) {
@@ -202,7 +199,7 @@ class Compiler extends Nette\Object
 
 
 	/**
-	 * @return array [context, subcontext]
+	 * @return array [context, spec]
 	 */
 	public function getContext()
 	{
@@ -239,7 +236,7 @@ class Compiler extends Nette\Object
 
 
 
-	private function processHtmlTagBegin(Token $token)
+	private function processHtmlTagBegin($token)
 	{
 		if ($token->closing) {
 			do {
@@ -247,13 +244,7 @@ class Compiler extends Nette\Object
 				if (!$htmlNode) {
 					$htmlNode = new HtmlNode($token->name);
 				}
-				if (strcasecmp($htmlNode->name, $token->name) === 0) {
-					break;
-				}
-				if ($htmlNode->macroAttrs) {
-					throw new CompileException("Unexpected </$token->name>.", 0, $token->line);
-				}
-			} while (TRUE);
+			} while (strcasecmp($htmlNode->name, $token->name));
 			$this->htmlNodes[] = $htmlNode;
 			$htmlNode->closing = TRUE;
 			$htmlNode->offset = strlen($this->output);
@@ -274,7 +265,7 @@ class Compiler extends Nette\Object
 
 
 
-	private function processHtmlTagEnd(Token $token)
+	private function processHtmlTagEnd($token)
 	{
 		if ($token->text === '-->') {
 			$this->output .= $token->text;
@@ -317,16 +308,11 @@ class Compiler extends Nette\Object
 
 
 
-	private function processHtmlAttribute(Token $token)
+	private function processHtmlAttribute($token)
 	{
 		$htmlNode = end($this->htmlNodes);
 		if (Strings::startsWith($token->name, Parser::N_PREFIX)) {
-			$name = substr($token->name, strlen(Parser::N_PREFIX));
-			if (isset($htmlNode->macroAttrs[$name])) {
-				throw new CompileException("Found multiple macro-attributes $token->name.", 0, $token->line);
-			}
-			$htmlNode->macroAttrs[$name] = $token->value;
-			
+			$htmlNode->macroAttrs[substr($token->name, strlen(Parser::N_PREFIX))] = $token->value;
 		} else {
 			$htmlNode->attrs[$token->name] = TRUE;
 			$this->output .= $token->text;
@@ -339,16 +325,6 @@ class Compiler extends Nette\Object
 				}
 				$this->setContext($token->value, $context);
 			}
-		}
-	}
-
-
-
-	private function processComment(Token $token)
-	{
-		$isLeftmost = trim(substr($this->output, strrpos("\n$this->output", "\n"))) === '';
-		if (!$isLeftmost) {
-			$this->output .= substr($token->text, strlen(rtrim($token->text, "\n")));
 		}
 	}
 

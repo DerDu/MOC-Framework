@@ -24,7 +24,7 @@ interface IContainer extends IComponent
 {
 
 	/**
-	 * Adds the specified component to the IContainer.
+	 * Adds the specified component to the IComponentContainer.
 	 * @param  IComponent
 	 * @param  string
 	 * @return void
@@ -32,7 +32,7 @@ interface IContainer extends IComponent
 	function addComponent(IComponent $component, $name);
 
 	/**
-	 * Removes a component from the IContainer.
+	 * Removes a component from the IComponentContainer.
 	 * @param  IComponent
 	 * @return void
 	 */

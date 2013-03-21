@@ -162,7 +162,7 @@ class Helpers
 				$count++;
 			}
 		}
-		if (trim($sql) !== '') {
+		if ($sql !== '') {
 			$connection->exec($sql);
 			$count++;
 		}
