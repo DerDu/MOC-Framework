@@ -339,7 +339,7 @@ class PHPExcel
 	 *
 	 * @param string $sheetName Sheet name to modify index for
 	 * @param int $newIndex New index for the sheet
-	 * @return New sheet index
+	 * @return int New sheet index
 	 * @throws Exception
 	 */
     public function setIndexByName($sheetName, $newIndex)
