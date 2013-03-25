@@ -128,7 +128,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 * @return Instance
 	 */
 	public function Create() {
-		$Instance = new \tFPDF( 'P', 'mm', 'A4' );
+		$Instance = new Addon\BeginAddonChain( 'P', 'mm', 'A4' );
 		if( null === $this->Current ) {
 			$this->Current = $Instance;
 			return $this;
