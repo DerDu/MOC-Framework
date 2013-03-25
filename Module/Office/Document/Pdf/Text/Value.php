@@ -81,7 +81,7 @@ class Value implements Module {
 	 *
 	 * @return int mm
 	 */
-	public function Width( $Text ) {
+	public function GetWidth( $Text ) {
 		$Text = explode( "\n", $Text );
 		$Length = 0;
 		foreach( (array)$Text as $Line ) {
@@ -99,8 +99,8 @@ class Value implements Module {
 	 *
 	 * @return int mm
 	 */
-	public function Height( $Text, $MaxWidth ) {
-		return ceil( ( Api::Extension()->Pdf()->Current()->FontSizePt / 2.5 ) * $this->Lines( $Text, $MaxWidth ) );
+	public function GetHeight( $Text, $MaxWidth ) {
+		return ceil( ( Api::Extension()->Pdf()->Current()->FontSizePt / 2.5 ) * $this->GetLineCount( $Text, $MaxWidth ) );
 	}
 
 	/**
@@ -109,10 +109,10 @@ class Value implements Module {
 	 *
 	 * @return int
 	 */
-	public function Lines( $Text, $MaxWidth ) {
+	public function GetLineCount( $Text, $MaxWidth ) {
 		$RowCount = substr_count( $Text, "\n" );
 		$RowCount += ceil(
-			( $this->Width( $Text )
+			( $this->GetWidth( $Text )
 				+ Api::Extension()->Pdf()->Current()->FontSizePt
 			) / $MaxWidth
 		);
@@ -127,7 +127,7 @@ class Value implements Module {
 	public function String( $Text ) {
 		Api::Extension()->Pdf()->Current()
 			->Cell(
-				$this->Width( $Text ), 0, $Text
+				$this->GetWidth( $Text ), 0, $Text
 			);
 		return Api::Module()->Office()->Document()->Pdf();
 	}

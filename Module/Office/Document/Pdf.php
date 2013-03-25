@@ -109,6 +109,13 @@ class Pdf implements Module{
 	}
 
 	/**
+	 * @return Pdf\Table
+	 */
+	public function Table() {
+		return Pdf\Table::InterfaceInstance();
+	}
+
+	/**
 	 * @return Pdf\Close
 	 */
 	public function Close(){
