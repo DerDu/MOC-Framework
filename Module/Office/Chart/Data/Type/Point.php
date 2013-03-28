@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Point
+ * 28.03.2013 08:13
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart\Data\Type;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Point implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Point
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Point();
 	}
 
 	/**
@@ -58,60 +71,64 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Configuration = array(
+		'points' => array( 'show' => true )
+	);
+
 	/**
-	 * Get Dependencies
+	 * @param bool $Toggle
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Point
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Show( $Toggle = true ) {
+		$this->Configuration['points']['show'] = $Toggle;
+		return $this;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param bool|float $Toggle true/false or opaque (float) 0 - 1
+	 * @param bool|string $Color false for default, else e.g '#FF0000'
+	 *
+	 * @return Point
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function Fill( $Toggle = 0.5, $Color = false ) {
+		$this->Configuration['points']['fill'] = $Toggle;
+		if( $Color !== false ) {
+			$this->Configuration['points']['fillColor'] = $Color;
+		}
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param int $Number
+	 *
+	 * @return Point
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function Width( $Number = 1 ) {
+		$this->Configuration['points']['lineWidth'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @param int $Number
+	 *
+	 * @return Point
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function Radius( $Number = 1 ) {
+		$this->Configuration['points']['radius'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Music
+	 * @return array
 	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Video
-	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		return $this->Configuration;
 	}
 }

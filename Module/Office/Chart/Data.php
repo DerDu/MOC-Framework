@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Data
+ * 26.03.2013 14:09
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Data implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Data
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Data();
 	}
 
 	/**
@@ -58,60 +71,81 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Series = array();
+	private $Configuration = array();
+
 	/**
-	 * Get Dependencies
+	 * @param string $Label
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Data\Config
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Config( $Label ) {
+		if( !isset( $this->Configuration[$Label] ) ) {
+			$this->Configuration[$Label] = Data\Config::InterfaceInstance();
+		}
+		return $this->Configuration[$Label];
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param string $Label
+	 * @param string|int|float $X
+	 * @param int|float $Y
+	 *
+	 * @return Data
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function AddPoint( $Label, $X, $Y ) {
+		if( !isset( $this->Series[$Label] ) ) {
+			$this->Series[$Label] = array();
+		}
+		$this->Series[$Label][$X] = $Y;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param string $Label
+	 * @param array $Array array( X-Axis => Y-Axis, ... )
+	 *
+	 * @return Data
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function AddPointList( $Label, $Array ) {
+		if( !isset( $this->Series[$Label] ) ) {
+			$this->Series[$Label] = array();
+		}
+		$this->Series[$Label] = array_merge( $this->Series[$Label], $Array );
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @param array $Array 2D-Array : array( Row => array( Column => Value ), ... ) e.g. Database-Result
+	 *
+	 * @return Data
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function AddSeries( $Array ) {
+		foreach( (array)$Array as $X => $Series ) {
+			foreach( (array)$Series as $Label => $Y ) {
+				$this->AddPoint( $Label, $X, $Y );
+			}
+		}
+		return $this;
 	}
+
 	/**
-	 * @return Office\Music
+	 * @return array
 	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
+	public function _getSeries() {
+		return $this->Series;
 	}
+
 	/**
-	 * @return Office\Video
+	 * @return string
 	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		return $this->Configuration;
 	}
 }

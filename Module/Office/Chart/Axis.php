@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Axis
+ * 27.03.2013 09:27
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Axis implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Axis
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Axis();
 	}
 
 	/**
@@ -58,60 +71,71 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	/** @var Axis\X[] $X */
+	private static $X = array();
+	/** @var Axis\Y[] $Y */
+	private static $Y = array();
+
 	/**
-	 * Get Dependencies
+	 * @param int $Number
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Axis\X
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function X( $Number = 1 ) {
+		for( $Run = 1; $Run <= $Number; $Run++ ) {
+			if( !array_key_exists( $Run, self::$X ) ) {
+				self::$X[$Run] = Axis\X::InterfaceInstance();
+			}
+		}
+		return self::$X[$Number];
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param int $Number
+	 *
+	 * @return Axis\Y
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function Y( $Number = 1 ) {
+		for( $Run = 1; $Run <= $Number; $Run++ ) {
+			if( !array_key_exists( $Run, self::$Y ) ) {
+				self::$Y[$Run] = Axis\Y::InterfaceInstance();
+			}
+		}
+		return self::$Y[$Number];
 	}
+
 	/**
-	 * @return Office\Image
+	 * @return string
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function _getConfiguration() {
+		return
+		'xaxes:['.implode( ',', array_map(
+			function( $Value ){
+				/** @var Axis\X $Value */
+				return $Value->_getConfiguration();
+			},
+			self::$X )
+		).'], '.
+		'yaxes:['.implode( ',', array_map(
+			function( $Value ){
+				/** @var Axis\Y $Value */
+				return $Value->_getConfiguration();
+			},
+			self::$Y )
+		).']';
 	}
+
 	/**
-	 * @return Office\Document
+	 * Reset Static-Properties to Default-Values
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Music
-	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Video
-	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _doReset() {
+		self::$X = array();
+		self::$Y = array();
 	}
 }

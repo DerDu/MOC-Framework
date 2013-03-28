@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Bar
+ * 28.03.2013 08:13
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart\Data\Type;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Bar implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Bar
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Bar();
 	}
 
 	/**
@@ -58,60 +71,84 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Configuration = array(
+		'bars' => array( 'show' => true )
+	);
+
 	/**
-	 * Get Dependencies
+	 * @param bool $Toggle
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Bar
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Show( $Toggle = true ) {
+		$this->Configuration['bars']['show'] = $Toggle;
+		return $this;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param bool|float $Toggle true/false or opaque (float) 0 - 1
+	 * @param bool|string $Color false for default, else e.g '#FF0000'
+	 *
+	 * @return Bar
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function Fill( $Toggle = 0.5, $Color = false ) {
+		$this->Configuration['bars']['fill'] = $Toggle;
+		if( $Color !== false ) {
+			$this->Configuration['bars']['fillColor'] = $Color;
+		}
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param int $Number
+	 *
+	 * @return Bar
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function Width( $Number = 1 ) {
+		$this->Configuration['bars']['lineWidth'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @param int|float $Number
+	 *
+	 * @return Bar
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function Size( $Number = 0.5 ) {
+		$this->Configuration['bars']['barWidth'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Music
+	 * @param string $Align 'left', 'right', 'center'
+	 *
+	 * @return Bar
 	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
+	public function Align( $Align = 'center' ) {
+		$this->Configuration['bars']['align'] = $Align;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Video
+	 * @param bool $Toggle
+	 *
+	 * @return Bar
 	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
+	public function Horizontal( $Toggle = true ) {
+		$this->Configuration['bars']['horizontal'] = $Toggle;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Chart
+	 * @return array
 	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		return $this->Configuration;
 	}
 }

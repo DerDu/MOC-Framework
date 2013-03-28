@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Grid
+ * 27.03.2013 08:37
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Grid implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Grid
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Grid();
 	}
 
 	/**
@@ -58,60 +71,98 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Configuration = array(
+		'show' => true,
+		'aboveData' => false,
+		'color' => '#333333',
+		'backgroundColor' => '#FFFFFF',
+		'borderColor' => '#999999',
+
+		'borderWidth' => array(
+			'top' => 1,
+			'right' => 1,
+			'bottom' => 1,
+			'left' => 1,
+		),
+		'margin' => array(
+			'top' => 1,
+			'right' => 1,
+			'bottom' => 1,
+			'left' => 1,
+		)
+	);
+
 	/**
-	 * Get Dependencies
+	 * @param bool $Toggle
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Grid
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function ConfigVisible( $Toggle = true ) {
+		$this->Configuration['show'] = ($Toggle?true:false);
+		return $this;
+	}
+	/**
+	 * @param bool $Toggle
+	 *
+	 * @return Grid
+	 */
+	public function ConfigAboveData( $Toggle = false ) {
+		$this->Configuration['aboveData'] = ($Toggle?true:false);
+		return $this;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param string $HexColor
+	 *
+	 * @return Grid
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function ConfigColorGrid( $HexColor = '#333333' ) {
+		$this->Configuration['color'] = $HexColor;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param string $HexColor
+	 *
+	 * @return Grid
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function ConfigColorBackground( $HexColor = '#FFFFFF' ) {
+		$this->Configuration['backgroundColor'] = $HexColor;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @param string $HexColor
+	 *
+	 * @return Grid
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function ConfigColorBorder( $HexColor = '#999999' ) {
+		$this->Configuration['borderColor'] = $HexColor;
+		return $this;
 	}
-	/**
-	 * @return Office\Music
-	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
+
+	/*
+	grid: {
+	    labelMargin: number
+	    axisMargin: number
+	    minBorderMargin: number or null
+	    clickable: boolean
+	    hoverable: boolean
+	    autoHighlight: boolean
+	    mouseActiveRadius: number
 	}
+	*/
+
 	/**
-	 * @return Office\Video
+	 * @return string
 	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		return 'grid:'.json_encode( $this->Configuration, JSON_FORCE_OBJECT );
 	}
 }

@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Type
+ * 26.03.2013 14:09
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart\Data;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Type implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Type
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Type();
 	}
 
 	/**
@@ -58,60 +71,52 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	/** @var null|Type\Line|Type\Point|Type\Bar $GraphType */
+	private $GraphType = null;
+
 	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Type\Line
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Line() {
+		if( $this->GraphType === null ) {
+			$this->GraphType = Type\Line::InterfaceInstance();
+		}
+		return $this->GraphType;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @return Type\Point
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function Point() {
+		if( $this->GraphType === null ) {
+			$this->GraphType = Type\Point::InterfaceInstance();
+		}
+		return $this->GraphType;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @return Type\Bar
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function Bar() {
+		if( $this->GraphType === null ) {
+			$this->GraphType = Type\Bar::InterfaceInstance();
+		}
+		return $this->GraphType;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @return array
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Music
-	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Video
-	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		if( $this->GraphType !== null ) {
+			return $this->GraphType->_getConfiguration();
+		}
+		return array();
 	}
 }

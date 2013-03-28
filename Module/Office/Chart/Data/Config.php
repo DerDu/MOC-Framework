@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Config
+ * 26.03.2013 14:09
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart\Data;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Config implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Config
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Config();
 	}
 
 	/**
@@ -58,60 +71,72 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	/*
+	{
+		clickable: boolean
+		hoverable: boolean
+		shadowSize: number
+		highlightColor: color or number
+	}
+	*/
+	private $Configuration = array();
+
+	/** @var null|Type $GraphType */
+	private $GraphType = null;
+
 	/**
-	 * Get Dependencies
+	 * @param string $HexColor
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Config
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Color( $HexColor = '#333333' ) {
+		$this->Configuration['color'] = $HexColor;
+		return $this;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param int $Number
+	 *
+	 * @return Config
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function XAxis( $Number = 1 ) {
+		$this->Configuration['xaxis'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param int $Number
+	 *
+	 * @return Config
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function YAxis( $Number = 1 ) {
+		$this->Configuration['yaxis'] = $Number;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @return Type
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function Type() {
+		if( $this->GraphType === null ) {
+			$this->GraphType = Type::InterfaceInstance();
+		}
+		return $this->GraphType;
 	}
+
 	/**
-	 * @return Office\Music
+	 * @return string
 	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Video
-	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getConfiguration() {
+		if( $this->GraphType !== null ) {
+			return array_merge( $this->Configuration, $this->GraphType->_getConfiguration() );
+		}
+		return $this->Configuration;
 	}
 }

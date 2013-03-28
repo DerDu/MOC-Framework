@@ -32,25 +32,38 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Office
- * 11.02.2013 12:34
+ * Container
+ * 26.03.2013 14:09
  */
-namespace MOC\Module;
+namespace MOC\Module\Office\Chart;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Office implements Module {
+class Container implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Office
+	 * @return Container
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Office();
+		return new Container();
 	}
 
 	/**
@@ -58,60 +71,64 @@ class Office implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Width = 320;
+	private $Height = 240;
+	private $Identifier = '';
+
 	/**
-	 * Get Dependencies
+	 * @param int $Pixel
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Container
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+	public function Width( $Pixel = 320 ) {
+		$this->Width = $Pixel;
+		return $this;
 	}
 
 	/**
-	 * @return Office\Mail
+	 * @param int $Pixel
+	 *
+	 * @return Container
 	 */
-	public function Mail() {
-		return Office\Mail::InterfaceInstance();
+	public function Height( $Pixel = 240 ) {
+		$this->Height = $Pixel;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Image
+	 * @param string $Id
+	 *
+	 * @return Container
 	 */
-	public function Image() {
-		return Office\Image::InterfaceInstance();
+	public function Identifier( $Id = 'Placeholder' ) {
+		$this->Identifier = $Id;
+		return $this;
 	}
+
 	/**
-	 * @return Office\Document
+	 * @return int
 	 */
-	public function Document() {
-		return Office\Document::InterfaceInstance();
+	public function _getWidth() {
+		return $this->Width;
 	}
+
 	/**
-	 * @return Office\Music
+	 * @return int
 	 */
-	public function Music() {
-		return Office\Music::InterfaceInstance();
+	public function _getHeight() {
+		return $this->Height;
 	}
+
 	/**
-	 * @return Office\Video
+	 * @return string
 	 */
-	public function Video() {
-		return Office\Video::InterfaceInstance();
-	}
-	/**
-	 * @return Office\Chart
-	 */
-	public function Chart() {
-		return Office\Chart::InterfaceInstance();
+	public function _getIdentifier() {
+		return $this->Identifier;
 	}
 }
