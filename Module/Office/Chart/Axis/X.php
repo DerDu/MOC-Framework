@@ -288,6 +288,11 @@ class X implements Module {
 
 		$Data =  json_encode( $this->Configuration, JSON_FORCE_OBJECT );
 
+		// Fix: ticks array(string) => array(array)
+		$Data	= str_replace( '"[', "[", $Data );
+		$Data	= str_replace( ']"', "]", $Data );
+		$Data	= str_replace( '\"', '"', $Data );
+
 		// Fix: string is function
 		$Data = preg_replace( '!"(function[^{]+{.*?})"(,|})!is', '${1}${2}', $Data );
 

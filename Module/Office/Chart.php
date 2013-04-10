@@ -103,6 +103,9 @@ class Chart implements Module{
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
 			__DIR__.'/../../Extension/Flot/jquery.flot.navigate.js'
 		)).'"></script>';
+		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
+			__DIR__.'/../../Extension/Flot/jquery.flot.threshold.js'
+		)).'"></script>';
 		// Additional
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
 			__DIR__.'/../../Extension/Flot/Plugins/flot.axislabels/jquery.flot.axislabels.js'
@@ -200,8 +203,9 @@ class Chart implements Module{
 			"jQuery('#".$this->Container()->_getIdentifier()."').css({'width':'".$this->Container()->_getWidth()."','height':'".$this->Container()->_getHeight()."'});".
 			"jQuery.plot('#".$this->Container()->_getIdentifier()."', ".$DataList.", {"
 				.$this->Grid()->_getConfiguration().', '
-				.$this->Axis()->_getConfiguration()//.', zoom: {interactive: true},	pan: {			interactive: true		}		'
-			."} )".
+				.$this->Axis()->_getConfiguration()
+				//.', zoom: {interactive: true}, pan: { interactive: true }, xaxis: { panRange: [1, 12], zoomRange: [3,12] }, yaxis: { zoomRange: [100000,300000] }'
+			."});".
 		'</script>';
 
 		$this->_doReset();

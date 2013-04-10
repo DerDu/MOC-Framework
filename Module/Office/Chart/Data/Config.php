@@ -38,6 +38,7 @@
 namespace MOC\Module\Office\Chart\Data;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Office\Document\Pdf\Font\Color;
 
 /**
  *
@@ -128,6 +129,20 @@ class Config implements Module {
 			$this->GraphType = Type::InterfaceInstance();
 		}
 		return $this->GraphType;
+	}
+
+	/**
+	 * @param float|int $Below
+	 * @param string $Color
+	 *
+	 * @return Config
+	 */
+	public function Threshold( $Below = 0, $Color = '#F03060' ) {
+		$this->Configuration['threshold'] = array(
+			'below' => $Below,
+			'color' => $Color
+		);
+		return $this;
 	}
 
 	/**
