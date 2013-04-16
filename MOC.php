@@ -74,7 +74,7 @@ class Api {
 		// Cut Root-Namespace
 		$Class = preg_replace( '!^'.__NAMESPACE__.'!', '', $Class );
 		// Correct & Trim DIRECTORY_SEPARATOR
-		$Class = ltrim( preg_replace( '![\\\/]+!', DIRECTORY_SEPARATOR, __DIR__.DIRECTORY_SEPARATOR.$Class.'.php' ), '\\/' );
+		$Class = preg_replace( '![\\\/]+!', DIRECTORY_SEPARATOR, __DIR__.DIRECTORY_SEPARATOR.$Class.'.php' );
 		if( false === ( $Class = realpath( $Class ) ) ) {
 			// File not found
 			return false;
