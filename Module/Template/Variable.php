@@ -76,19 +76,36 @@ class Variable implements Module {
 	private $Identifier = '';
 	private $Content = '';
 
+	/**
+	 * @param $Identifier
+	 *
+	 * @return Variable
+	 */
 	public function Identifier( $Identifier ) {
 		$this->Identifier = $Identifier;
 		return $this;
 	}
 
+	/**
+	 * @param $Content
+	 *
+	 * @return Variable
+	 */
 	public function Content( $Content ) {
 		$this->Content = $Content;
 		return $this;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function _getIdentifier() {
 		return $this->Identifier;
 	}
+
+	/**
+	 * @return string
+	 */
 	public function _getContent() {
 		return $this->Content;
 	}
