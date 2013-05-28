@@ -6,16 +6,9 @@ extensions:
 	- php
 	
 exclude: "*\/Documentation\/Content\/*,*\/.idea\/*,*\/.git\/*,*\/#Trash\/*,*\/Data\/*,*\/Library\/*,*\/3rdParty\/*"
-skipDocPath: ""
-skipDocPrefix: ""
 charset: auto
 main: MOC
-title: "M\\odular()->O\\bject()->C\\haining()->Framework()"
-baseUrl: ""
-googleCseId: ""
-googleCseLabel: ""
-googleAnalytics: ""
-templateConfig: ./templates/default/config.neon
+title: "Modular()->Object()->Chaining()->Framework()"
 groups: auto
 allowedHtml:
 	- b
@@ -39,18 +32,19 @@ autocomplete:
 accessLevels:
 	- public
 	- protected
+	- private
 	
-internal: false
+internal: true
 php: true
 tree: true
-deprecated: false
-todo: false
+deprecated: true
+todo: true
 sourceCode: true
-download: false
+download: true
 report: ""
 wipeout: true
-quiet: false
-progressbar: true
+quiet: true
+progressbar: false
 colors: false
-updateCheck: true
+updateCheck: false
 debug: false
