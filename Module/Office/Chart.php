@@ -84,31 +84,31 @@ class Chart implements Module{
 		if( $ExCanvas ) {
 			$Script .= '<script type="text/javascript" src="'.
 			Api::Core()->Proxy()->Url(
-				Api::Core()->Drive()->File()->Handle( __DIR__.'/../../Extension/Flot/excanvas.min.js' )
+				Api::Core()->Drive()->File()->Handle( __DIR__.'/../../Extension/Flot/3rdParty/excanvas.min.js' )
 			).'"></script>';
 		}
 		if( $jQuery ) {
 			$Script .= '<script type="text/javascript" src="'.
 			Api::Core()->Proxy()->Url(
-				Api::Core()->Drive()->File()->Handle( __DIR__.'/../../Extension/Flot/jquery.js' )
+				Api::Core()->Drive()->File()->Handle( __DIR__.'/../../Extension/Flot/3rdParty/jquery.js' )
 			).'"></script>';
 		}
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/Flot/jquery.flot.js'
+			__DIR__.'/../../Extension/Flot/3rdParty/jquery.flot.js'
 		)).'"></script>';
 		// Bundled
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/Flot/jquery.flot.categories.js'
+			__DIR__.'/../../Extension/Flot/3rdParty/jquery.flot.categories.js'
 		)).'"></script>';
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/Flot/jquery.flot.navigate.js'
+			__DIR__.'/../../Extension/Flot/3rdParty/jquery.flot.navigate.js'
 		)).'"></script>';
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/Flot/jquery.flot.threshold.js'
+			__DIR__.'/../../Extension/Flot/3rdParty/jquery.flot.threshold.js'
 		)).'"></script>';
 		// Additional
 		$Script .= '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/Flot/Plugins/flot.axislabels/jquery.flot.axislabels.js'
+			__DIR__.'/../../Extension/Flot/3rdParty/Plugins/flot.axislabels/jquery.flot.axislabels.js'
 		)).'"></script>';
 		return $Script;
 	}
