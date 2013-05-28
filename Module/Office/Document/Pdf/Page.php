@@ -130,4 +130,19 @@ class Page implements Module {
 	public function Position() {
 		return Page\Position::InterfaceInstance();
 	}
+
+	/**
+	 * @return int mm
+	 */
+	public function Width() {
+		return Api::Extension()->Pdf()->Current()->CurPageSize[0];
+	}
+
+	/**
+	 * @return int mm
+	 */
+	public function Height() {
+		return Api::Extension()->Pdf()->Current()->CurPageSize[1];
+	}
+
 }
