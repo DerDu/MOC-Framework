@@ -78,6 +78,11 @@ class Engine implements Module {
 	/** @var null|\MOC\Core\Template $Engine */
 	private $Engine = null;
 
+	/**
+	 * @param Draft $Draft
+	 *
+	 * @return Engine
+	 */
 	public function Draft( Draft $Draft ) {
 		$this->Engine->ApplyTemplate(
 			Api::Core()->Template()->CreateTemplate()->AssignContent(
@@ -86,6 +91,13 @@ class Engine implements Module {
 		);
 		return $this;
 	}
+
+	/**
+	 * @param Variable $Variable
+	 * @param int $Limit
+	 *
+	 * @return Engine
+	 */
 	public function Variable( Variable $Variable, $Limit = -1 ) {
 		$this->Engine->ApplyVariable(
 			Api::Core()->Template()->CreateVariable()->SetData(
@@ -95,6 +107,13 @@ class Engine implements Module {
 		);
 		return $this;
 	}
+
+	/**
+	 * @param Import $Import
+	 * @param int $Limit
+	 *
+	 * @return Engine
+	 */
 	public function Import( Import $Import, $Limit = -1 ) {
 		$this->Engine->ApplyImport(
 			Api::Core()->Template()->CreateImport()->SetIdentifier(
@@ -107,8 +126,11 @@ class Engine implements Module {
 		return $this;
 	}
 
-
-
+	/**
+	 * @param bool $Clean
+	 *
+	 * @return string
+	 */
 	public function Content( $Clean = false ) {
 		return $this->Engine->GetPayload( $Clean );
 	}
