@@ -36,10 +36,12 @@
  * 30.08.2012 22:14
  */
 namespace MOC\Generic\Device;
+use MOC\Generic\Common;
+
 /**
  *
  */
-interface Extension extends \MOC\Generic\Common {
+interface Extension extends Common {
 
 	/**
 	 * Create new Extension-Instance

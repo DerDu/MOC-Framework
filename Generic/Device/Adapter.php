@@ -36,9 +36,11 @@
  * 04.09.2012 13:33
  */
 namespace MOC\Generic\Device;
+use MOC\Generic\Common;
+
 /**
  *
  */
-interface Adapter extends \MOC\Generic\Common {
+interface Adapter extends Common {
 
 }
