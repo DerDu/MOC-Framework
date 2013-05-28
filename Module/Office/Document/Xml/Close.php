@@ -32,32 +32,23 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Close
+ * 16.04.2013 11:47
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Xml;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Close implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -68,30 +59,27 @@ class Document implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Close
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Close();
 	}
+
 	/**
-	 * @return Document\Pdf
+	 * @return Close\File
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
-	}
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function File(){
+		return Close\File::InterfaceInstance();
 	}
 }

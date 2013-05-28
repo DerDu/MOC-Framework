@@ -32,25 +32,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Xml
+ * 16.04.2013 11:47
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
+class Xml implements Module {
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Document
+	 * @return Xml
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Document();
+		return new Xml();
 	}
 
 	/**
@@ -70,28 +72,21 @@ class Document implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Document\Excel
+	 * @return Xml\Open
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public function Open(){
+		return Xml\Open::InterfaceInstance();
 	}
+
 	/**
-	 * @return Document\Pdf
+	 * @return Xml\Close
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
+	public function Close(){
+		return Xml\Close::InterfaceInstance();
 	}
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
-	}
+
 }

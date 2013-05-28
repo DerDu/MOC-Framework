@@ -32,32 +32,23 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Open
+ * 16.04.2013 11:47
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Xml;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Open implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -68,30 +59,30 @@ class Document implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Open
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Open();
 	}
+
 	/**
-	 * @return Document\Pdf
+	 * @param string $RootNode
+	 *
+	 * @return \MOC\Module\Office\Document\Xml
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
-	}
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function Blank( $RootNode = 'Root' ){
+		Api::Extension()->Xml()->Create()->Current()->Create( $RootNode );
+		return Api::Module()->Office()->Document()->Xml();
 	}
 }

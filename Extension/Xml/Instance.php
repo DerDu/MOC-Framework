@@ -32,25 +32,33 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Instance
+ * 14.02.2013 11:25
  */
-namespace MOC\Module\Office;
-use MOC\Api;
-use MOC\Generic\Device\Module;
+namespace MOC\Extension\Xml;
+use \MOC\Api;
+use MOC\Core\Xml;
+use MOC\Generic\Device\Extension;
 
 /**
  *
  */
-class Document implements Module {
+class Instance implements Extension {
+
+	/** @var Instance $Singleton */
+	private static $Singleton = null;
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Document
+	 * @return Instance
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Document();
+		if( self::$Singleton === null ) {
+			self::$Singleton = new Instance();
+		} return self::$Singleton;
 	}
 
 	/**
@@ -58,9 +66,10 @@ class Document implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -68,30 +77,84 @@ class Document implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
+		return Api::Core()->Depending();
+	}
+
+	/** @var [] $InstanceQueue */
+	private $InstanceQueue = array();
+	/** @var $InstanceCurrent */
+	private $InstanceCurrent = null;
+
+	/**
+	 * @return Instance
+	 */
+	public function Create() {
+		$Instance = Api::Core()->Xml();
+		if( null === $this->InstanceCurrent ) {
+			$this->InstanceCurrent = $Instance;
+			return $this;
+		} else {
+			array_push( $this->InstanceQueue, $this->InstanceCurrent );
+			$this->InstanceCurrent = $Instance;
+			return $this;
+		}
 	}
 
 	/**
-	 * @return Document\Excel
+	 * @return null|Xml
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public function Current() {
+		return $this->InstanceCurrent;
 	}
+
 	/**
-	 * @return Document\Pdf
+	 * @return Instance
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
+	public function Destroy() {
+		if( count( $this->InstanceQueue ) ) {
+			$this->InstanceCurrent = array_pop( $this->InstanceQueue );
+		} else {
+			$this->InstanceCurrent = null;
+		}
+		return $this;
 	}
+
 	/**
-	 * @return Document\Xml
+	 * Set external Extension-Instance
+	 *
+	 * Contains:
+	 * - Set new (extern created) 3rdParty Instance to Current
+	 *
+	 * @param $Instance
+	 *
+	 * @return \MOC\Generic\Device\Extension
 	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function Define( $Instance ) {
+		// TODO: Implement Define() method.
 	}
+
+	/**
+	 * Select Index as active 3rdParty Instance
+	 *
+	 * @param int $Index
+	 *
+	 * @return \MOC\Generic\Device\Extension
+	 */
+	public function Select( $Index ) {
+		// TODO: Implement Select() method.
+	}
+
+	/**
+	 * Get Index for Select() from Current() 3rdParty Instance
+	 *
+	 * @return int
+	 */
+	public function Index() {
+		// TODO: Implement Index() method.
+	}
+
+
 }
