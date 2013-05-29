@@ -5,11 +5,11 @@
 	<meta name="generator" content="ApiGen 2.7.0" />
 	<meta name="robots" content="noindex" />
 
-	<title>File MOC.php | Modular()-&gt;Object()-&gt;Chaining()-&gt;Framework()</title>
+	<title>File MOC.php</title>
 
-	<script type="text/javascript" src="resources/combined.js?3868169076"></script>
-	<script type="text/javascript" src="elementlist.js?353461473"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1567499433" />
+	<script type="text/javascript" src="resources/combined.js?2706823950"></script>
+	<script type="text/javascript" src="elementlist.js?3482913364"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?519850069" />
 
 </head>
 
@@ -61,9 +61,17 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
+				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
+						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Pdf.html">Pdf</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.Word.html">Word</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.Xml.html">Xml</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.YUICompressor.html">YUICompressor</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Zip.html">Zip</a>
 						</li>
@@ -79,8 +87,18 @@
 							</ul></li></ul></li>
 				<li class="main"><a href="namespace-MOC.Module.html">Module<span></span></a>
 						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Database.html">Database<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Database.Driver.html">Driver</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Drive.html">Drive</a>
 						</li>
+				<li class="main"><a href="namespace-MOC.Module.Image.html">Image<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Image.Font.html">Font</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Installer.html">Installer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Network.html">Network<span></span></a>
@@ -103,6 +121,11 @@
 							</ul></li></ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Office.html">Office<span></span></a>
 						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Office.Chart.html">Chart<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Office.Chart.Axis.html">Axis</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Document.html">Document<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Office.Document.Excel.html">Excel<span></span></a>
@@ -132,14 +155,16 @@
 				<li class="main"><a href="namespace-MOC.Module.Office.Document.Pdf.Page.Position.html">Position</a>
 						</li>
 							</ul></li>
-				<li class="main"><a href="namespace-MOC.Module.Office.Document.Pdf.Table.html">Table<span></span></a>
-						<ul>
-				<li class="main"><a href="namespace-MOC.Module.Office.Document.Pdf.Table.Head.html">Head</a>
-						</li>
-							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Document.Pdf.Text.html">Text</a>
 						</li>
+							</ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Office.Document.Xml.html">Xml<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Office.Document.Xml.Close.html">Close</a>
+						</li>
 							</ul></li></ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Office.Image.html">Image</a>
+						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.html">Mail<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Address.html">Address</a>
@@ -149,9 +174,14 @@
 							</ul></li></ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
+				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
+						</li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Zip.html">Zip</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Template.html">Template</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Plugin.html">Plugin</a>
 						</li>
 							</ul></li>
@@ -213,7 +243,7 @@
 		</ul>
 		<ul>
 			<li>
-				<a href="modular-object-chaining-framework-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -271,13 +301,13 @@
 <a href="#51" id="51" class="l"> 51: </a>        <span class="php-keyword2">spl_autoload_register</span>( <span class="php-keyword1">array</span>(__CLASS__,<span class="php-quote">'AutoLoader'</span>) );
 <a href="#52" id="52" class="l"> 52: </a>
 <a href="#53" id="53" class="l"> 53: </a>        <span class="php-comment">// Register Error-Handler</span>
-<a href="#54" id="54" class="l"> 54: </a>        \MOC\Core\Error::InterfaceInstance()-&gt;Register()-&gt;Error()-&gt;SetHandler();
+<a href="#54" id="54" class="l"> 54: </a>        Core\Error::InterfaceInstance()-&gt;Register()-&gt;Error()-&gt;SetHandler();
 <a href="#55" id="55" class="l"> 55: </a>        <span class="php-comment">// Register Exception-Handler</span>
-<a href="#56" id="56" class="l"> 56: </a>        \MOC\Core\Error::InterfaceInstance()-&gt;Register()-&gt;Exception()-&gt;SetHandler();
+<a href="#56" id="56" class="l"> 56: </a>        Core\Error::InterfaceInstance()-&gt;Register()-&gt;Exception()-&gt;SetHandler();
 <a href="#57" id="57" class="l"> 57: </a>        <span class="php-comment">// Register Shutdown-Handler</span>
-<a href="#58" id="58" class="l"> 58: </a>        \MOC\Core\Error::InterfaceInstance()-&gt;Register()-&gt;Shutdown()-&gt;SetHandler();
+<a href="#58" id="58" class="l"> 58: </a>        Core\Error::InterfaceInstance()-&gt;Register()-&gt;Shutdown()-&gt;SetHandler();
 <a href="#59" id="59" class="l"> 59: </a>        <span class="php-comment">// Set Reporting-Level</span>
-<a href="#60" id="60" class="l"> 60: </a>        \MOC\Core\Error::InterfaceInstance()-&gt;Reporting()-&gt;Level( E_ALL )-&gt;Display( <span class="php-keyword1">true</span> )-&gt;Debug( <span class="php-keyword1">true</span> )-&gt;Apply();
+<a href="#60" id="60" class="l"> 60: </a>        Core\Error::InterfaceInstance()-&gt;Reporting()-&gt;Level( E_ALL )-&gt;Display( <span class="php-keyword1">true</span> )-&gt;Debug( <span class="php-keyword1">true</span> )-&gt;Apply();
 <a href="#61" id="61" class="l"> 61: </a>    }
 <a href="#62" id="62" class="l"> 62: </a>
 <a href="#63" id="63" class="l"> 63: </a>    <span class="php-comment">/**
@@ -294,7 +324,7 @@
 <a href="#74" id="74" class="l"> 74: </a>        <span class="php-comment">// Cut Root-Namespace</span>
 <a href="#75" id="75" class="l"> 75: </a>        <span class="php-var">$Class</span> = <span class="php-keyword2">preg_replace</span>( <span class="php-quote">'!^'</span>.__NAMESPACE__.<span class="php-quote">'!'</span>, <span class="php-quote">''</span>, <span class="php-var">$Class</span> );
 <a href="#76" id="76" class="l"> 76: </a>        <span class="php-comment">// Correct &amp; Trim DIRECTORY_SEPARATOR</span>
-<a href="#77" id="77" class="l"> 77: </a>        <span class="php-var">$Class</span> = <span class="php-keyword2">ltrim</span>( <span class="php-keyword2">preg_replace</span>( <span class="php-quote">'![\\\/]+!'</span>, DIRECTORY_SEPARATOR, __DIR__.DIRECTORY_SEPARATOR.<span class="php-var">$Class</span>.<span class="php-quote">'.php'</span> ), <span class="php-quote">'\\/'</span> );
+<a href="#77" id="77" class="l"> 77: </a>        <span class="php-var">$Class</span> = <span class="php-keyword2">preg_replace</span>( <span class="php-quote">'![\\\/]+!'</span>, DIRECTORY_SEPARATOR, __DIR__.DIRECTORY_SEPARATOR.<span class="php-var">$Class</span>.<span class="php-quote">'.php'</span> );
 <a href="#78" id="78" class="l"> 78: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword1">false</span> === ( <span class="php-var">$Class</span> = <span class="php-keyword2">realpath</span>( <span class="php-var">$Class</span> ) ) ) {
 <a href="#79" id="79" class="l"> 79: </a>            <span class="php-comment">// File not found</span>
 <a href="#80" id="80" class="l"> 80: </a>            <span class="php-keyword1">return</span> <span class="php-keyword1">false</span>;
@@ -306,39 +336,39 @@
 <a href="#86" id="86" class="l"> 86: </a>    }
 <a href="#87" id="87" class="l"> 87: </a>
 <a href="#88" id="88" class="l"> 88: </a>    <span class="php-comment">/**
-</span><a href="#89" id="89" class="l"> 89: </a><span class="php-comment">     * @return \MOC\Adapter\Core
+</span><a href="#89" id="89" class="l"> 89: </a><span class="php-comment">     * @return Adapter\Core
 </span><a href="#90" id="90" class="l"> 90: </a><span class="php-comment">     */</span>
 <a href="#91" id="91" class="l"> 91: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> Core() {
-<a href="#92" id="92" class="l"> 92: </a>        <span class="php-keyword1">return</span> \MOC\Adapter\Core::InterfaceInstance();
+<a href="#92" id="92" class="l"> 92: </a>        <span class="php-keyword1">return</span> Adapter\Core::InterfaceInstance();
 <a href="#93" id="93" class="l"> 93: </a>    }
 <a href="#94" id="94" class="l"> 94: </a>    <span class="php-comment">/**
-</span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment">     * @return \MOC\Adapter\Extension
+</span><a href="#95" id="95" class="l"> 95: </a><span class="php-comment">     * @return Adapter\Extension
 </span><a href="#96" id="96" class="l"> 96: </a><span class="php-comment">     */</span>
 <a href="#97" id="97" class="l"> 97: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> Extension() {
-<a href="#98" id="98" class="l"> 98: </a>        <span class="php-keyword1">return</span> \MOC\Adapter\Extension::InterfaceInstance();
+<a href="#98" id="98" class="l"> 98: </a>        <span class="php-keyword1">return</span> Adapter\Extension::InterfaceInstance();
 <a href="#99" id="99" class="l"> 99: </a>    }
 <a href="#100" id="100" class="l">100: </a>    <span class="php-comment">/**
-</span><a href="#101" id="101" class="l">101: </a><span class="php-comment">     * @return \MOC\Adapter\Module
+</span><a href="#101" id="101" class="l">101: </a><span class="php-comment">     * @return Adapter\Module
 </span><a href="#102" id="102" class="l">102: </a><span class="php-comment">     */</span>
 <a href="#103" id="103" class="l">103: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> Module() {
-<a href="#104" id="104" class="l">104: </a>        <span class="php-keyword1">return</span> \MOC\Adapter\Module::InterfaceInstance();
+<a href="#104" id="104" class="l">104: </a>        <span class="php-keyword1">return</span> Adapter\Module::InterfaceInstance();
 <a href="#105" id="105" class="l">105: </a>    }
 <a href="#106" id="106" class="l">106: </a>    <span class="php-comment">/**
-</span><a href="#107" id="107" class="l">107: </a><span class="php-comment">     * @return \MOC\Adapter\Plugin
+</span><a href="#107" id="107" class="l">107: </a><span class="php-comment">     * @return Adapter\Plugin
 </span><a href="#108" id="108" class="l">108: </a><span class="php-comment">     */</span>
 <a href="#109" id="109" class="l">109: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> Plugin() {
-<a href="#110" id="110" class="l">110: </a>        <span class="php-keyword1">return</span> \MOC\Adapter\Plugin::InterfaceInstance();
+<a href="#110" id="110" class="l">110: </a>        <span class="php-keyword1">return</span> Adapter\Plugin::InterfaceInstance();
 <a href="#111" id="111" class="l">111: </a>    }
 <a href="#112" id="112" class="l">112: </a>}
 <a href="#113" id="113" class="l">113: </a>
 <a href="#114" id="114" class="l">114: </a><span class="php-comment">/**
-</span><a href="#115" id="115" class="l">115: </a><span class="php-comment"> * Startup COF-API
+</span><a href="#115" id="115" class="l">115: </a><span class="php-comment"> * Startup MOC-API
 </span><a href="#116" id="116" class="l">116: </a><span class="php-comment"> */</span>
 <a href="#117" id="117" class="l">117: </a>Api::Setup();
 <a href="#118" id="118" class="l">118: </a></code></pre>
 
 	<div id="footer">
-		Modular()-&gt;Object()-&gt;Chaining()-&gt;Framework() API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.7.0</a>
 	</div>
 </div>
 </div>
