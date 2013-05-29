@@ -1,7 +1,9 @@
 ### Modular - Object - Chaining
 The easy way to OOP
 
-> Simple, fast, extensible, unified interface to unlimited possibilities. Mind the task - forget the obstacles...
+> Simple, fast, extensible, unified interface to unlimited possibilities.
+>
+> Mind the task - forget the obstacles...
 
 ------------------------------------------------------------------------------------------------------------------------
 
