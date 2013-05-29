@@ -84,14 +84,17 @@ class Encoder implements Module {
 	 * @return Encoder
 	 */
 	public function Open( File $File ) {
-		Api::Extension()->Zip()->Create( $File );
+		Api::Extension()->Zip()->Create();
+		// Hook 3rd-Party Property
+		Api::Extension()->Zip()->Current()->zipname = $File->GetLocation();
+
 		$this->File = $File;
 		return $this;
 	}
 
 	/**
 	 * @param File $File
-	 * @param null|string $Base
+	 * @param null|string|boolean $Base (null = NoChange, string = RemoveThisPath, false = RemovePath)
 	 *
 	 * @return Encoder
 	 */
@@ -99,19 +102,19 @@ class Encoder implements Module {
 
 		if( $this->File->Exists() ) {
 			if( $Base === null ) {
-				Api::Extension()->Zip()->Current()->add( $File->GetLocation() );
+				Api::Extension()->Zip()->Current()->add( $File->GetLocation(), PCLZIP_OPT_TEMP_FILE_OFF );
 			} else if( $Base === false ) {
-				Api::Extension()->Zip()->Current()->add( $File->GetLocation() , PCLZIP_OPT_REMOVE_ALL_PATH );
+				Api::Extension()->Zip()->Current()->add( $File->GetLocation() , PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_TEMP_FILE_OFF );
 			} else {
-				Api::Extension()->Zip()->Current()->add( $File->GetLocation() , PCLZIP_OPT_REMOVE_PATH, $Base );
+				Api::Extension()->Zip()->Current()->add( $File->GetLocation() , PCLZIP_OPT_REMOVE_PATH, $Base, PCLZIP_OPT_TEMP_FILE_OFF );
 			}
 		} else {
 			if( $Base === null ) {
-				Api::Extension()->Zip()->Current()->create( $File->GetLocation() );
+				Api::Extension()->Zip()->Current()->create( $File->GetLocation() , PCLZIP_OPT_TEMP_FILE_OFF );
 			} else if( $Base === false ) {
-				Api::Extension()->Zip()->Current()->create( $File->GetLocation() , PCLZIP_OPT_REMOVE_ALL_PATH );
+				Api::Extension()->Zip()->Current()->create( $File->GetLocation() , PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_OPT_TEMP_FILE_OFF );
 			} else {
-				Api::Extension()->Zip()->Current()->create( $File->GetLocation() , PCLZIP_OPT_REMOVE_PATH, $Base );
+				Api::Extension()->Zip()->Current()->create( $File->GetLocation() , PCLZIP_OPT_REMOVE_PATH, $Base, PCLZIP_OPT_TEMP_FILE_OFF );
 			}
 		}
 		return $this;

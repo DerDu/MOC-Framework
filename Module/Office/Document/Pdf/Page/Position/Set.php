@@ -99,4 +99,31 @@ class Set implements Module {
 		$this->X( $X );
 		return Api::Module()->Office()->Document()->Pdf();
 	}
+
+
+	/*
+	 	public function SetX( $Value, $Force = false ) {
+	 		if( $Value < $this->MarginLeft() ) {
+	 			if( ! $Force ) {
+	 				$Value = $this->MarginLeft();
+	 			}
+	 		}
+	 		if( $Value > ( $this->GetWidth() - $this->MarginRight() ) ) {
+	 			if( ! $Force ) {
+	 				$Value = ( $this->GetWidth() - $this->MarginRight() );
+	 			}
+	 		}
+	 		Api::Extension()->Pdf()->Current()->SetXY( $Value, $this->GetY() );
+	 		return $this;
+	 	}
+	 	public function SetY( $Value, $Force = false ) {
+	 		if( $Value < $this->MarginTop() ) {
+	 			if( ! $Force ) {
+	 				$Value = $this->MarginTop();
+	 			}
+	 		}
+	 		Api::Extension()->Pdf()->Current()->SetXY( $this->GetX(), $Value );
+	 		return $this;
+	 	}
+	 */
 }

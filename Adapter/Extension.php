@@ -124,6 +124,14 @@ class Extension implements Adapter {
 	}
 
 	/**
+	 * @return \MOC\Extension\Xml\Instance
+	 */
+	public function Xml() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+		return \MOC\Extension\Xml\Instance::InterfaceInstance();
+	}
+
+	/**
 	 * @return \MOC\Extension\Zip\Instance
 	 */
 	public function Zip() {

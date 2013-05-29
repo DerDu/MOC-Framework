@@ -77,24 +77,46 @@ class Import implements Module {
 	private $Identifier = '';
 	private $Content = '';
 
+	/**
+	 * @param string $Identifier
+	 *
+	 * @return Import
+	 */
 	public function Identifier( $Identifier ) {
 		$this->Identifier = $Identifier;
 		return $this;
 	}
 
+	/**
+	 * @param File $File
+	 *
+	 * @return Import
+	 */
 	public function File( File $File ) {
 		$this->Content = $File->Read();
 		return $this;
 	}
 
+	/**
+	 * @param $Content
+	 *
+	 * @return Import
+	 */
 	public function Content( $Content ) {
 		$this->Content = $Content;
 		return $this;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function _getIdentifier() {
 		return $this->Identifier;
 	}
+
+	/**
+	 * @return string
+	 */
 	public function _getContent() {
 		return $this->Content;
 	}

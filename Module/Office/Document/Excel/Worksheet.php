@@ -133,6 +133,22 @@ class Worksheet implements Module {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function GetDataWidth() {
+		return \PHPExcel_Cell::columnIndexFromString(
+			$this->getActiveSheet()->getHighestDataColumn()
+		);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function GetDataHeight() {
+		return $this->getActiveSheet()->getHighestDataRow();
+	}
+
+	/**
 	 * @return \PHPExcel_Worksheet
 	 */
 	private function getActiveSheet() {
