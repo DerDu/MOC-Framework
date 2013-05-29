@@ -108,4 +108,10 @@ class Office implements Module {
 	public function Video() {
 		return Office\Video::InterfaceInstance();
 	}
+	/**
+	 * @return Office\Chart
+	 */
+	public function Chart() {
+		return Office\Chart::InterfaceInstance();
+	}
 }

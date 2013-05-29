@@ -81,7 +81,9 @@ class Decoder implements Module {
 	 * @return File[]
 	 */
 	public function Open( File $File ) {
-		Api::Extension()->Zip()->Create( $File );
+		Api::Extension()->Zip()->Create();
+		// Hook 3rd-Party Property
+		Api::Extension()->Zip()->Current()->zipname = $File->GetLocation();
 
 		if( $File->Exists() ) {
 			$Cache = Api::Core()->Cache()->Group( uniqid( __METHOD__, true ) )->Identifier( __METHOD__ )->Set(false);

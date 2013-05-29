@@ -89,4 +89,14 @@ class Position implements Module {
 	public function Get(){
 		return Position\Get::InterfaceInstance();
 	}
+
+	/**
+	 * @param null|float $Height
+	 *
+	 * @return \MOC\Module\Office\Document\Pdf
+	 */
+	public function LineFeed( $Height = null ) {
+		Api::Extension()->Pdf()->Current()->Ln( $Height );
+		return Api::Module()->Office()->Document()->Pdf();
+	}
 }

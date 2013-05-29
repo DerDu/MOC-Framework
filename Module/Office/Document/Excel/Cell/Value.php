@@ -82,6 +82,8 @@ class Value implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Set( $Value ) {
+		// Prepare UTF8
+		$Value = Api::Core()->Encoding()->MixedToUtf8( $Value );
 		// Reset Cell-Format
 		$this->getNumberFormat()->setFormatCode( \PHPExcel_Style_NumberFormat::FORMAT_GENERAL );
 		$this->getCell()->setValue( $Value );
@@ -93,6 +95,8 @@ class Value implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function String( $Value ) {
+		// Prepare UTF8
+		$Value = Api::Core()->Encoding()->MixedToUtf8( $Value );
 		// Set Cell-Format: TEXT
 		$this->getNumberFormat()->setFormatCode( \PHPExcel_Style_NumberFormat::FORMAT_TEXT );
 		$this->getCell()->setValueExplicit( $Value, \PHPExcel_Cell_DataType::TYPE_STRING );

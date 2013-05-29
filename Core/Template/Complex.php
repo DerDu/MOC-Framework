@@ -37,7 +37,6 @@
  */
 namespace MOC\Core\Template;
 use MOC\Api;
-use MOC\Core\Template;
 use MOC\Generic\Device\Core;
 
 /**
@@ -82,7 +81,7 @@ class Complex implements Core {
 
 	/** @var string $Identifier */
 	private $Identifier = '';
-	/** @var Template|null $TplEngine */
+	/** @var \MOC\Core\Template|null $TplEngine */
 	private $Engine = null;
 
 	/**
@@ -96,11 +95,11 @@ class Complex implements Core {
 	}
 
 	/**
-	 * @param Template $Engine
+	 * @param \MOC\Core\Template $Engine
 	 *
 	 * @return Complex
 	 */
-	public function AssignEngine( Template $Engine = null ) {
+	public function AssignEngine( \MOC\Core\Template $Engine = null ) {
 		$this->Engine = $Engine;
 		return $this;
 	}

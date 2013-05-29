@@ -72,7 +72,8 @@ class Document implements Module {
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
 			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() );
+			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
+			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
 	}
 
 	/**
@@ -86,5 +87,11 @@ class Document implements Module {
 	 */
 	public function Pdf() {
 		return Document\Pdf::InterfaceInstance();
+	}
+	/**
+	 * @return Document\Xml
+	 */
+	public function Xml() {
+		return Document\Xml::InterfaceInstance();
 	}
 }

@@ -41,9 +41,17 @@ require_once('Odbc.php');
  *
  */
 class OdbcMssql extends Odbc {
+
+	/**
+	 *
+	 */
 	function __construct() {
 		$this->OptionQuote("'");
 		$this->OptionEscapeQuoteWith("'");
-		$this->OptionDateTimeFormat("Y-d-m H:i:s");
+		if( preg_match( '!win!is', PHP_OS ) ) {
+			$this->OptionDateTimeFormat("Y-d-m H:i:s");
+		} else {
+			$this->OptionDateTimeFormat("Y-m-d H:i:s");
+		}
 	}
 }

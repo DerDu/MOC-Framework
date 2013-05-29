@@ -207,7 +207,7 @@ class Property implements Core {
 	 * @return string
 	 */
 	protected function UpdateSyntax( $Path ) {
-		return trim( preg_replace( '![\\\/]+!', DIRECTORY_SEPARATOR, $Path ), '\\/' );
+		return rtrim( preg_replace( '![\\\/]+!', DIRECTORY_SEPARATOR, $Path ), '\\/' );
 	}
 
 }

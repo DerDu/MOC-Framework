@@ -1,6 +1,3 @@
-# MOC-Framework
-===============
-
 ### Modular - Object - Chaining
 The easy way to OOP
 
@@ -13,7 +10,7 @@ The easy way to OOP
 	```php
 	require('MOC.php');
 	```
-2. Start your Engine
+2. Start your engine
 
 	```php
 	use MOC\Api;
@@ -70,11 +67,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	- Init the library
 	- Provide adapter access
 
-	And MOC said: "Let there be ligh... ähm.. ```Api::``` !"
+	And MOC said: "Let there be ligh... err.. ```Api::``` !"
 
-2. ##### Adapter
-	Your window into a better world
-	- Starting point of the chain
+2. ##### Adapter (Prayer)
+	Your Way to a Better Life
+	- The starting point of the chain
 	- Provide Core/Extension/Module/Plugin access
 
 	... and MOC devided the ```::Core()``` from the ```::Module()``` ... and it was good
@@ -114,35 +111,40 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #### apigen
 Used to create the MOC-Documentation
+- Project: <http://apigen.org>
 - License: BSD
-- Project: http://apigen.org
 
 #### YUICompressor
 Add Packer:Script/Style capability
+- Project: <http://yui.github.com/yuicompressor>
 - License: BSD
-- Project: http://yui.github.com/yuicompressor
 
 #### PHPExcel
 Add Office:Document:Excel capability
+- Project: <http://phpexcel.codeplex.com>
 - License: LGPL
-- Project: http://phpexcel.codeplex.com
 
 #### PHPWord
 Add Office:Document:Word capability
+- Project: <http://phpword.codeplex.com>
 - License: LGPL
-- Project: http://phpword.codeplex.com
 
 #### tFPDF
 Add Office:Document:PDF capability
+- Project: <http://fpdf.org/fr/script/script92.php>
 - License: LGPL
-- Project: http://fpdf.org/fr/script/script92.php
 
 #### PHPMailer
 Add Office:Mail:Smtp capability
+- Project: <http://sourceforge.net/projects/phpmailer>
 - License: LGPL
-- Project: http://sourceforge.net/projects/phpmailer
 
 #### PclZip
 Add Packer:Zip capability
+- Project: <http://www.phpconcept.net>
 - License: LGPL
-- Project: http://www.phpconcept.net
+
+#### Flot
+Add Office:Chart capability
+- Project: <http://www.flotcharts.org>
+- Licence: Copyright (see Project)

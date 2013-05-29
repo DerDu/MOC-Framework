@@ -43,15 +43,26 @@ use MOC\Module\Database\Driver;
  */
 class Mysql extends Driver {
 
+	/**
+	 *
+	 */
 	function __construct() {
 		$this->OptionQuote("'");
 		$this->OptionEscapeQuoteWith("\\");
 		$this->OptionDateTimeFormat("Y-d-m H:i:s");
 	}
 
+	/**
+	 * @param string $DSN
+	 * @param string $User
+	 * @param string $Password
+	 * @param null|string $Database
+	 *
+	 * @return bool
+	 */
 	public function Open( $DSN, $User, $Password, $Database = null ){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false == ( $Resource = @mysql_connect( $DSN, $User, $Password ) ) ) {
+		if( false == ( $Resource = mysql_connect( $DSN, $User, $Password ) ) ) {
 			if( strlen( $Error = mysql_error() ) ) { $this->DebugError( mysql_error().' '.$Error ); }
 			return false;
 		} else {
@@ -60,12 +71,17 @@ class Mysql extends Driver {
 		}
 	}
 
+	/**
+	 * @param int $FETCH_AS
+	 *
+	 * @return array|bool
+	 */
 	public function Execute( $FETCH_AS = self::RESULT_AS_ARRAY_ASSOC ) {
 		if( !$this->GetResource() ) {
 			return false;
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false === ( $Result = @mysql_query( $this->GetQuery(), $this->GetResource() ) ) ) {
+		if( false === ( $Result = mysql_query( $this->GetQuery(), $this->GetResource() ) ) ) {
 			if( strlen( $Error = mysql_error() ) ) { $this->DebugError( mysql_error().' '.$Error."\n\n".$this->GetQuery() ); }
 			return false;
 		}
@@ -79,36 +95,53 @@ class Mysql extends Driver {
 		}
 	}
 
+	/**
+	 * @param resource $Result
+	 *
+	 * @return array
+	 */
 	protected function FetchAsArray( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = @mysql_num_rows( $Result );
-		while( false !== ( $Row = @mysql_fetch_array( $Result ) ) ) {
+		$RowCount = mysql_num_rows( $Result );
+		while( false !== ( $Row = mysql_fetch_array( $Result ) ) ) {
 			array_push( $Return, array_values( $Row ) );
 		}
-		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = @mysql_num_rows( $Result ) : $RowCount ) );
+		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = mysql_num_rows( $Result ) : $RowCount ) );
 		$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
-		@mysql_free_result( $Result );
+		mysql_free_result( $Result );
 		return $Return;
 	}
+
+	/**
+	 * @param resource $Result
+	 *
+	 * @return array
+	 */
 	protected function FetchAsArrayAssoc( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = @mysql_num_rows( $Result );
-		while( false !== ( $Row = @mysql_fetch_array( $Result ) ) ) {
+		$RowCount = mysql_num_rows( $Result );
+		while( false !== ( $Row = mysql_fetch_array( $Result ) ) ) {
 			array_push( $Return, $Row );
 		}
-		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = @mysql_num_rows( $Result ) : $RowCount ) );
-		@mysql_free_result( $Result );
+		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = mysql_num_rows( $Result ) : $RowCount ) );
+		mysql_free_result( $Result );
 		return $Return;
 	}
 
+	/**
+	 * @return bool|void
+	 */
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		@mysql_close( $this->GetResource() );
+		mysql_close( $this->GetResource() );
 		$this->SetResource(null);
 	}
 
+	/**
+	 *
+	 */
 	public function TransactionStart() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 	}
@@ -117,6 +150,9 @@ class Mysql extends Driver {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 	}
 
+	/**
+	 *
+	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 	}

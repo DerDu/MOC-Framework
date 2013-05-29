@@ -36,9 +36,11 @@
  * 18.02.2012 15:02
  */
 namespace MOC\Generic\Device;
+use MOC\Generic\Common;
+
 /**
  *
  */
-interface Plugin extends \MOC\Generic\Common {
+interface Plugin extends Common {
 
 }

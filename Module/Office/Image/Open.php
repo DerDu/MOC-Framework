@@ -37,10 +37,13 @@
  */
 namespace MOC\Module\Office\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Open implements \MOC\Generic\Device\Module {
+class Open implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -90,11 +93,11 @@ class Open implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return \MOC\Module\Office\Image
 	 */
-	public function File( \MOC\Module\Drive\File $File ){
+	public function File( File $File ){
 		if( $File->Exists() ) {
 			$Factory = $this->GetLoadFactory( $File );
 			$Resource = $Factory( $File->GetLocation() );
@@ -104,20 +107,20 @@ class Open implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return mixed
 	 */
-	private function GetTypeFactory( \MOC\Module\Drive\File $File ) {
+	private function GetTypeFactory( File $File ) {
 		return str_replace( 'jpg', 'jpeg', strtolower( $File->GetExtension() ) );
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return string
 	 */
-	private function GetLoadFactory( \MOC\Module\Drive\File $File ) {
+	private function GetLoadFactory( File $File ) {
 		return 'imagecreatefrom'.$this->GetTypeFactory( $File );
 	}
 }

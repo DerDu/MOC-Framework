@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2012, Gerd Christian Kunze
+ * Copyright (c) 2013, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,25 +32,26 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Text
- * 14.09.2012 08:30
+ * Table
+ * 25.03.2013 11:15
  */
-namespace MOC\Module\Office\Document\Pdf;#
+namespace MOC\Module\Office\Document\Pdf;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Text1 implements Module {
+class Table implements Module {
 	/**
-	 * Get Singleton/Instance
+	 * Get Changelog
 	 *
 	 * @static
-	 * @return Text
+	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public static function InterfaceInstance() {
-		return new Text();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -58,77 +59,27 @@ class Text1 implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * Get Changelog
+	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Core\Changelog
+	 * @return Image
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
-	}
-
-	/** @var null|Font $Font */
-	private $Font = null;
-
-	private $Align = 'L';
-
-	/**
-	 * @param Font $Font
-	 *
-	 * @return Font|Text|null
-	 */
-	public function Font( Font $Font = null ) {
-		if( null !== $Font ) {
-			$this->Font = $Font;
-			return $this;
-		} return $this->Font;
-	}
-
-	const ALIGN_LEFT = 'L';
-	const ALIGN_RIGHT = 'R';
-	const ALIGN_CENTER = 'C';
-
-	/**
-	 * @param null $Value
-	 *
-	 * @return Text|string
-	 */
-	public function Align( $Value = null ) {
-		if( null !== $Value ) {
-			$this->Align = $Value;
-			return $this;
-		} return $this->Align;
+	public static function InterfaceInstance() {
+		return new Table();
 	}
 
 	/**
-	 * @param null $Content
-	 *
-	 * @return Text
+	 * @return \tfpdfTable
 	 */
-	public function Apply( $Content = null ) {
-		$this->Font->Apply();
-		if( $Content != null ) {
-			Api::Extension()->Pdf()->Current()->Cell(
-				$this->GetWidth( $Content ), 0, $Content
-			);
-
-		}
-		return $this;
-	}
-
-	/**
-	 * @param $Content
-	 *
-	 * @return float
-	 */
-	public function GetWidth( $Content ) {
-		$this->Font->Apply();
-		return Api::Extension()->Pdf()->Current()->GetStringWidth( $Content );
+	public function Plugin() {
+		return new \tfpdfTable( Api::Extension()->Pdf()->Current() );
 	}
 }

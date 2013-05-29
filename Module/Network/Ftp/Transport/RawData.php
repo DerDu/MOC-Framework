@@ -128,7 +128,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return string
-	 */public function RawDataChMod( $Value = null ) {
+	 */
+	public function RawDataChMod( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataChMod = $this->ConvertToOctal( $Value );
 		} return $this->RawDataChMod;
@@ -138,7 +139,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataHardLink( $Value = null ) {
+	 */
+	public function RawDataHardLink( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataHardLink = $Value;
 		} return $this->RawDataHardLink;
@@ -148,7 +150,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataOwner( $Value = null ) {
+	 */
+	public function RawDataOwner( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataOwner = $Value;
 		} return $this->RawDataOwner;
@@ -158,7 +161,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataGroup( $Value = null ) {
+	 */
+	public function RawDataGroup( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataGroup = $Value;
 		} return $this->RawDataGroup;
@@ -168,7 +172,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataSize( $Value = null ) {
+	 */
+	public function RawDataSize( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataSize = $Value;
 		} return $this->RawDataSize;
@@ -178,7 +183,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataMonth( $Value = null ) {
+	 */
+	public function RawDataMonth( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataMonth = $Value;
 		} return $this->RawDataMonth;
@@ -188,7 +194,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataDay( $Value = null ) {
+	 */
+	public function RawDataDay( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataDay = $Value;
 		} return $this->RawDataDay;
@@ -198,7 +205,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataModified( $Value = null ) {
+	 */
+	public function RawDataModified( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataModified = $Value;
 		} return $this->RawDataModified;
@@ -208,7 +216,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataName( $Value = null ) {
+	 */
+	public function RawDataName( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataName = $Value;
 		} return $this->RawDataName;
@@ -218,7 +227,8 @@ class RawData implements Module {
 	 * @param null $Value
 	 *
 	 * @return null|string
-	 */public function RawDataLocation( $Value = null ) {
+	 */
+	public function RawDataLocation( $Value = null ) {
 		if( null !== $Value ) {
 			$this->RawDataLocation = $Value;
 		} return $this->RawDataLocation;

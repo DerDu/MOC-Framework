@@ -36,9 +36,11 @@
  * 30.08.2012 22:14
  */
 namespace MOC\Generic\Device;
+use MOC\Generic\Common;
+
 /**
  *
  */
-interface Core extends \MOC\Generic\Common {
+interface Core extends Common {
 
 }

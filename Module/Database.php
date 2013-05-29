@@ -82,6 +82,11 @@ class Database implements Module {
 	const DRIVER_ODBC_MSSQL = 101;
 	const DRIVER_ODBC_ORACLE = 102;
 
+	/**
+	 * @param int $DRIVER
+	 *
+	 * @return Database
+	 */
 	public function Driver( $DRIVER = self::DRIVER_ODBC_MSSQL ) {
 		switch( $DRIVER ) {
 			case self::DRIVER_MYSQL: {
@@ -100,23 +105,55 @@ class Database implements Module {
 		return $this;
 	}
 
+	/**
+	 * @param      $Host
+	 * @param      $User
+	 * @param      $Password
+	 * @param null $Database
+	 *
+	 * @return Database
+	 */
 	public function Open( $Host, $User, $Password, $Database = null ) {
 		$this->_getResource()->Open( $Host, $User, $Password, $Database );
 		return $this;
 	}
+
+	/**
+	 * @return Database
+	 */
 	public function Close() {
 		$this->_getResource()->Close();
 		$this->_closeResource();
 		return $this;
 	}
+
+	/**
+	 * @param string $SqlTemplate
+	 *
+	 * @return Database
+	 */
 	public function Statement( $SqlTemplate ) {
 		$this->_getResource()->Statement( $SqlTemplate );
 		return $this;
 	}
+
+	/**
+	 * @param mixed $Value
+	 * @param null|string $Key
+	 * @param int $Type
+	 *
+	 * @return Database
+	 */
 	public function Parameter( $Value, $Key = null, $Type = Database\Driver::PARAM_TYPE_NONE ) {
 		$this->_getResource()->Parameter( $Value, $Key, $Type );
 		return $this;
 	}
+
+	/**
+	 * @param int $FETCH_AS
+	 *
+	 * @return mixed
+	 */
 	public function Execute( $FETCH_AS = Database\Driver::RESULT_AS_ARRAY_ASSOC ) {
 		return $this->_getResource()->Execute( $FETCH_AS );
 	}

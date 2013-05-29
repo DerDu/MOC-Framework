@@ -36,11 +36,12 @@
  * 14.02.2013 11:25
  */
 namespace MOC\Extension\Pdf;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -55,6 +56,16 @@ class Instance implements \MOC\Generic\Device\Extension {
 	public static function InterfaceInstance() {
 		require_once( '3rdParty/tFPDF/tfpdf.php' );
 		require_once( '3rdParty/tFPDF/makefont/makefont.php' );
+		// This Addon must be purchased to use http://www.interpid.eu
+		if( file_exists( __DIR__.'/3rdParty/Addons/TFPDFTable/class.tfpdftable.php' ) ) {
+			require_once( __DIR__.'/3rdParty/Addons/TFPDFTable/class.tfpdftable.php' );
+		}
+		// Those are bundled
+		require_once( '3rdParty/Addons/EndAddonChain.php' );
+		require_once( '3rdParty/Addons/JavaScript.php' );
+		require_once( '3rdParty/Addons/AutoPrint.php' );
+		require_once( '3rdParty/Addons/BeginAddonChain.php' );
+
 		if( self::$Singleton === null ) {
 			self::$Singleton = new Instance();
 		} return self::$Singleton;
@@ -92,7 +103,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param $Instance
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Define( $Instance ) {
 		// TODO: Implement Define() method.
@@ -103,7 +114,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param int $Index
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Select( $Index ) {
 		// TODO: Implement Select() method.
@@ -128,7 +139,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 * @return Instance
 	 */
 	public function Create() {
-		$Instance = new \tFPDF( 'P', 'mm', 'A4' );
+		$Instance = new Addon\BeginAddonChain( 'P', 'mm', 'A4' );
 		if( null === $this->Current ) {
 			$this->Current = $Instance;
 			return $this;

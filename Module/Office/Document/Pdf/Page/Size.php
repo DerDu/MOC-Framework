@@ -118,6 +118,20 @@ class Size implements Module {
 	}
 
 	/**
+	 * @return int mm
+	 */
+	public function GetWidth() {
+		return Api::Extension()->Pdf()->Current()->CurPageSize[0];
+	}
+
+	/**
+	 * @return int mm
+	 */
+	public function GetHeight() {
+		return Api::Extension()->Pdf()->Current()->CurPageSize[1];
+	}
+
+	/**
 	 * @return string
 	 */
 	public function Current() {

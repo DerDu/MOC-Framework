@@ -36,11 +36,13 @@
  * 14.02.2013 11:25
  */
 namespace MOC\Extension\Zip;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -89,12 +91,10 @@ class Instance implements \MOC\Generic\Device\Extension {
 	private $InstanceCurrent = null;
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
-	 *
 	 * @return Instance
 	 */
-	public function Create( \MOC\Module\Drive\File $File ) {
-		$Instance = new \PclZip( $File->GetLocation() );
+	public function Create() {
+		$Instance = new \PclZip('');
 		if( null === $this->InstanceCurrent ) {
 			$this->InstanceCurrent = $Instance;
 			return $this;
@@ -123,4 +123,39 @@ class Instance implements \MOC\Generic\Device\Extension {
 		}
 		return $this;
 	}
+
+	/**
+	 * Set external Extension-Instance
+	 *
+	 * Contains:
+	 * - Set new (extern created) 3rdParty Instance to Current
+	 *
+	 * @param $Instance
+	 *
+	 * @return Extension
+	 */
+	public function Define( $Instance ) {
+		// TODO: Implement Define() method.
+	}
+
+	/**
+	 * Select Index as active 3rdParty Instance
+	 *
+	 * @param int $Index
+	 *
+	 * @return Extension
+	 */
+	public function Select( $Index ) {
+		// TODO: Implement Select() method.
+	}
+
+	/**
+	 * Get Index for Select() from Current() 3rdParty Instance
+	 *
+	 * @return int
+	 */
+	public function Index() {
+		// TODO: Implement Index() method.
+	}
+
 }
