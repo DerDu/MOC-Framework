@@ -36,11 +36,13 @@
  * 13.03.2013 09:51
  */
 namespace MOC\Extension\YUICompressor;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -90,7 +92,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * Contains:
 	 * - Do 3rdParty Setup
-	 * - Create new (intern) 3rdParty Instance
+	 * - Create new (internal) 3rdParty Instance
 	 *
 	 * @return Instance
 	 */
