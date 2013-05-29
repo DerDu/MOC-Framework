@@ -146,7 +146,8 @@
 			height: 58px;
 			line-height: 1.2;
 			color: #fff;
-			padding-top: 22px;
+			padding-top: 12px;
+			padding-bottom: 10px;
 			font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
 
 			width: 138px;
@@ -154,9 +155,13 @@
 			display: block;
 			background: transparent url("Images/download-button.png") 0 0 no-repeat;
 			margin-bottom: 20px;
-			font-size: 21px;
+			font-size: 19px;
 		}
 
+		#Sidebar .Button span {
+			display: block;
+			font-size: 14px;
+		}
 		#Sidebar .Button small {
 			display: block;
 			font-size: 14px;
@@ -186,13 +191,21 @@
 		</td>
 		<td id="Sidebar">
 			<a class="Button" href="https://github.com/DerDu/MOC-Framework/zipball/master">
-				<small>Download</small>
-				.zip file
+				<span>Download</span>
+				Stable
+				<small>.zip file</small>
 			</a>
 
-			<a class="Button" href="https://github.com/DerDu/MOC-Framework/tarball/master">
-				<small>Download</small>
-				.tar.gz file
+			<a class="Button" href="https://github.com/DerDu/MOC-Framework/zipball/development">
+				<span>Download</span>
+				Nightly
+				<small>.zip file</small>
+			</a>
+
+			<a class="Button" href="http://derdu.github.io/MOC-Framework/Documentation/api-documentation.zip">
+				<span>Download</span>
+				Documentation
+				<small>.zip file</small>
 			</a>
 
 			<p><a href="https://github.com/DerDu/MOC-Framework">MOC-Framework</a><br/> is maintained by <a href="https://github.com/DerDu">DerDu</a>.</p>
