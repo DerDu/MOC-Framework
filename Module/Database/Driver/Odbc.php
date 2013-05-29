@@ -44,6 +44,8 @@ use MOC\Module\Database\Driver;
 class Odbc extends Driver {
 
 	/**
+	 * Opens a ODBC database connection
+	 * 
 	 * @param string $DSN
 	 * @param string $User
 	 * @param string $Password
@@ -63,6 +65,8 @@ class Odbc extends Driver {
 	}
 
 	/**
+	 * Executes a SQL query
+	 * 
 	 * @param int $FETCH_AS
 	 *
 	 * @return array|bool
@@ -87,6 +91,8 @@ class Odbc extends Driver {
 	}
 
 	/**
+	 * Fetches a query result as an array
+	 * 
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -106,6 +112,8 @@ class Odbc extends Driver {
 	}
 
 	/**
+	 * Fetches a query result as an associative array
+	 * 
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -124,23 +132,43 @@ class Odbc extends Driver {
 		return $Return;
 	}
 
+	/**
+	 * Closes a database connection
+	 * 
+	 * @return void
+	 */
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		odbc_close( $this->GetResource() );
 		$this->SetResource(null);
 	}
-
+		
+	/**
+	 * Starts a Transaction
+	 * 
+	 * @return void
+	 */
 	public function TransactionStart() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		odbc_autocommit( $this->GetResource(), false );
 	}
 
+	/**
+	 * Ends a Transaction with Commit 
+	 * 
+	 * @return void
+	 */
 	public function TransactionCommit() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		odbc_commit( $this->GetResource() );
 		odbc_autocommit( $this->GetResource(), true );
 	}
 
+	/**
+	 * Ends a Transaction with Rollback 
+	 * 
+	 * @return void
+	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		odbc_rollback( $this->GetResource() );

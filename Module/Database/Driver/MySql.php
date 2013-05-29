@@ -53,6 +53,8 @@ class Mysql extends Driver {
 	}
 
 	/**
+	 * Opens a MSSQL database connection
+	 *
 	 * @param string $DSN
 	 * @param string $User
 	 * @param string $Password
@@ -72,6 +74,8 @@ class Mysql extends Driver {
 	}
 
 	/**
+	 * Executes a SQL query
+	 *
 	 * @param int $FETCH_AS
 	 *
 	 * @return array|bool
@@ -96,6 +100,8 @@ class Mysql extends Driver {
 	}
 
 	/**
+	 * Fetches a query result as an array
+	 *
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -114,6 +120,8 @@ class Mysql extends Driver {
 	}
 
 	/**
+	 * Fetches a query result as an associative array
+	 *
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -131,7 +139,7 @@ class Mysql extends Driver {
 	}
 
 	/**
-	 * @return bool|void
+	 * Closes a database connection
 	 */
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
@@ -140,21 +148,27 @@ class Mysql extends Driver {
 	}
 
 	/**
+	 * Starts a Transaction
 	 *
+	 * @todo Implement Transaction
 	 */
 	public function TransactionStart() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 	}
-	
+
 	/**
-	 * @todo implement
+	 * Ends a Transaction with Commit
+	 *
+	 * @todo Implement Commit
 	 */
 	public function TransactionCommit() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 	}
 
 	/**
+	 * Ends a Transaction with Rollback
 	 *
+	 * @todo Implement Rollback
 	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
