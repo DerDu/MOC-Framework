@@ -111,7 +111,7 @@ class Documentation implements Plugin {
 			// Main project name prefix
 			'main' => 'MOC',
 			// Title of generated documentation
-			'title' => 'Modular()->Object()->Chaining()->Framework()',
+			'title' => '',
 			// Documentation base URL
 			//'baseUrl' => '',
 			// Google Custom Search ID

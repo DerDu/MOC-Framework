@@ -4,11 +4,11 @@ source: D:\WebContent\MOC-Framework\Framework
 destination: D:\WebContent\MOC-Framework\Framework\Plugin\Documentation\Content
 extensions:
 	- php
-	
+
 exclude: "*\/Documentation\/Content\/*,*\/.idea\/*,*\/.git\/*,*\/#Trash\/*,*\/Data\/*,*\/Library\/*,*\/3rdParty\/*"
 charset: auto
 main: MOC
-title: "Modular()->Object()->Chaining()->Framework()"
+title: ""
 groups: auto
 allowedHtml:
 	- b
@@ -23,17 +23,17 @@ allowedHtml:
 	- samp
 	- kbd
 	- tt
-	
+
 autocomplete:
 	- classes
 	- constants
 	- functions
-	
+
 accessLevels:
 	- public
 	- protected
 	- private
-	
+
 internal: true
 php: true
 tree: true
