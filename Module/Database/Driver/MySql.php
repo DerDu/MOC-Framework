@@ -53,7 +53,7 @@ class Mysql extends Driver {
 	}
 
 	/**
-	 * Opens a MSSQL database connection
+	 * Opens a MySQL database connection
 	 *
 	 * @param string $DSN
 	 * @param string $User
