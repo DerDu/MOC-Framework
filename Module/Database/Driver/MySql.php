@@ -32,19 +32,19 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Odbc
+ * Mysql
  * 14.01.2013 20:33
  */
 namespace MOC\Module\Database\Driver;
 use MOC\Module\Database\Driver;
 
 /**
- *
+ * Class which provides an interface to a MySQL database 
  */
 class Mysql extends Driver {
 
 	/**
-	 *
+	 * Constructor which sets database system specific options 
 	 */
 	function __construct() {
 		$this->OptionQuote("'");
@@ -53,7 +53,7 @@ class Mysql extends Driver {
 	}
 
 	/**
-	 * Opens a MSSQL database connection
+	 * Opens a MySQL database connection
 	 *
 	 * @param string $DSN
 	 * @param string $User

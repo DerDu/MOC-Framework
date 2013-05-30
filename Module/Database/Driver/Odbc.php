@@ -39,7 +39,7 @@ namespace MOC\Module\Database\Driver;
 use MOC\Module\Database\Driver;
 
 /**
- *
+ * Class which provides a common ODBC interface
  */
 class Odbc extends Driver {
 
@@ -134,8 +134,6 @@ class Odbc extends Driver {
 
 	/**
 	 * Closes a database connection
-	 * 
-	 * @return void
 	 */
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
@@ -145,8 +143,6 @@ class Odbc extends Driver {
 		
 	/**
 	 * Starts a Transaction
-	 * 
-	 * @return void
 	 */
 	public function TransactionStart() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
@@ -155,8 +151,6 @@ class Odbc extends Driver {
 
 	/**
 	 * Ends a Transaction with Commit 
-	 * 
-	 * @return void
 	 */
 	public function TransactionCommit() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
@@ -166,8 +160,6 @@ class Odbc extends Driver {
 
 	/**
 	 * Ends a Transaction with Rollback 
-	 * 
-	 * @return void
 	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );

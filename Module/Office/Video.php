@@ -72,4 +72,62 @@ class Video implements Module{
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
+
+	/**
+	 * @return string
+	 */
+	public function Setup() {
+		return '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
+			__DIR__.'/../../Extension/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
+		)).'"></script>';
+	}
+
+	/** @var Video\Container $Container */
+	private static $Container = null;
+
+	/**
+	 * @return Video\Container
+	 */
+	public function Container() {
+		if( self::$Container === null ) {
+			self::$Container = Video\Container::InterfaceInstance();
+		}
+		return self::$Container;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function Render() {
+
+		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../Extension/FlowPlayer/3rdParty/' );
+		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
+
+		if( null === ( $Video = $this->Container()->_getUrl() ) ) {
+			if( null === ( $Video = $this->Container()->_getFile() ) ) {
+				return false;
+			}
+			$Video = Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle( $Video->GetLocation() ) );
+		}
+
+		$Script = '<a id="'.$this->Container()->_getIdentifier().'" href="'.$Video.'" style="display: block; width: '.$this->Container()->_getWidth().'px; height:'.$this->Container()->_getHeight().'px;"></a>'.
+		'<script type="text/javascript">'.
+			//"jQuery('#".$this->Container()->_getIdentifier()."').css({'display':'block','width':'".$this->Container()->_getWidth()."','height':'".$this->Container()->_getHeight()."'});".
+			"flowplayer( '".$this->Container()->_getIdentifier()."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."' );".
+		'</script>';
+
+		$this->_doReset();
+
+		return $Script;
+	}
+
+	/**
+	 * Reset Static-Properties to Default-Values
+	 *
+	 * @return Video
+	 */
+	public function _doReset() {
+		self::$Container = null;
+		return $this;
+	}
 }

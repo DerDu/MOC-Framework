@@ -97,7 +97,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 * Set external Extension-Instance
 	 *
 	 * Contains:
-	 * - Set new (extern created) 3rdParty Instance to Current
+	 * - Set new (external created) 3rdParty Instance to Current
 	 *
 	 * @param $Instance
 	 *
