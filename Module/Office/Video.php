@@ -77,9 +77,9 @@ class Video implements Module{
 	 * @return string
 	 */
 	public function Setup() {
-		return '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
+		return '<script type="text/javascript" src="'.Api::Module()->Drive()->File()->Open(
 			__DIR__.'/../../Extension/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
-		)).'"></script>';
+		)->GetUrl().'"></script>';
 	}
 
 	/** @var Video\Container $Container */
