@@ -188,7 +188,8 @@ class Proxy implements Core {
 	 * @param $Status
 	 *
 	 * @return null|string
-	 */private function ProxyNone( $Url, $Status ) {
+	 */
+	private function ProxyNone( $Url, $Status ) {
 		$this->Server = Proxy\Server::InterfaceInstance();
 		$this->Server->Host( parse_url( $Url, PHP_URL_HOST ) );
 		if( parse_url( $Url, PHP_URL_PORT ) === null ) {
@@ -235,7 +236,8 @@ class Proxy implements Core {
 	 * @param $Status
 	 *
 	 * @return null|string
-	 */private function ProxyRelay( $Url, $Status ) {
+	 */
+	private function ProxyRelay( $Url, $Status ) {
 		if( ($Socket = fsockopen( $this->Server->Host(), $this->Server->Port(), $this->ErrorNumber, $this->ErrorString, $this->Timeout )) ) {
 			$Content = '';
 			fputs( $Socket, "GET ".$Url." HTTP/1.0\r\nHost: ".$this->Server->Host()."\r\n\r\n");
@@ -269,7 +271,8 @@ class Proxy implements Core {
 	 * @param $Status
 	 *
 	 * @return null|string
-	 */private function ProxyBasic( $Url, $Status ) {
+	 */
+	private function ProxyBasic( $Url, $Status ) {
 		if( ($Socket = fsockopen( $this->Server->Host(), $this->Server->Port(), $this->ErrorNumber, $this->ErrorString, $this->Timeout )) ) {
 			$Content = '';
 			fputs( $Socket, "GET ".$Url." HTTP/1.0\r\nHost: ".$this->Server->Host()."\r\n");
