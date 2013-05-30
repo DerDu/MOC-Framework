@@ -1,6 +1,10 @@
 ### Modular - Object - Chaining
 The easy way to OOP
 
+> Simple, fast, extensible, unified interface to unlimited possibilities.
+>
+> Mind the task - forget the obstacles...
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Usage
@@ -107,7 +111,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Used 3rd Party Applications
-==========================
+
 
 #### apigen
 Used to create the MOC-Documentation
@@ -147,4 +151,4 @@ Add Packer:Zip capability
 #### Flot
 Add Office:Chart capability
 - Project: <http://www.flotcharts.org>
-- Licence: Copyright (see Project)
+- License: Copyright (see Project)

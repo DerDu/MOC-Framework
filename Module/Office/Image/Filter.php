@@ -37,18 +37,20 @@
  */
 namespace MOC\Module\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Filter implements \MOC\Generic\Device\Module {
+class Filter implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Image\Filter
+	 * @return Filter
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Image\Filter();
+		return new Filter();
 	}
 
 	/**
@@ -62,14 +64,16 @@ class Filter implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * Get Version
+	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Version
+	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public static function InterfaceVersion() {
-		return Api::Core()->Version();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog();
 	}
+
 
 	/** @var null|\MOC\Module\Image\Resource $Resource */
 	private $Resource = null;
