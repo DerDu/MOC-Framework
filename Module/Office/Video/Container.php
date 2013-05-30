@@ -32,25 +32,39 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Video
- * 13.02.2013 13:39
+ * Container
+ * 30.05.2013 11:44
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Video;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
 
 /**
  *
  */
-class Video implements Module{
+class Container implements Module {
+
+	/**
+	 * Get Dependencies
+	 *
+	 * @static
+	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceDepending() {
+		return Api::Core()->Depending();
+	}
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Video
+	 * @return Container
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Video();
+		return new Container();
 	}
 
 	/**
@@ -58,76 +72,102 @@ class Video implements Module{
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
+	private $Width = 320;
+	private $Height = 240;
+	private $Identifier = '';
+	/** @var \MOC\Module\Drive\File $File */
+	private $File = null;
+	/** @var string $Url */
+	private $Url = null;
+
 	/**
-	 * Get Dependencies
+	 * @param int $Pixel
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Container
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function Setup() {
-		return '<script type="text/javascript" src="'.Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle(
-			__DIR__.'/../../Extension/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
-		)).'"></script>';
-	}
-
-	/** @var Video\Container $Container */
-	private static $Container = null;
-
-	/**
-	 * @return Video\Container
-	 */
-	public function Container() {
-		if( self::$Container === null ) {
-			self::$Container = Video\Container::InterfaceInstance();
-		}
-		return self::$Container;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function Render() {
-
-		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../Extension/FlowPlayer/3rdParty/' );
-		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
-
-		if( null === ( $Video = $this->Container()->_getUrl() ) ) {
-			if( null === ( $Video = $this->Container()->_getFile() ) ) {
-				return false;
-			}
-			$Video = Api::Core()->Proxy()->Url( Api::Core()->Drive()->File()->Handle( $Video->GetLocation() ) );
-		}
-
-		$Script = '<a id="'.$this->Container()->_getIdentifier().'" href="'.$Video.'" style="display: block; width: '.$this->Container()->_getWidth().'px; height:'.$this->Container()->_getHeight().'px;"></a>'.
-		'<script type="text/javascript">'.
-			//"jQuery('#".$this->Container()->_getIdentifier()."').css({'display':'block','width':'".$this->Container()->_getWidth()."','height':'".$this->Container()->_getHeight()."'});".
-			"flowplayer( '".$this->Container()->_getIdentifier()."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."' );".
-		'</script>';
-
-		$this->_doReset();
-
-		return $Script;
-	}
-
-	/**
-	 * Reset Static-Properties to Default-Values
-	 *
-	 * @return Video
-	 */
-	public function _doReset() {
-		self::$Container = null;
+	public function Width( $Pixel = 320 ) {
+		$this->Width = $Pixel;
 		return $this;
+	}
+
+	/**
+	 * @param int $Pixel
+	 *
+	 * @return Container
+	 */
+	public function Height( $Pixel = 240 ) {
+		$this->Height = $Pixel;
+		return $this;
+	}
+
+	/**
+	 * @param string $Id
+	 *
+	 * @return Container
+	 */
+	public function Identifier( $Id = 'Placeholder' ) {
+		$this->Identifier = $Id;
+		return $this;
+	}
+
+	/**
+	 * @param \MOC\Module\Drive\File $File
+	 *
+	 * @return Container
+	 */
+	public function File( File $File ) {
+		$this->File = $File;
+		return $this;
+	}
+
+	/**
+	 * @param string $Url
+	 *
+	 * @return Container
+	 */
+	public function Url( $Url ) {
+		$this->Url = $Url;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function _getWidth() {
+		return $this->Width;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function _getHeight() {
+		return $this->Height;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function _getIdentifier() {
+		return $this->Identifier;
+	}
+
+	/**
+	 * @return File
+	 */
+	public function _getFile() {
+		return $this->File;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function _getUrl() {
+		return $this->Url;
 	}
 }
