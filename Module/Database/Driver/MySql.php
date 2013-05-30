@@ -39,12 +39,12 @@ namespace MOC\Module\Database\Driver;
 use MOC\Module\Database\Driver;
 
 /**
- *
+ * Class which provides an interface to a MySQL database 
  */
 class Mysql extends Driver {
 
 	/**
-	 *
+	 * Constructor which sets database system specific options 
 	 */
 	function __construct() {
 		$this->OptionQuote("'");

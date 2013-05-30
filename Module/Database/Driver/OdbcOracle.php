@@ -32,15 +32,20 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * OdbcMssql
+ * OdbcOracle
  * 16.01.2013 13:13
  */
 namespace MOC\Module\Database\Driver;
 require_once('Odbc.php');
+
 /**
- *
+ * Class which provides an ODBC interface for an Oracle database system 
  */
 class OdbcOracle extends Odbc {
+	
+	/**
+	 * Constructor which sets database system specific options 
+	 */
 	function __construct() {
 		$this->OptionQuote("'");
 		$this->OptionEscapeQuoteWith("'");
