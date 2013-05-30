@@ -132,16 +132,16 @@ After weeks of research (if i am allowed to do this) i found this way to add in 
 
 Loaded with this argument i can clearly say: So it is!
 
-MOC-Framework is NOT "specifically designed" to work with a "specific" 3PS.
-The 3PS is an interchangeable "Extension" to the MOC-Framework
-
-The functionality of MOC is provided by a "Module" which COULD use a "Extension", but don't have to.
+- MOC-Framework is NOT "specifically designed" to work with a "specific" 3PS.
+- The 3PS is an interchangeable "Extension" to the MOC-Framework
+- The functionality of MOC is provided by a "Module" which COULD use a "Extension", but don't have to.
 
 Example:
 
 > Api::Module()->Office()->Document()->Pdf();
 >
 > This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
+>
 > You are able to exchange this Pdf-Extension with on powered by 3PS from "tcPdf"
 >
 > See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
