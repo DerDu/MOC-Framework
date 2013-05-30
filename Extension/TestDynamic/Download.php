@@ -36,6 +36,7 @@
  * 30.05.2013 20:58
  */
 namespace MOC\Extension\TestDynamic;
+use MOC\Api;
 /**
  *
  */
@@ -135,8 +136,23 @@ class Download implements \MOC\Generic\Device\Extension {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		$N = new \MOC\Module\Network();
-		var_dump( $N->Http()->Get()->Request( '' ) );
+		$DownloadLocation = Api::Module()->Network()->Http()->Get()->Request( 'http://flash.flowplayer.org/download/' );
+		preg_match('!releases\.flowplayer\.org/flowplayer/([^"]*?.zip)!is',$DownloadLocation,$Match);
+		$DownloadResource = Api::Module()->Network()->Http()->Get()->Request( $Match[0] );
+		$ArchiveResource = Api::Module()->Drive()->File()->Open(
+			Api::Core()->Cache()->Identifier( $DownloadResource )->Set('')->Location()
+		)->Write( $DownloadResource );
+		$ArchiveContent = Api::Module()->Packer()->Zip()->Decoder()->Open( $ArchiveResource );
+		foreach( $ArchiveContent as $System ) {
+			if( $System instanceof \MOC\Module\Drive\File ) {
+				$Path = str_replace( Api::Core()->Cache()->Directory()->Location().DIRECTORY_SEPARATOR, '', $System->GetLocation() );
+				$Path = substr( $Path, strpos( $Path, DIRECTORY_SEPARATOR ) +1 );
+				$Path = str_replace( 'flowplayer'.DIRECTORY_SEPARATOR, '', $Path );
+				$Path = __DIR__.DIRECTORY_SEPARATOR.'3rdParty'.DIRECTORY_SEPARATOR.$Path;
+				Api::Module()->Drive()->Directory()->Open( dirname( $Path ) );
+				$System->CopyTo( $Path );
+			}
+		}
 	}
 
 }
