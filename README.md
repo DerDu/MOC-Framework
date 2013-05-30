@@ -149,12 +149,10 @@ So there are three parts:
 
 MOC-Framework (BSD)
 - Provides an seamless API to the developer
-
 Module (BSD)
 - Provides the functionality to the API
 	- Case 1: it contains the code itself
 	- Case 2: it uses an Extension
-
 Extension (BSD)
 - Loads and initializes the 3PS
 - Provides the 3PS functionality to the Module
