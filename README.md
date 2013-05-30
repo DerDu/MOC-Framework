@@ -110,7 +110,63 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Used 3rd Party Applications
+### Linking 3rd party software to the MOC-Framework
+
+Note:
+- The term "3rd party software" will be substituted by "3PS" in the following section
+
+To respect (most of) the licenses the 3PS author/owner may have chosen, this is achieved
+by using it with a kind of "plugin" architecture. This is (unfortunately) necessary because of the (e.g.) GPLv3 license.
+
+After weeks of research (if i am allowed to do this) i found this way to add in GPLv3 3PS and still let the MOC-Framework be under BSD as a whole.
+
+> GPLv3 adds more clarity with regard to what constitutes a derivative work. For example, GPLv3 states that if the program
+> is "specifically designed" to work with a GPL-governed library, then the library is considered part of the overall work
+> and the entire application is governed by the GPL.
+>
+> However, if one could swap out the GPL library for another library (i.e., if the application wasn't
+> "specifically designed" to work with the GPL library), then it's not part of the overall work and
+> would not be governed by the license.
+>
+> Source: <http://www.ibm.com/developerworks/rational/library/edge/08/mar08/curran/>
+
+Loaded with this argument i can clearly say: So it is!
+
+MOC-Framework is NOT "specifically designed" to work with a "specific" 3PS.
+The 3PS is an interchangeable "Extension" to the MOC-Framework
+
+The functionality of MOC is provided by a "Module" which COULD use a "Extension", but don't have to.
+
+Example:
+
+> Api::Module()->Office()->Document()->Pdf();
+>
+> This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
+> You are able to exchange this Pdf-Extension with on powered by 3PS from "tcPdf"
+>
+> See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
+
+
+So there are three parts:
+
+MOC-Framework (BSD)
+- Provides an seamless API to the developer
+
+Module (BSD)
+- Provides the functionality to the API
+	- Case 1: it contains the code itself
+	- Case 2: it uses an Extension
+
+Extension (BSD)
+- Loads and initializes the 3PS
+- Provides the 3PS functionality to the Module
+- Contains (File-System):
+	- Folder: "3rdParty" (<3PS-License>)
+		- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
+	- File: "Instance.php"
+		- A minimal interface (BSD) to load/boot/close the 3PS
+
+### Used 3rd party software
 
 
 #### apigen
@@ -152,3 +208,8 @@ Add Packer:Zip capability
 Add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
+
+#### FlowPlayer
+Add Office:Video capability
+- Project: <http://flash.flowplayer.org>
+- License: GPLv3
