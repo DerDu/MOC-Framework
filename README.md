@@ -159,7 +159,7 @@ Extension (BSD)
 - Loads and initializes the 3PS
 - Provides the 3PS functionality to the Module
 - Contains (File-System):
-	- Folder: "3rdParty" (<3PS-License>)
+	- Folder: "3rdParty" (>3PS-License<)
 		- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
 	- File: "Instance.php"
 		- A minimal interface (BSD) to load/boot/close the 3PS
