@@ -138,13 +138,11 @@ Loaded with this argument i can clearly say: So it is!
 
 Example:
 
-> Api::Module()->Office()->Document()->Pdf();
->
-> This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
->
-> You are able to exchange this Pdf-Extension with on powered by 3PS from "tcPdf"
->
-> See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
+`Api::Module()->Office()->Document()->Pdf();`
+
+- This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
+- You are able to exchange this Pdf-Extension with one powered by 3PS from "tcPdf"
+- See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
 
 
 So there are three parts:
