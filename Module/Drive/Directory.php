@@ -106,6 +106,31 @@ class Directory implements Module {
 	}
 
 	/**
+	 * @param Directory $Directory
+	 *
+	 * @return string
+	 */
+	public function GetLocationRelative( Directory $Directory ) {
+		$Current = explode( DIRECTORY_SEPARATOR, $this->GetLocation() );
+		$Base = explode( DIRECTORY_SEPARATOR, $Directory->GetLocation() );
+		$Size = min( count( $Current ), count( $Base ) );
+
+		for( $Run = 0; $Run < $Size; $Run++ ) {
+			if( empty( $Current[$Run] ) || empty( $Base[$Run] ) ) {
+				continue;
+			}
+			if( $Current[$Run] == $Base[$Run]  ) {
+				$Current[$Run] = false;
+			} else {
+				$Current = array_filter( $Current );
+				array_unshift( $Current, '..' );
+			}
+		}
+
+		return implode( '/', $Current );
+	}
+
+	/**
 	 * @return null|string
 	 */
 	public function GetPath() {
