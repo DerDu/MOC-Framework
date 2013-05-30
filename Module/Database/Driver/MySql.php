@@ -32,14 +32,14 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Odbc
+ * MySQL
  * 14.01.2013 20:33
  */
 namespace MOC\Module\Database\Driver;
 use MOC\Module\Database\Driver;
 
 /**
- *
+ * 
  */
 class Mysql extends Driver {
 
