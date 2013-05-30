@@ -6,9 +6,9 @@
 
 	<title>Class MOC\Module\Database\Driver\Mysql</title>
 
-	<script type="text/javascript" src="resources/combined.js?2838390158"></script>
-	<script type="text/javascript" src="elementlist.js?3482913364"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<script type="text/javascript" src="resources/combined.js?3300334335"></script>
+	<script type="text/javascript" src="elementlist.js?438870645"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4203613748" />
 
 </head>
 
@@ -61,6 +61,8 @@
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.FlowPlayer.html">FlowPlayer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
@@ -170,7 +172,10 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Content.html">Content</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Office.Video.html">Video</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
@@ -253,6 +258,11 @@
 	<h1>Class Mysql</h1>
 
 
+	<div class="description">
+	
+<p>Class which provides an interface to a MySQL database</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -296,7 +306,7 @@
 		<b>Namespace:</b> <a href="namespace-MOC.html">MOC</a>\<a href="namespace-MOC.Module.html">Module</a>\<a href="namespace-MOC.Module.Database.html">Database</a>\<a href="namespace-MOC.Module.Database.Driver.html">Driver</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-MOC.Module.Database.Driver.Mysql.html#41-162" title="Go to source code">Module/Database/Driver/MySql.php</a><br />
+		<b>Located at</b> <a href="source-class-MOC.Module.Database.Driver.Mysql.html#41-176" title="Go to source code">Module/Database/Driver/MySql.php</a><br />
 	</div>
 
 
@@ -318,10 +328,14 @@
 
 		<div class="description short">
 			
+<p>Constructor which sets database system specific options</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Constructor which sets database system specific options</p>
+
 
 
 
@@ -343,14 +357,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Open">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#55-72" title="Go to source code">Open</a>( <span>string <var>$DSN</var></span>, <span>string <var>$User</var></span>, <span>string <var>$Password</var></span>, <span>null|string <var>$Database</var> = <span class="php-keyword1">null</span> </span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#55-74" title="Go to source code">Open</a>( <span>string <var>$DSN</var></span>, <span>string <var>$User</var></span>, <span>string <var>$Password</var></span>, <span>null|string <var>$Database</var> = <span class="php-keyword1">null</span> </span> )</code>
 
 		<div class="description short">
 			
+<p>Opens a MySQL database connection</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Opens a MySQL database connection</p>
+
 
 
 				<h4>Parameters</h4>
@@ -387,14 +405,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Execute">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#74-96" title="Go to source code">Execute</a>( <span>integer <var>$FETCH_AS</var> = self::RESULT_AS_ARRAY_ASSOC </span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#76-100" title="Go to source code">Execute</a>( <span>integer <var>$FETCH_AS</var> = self::RESULT_AS_ARRAY_ASSOC </span> )</code>
 
 		<div class="description short">
 			
+<p>Executes a SQL query</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Executes a SQL query</p>
+
 
 
 				<h4>Parameters</h4>
@@ -425,14 +447,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_FetchAsArray">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#98-114" title="Go to source code">FetchAsArray</a>( <span>resource <var>$Result</var></span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#102-120" title="Go to source code">FetchAsArray</a>( <span>resource <var>$Result</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Fetches a query result as an array</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Fetches a query result as an array</p>
+
 
 
 				<h4>Parameters</h4>
@@ -463,14 +489,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_FetchAsArrayAssoc">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#116-131" title="Go to source code">FetchAsArrayAssoc</a>( <span>resource <var>$Result</var></span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#122-139" title="Go to source code">FetchAsArrayAssoc</a>( <span>resource <var>$Result</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Fetches a query result as an associative array</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Fetches a query result as an associative array</p>
+
 
 
 				<h4>Parameters</h4>
@@ -494,27 +524,31 @@
 
 		<td class="attributes"><code>
 			 public 
-			boolean|
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Close">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#133-140" title="Go to source code">Close</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#141-148" title="Go to source code">Close</a>( )</code>
 
 		<div class="description short">
 			
+<p>Closes a database connection</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Closes a database connection</p>
+
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean|</code><br />
+					<code>boolean</code><br />
 				</div>
 
 
@@ -534,19 +568,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionStart">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#142-147" title="Go to source code">TransactionStart</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#150-157" title="Go to source code">TransactionStart</a>( )</code>
 
 		<div class="description short">
 			
+<p>Starts a Transaction</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Starts a Transaction</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement Transaction<br />
+				</div>
 
 
 		</div>
@@ -563,14 +605,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionCommit">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#149-154" title="Go to source code">TransactionCommit</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#159-166" title="Go to source code">TransactionCommit</a>( )</code>
 
 		<div class="description short">
 			
+<p>Ends a Transaction with Commit</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Ends a Transaction with Commit</p>
+
 
 
 
@@ -578,7 +624,7 @@
 
 				<h4>Todo</h4>
 				<div class="list">
-						implement<br />
+						Implement Commit<br />
 				</div>
 
 
@@ -596,19 +642,27 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionRollback">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#156-161" title="Go to source code">TransactionRollback</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Mysql.html#168-175" title="Go to source code">TransactionRollback</a>( )</code>
 
 		<div class="description short">
 			
+<p>Ends a Transaction with Rollback</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Ends a Transaction with Rollback</p>
 
 
 
 
 
+
+				<h4>Todo</h4>
+				<div class="list">
+						Implement Rollback<br />
+				</div>
 
 
 		</div>

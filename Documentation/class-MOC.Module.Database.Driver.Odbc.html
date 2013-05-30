@@ -6,9 +6,9 @@
 
 	<title>Class MOC\Module\Database\Driver\Odbc</title>
 
-	<script type="text/javascript" src="resources/combined.js?2838390158"></script>
-	<script type="text/javascript" src="elementlist.js?3482913364"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<script type="text/javascript" src="resources/combined.js?3300334335"></script>
+	<script type="text/javascript" src="elementlist.js?438870645"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4203613748" />
 
 </head>
 
@@ -61,6 +61,8 @@
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.FlowPlayer.html">FlowPlayer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
@@ -170,7 +172,10 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Content.html">Content</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Office.Video.html">Video</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
@@ -253,6 +258,11 @@
 	<h1>Class Odbc</h1>
 
 
+	<div class="description">
+	
+<p>Class which provides a common ODBC interface</p>
+
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -301,7 +311,7 @@
 		<b>Namespace:</b> <a href="namespace-MOC.html">MOC</a>\<a href="namespace-MOC.Module.html">Module</a>\<a href="namespace-MOC.Module.Database.html">Database</a>\<a href="namespace-MOC.Module.Database.Driver.html">Driver</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-MOC.Module.Database.Driver.Odbc.html#41-149" title="Go to source code">Module/Database/Driver/Odbc.php</a><br />
+		<b>Located at</b> <a href="source-class-MOC.Module.Database.Driver.Odbc.html#41-169" title="Go to source code">Module/Database/Driver/Odbc.php</a><br />
 	</div>
 
 
@@ -319,14 +329,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Open">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#46-63" title="Go to source code">Open</a>( <span>string <var>$DSN</var></span>, <span>string <var>$User</var></span>, <span>string <var>$Password</var></span>, <span>null|string <var>$Database</var> = <span class="php-keyword1">null</span> </span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#46-65" title="Go to source code">Open</a>( <span>string <var>$DSN</var></span>, <span>string <var>$User</var></span>, <span>string <var>$Password</var></span>, <span>null|string <var>$Database</var> = <span class="php-keyword1">null</span> </span> )</code>
 
 		<div class="description short">
 			
+<p>Opens a ODBC database connection</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Opens a ODBC database connection</p>
+
 
 
 				<h4>Parameters</h4>
@@ -363,14 +377,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Execute">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#65-87" title="Go to source code">Execute</a>( <span>integer <var>$FETCH_AS</var> = self::RESULT_AS_ARRAY_ASSOC </span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#67-91" title="Go to source code">Execute</a>( <span>integer <var>$FETCH_AS</var> = self::RESULT_AS_ARRAY_ASSOC </span> )</code>
 
 		<div class="description short">
 			
+<p>Executes a SQL query</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Executes a SQL query</p>
+
 
 
 				<h4>Parameters</h4>
@@ -401,14 +419,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_FetchAsArray">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#89-106" title="Go to source code">FetchAsArray</a>( <span>resource <var>$Result</var></span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#93-112" title="Go to source code">FetchAsArray</a>( <span>resource <var>$Result</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Fetches a query result as an array</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Fetches a query result as an array</p>
+
 
 
 				<h4>Parameters</h4>
@@ -439,14 +461,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_FetchAsArrayAssoc">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#108-125" title="Go to source code">FetchAsArrayAssoc</a>( <span>resource <var>$Result</var></span> )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#114-133" title="Go to source code">FetchAsArrayAssoc</a>( <span>resource <var>$Result</var></span> )</code>
 
 		<div class="description short">
 			
+<p>Fetches a query result as an associative array</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Fetches a query result as an associative array</p>
+
 
 
 				<h4>Parameters</h4>
@@ -477,14 +503,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_Close">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#127-131" title="Go to source code">Close</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#135-142" title="Go to source code">Close</a>( )</code>
 
 		<div class="description short">
 			
+<p>Closes a database connection</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Closes a database connection</p>
+
 
 
 
@@ -510,14 +540,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionStart">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#133-136" title="Go to source code">TransactionStart</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#144-150" title="Go to source code">TransactionStart</a>( )</code>
 
 		<div class="description short">
 			
+<p>Starts a Transaction</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Starts a Transaction</p>
+
 
 
 
@@ -539,14 +573,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionCommit">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#138-142" title="Go to source code">TransactionCommit</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#152-159" title="Go to source code">TransactionCommit</a>( )</code>
 
 		<div class="description short">
 			
+<p>Ends a Transaction with Commit</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Ends a Transaction with Commit</p>
+
 
 
 
@@ -568,14 +606,18 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_TransactionRollback">#</a>
-		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#144-148" title="Go to source code">TransactionRollback</a>( )</code>
+		<code><a href="source-class-MOC.Module.Database.Driver.Odbc.html#161-168" title="Go to source code">TransactionRollback</a>( )</code>
 
 		<div class="description short">
 			
+<p>Ends a Transaction with Rollback</p>
+
 		</div>
 
 		<div class="description detailed hidden">
 			
+<p>Ends a Transaction with Rollback</p>
+
 
 
 

@@ -7,9 +7,9 @@
 
 	<title>File Module/Database/Driver/OdbcMssql.php</title>
 
-	<script type="text/javascript" src="resources/combined.js?2838390158"></script>
-	<script type="text/javascript" src="elementlist.js?3482913364"></script>
-	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+	<script type="text/javascript" src="resources/combined.js?3300334335"></script>
+	<script type="text/javascript" src="elementlist.js?438870645"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4203613748" />
 
 </head>
 
@@ -62,6 +62,8 @@
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Extension.FlowPlayer.html">FlowPlayer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
@@ -171,7 +173,10 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Content.html">Content</a>
 						</li>
-							</ul></li></ul></li>
+							</ul></li>
+				<li class="main"><a href="namespace-MOC.Module.Office.Video.html">Video</a>
+						</li>
+							</ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
@@ -290,25 +295,26 @@
 </span></span><span id="37" class="l"><a class="l" href="#37">37: </a><span class="php-comment"> */</span>
 </span><span id="38" class="l"><a class="l" href="#38">38: </a><span class="php-keyword1">namespace</span> MOC\Module\Database\Driver;
 </span><span id="39" class="l"><a class="l" href="#39">39: </a><span class="php-keyword1">require_once</span>(<span class="php-quote">'Odbc.php'</span>);
-</span><span id="40" class="l"><a class="l" href="#40">40: </a><span class="php-comment">/**
-</span></span><span id="41" class="l"><a class="l" href="#41">41: </a><span class="php-comment"> *
-</span></span><span id="42" class="l"><a class="l" href="#42">42: </a><span class="php-comment"> */</span>
-</span><span id="43" class="l"><a class="l" href="#43">43: </a><span class="php-keyword1">class</span> <a id="OdbcMssql" href="#OdbcMssql">OdbcMssql</a> <span class="php-keyword1">extends</span> Odbc {
-</span><span id="44" class="l"><a class="l" href="#44">44: </a>
-</span><span id="45" class="l"><a class="l" href="#45">45: </a>    <span class="php-comment">/**
-</span></span><span id="46" class="l"><a class="l" href="#46">46: </a><span class="php-comment">     *
-</span></span><span id="47" class="l"><a class="l" href="#47">47: </a><span class="php-comment">     */</span>
-</span><span id="48" class="l"><a class="l" href="#48">48: </a>    <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>() {
-</span><span id="49" class="l"><a class="l" href="#49">49: </a>        <span class="php-var">$this</span>-&gt;OptionQuote(<span class="php-quote">&quot;'&quot;</span>);
-</span><span id="50" class="l"><a class="l" href="#50">50: </a>        <span class="php-var">$this</span>-&gt;OptionEscapeQuoteWith(<span class="php-quote">&quot;'&quot;</span>);
-</span><span id="51" class="l"><a class="l" href="#51">51: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">preg_match</span>( <span class="php-quote">'!win!is'</span>, PHP_OS ) ) {
-</span><span id="52" class="l"><a class="l" href="#52">52: </a>            <span class="php-var">$this</span>-&gt;OptionDateTimeFormat(<span class="php-quote">&quot;Y-d-m H:i:s&quot;</span>);
-</span><span id="53" class="l"><a class="l" href="#53">53: </a>        } <span class="php-keyword1">else</span> {
-</span><span id="54" class="l"><a class="l" href="#54">54: </a>            <span class="php-var">$this</span>-&gt;OptionDateTimeFormat(<span class="php-quote">&quot;Y-m-d H:i:s&quot;</span>);
-</span><span id="55" class="l"><a class="l" href="#55">55: </a>        }
-</span><span id="56" class="l"><a class="l" href="#56">56: </a>    }
-</span><span id="57" class="l"><a class="l" href="#57">57: </a>}
-</span><span id="58" class="l"><a class="l" href="#58">58: </a></span></code></pre>
+</span><span id="40" class="l"><a class="l" href="#40">40: </a>
+</span><span id="41" class="l"><a class="l" href="#41">41: </a><span class="php-comment">/**
+</span></span><span id="42" class="l"><a class="l" href="#42">42: </a><span class="php-comment"> * Class which provides an ODBC interface for a MSSQL database system 
+</span></span><span id="43" class="l"><a class="l" href="#43">43: </a><span class="php-comment"> */</span>
+</span><span id="44" class="l"><a class="l" href="#44">44: </a><span class="php-keyword1">class</span> <a id="OdbcMssql" href="#OdbcMssql">OdbcMssql</a> <span class="php-keyword1">extends</span> Odbc {
+</span><span id="45" class="l"><a class="l" href="#45">45: </a>
+</span><span id="46" class="l"><a class="l" href="#46">46: </a>    <span class="php-comment">/**
+</span></span><span id="47" class="l"><a class="l" href="#47">47: </a><span class="php-comment">     * Constructor which sets database system specific options 
+</span></span><span id="48" class="l"><a class="l" href="#48">48: </a><span class="php-comment">     */</span>
+</span><span id="49" class="l"><a class="l" href="#49">49: </a>    <span class="php-keyword1">function</span> <a id="___construct" href="#___construct">__construct</a>() {
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>        <span class="php-var">$this</span>-&gt;OptionQuote(<span class="php-quote">&quot;'&quot;</span>);
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>        <span class="php-var">$this</span>-&gt;OptionEscapeQuoteWith(<span class="php-quote">&quot;'&quot;</span>);
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>        <span class="php-keyword1">if</span>( <span class="php-keyword2">preg_match</span>( <span class="php-quote">'!win!is'</span>, PHP_OS ) ) {
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>            <span class="php-var">$this</span>-&gt;OptionDateTimeFormat(<span class="php-quote">&quot;Y-d-m H:i:s&quot;</span>);
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>        } <span class="php-keyword1">else</span> {
+</span><span id="55" class="l"><a class="l" href="#55">55: </a>            <span class="php-var">$this</span>-&gt;OptionDateTimeFormat(<span class="php-quote">&quot;Y-m-d H:i:s&quot;</span>);
+</span><span id="56" class="l"><a class="l" href="#56">56: </a>        }
+</span><span id="57" class="l"><a class="l" href="#57">57: </a>    }
+</span><span id="58" class="l"><a class="l" href="#58">58: </a>}
+</span><span id="59" class="l"><a class="l" href="#59">59: </a></span></code></pre>
 
 	<div id="footer">
 		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
