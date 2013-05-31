@@ -82,6 +82,6 @@ class Get implements Module {
 
 
 	public function Request( $Url ) {
-		return Api::Core()->Proxy()->GetContent( $Url );
+		return Api::Core()->Proxy()->GetFile( $Url );
 	}
 }

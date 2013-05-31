@@ -99,6 +99,7 @@ class Video implements Module{
 	 * @return string
 	 */
 	public function Render() {
+		Api::Extension()->FlowPlayer()->Create();
 
 		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../Extension/FlowPlayer/3rdParty/' );
 		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
