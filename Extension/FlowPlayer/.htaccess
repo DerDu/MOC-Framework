@@ -1,0 +1,3 @@
+<FilesMatch "\.(js|swf|css)$">
+	Allow from All
+</FilesMatch>

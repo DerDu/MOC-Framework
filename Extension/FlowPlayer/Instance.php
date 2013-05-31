@@ -36,13 +36,14 @@
  * 30.05.2013 13:32
  */
 namespace MOC\Extension\FlowPlayer;
-use \MOC\Api;
+use MOC\Api;
 use MOC\Generic\Device\Extension;
+use MOC\Generic\Device\Extension\Download;
 
 /**
  *
  */
-class Instance implements Extension {
+class Instance extends Download implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -92,7 +93,11 @@ class Instance implements Extension {
 	 * @return \MOC\Generic\Device\Extension
 	 */
 	public function Create() {
-		// TODO: Implement Create() method.
+		$Path = __DIR__.DIRECTORY_SEPARATOR.'3rdParty';
+		if( Api::Core()->Drive()->Directory()->Handle( $Path )->IsEmpty() ) {
+			$this->Download( 'http://flash.flowplayer.org/download/', '!http://releases\.flowplayer\.org/flowplayer/[^"]*?.zip!is', $Path );
+		}
+		return $this;
 	}
 
 	/**
