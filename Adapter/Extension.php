@@ -154,4 +154,12 @@ class Extension implements Adapter {
 		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 		return \MOC\Extension\YUICompressor\Instance::InterfaceInstance();
 	}
+
+	/**
+	 * @return \MOC\Extension\FlowPlayer\Instance
+	 */
+	public function FlowPlayer() {
+		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
+		return \MOC\Extension\FlowPlayer\Instance::InterfaceInstance();
+	}
 }
