@@ -37,7 +37,6 @@
  */
 namespace MOC\Generic\Device\Extension;
 use MOC\Api;
-use MOC\Module\Drive\Directory;
 use MOC\Module\Drive\File;
 
 /**
@@ -45,69 +44,75 @@ use MOC\Module\Drive\File;
  */
 abstract class Download {
 
-	/** @var string $DownloadPage */
-	private $DownloadPage = '';
-	/** @var null|File|File[]|Directory[] $Library */
-	private $LibraryContent = null;
-	/** @var int $LibraryRoot */
-	private $LibraryRoot = 0;
-	/** @var string $LibraryLocation */
-	private $LibraryLocation = '';
+	/** @var string $ProjectPage */
+	private $ProjectPage = '';
+	/** @var string $ProjectLocation */
+	private $ProjectLocation = '';
+	/** @var array $ProjectFilter */
+	private $ProjectFilter = array();
 
 	/**
-	 * @param string $DownloadPageUrl
-	 * @param string $DownloadLinkFilter
-	 * @param string $DownloadTargetPath
-	 */
-	final public function Download( $DownloadPageUrl, $DownloadLinkFilter = '!"[^"]+\.zip"!is', $DownloadTargetPath ) {
-		$this->_getDownloadPage( $DownloadPageUrl );
-		$this->_getDownloadLibrary( $DownloadLinkFilter );
-		$this->_getLibraryContent();
-		$this->_getLibraryRoot();
-		$this->LibraryLocation = $DownloadTargetPath;
-		$this->_installLibrary();
-	}
-
-	/**
+	 * Remote Project-Page
+	 *
 	 * @param $Url
 	 */
-	private function _getDownloadPage( $Url ) {
-		$this->DownloadPage = Api::Module()->Network()->Http()->Get()->Request( $Url );
+	final protected function DownloadProjectPage( $Url ) {
+		$this->ProjectPage = Api::Module()->Network()->Http()->Get()->Request( $Url );
 	}
 
 	/**
-	 * @param $RegExFilter
+	 * Local Project-Path
+	 *
+	 * @param $Path
 	 */
-	private function _getDownloadLibrary( $RegExFilter ) {
-		preg_match( $RegExFilter, $this->DownloadPage, $Match );
-		$LibraryContent = Api::Module()->Network()->Http()->Get()->Request( $Match[0] );
-		$this->LibraryContent = Api::Module()->Drive()->File()->Open(
-			Api::Core()->Cache()->Identifier( $LibraryContent )->Timeout(3600)->Set('')->Location()
-		)->Write( $LibraryContent );
+	final protected function DownloadProjectLocation( $Path ) {
+		$this->ProjectLocation = $Path;
 	}
 
-	private function _getLibraryContent() {
-		$this->LibraryContent = Api::Module()->Packer()->Zip()->Decoder()->Open( $this->LibraryContent );
+	/**
+	 * RegExp
+	 *
+	 * @param string $Filter
+	 */
+	final protected function DownloadProjectFilter( $Filter ) {
+		$this->ProjectFilter[] = $Filter;
 	}
 
-	private function _getLibraryRoot() {
-		$LibrarySize = count( $this->LibraryContent ) -1;
-		for( $Run = $LibrarySize; $Run > 1; $Run-- ) {
-			$DifferenceAt = strspn( $this->LibraryContent[$Run]->GetLocation() ^ $this->LibraryContent[$Run -1]->GetLocation(), "\0" );
-			if( $DifferenceAt < $this->LibraryRoot || $this->LibraryRoot == 0 ) {
-				$this->LibraryRoot = $DifferenceAt;
+	/**
+	 * @throws \Exception
+	 */
+	final protected function DownloadProject() {
+
+		foreach( (array)$this->ProjectFilter as $Filter ) {
+			if( preg_match( $Filter, $this->ProjectPage, $Match ) ) {
+				$this->DownloadProjectPage( $Match[0] );
+			} else {
+				throw new \Exception( 'Unable to determine download location' );
 			}
 		}
-	}
 
-	private function _installLibrary() {
-		foreach( $this->LibraryContent as $Object ) {
+		$this->ProjectPage = Api::Module()->Drive()->File()->Open(
+			Api::Core()->Cache()->Identifier( $this->ProjectPage )->Timeout(3600)->Set('')->Location()
+		)->Write( $this->ProjectPage );
+
+		$this->ProjectPage = Api::Module()->Packer()->Zip()->Decoder()->Open( $this->ProjectPage );
+
+		$RootIndex = 0;
+		for( $Run = ( count( $this->ProjectPage ) -1 ); $Run > 1; $Run-- ) {
+			$DifferenceAt = strspn(
+				$this->ProjectPage[$Run]->GetLocation() ^ $this->ProjectPage[$Run -1]->GetLocation(), "\0"
+			);
+			if( $DifferenceAt < $RootIndex || $RootIndex == 0 ) {
+				$RootIndex = $DifferenceAt;
+			}
+		}
+
+		foreach( $this->ProjectPage as $Object ) {
 			if( $Object instanceof File ) {
-				$Path = $this->LibraryLocation.DIRECTORY_SEPARATOR.substr( $Object->GetLocation(), $this->LibraryRoot );
+				$Path = $this->ProjectLocation.DIRECTORY_SEPARATOR.substr( $Object->GetLocation(), $RootIndex );
 				Api::Module()->Drive()->Directory()->Open( dirname( $Path ) );
 				$Object->CopyTo( $Path );
 			}
 		}
 	}
-
 }

@@ -56,9 +56,12 @@ class Instance extends Download implements Extension {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
+		/*
 		if( self::$Singleton === null ) {
 			self::$Singleton = new Instance();
 		} return self::$Singleton;
+		*/
+		return new Instance();
 	}
 
 	/**
@@ -95,7 +98,10 @@ class Instance extends Download implements Extension {
 	public function Create() {
 		$Path = __DIR__.DIRECTORY_SEPARATOR.'3rdParty';
 		if( Api::Core()->Drive()->Directory()->Handle( $Path )->IsEmpty() ) {
-			$this->Download( 'http://flash.flowplayer.org/download/', '!http://releases\.flowplayer\.org/flowplayer/[^"]*?.zip!is', $Path );
+			$this->DownloadProjectPage( 'http://flash.flowplayer.org/download/' );
+			$this->DownloadProjectFilter( '!http://releases\.flowplayer\.org/flowplayer/[^"]*?.zip!is' );
+			$this->DownloadProjectLocation( $Path );
+			$this->DownloadProject();
 		}
 		return $this;
 	}
