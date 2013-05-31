@@ -93,6 +93,8 @@ class Decoder implements Module {
 				function ( &$File ) {
 					if( !$File['folder'] ) {
 						$File = Api::Module()->Drive()->File()->Open( $File['filename'] );
+					} else {
+						$File = Api::Module()->Drive()->Directory()->Open( $File['filename'] );
 					}
 				}
 			);

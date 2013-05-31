@@ -322,7 +322,7 @@ class PHPExcel
 	 * Get index for sheet
 	 *
 	 * @param PHPExcel_Worksheet $pSheet
-	 * @return int Sheet index
+	 * @return Sheet index
 	 * @throws Exception
 	 */
 	public function getIndex(PHPExcel_Worksheet $pSheet)

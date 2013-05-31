@@ -167,6 +167,15 @@ class File implements Module {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function GetUrl() {
+		return Api::Core()->Proxy()->Url(
+			Api::Core()->Drive()->File()->Handle( $this->GetLocation() )
+		);
+	}
+
+	/**
 	 * @return int|null
 	 */
 	public function GetSize() {

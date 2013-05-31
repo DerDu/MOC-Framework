@@ -36,11 +36,13 @@
  * 13.02.2013 21:21
  */
 namespace MOC\Extension\Excel;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -69,6 +71,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
 			->Build()->Clearance( '18.02.2013 11:22', 'Alpha' )
 			->Update()->Changed3rdParty( '25.02.2013 15:07', '1.7.7 -> 1.7.8 Code only' )
+			->Update()->Changed3rdParty( '30.05.2013 15:53', '1.7.8 Code only -> 1.7.8 Full project' )
 		;
 	}
 

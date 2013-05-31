@@ -64,53 +64,61 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Design
+### Linking 3rd party software to the MOC-Framework
 
-1. ##### MOC
-	"The Api"
-	- Init the library
-	- Provide adapter access
+Note:
+- The term "3rd party software" will be substituted by "3PS" in the following section
 
-	And MOC said: "Let there be ligh... err.. ```Api::``` !"
+To respect (most of) the licenses the 3PS author/owner may have chosen, this is achieved
+by using it with a kind of "plugin" architecture. This is (unfortunately) necessary because of the (e.g.) GPLv3 license.
 
-2. ##### Adapter (Prayer)
-	Your Way to a Better Life
-	- The starting point of the chain
-	- Provide Core/Extension/Module/Plugin access
+After weeks of research (if i am allowed to do this) i found this way to add in GPLv3 3PS and still let the MOC-Framework be under BSD as a whole.
 
-	... and MOC devided the ```::Core()``` from the ```::Module()``` ... and it was good
+> GPLv3 adds more clarity with regard to what constitutes a derivative work. For example, GPLv3 states that if the program
+> is "specifically designed" to work with a GPL-governed library, then the library is considered part of the overall work
+> and the entire application is governed by the GPL.
+>
+> However, if one could swap out the GPL library for another library (i.e., if the application wasn't
+> "specifically designed" to work with the GPL library), then it's not part of the overall work and
+> would not be governed by the license.
+>
+> Source: <http://www.ibm.com/developerworks/rational/library/edge/08/mar08/curran/>
 
-3. ##### Core (God)
-	Contains secret internal operations ;-)
-	- Error handling
-	- Session handling
-	- Cache handling
-	- ...
+Loaded with this argument i can clearly say: So it is!
 
-	You should never use this one directly in your application
+- MOC-Framework is NOT "specifically designed" to work with a "specific" 3PS.
+- The 3PS is an interchangeable "Extension" to the MOC-Framework
+- The functionality of MOC is provided by a "Module" which COULD use a "Extension", but don't have to.
 
-4. ##### Extension (The tree of life)
-	Add power to the system
-	- Defines a common interface for 3rd party applications
+Example:
 
-	And again: You should never use this one directly in your application
+`Api::Module()->Office()->Document()->Pdf();`
 
-5. ##### Module (The tree of knowledge)
-	Make the hole thing shiny
-	- Add in the functionality
-	- Defines a seamless interface to extensions
-
-	You will need this one - and ONLY this one - for your application
-
-6. ##### Plugin (The snake)
-	Up to your imagination
-
-	I had an idea but... never mind... -.-
+- This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
+- You are able to exchange this Pdf-Extension with one powered by 3PS from "tcPdf"
+- See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
 
 
-------------------------------------------------------------------------------------------------------------------------
+So there are three parts:
 
-### Used 3rd Party Applications
+MOC-Framework (BSD)
+- Provides an seamless API to the developer
+
+Module (BSD)
+- Provides the functionality to the API
+	- Case 1: it contains the code itself
+	- Case 2: it uses an Extension
+
+Extension (BSD)
+- Loads and initializes the 3PS
+- Provides the 3PS functionality to the Module
+- Contains (File-System):
+	- Folder: "3rdParty" (>3PS-License<)
+		- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
+	- File: "Instance.php"
+		- A minimal interface (BSD) to load/boot/close the 3PS
+
+### Used 3rd party software
 
 
 #### apigen
@@ -152,3 +160,9 @@ Add Packer:Zip capability
 Add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
+
+#### FlowPlayer
+Add Office:Video capability
+- Lazy Extension: Is loaded on first use
+- Project: <http://flash.flowplayer.org>
+- License: GPLv3

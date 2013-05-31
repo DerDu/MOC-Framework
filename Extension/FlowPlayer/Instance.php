@@ -33,16 +33,17 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * Instance
- * 13.02.2013 21:21
+ * 30.05.2013 13:32
  */
 namespace MOC\Extension\FlowPlayer;
-use \MOC\Api;
+use MOC\Api;
 use MOC\Generic\Device\Extension;
+use MOC\Generic\Device\Extension\Download;
 
 /**
  *
  */
-class Instance implements Extension {
+class Instance extends Download implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -55,9 +56,12 @@ class Instance implements Extension {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
+		/*
 		if( self::$Singleton === null ) {
 			self::$Singleton = new Instance();
 		} return self::$Singleton;
+		*/
+		return new Instance();
 	}
 
 	/**
@@ -92,7 +96,14 @@ class Instance implements Extension {
 	 * @return \MOC\Generic\Device\Extension
 	 */
 	public function Create() {
-		// TODO: Implement Create() method.
+		$Path = __DIR__.DIRECTORY_SEPARATOR.'3rdParty';
+		if( Api::Core()->Drive()->Directory()->Handle( $Path )->IsEmpty() ) {
+			$this->DownloadProjectPage( 'http://flash.flowplayer.org/download/' );
+			$this->DownloadProjectFilter( '!http://releases\.flowplayer\.org/flowplayer/[^"]*?.zip!is' );
+			$this->DownloadProjectLocation( $Path );
+			$this->DownloadProject();
+		}
+		return $this;
 	}
 
 	/**

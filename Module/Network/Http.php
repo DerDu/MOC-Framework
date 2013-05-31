@@ -87,4 +87,11 @@ class Http implements Module {
 	public function Post() {
 		return Http\Post::InterfaceInstance();
 	}
+
+	/**
+	 * @return Http\Get
+	 */
+	public function Get() {
+		return Http\Get::InterfaceInstance();
+	}
 }
