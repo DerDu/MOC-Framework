@@ -64,52 +64,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Design
-
-1. ##### MOC
-	"The Api"
-	- Init the library
-	- Provide adapter access
-
-	And MOC said: "Let there be ligh... err.. ```Api::``` !"
-
-2. ##### Adapter (Prayer)
-	Your Way to a Better Life
-	- The starting point of the chain
-	- Provide Core/Extension/Module/Plugin access
-
-	... and MOC devided the ```::Core()``` from the ```::Module()``` ... and it was good
-
-3. ##### Core (God)
-	Contains secret internal operations ;-)
-	- Error handling
-	- Session handling
-	- Cache handling
-	- ...
-
-	You should never use this one directly in your application
-
-4. ##### Extension (The tree of life)
-	Add power to the system
-	- Defines a common interface for 3rd party applications
-
-	And again: You should never use this one directly in your application
-
-5. ##### Module (The tree of knowledge)
-	Make the hole thing shiny
-	- Add in the functionality
-	- Defines a seamless interface to extensions
-
-	You will need this one - and ONLY this one - for your application
-
-6. ##### Plugin (The snake)
-	Up to your imagination
-
-	I had an idea but... never mind... -.-
-
-
-------------------------------------------------------------------------------------------------------------------------
-
 ### Linking 3rd party software to the MOC-Framework
 
 Note:
@@ -209,5 +163,6 @@ Add Office:Chart capability
 
 #### FlowPlayer
 Add Office:Video capability
+- Lazy Extension: Is loaded on first use
 - Project: <http://flash.flowplayer.org>
 - License: GPLv3
