@@ -71,6 +71,7 @@ class Instance implements Extension {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
 			->Build()->Clearance( '18.02.2013 11:22', 'Alpha' )
 			->Update()->Changed3rdParty( '25.02.2013 15:07', '1.7.7 -> 1.7.8 Code only' )
+			->Update()->Changed3rdParty( '30.05.2013 15:53', '1.7.8 Code only -> 1.7.8 Full project' )
 		;
 	}
 
