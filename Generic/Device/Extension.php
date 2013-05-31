@@ -48,7 +48,7 @@ interface Extension extends Common {
 	 *
 	 * Contains:
 	 * - Do 3rdParty Setup
-	 * - Create new (intern) 3rdParty Instance
+	 * - Create new (internal) 3rdParty Instance
 	 *
 	 * @return \MOC\Generic\Device\Extension
 	 */
