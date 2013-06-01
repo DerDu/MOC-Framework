@@ -22,9 +22,7 @@ The easy way to OOP
 3. Put the pedal to the metal.
 
 	```php
-	var_dump(
-		Api::Module()->Drive()->File()->Open('README.md')->Read()
-	);
+	print Api::Module()->Drive()->File()->Open('README.md')->Read();
 	```
 
 ------------------------------------------------------------------------------------------------------------------------
