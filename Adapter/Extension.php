@@ -38,9 +38,17 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-
+use MOC\Extension\Excel\Instance as Excel;
+use MOC\Extension\Mail\Instance as Mail;
+use MOC\Extension\Pdf\Instance as Pdf;
+use MOC\Extension\Word\Instance as Word;
+use MOC\Extension\Xml\Instance as Xml;
+use MOC\Extension\Zip\Instance as Zip;
+use MOC\Extension\ApiGen\Instance as ApiGen;
+use MOC\Extension\YUICompressor\Instance as YUICompressor;
+use MOC\Extension\FlowPlayer\Instance as FlowPlayer;
 /**
- *
+ * Class which provides an interface to the Extension functionality of MOC
  */
 class Extension implements Adapter {
 
@@ -66,13 +74,7 @@ class Extension implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Extension\Excel\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Mail\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Pdf\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Zip\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\ApiGen\Instance', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -82,84 +84,69 @@ class Extension implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 10:02', 'Alpha' )
-			->Build()->Clearance( '18.02.2013 11:31', 'Beta' )
-			->Fix()->BugFix( '18.02.2013 13:57', 'Depending' )
-			->Update()->Added( '19.02.2013 8:29', 'ApiGen()' )
-			->Update()->Added( '01.03.2013 14:25', 'Word()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
-	 * @return \MOC\Extension\Excel\Instance
+	 * @return Excel
 	 */
 	public function Excel() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Excel\Instance::InterfaceInstance();
+		return Excel::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Mail\Instance
+	 * @return Mail
 	 */
 	public function Mail() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Mail\Instance::InterfaceInstance();
+		return Mail::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Pdf\Instance
+	 * @return Pdf
 	 */
 	public function Pdf() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Pdf\Instance::InterfaceInstance();
+		return Pdf::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Word\Instance
+	 * @return Word
 	 */
 	public function Word() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Word\Instance::InterfaceInstance();
+		return Word::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Xml\Instance
+	 * @return Xml
 	 */
 	public function Xml() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Xml\Instance::InterfaceInstance();
+		return Xml::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Zip\Instance
+	 * @return Zip
 	 */
 	public function Zip() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Zip\Instance::InterfaceInstance();
+		return Zip::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\ApiGen\Instance
+	 * @return ApiGen
 	 */
 	public function ApiGen() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\ApiGen\Instance::InterfaceInstance();
+		return ApiGen::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\YUICompressor\Instance
+	 * @return YUICompressor
 	 */
 	public function YUICompressor() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\YUICompressor\Instance::InterfaceInstance();
+		return YUICompressor::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\FlowPlayer\Instance
+	 * @return FlowPlayer
 	 */
 	public function FlowPlayer() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\FlowPlayer\Instance::InterfaceInstance();
+		return FlowPlayer::InterfaceInstance();
 	}
 }

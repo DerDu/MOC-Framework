@@ -47,7 +47,7 @@ use MOC\Module\Packer;
 use MOC\Module\Template;
 
 /**
- *
+ * Class which provides an interface to the Module functionality of MOC
  */
 class Module implements Adapter {
 
@@ -73,13 +73,7 @@ class Module implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Drive', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office', Api::Core()->Version() )
-			->Package( '\MOC\Module\Packer', Api::Core()->Version() )
-			->Package( '\MOC\Module\Installer', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -89,11 +83,7 @@ class Module implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 10:02', 'Alpha' )
-			->Build()->Clearance( '18.02.2013 11:31', 'Beta' )
-			->Fix()->BugFix( '18.02.2013 14:03', 'Depending' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**

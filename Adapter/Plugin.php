@@ -41,7 +41,7 @@ use MOC\Generic\Device\Adapter;
 use MOC\Plugin\Documentation;
 
 /**
- *
+ * Class which provides an interface to the Plugin functionality of MOC
  */
 class Plugin implements Adapter {
 
@@ -67,9 +67,7 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Plugin\Documentation', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -79,9 +77,7 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 09:04', 'Dev' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**

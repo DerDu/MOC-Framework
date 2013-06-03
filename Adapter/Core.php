@@ -36,6 +36,7 @@
  * 29.08.2012 15:25
  */
 namespace MOC\Adapter;
+use MOC\Generic\Device\Adapter;
 use MOC\Api;
 use MOC\Core\Cache;
 use MOC\Core\Changelog;
@@ -49,10 +50,9 @@ use MOC\Core\Session;
 use MOC\Core\Template;
 use MOC\Core\Version;
 use MOC\Core\Xml;
-use MOC\Generic\Device\Adapter;
 
 /**
- *
+ * Class which provides an interface to the Core functionality of MOC
  */
 class Core implements Adapter {
 
@@ -78,17 +78,7 @@ class Core implements Adapter {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Cache', Api::Core()->Version() )
-			->Package( '\MOC\Core\Drive', Api::Core()->Version() )
-			->Package( '\MOC\Core\Encoding', Api::Core()->Version() )
-			->Package( '\MOC\Core\Error', Api::Core()->Version() )
-			->Package( '\MOC\Core\Journal', Api::Core()->Version() )
-			->Package( '\MOC\Core\Proxy', Api::Core()->Version() )
-			->Package( '\MOC\Core\Session', Api::Core()->Version() )
-			->Package( '\MOC\Core\Xml', Api::Core()->Version() )
-			->Package( '\MOC\Core\Template', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -98,34 +88,29 @@ class Core implements Adapter {
 	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 10:02', 'Alpha' )
-			->Build()->Clearance( '18.02.2013 11:31', 'Beta' )
-			->Fix()->BugFix( '18.02.2013 13:56', 'Depending' )
-			->Update()->Added( '18.02.2013 16:33', 'Template()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
-	// ========================================================================================================== //
 	/**
 	 * @return Depending
 	 */
 	public function Depending() {
 		return Depending::InterfaceInstance();
 	}
+
 	/**
 	 * @return Version
 	 */
 	public function Version() {
 		return Version::InterfaceInstance();
 	}
+
 	/**
 	 * @return Changelog
 	 */
 	public function Changelog() {
 		return Changelog::InterfaceInstance();
 	}
-    // ========================================================================================================== //
 
 	/**
 	 * @return Cache
