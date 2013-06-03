@@ -22,9 +22,7 @@ The easy way to OOP
 3. Put the pedal to the metal.
 
 	```php
-	var_dump(
-		Api::Module()->Drive()->File()->Open('README.md')->Read()
-	);
+	print Api::Module()->Drive()->File()->Open('README.md')->Read();
 	```
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -94,9 +92,9 @@ Example:
 
 `Api::Module()->Office()->Document()->Pdf();`
 
-- This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "fPDF"
+- This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "tFPDF"
 - You are able to exchange this Pdf-Extension with one powered by 3PS from "tcPdf"
-- See? MOC-Framework is not "specifically designed" to work with "fPDF" ;-)
+- See? MOC-Framework is not "specifically designed" to work with "tFPDF" ;-)
 
 
 So there are three parts:
