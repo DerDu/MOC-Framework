@@ -118,7 +118,7 @@ class Read extends Write implements Module {
 	}
 
 	/**
-	 * @return \MOC\Core\Drive\File[]
+	 * @return \MOC\Module\Drive\File[]
 	 */
 	public function FileListRecursive() {
 /*		if( is_dir( $this->Location() ) ) {
