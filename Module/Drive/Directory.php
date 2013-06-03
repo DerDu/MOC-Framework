@@ -82,6 +82,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Opens directory
+	 * 
 	 * @param string $Location
 	 *
 	 * @return Directory
@@ -92,6 +94,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Get name
+	 * 
 	 * @return null|string
 	 */
 	public function GetName() {
@@ -99,6 +103,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets location
+	 * 
 	 * @return null|string
 	 */
 	public function GetLocation() {
@@ -131,6 +137,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets path
+	 * 
 	 * @return null|string
 	 */
 	public function GetPath() {
@@ -138,6 +146,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets time
+	 * 
 	 * @return int|null
 	 */
 	public function GetTime() {
@@ -145,6 +155,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets hash
+	 * 
 	 * @return null|string
 	 */
 	public function GetHash() {
@@ -152,6 +164,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets a list of all files (with recursive option)
+	 * 
 	 * @param bool $doRecursive
 	 *
 	 * @return File[]
@@ -178,6 +192,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets a list of all directories (with recursive option)
+	 * 
 	 * @param bool $doRecursive
 	 *
 	 * @return Directory[]
