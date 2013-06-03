@@ -40,7 +40,6 @@ use MOC\Api;
 use MOC\Generic\Device\Adapter;
 use MOC\Module\Database;
 use MOC\Module\Drive;
-use MOC\Module\Installer;
 use MOC\Module\Network;
 use MOC\Module\Office;
 use MOC\Module\Packer;
@@ -128,10 +127,4 @@ class Module implements Adapter {
 		return Database::InterfaceInstance();
 	}
 
-	/**
-	 * @return Installer
-	 */
-	public function Installer() {
-		return Installer::InterfaceInstance();
-	}
 }
