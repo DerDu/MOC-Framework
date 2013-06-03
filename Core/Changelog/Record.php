@@ -70,9 +70,7 @@ class Record implements Core {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:18', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	private $Timestamp = '';
