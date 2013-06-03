@@ -61,12 +61,9 @@ class Depending implements Core {
 	 *
 	 * @static
 	 * @return Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:52', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -76,8 +73,7 @@ class Depending implements Core {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', Api::Core()->Version()->Build(1) );
+		return Api::Core()->Depending();
 	}
 
 	/**

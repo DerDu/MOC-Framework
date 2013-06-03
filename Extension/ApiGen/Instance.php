@@ -36,11 +36,13 @@
  * 14.02.2013 11:25
  */
 namespace MOC\Extension\ApiGen;
-use \MOC\Api;
+use MOC\Api;
+use MOC\Generic\Device\Extension;
+
 /**
  *
  */
-class Instance implements \MOC\Generic\Device\Extension {
+class Instance implements Extension {
 
 	/** @var Instance $Singleton */
 	private static $Singleton = null;
@@ -50,7 +52,6 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @static
 	 * @return Instance
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
@@ -63,7 +64,6 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
@@ -77,7 +77,6 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -101,7 +100,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param $Instance
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Define( $Instance ) {
 		return $this;
@@ -112,7 +111,7 @@ class Instance implements \MOC\Generic\Device\Extension {
 	 *
 	 * @param int $Index
 	 *
-	 * @return \MOC\Generic\Device\Extension
+	 * @return Extension
 	 */
 	public function Select( $Index ) {
 		return $this;

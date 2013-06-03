@@ -62,7 +62,6 @@ class Exception implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -73,12 +72,9 @@ class Exception implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 10:37', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**

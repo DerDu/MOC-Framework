@@ -76,8 +76,7 @@ class Cache implements Core {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1)->Update(3) );
+		return Api::Core()->Depending();
 	}
 
 	/** @var Drive\Directory $CacheDirectory */

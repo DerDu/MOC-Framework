@@ -68,7 +68,6 @@ class Text implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
@@ -103,7 +102,8 @@ class Text implements Module {
 	 * @param $Size
 	 *
 	 * @return number
-	 */public function TextHeight( $Text, $Font, $Size ) {
+	 */
+	public function TextHeight( $Text, $Font, $Size ) {
 		// Fetch Font-Box
 		$TextBox = imagettfbbox( $Size, 0, $Font, $Text );
 		// Fetch Dimension
@@ -123,7 +123,8 @@ class Text implements Module {
 	 * @param $Text
 	 *
 	 * @return string
-	 */private function ConvertToUtf8( $Text ) {
+	 */
+	private function ConvertToUtf8( $Text ) {
 		return Api::Core()->Encoding()->MixedToUtf8( $Text );
 	}
 
@@ -131,7 +132,8 @@ class Text implements Module {
 	 * @param $Text
 	 *
 	 * @return string
-	 */private function ConvertToNCR( $Text ) {
+	 */
+	private function ConvertToNCR( $Text ) {
 		$Result = '';
 		$Length = strlen( $Text );
 		for( $Run = 0; $Run < $Length; $Run++ ) {

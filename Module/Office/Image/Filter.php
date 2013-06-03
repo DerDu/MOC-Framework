@@ -38,6 +38,7 @@
 namespace MOC\Module\Office\Image;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Office\Image\Resource;
 
 /**
  *
@@ -68,7 +69,6 @@ class Filter implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();

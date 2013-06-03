@@ -38,6 +38,7 @@
 namespace MOC\Module\Office\Image;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Office\Image\Resource;
 
 /**
  *
@@ -48,7 +49,6 @@ class Resize implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
@@ -59,7 +59,6 @@ class Resize implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -70,10 +69,9 @@ class Resize implements Module {
 	 *
 	 * @static
 	 * @return Resize
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		// TODO: Implement InterfaceInstance() method.
+		return new Resize();
 	}
 
 	/** @var Resource $Resource */
@@ -82,7 +80,7 @@ class Resize implements Module {
 	/**
 	 * @param Resource $Resource
 	 *
-	 * @return Resize
+	 * @return $this
 	 */
 	public function UseResource( Resource $Resource ) {
 		$this->Resource = $Resource;

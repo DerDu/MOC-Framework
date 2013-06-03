@@ -48,12 +48,9 @@ class Template implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 16:48', 'Dev', __CLASS__ )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -61,7 +58,6 @@ class Template implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -72,7 +68,6 @@ class Template implements Core {
 	 *
 	 * @static
 	 * @return Template
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Template();

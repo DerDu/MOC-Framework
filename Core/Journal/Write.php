@@ -39,7 +39,6 @@ namespace MOC\Core\Journal;
 use MOC\Api;
 use MOC\Core\Drive;
 use MOC\Core\Session;
-use MOC\Core\Version;
 use MOC\Generic\Common;
 
 /**
@@ -61,12 +60,9 @@ class Write implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1) )
-			->Package( '\MOC\Core\Session', Version::InterfaceInstance()->Build(1) );
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -74,10 +70,9 @@ class Write implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	private $Name = null;

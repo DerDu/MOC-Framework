@@ -75,8 +75,7 @@ class Error implements Core {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Journal', Version::InterfaceInstance()->Build(1) );
+		return Api::Core()->Depending();
 	}
 
 	/**

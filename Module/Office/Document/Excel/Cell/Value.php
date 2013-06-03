@@ -49,7 +49,6 @@ class Value implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -60,7 +59,6 @@ class Value implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -71,7 +69,6 @@ class Value implements Module {
 	 *
 	 * @static
 	 * @return Value
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Value();
@@ -107,7 +104,7 @@ class Value implements Module {
 	 * @param mixed $Value
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Formular( $Value ) {
+	public function Formula( $Value ) {
 		// Reset Cell-Format
 		$this->getNumberFormat()->setFormatCode( \PHPExcel_Style_NumberFormat::FORMAT_GENERAL );
 		$this->getCell()->setValueExplicit( $Value, \PHPExcel_Cell_DataType::TYPE_FORMULA );

@@ -38,6 +38,7 @@
 namespace MOC\Module\Office\Image;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Office\Image\Resource;
 
 /**
  *

@@ -49,13 +49,9 @@ class Documentation implements Plugin {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 08:26', 'Dev' )
-			->Fix()->BugFix( '19.02.2013 11:10', 'Changed Config' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -63,11 +59,9 @@ class Documentation implements Plugin {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Extension\ApiGen\Instance', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -75,7 +69,6 @@ class Documentation implements Plugin {
 	 *
 	 * @static
 	 * @return Documentation
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		Api::Extension()->ApiGen()->Create();
