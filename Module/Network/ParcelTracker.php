@@ -70,13 +70,7 @@ class ParcelTracker implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\DHLGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\UPSGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\DPDGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\GLSGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\TOFGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\HermesGermany', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

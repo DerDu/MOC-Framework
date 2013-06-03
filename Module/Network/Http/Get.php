@@ -51,9 +51,7 @@ class Get implements Module {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 20:58', 'Dev' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -64,9 +62,7 @@ class Get implements Module {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Proxy', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();
 	}
 
 	/**

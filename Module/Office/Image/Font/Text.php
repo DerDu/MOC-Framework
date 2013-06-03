@@ -37,18 +37,20 @@
  */
 namespace MOC\Module\Image\Font;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Text implements \MOC\Implement\Common {
+class Text implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Image\Font\Text
+	 * @return Text
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Image\Font\Text();
+		return new Text();
 	}
 
 	/**
@@ -62,13 +64,14 @@ class Text implements \MOC\Implement\Common {
 	}
 
 	/**
-	 * Get Version
+	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Version
+	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public static function InterfaceVersion() {
-		return Api::Core()->Version();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog();
 	}
 
 	/**

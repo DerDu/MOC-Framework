@@ -66,9 +66,7 @@ class Http implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Method Post()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**

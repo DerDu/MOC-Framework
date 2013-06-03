@@ -51,9 +51,7 @@ class Post implements Module {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 14:13', 'Dev' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -85,7 +83,7 @@ class Post implements Module {
 	 * @return bool|string
 	 */
 	public function Request( $Url, $Data = array() ) {
-		set_time_limit(5);
+
 		$Uri = Uri::InterfaceInstance()->Load( $Url );
 
 		foreach( (array)$Data as $Key => $Value ) {
