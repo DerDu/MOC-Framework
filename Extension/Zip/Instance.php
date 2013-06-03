@@ -42,6 +42,7 @@ use MOC\Generic\Device\Extension;
 /**
  *
  */
+/** @noinspection PhpUndefinedClassInspection */
 class Instance implements Extension {
 
 	/** @var Instance $Singleton */

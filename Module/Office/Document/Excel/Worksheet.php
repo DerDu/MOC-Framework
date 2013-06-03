@@ -111,6 +111,7 @@ class Worksheet implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Select( $Name ) {
+		/** @noinspection PhpParamsInspection */
 		Api::Extension()->Excel()->Current()->setActiveSheetIndex(
 			Api::Extension()->Excel()->Current()->getIndex(
 				Api::Extension()->Excel()->Current()->getSheetByName( $Name )
@@ -123,6 +124,7 @@ class Worksheet implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Remove() {
+		/** @noinspection PhpParamsInspection */
 		Api::Extension()->Excel()->Current()->removeSheetByIndex(
 			Api::Extension()->Excel()->Current()->getIndex( $this->getActiveSheet() )
 		);
