@@ -108,13 +108,15 @@ Module (BSD)
 	- Case 2: it uses an Extension
 
 Extension (BSD)
-- Loads and initializes the 3PS
-- Provides the 3PS functionality to the Module
-- Contains (File-System):
-	- Folder: "3rdParty" (>3PS-License<)
-		- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
-	- File: "Instance.php"
-		- A minimal interface (BSD) to load/boot/close the 3PS
+	- Case 1: it contains the code itself
+	- Case 2: it uses 3PS
+		- Loads and initializes the 3PS
+		- Provides the 3PS functionality to the Module
+		- Contains (File-System):
+			- Folder: "3rdParty" (>3PS-License<)
+				- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
+			- File: "Instance.php"
+				- A minimal interface (BSD) to load/boot/close the 3PS
 
 ### Used 3rd party software
 
