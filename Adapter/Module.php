@@ -72,7 +72,20 @@ class Module implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+		return Api::Core()->Depending()
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Database' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Drive' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Network' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Office' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Packer' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Template' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+		;
 	}
 
 	/**
@@ -82,7 +95,10 @@ class Module implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ )
+			->Build()->Clearance( '03.06.2013 15:17', 'Development' )
+			->Fix()->DocFix( '03.06.2013 15:18', 'Dependencies' )
+		;
 	}
 
 	/**

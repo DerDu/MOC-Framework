@@ -73,9 +73,7 @@ class Network implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Network\Ftp', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

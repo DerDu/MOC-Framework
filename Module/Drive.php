@@ -71,9 +71,7 @@ class Drive implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Drive\File', Api::Core()->Version() )
-			->Package( '\MOC\Module\Drive\Directory', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

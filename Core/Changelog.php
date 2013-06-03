@@ -75,7 +75,9 @@ class Changelog implements Core {
 	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ )
+			->Build()->Clearance( '03.06.2013 14:43', 'Development' )
+		;
 	}
 
 	/** @var string $RecordClass */
@@ -134,7 +136,8 @@ class Changelog implements Core {
 		$Protocol = array();
 		/** @var Changelog\Record $Record */
 		foreach( (array)$this->RecordList as $Record ) {
-			$rMethod = new \ReflectionMethod( $Record->Method() );
+			$Suspect = explode( '::', $Record->Method() );
+			$rMethod = new \ReflectionMethod( $Suspect[0], $Suspect[1] );
 			$ClassName = $rMethod->getDeclaringClass()->getShortName();
 			$MethodName = $rMethod->getName();
 			switch( $ClassName ) {
@@ -184,9 +187,9 @@ class Changelog implements Core {
 
 			$ChangeLogEntry = Changelog\Entry::InterfaceInstance();
 
-			$ChangeLogEntry->Location( $this->RecordClass );
+//			$ChangeLogEntry->Location( $this->RecordClass );
 			$ChangeLogEntry->Message( 'MISSING CHANGELOG' );
-			//$ChangeLogEntry->Timestamp( '-NA-' );
+			$ChangeLogEntry->Timestamp( '-NA-' );
 
 			$this->Log[] = $ChangeLogEntry;
 
@@ -194,7 +197,8 @@ class Changelog implements Core {
 
 			/** @var Changelog\Record $Record */
 			foreach( (array)$this->RecordList as $Record ) {
-				$rMethod = new \ReflectionMethod( $Record->Method() );
+				$Suspect = explode( '::', $Record->Method() );
+				$rMethod = new \ReflectionMethod( $Suspect[0], $Suspect[1] );
 				$ClassName = $rMethod->getDeclaringClass()->getShortName();
 				$MethodName = $rMethod->getName();
 				$ChangeLogEntry = Changelog\Entry::InterfaceInstance();
@@ -231,7 +235,7 @@ class Changelog implements Core {
 				$ChangeLogEntry->Type( $ClassName );
 				$ChangeLogEntry->Cause( $MethodName );
 				$ChangeLogEntry->Message( $Record->Message() );
-				$ChangeLogEntry->Location( $Record->Location() );
+				//$ChangeLogEntry->Location( $Record->Location() );
 				$this->Log[] = $ChangeLogEntry;
 			}
 

@@ -70,12 +70,7 @@ class Office implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Mail', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Image', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Music', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Video', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

@@ -65,7 +65,7 @@ class Cache implements Core {
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:52', 'Alpha' )
+			->Build()->Clearance( '03.06.2013 14:43', 'Development' )
 		;
 	}
 

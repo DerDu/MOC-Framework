@@ -78,7 +78,32 @@ class Core implements Adapter {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+		return Api::Core()->Depending()
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Cache' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Changelog' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Depending' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Drive' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Encoding' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Error' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Journal' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Proxy' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Session' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Template' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Version' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Core' )
+				->SetClass( 'Xml' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+		;
 	}
 
 	/**
@@ -88,7 +113,10 @@ class Core implements Adapter {
 	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ )
+			->Build()->Clearance( '03.06.2013 14:59', 'Development' )
+			->Fix()->DocFix( '03.06.2013 15:00', 'Dependencies' )
+		;
 	}
 
 	/**

@@ -76,7 +76,7 @@ class Record implements Core {
 	private $Timestamp = '';
 	private $Method = '';
 	private $Message = '';
-	private $Location = '';
+	//private $Location = '';
 
 	/**
 	 * @param null $Timestamp
@@ -114,15 +114,16 @@ class Record implements Core {
 			$this->Message = $Message;
 		} return $this->Message;
 	}
-
+/*
 	/**
 	 * @param null $Location
 	 *
 	 * @return null|string
 	 */
-	public function Location( $Location = null ) {
+/*	public function Location( $Location = null ) {
 		if( null !== $Location ) {
 			$this->Location = $Location;
 		} return $this->Location;
 	}
+*/
 }

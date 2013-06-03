@@ -70,10 +70,7 @@ class Entry implements Core {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance(  '18.02.2013 13:11', 'Alpha' )
-			->Update()->Added(  '18.02.2013 13:13', 'Method Timestamp' )
-		;
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/** @var string $Timestamp */
@@ -86,8 +83,8 @@ class Entry implements Core {
 	private $Cause = '-NA-';
 	/** @var string $Message */
 	private $Message = '-NA-';
-	/** @var string $Data */
-	private $Location = '-NA-';
+//	/** @var string $Data */
+//	private $Location = '-NA-';
 
 	/**
 	 * @param null|string $Value
@@ -143,15 +140,16 @@ class Entry implements Core {
 			$this->Message = $Value;
 		} return $this->Message;
 	}
-
+/*
 	/**
 	 * @param null|string $Value
 	 *
 	 * @return null|string
 	 */
-	public function Location( $Value = null ) {
+/*	public function Location( $Value = null ) {
 		if( null !== $Value ) {
 			$this->Location = $Value;
 		} return $this->Location;
 	}
+*/
 }
