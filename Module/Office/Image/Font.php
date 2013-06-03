@@ -35,20 +35,22 @@
  * Font
  * 11.02.2013 14:33
  */
-namespace MOC\Module\Image;
+namespace MOC\Module\Office\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Font implements \MOC\Implement\Common {
+class Font implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Image\Font
+	 * @return Font
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Image\Font();
+		return new Font();
 	}
 
 	/**
@@ -62,24 +64,24 @@ class Font implements \MOC\Implement\Common {
 	}
 
 	/**
-	 * Get Version
+	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Version
+	 * @return \MOC\Core\Changelog
 	 */
-	public static function InterfaceVersion() {
-		return Api::Core()->Version();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog();
 	}
 
-	/** @var null|\MOC\Module\Image\Resource $Resource */
+	/** @var null|Resource $Resource */
 	private $Resource = null;
 
 	/**
-	 * @param \MOC\Module\Image\Resource|Resource $Resource $Resource
+	 * @param Resource $Resource
 	 *
 	 * @return Font
 	 */
-	public function UseResource( \MOC\Module\Image\Resource $Resource ) {
+	public function UseResource( Resource $Resource ) {
 		$this->Resource = $Resource;
 		return $this;
 	}

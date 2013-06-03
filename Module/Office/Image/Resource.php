@@ -35,20 +35,36 @@
  * Resource
  * 13.09.2012 22:44
  */
-namespace MOC\Module\Image;
+namespace MOC\Module\Office\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
-class Resource implements \MOC\Implement\Common {
+class Resource implements Module {
+
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Image\Resource
+	 * @return Resource
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Image\Resource();
+		return new Resource();
+	}
+
+	/**
+	 * Get Changelog
+	 *
+	 * @static
+	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -56,46 +72,37 @@ class Resource implements \MOC\Implement\Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
-	/**
-	 * Get Version
-	 *
-	 * @static
-	 * @return \MOC\Core\Version
-	 */
-	public static function InterfaceVersion() {
-		return Api::Core()->Version();
-	}
-
 	/** @var null|\resource $Resource */
 	private $Resource = null;
-	/** @var null|\MOC\Core\Drive\File $File */
+	/** @var null|File $File */
 	private $File = null;
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return Resource
 	 */
-	public function Load( \MOC\Core\Drive\File $File ) {
+	public function Load( File $File ) {
 		$this->File = $File;
 		if( $this->File->Exists() ) {
 			$Factory = $this->GetLoadFactory( $this->File );
-			$this->Resource = $Factory( $this->File->Location() );
+			$this->Resource = $Factory( $this->File->GetLocation() );
 		}
 		return $this;
 	}
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return Resource
 	 */
-	public function Save( \MOC\Core\Drive\File $File = null ) {
+	public function Save( File $File = null ) {
 		if( null === $File ) {
 			$File = $this->File;
 		}
@@ -103,12 +110,12 @@ class Resource implements \MOC\Implement\Common {
 		$Type = $this->GetTypeFactory( $File );
 		switch( $Type ) {
 			case 'jpeg': {
-				$Factory( $this->Resource, $File->Location(), 100 );
+				$Factory( $this->Resource, $File->GetLocation(), 100 );
 				break;
 			}
 			default: {
 				imagesavealpha( $this->Resource, true );
-				$Factory( $this->Resource, $File->Location() );
+				$Factory( $this->Resource, $File->GetLocation() );
 			}
 		}
 		$this->Load( $File );
@@ -137,29 +144,29 @@ class Resource implements \MOC\Implement\Common {
 	}
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return mixed
 	 */
-	private function GetTypeFactory( \MOC\Core\Drive\File $File ) {
-		return str_replace( 'jpg', 'jpeg', strtolower( $File->Extension() ) );
+	private function GetTypeFactory( File $File ) {
+		return str_replace( 'jpg', 'jpeg', strtolower( $File->GetExtension() ) );
 	}
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return string
 	 */
-	private function GetLoadFactory( \MOC\Core\Drive\File $File ) {
+	private function GetLoadFactory( File $File ) {
 		return 'imagecreatefrom'.$this->GetTypeFactory( $File );
 	}
 
 	/**
-	 * @param \MOC\Core\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return string
 	 */
-	private function GetSaveFactory( \MOC\Core\Drive\File $File ) {
+	private function GetSaveFactory( File $File ) {
 		return 'image'.$this->GetTypeFactory( $File );
 	}
 }

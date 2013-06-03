@@ -37,10 +37,14 @@
  */
 namespace MOC\Module\Office\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
+use MOC\Module\Office\Image;
+
 /**
  *
  */
-class Close implements \MOC\Generic\Device\Module {
+class Close implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -49,7 +53,7 @@ class Close implements \MOC\Generic\Device\Module {
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -78,7 +82,7 @@ class Close implements \MOC\Generic\Device\Module {
 	 * @param int $Width
 	 * @param int $Height
 	 *
-	 * @return \MOC\Module\Office\Image
+	 * @return Image
 	 */
 	public function Blank( $Width, $Height ) {
 		$Resource = imagecreatetruecolor( $Width, $Height );
@@ -90,11 +94,11 @@ class Close implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
-	 * @return \MOC\Module\Office\Image
+	 * @return Image
 	 */
-	public function File( \MOC\Module\Drive\File $File ){
+	public function File( File $File ){
 		$Factory = $this->GetSaveFactory( $File );
 		$Type = $this->GetTypeFactory( $File );
 		switch( $Type ) {
@@ -113,20 +117,20 @@ class Close implements \MOC\Generic\Device\Module {
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return mixed
 	 */
-	private function GetTypeFactory( \MOC\Module\Drive\File $File ) {
+	private function GetTypeFactory( File $File ) {
 		return str_replace( 'jpg', 'jpeg', strtolower( $File->GetExtension() ) );
 	}
 
 	/**
-	 * @param \MOC\Module\Drive\File $File
+	 * @param File $File
 	 *
 	 * @return string
 	 */
-	private function GetSaveFactory( \MOC\Module\Drive\File $File ) {
+	private function GetSaveFactory( File $File ) {
 		return 'image'.$this->GetTypeFactory( $File );
 	}
 }
