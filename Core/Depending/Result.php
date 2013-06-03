@@ -76,6 +76,8 @@ class Result implements Core {
 	private $Install = array();
 	private $Update = array();
 	private $Available = array();
+	private $UpdateOptional = array();
+	private $InstallOptional = array();
 
 	/**
 	 * @param Package|null $Package
@@ -93,10 +95,32 @@ class Result implements Core {
 	 *
 	 * @return Package[]
 	 */
+	public function InstallOptional( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->InstallOptional[$Package->GetFQN()] = $Package;
+		} return $this->InstallOptional;
+	}
+
+	/**
+	 * @param Package|null $Package
+	 *
+	 * @return Package[]
+	 */
 	public function Update( Package $Package = null ) {
 		if( $Package !== null ) {
 			$this->Update[$Package->GetFQN()] = $Package;
 		} return $this->Update;
+	}
+
+	/**
+	 * @param Package|null $Package
+	 *
+	 * @return Package[]
+	 */
+	public function UpdateOptional( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->UpdateOptional[$Package->GetFQN()] = $Package;
+		} return $this->UpdateOptional;
 	}
 
 	/**

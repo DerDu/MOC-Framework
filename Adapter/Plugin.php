@@ -67,7 +67,10 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+		return Api::Core()->Depending()
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin' )
+				->SetClass( 'Documentation' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
+		;
 	}
 
 	/**
@@ -77,7 +80,10 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ )
+			->Build()->Clearance( '03.06.2013 16:17', 'Development' )
+			->Fix()->DocFix( '03.06.2013 16:18', 'Dependencies' )
+		;
 	}
 
 	/**

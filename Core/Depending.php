@@ -171,13 +171,21 @@ class Depending implements Core {
 				$Changelog = $Object::InterfaceChangelog();
 				if( true === $Analyze->Compare( $Changelog->Version(), $Package->GetVersion() ) ) {
 					$Package->SetChangelog( $Changelog );
-					$Result->Update( $Package );
+					if( $Package->GetOptional() ) {
+						$Result->Optional( $Package );
+					} else {
+						$Result->Update( $Package );
+					}
 				} else {
 					$Package->SetVersion( $Changelog->Version() );
 					$Result->Available( $Package );
 				}
 			} else {
-				$Result->Install( $Package );
+				if( $Package->GetOptional() ) {
+					$Result->Optional( $Package );
+				} else {
+					$Result->Install( $Package );
+				}
 			}
 		}
 
