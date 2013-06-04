@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class for tasks with directories
  */
 class Directory implements Module {
 
@@ -48,7 +48,7 @@ class Directory implements Module {
 	private $Resource = null;
 
 	/**
-	 * Get Singleton/Instance
+	 * Gets Singleton/Instance
 	 *
 	 * @static
 	 * @return Directory
@@ -60,7 +60,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get Changelog
+	 * Gets Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
@@ -72,7 +72,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get Dependencies
+	 * Gets Dependencies
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
@@ -94,7 +94,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get name
+	 * Gets name
 	 * 
 	 * @return null|string
 	 */
@@ -222,7 +222,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get resource
+	 * Gets resource
 	 * 
 	 * @return \MOC\Core\Drive\Directory|null
 	 */
