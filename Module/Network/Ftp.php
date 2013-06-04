@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class for FTP access
  */
 class Ftp implements Module {
 
@@ -82,6 +82,8 @@ class Ftp implements Module {
 	private $Connection = null;
 
 	/**
+	 * Opens a FTP connection
+	 * 
 	 * @param string $ServerName
 	 * @param int $Port
 	 * @param int $TimeOut
@@ -94,6 +96,8 @@ class Ftp implements Module {
 	}
 
 	/**
+	 * Login to the FTP server
+	 * 
 	 * @param string $UserName
 	 * @param string $Password
 	 *
@@ -105,6 +109,8 @@ class Ftp implements Module {
 	}
 
 	/**
+	 * Gets FTP connection
+	 * 
 	 * @return Ftp\Transport\Connection
 	 */
 	private function Connection() {
@@ -115,6 +121,8 @@ class Ftp implements Module {
 	}
 
 	/**
+	 * Gets directory
+	 * 
 	 * @return Ftp\Transport\Connection|Ftp\Directory|null
 	 */
 	public function Directory() {
@@ -122,6 +130,8 @@ class Ftp implements Module {
 	}
 
 	/**
+	 * Gets file
+	 * 
 	 * @return Ftp\Transport\Connection|Ftp\File|null
 	 */
 	public function File() {
