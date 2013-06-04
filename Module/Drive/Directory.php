@@ -112,6 +112,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets relative path of the directory
+	 * 
 	 * @param Directory $Directory
 	 *
 	 * @return string
@@ -220,6 +222,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Get resource
+	 * 
 	 * @return \MOC\Core\Drive\Directory|null
 	 */
 	private function Resource() {
