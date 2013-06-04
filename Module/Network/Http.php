@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class for common HTTP requests
  */
 class Http implements Module {
 
@@ -80,6 +80,8 @@ class Http implements Module {
 	}
 
 	/**
+	 * Gets HTTP Post request
+	 * 
 	 * @return Http\Post
 	 */
 	public function Post() {
@@ -87,6 +89,8 @@ class Http implements Module {
 	}
 
 	/**
+	 * Gets HTTP Get request
+	 * 
 	 * @return Http\Get
 	 */
 	public function Get() {
