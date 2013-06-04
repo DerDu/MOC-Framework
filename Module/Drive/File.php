@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class which provides basic file access
  */
 class File implements Module {
 
@@ -80,6 +80,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Opens file
+	 * 
 	 * @param $Location
 	 *
 	 * @return File
@@ -90,6 +92,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Reads file
+	 * 
 	 * @return null|string
 	 */
 	public function Read() {
@@ -100,6 +104,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Writes to file
+	 * 
 	 * @param $Content
 	 *
 	 * @return File
@@ -112,6 +118,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Appends to file
+	 * 
 	 * @param $Content
 	 *
 	 * @return File
@@ -124,6 +132,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Deletes file
+	 * 
 	 * @return File
 	 */
 	public function Delete() {
@@ -139,6 +149,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets filename name
+	 * 
 	 * @return null|string
 	 */
 	public function GetName() {
@@ -146,6 +158,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Get filename extension
+	 * 
 	 * @return null|string
 	 */
 	public function GetExtension() {
@@ -153,6 +167,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets file location
+	 * 
 	 * @return null|string
 	 */
 	public function GetLocation() {
@@ -160,6 +176,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets file path
+	 * 
 	 * @return null|string
 	 */
 	public function GetPath() {
@@ -167,6 +185,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets URL of the file location
+	 * 
 	 * @return string
 	 */
 	public function GetUrl() {
@@ -176,6 +196,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets file size
+	 * 
 	 * @return int|null
 	 */
 	public function GetSize() {
@@ -183,6 +205,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets time
+	 * 
 	 * @return int|null
 	 */
 	public function GetTime() {
@@ -190,6 +214,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets hash
+	 * 
 	 * @return null|string
 	 */
 	public function GetHash() {
@@ -197,6 +223,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Copies file to a location
+	 * 
 	 * @param $Location
 	 *
 	 * @return File
@@ -207,6 +235,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Moves file to a location
+	 * 
 	 * @param $Location
 	 *
 	 * @return File
@@ -217,6 +247,8 @@ class File implements Module {
 	}
 
 	/**
+	 * Gets resource
+	 * 
 	 * @return \MOC\Core\Drive\File
 	 */
 	private function Resource() {
