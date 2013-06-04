@@ -98,6 +98,10 @@ class Open implements Module {
 		if( $File->Exists() ) {
 			$Factory = $this->GetLoadFactory( $File );
 			$Resource = $Factory( $File->GetLocation() );
+			if( $this->GetTypeFactory( $File ) == 'png' ) {
+				imageAlphaBlending($Resource, true);
+				imageSaveAlpha($Resource, true);
+			}
 			Api::Module()->Office()->Image()->_openResource( $Resource );
 		}
 		return Api::Module()->Office()->Image();
