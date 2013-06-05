@@ -81,11 +81,11 @@ class Exception implements Common {
 	 * @param null  $Message
 	 * @param null  $File
 	 * @param null  $Line
-	 * @param array $Trace
+	 * @param string $Trace
 	 *
 	 * @return void
 	 */
-	public function Trigger( $Message = null, $File = null, $Line = null, $Trace = array() ) {
+	public function Trigger( $Message = null, $File = null, $Line = null, $Trace = '' ) {
 		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".nl2br($Trace)."\n\n".'Trigger in '.$File.' at line '.$Line );
 		if( Reporting::$Display ) {
 			die( str_replace( array(
