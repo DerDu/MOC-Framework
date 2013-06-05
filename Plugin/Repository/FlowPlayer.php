@@ -36,13 +36,15 @@
  * 05.06.2013 14:00
  */
 namespace MOC\Plugin\Repository;
+use MOC\Api;
 use MOC\Plugin\Hook;
 /**
  *
  */
 class FlowPlayer extends Hook implements Hook\VideoPlayer {
+
 	/**
-	 * This method must be used to setup your plugin
+	 * This method is used to setup your plugin
 	 *
 	 * - called only once
 	 *
@@ -52,29 +54,52 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 		// TODO: Implement HookLoader() method.
 	}
 
+	/** @var int $Width */
+	private $Width = '';
+	/** @var int $Height */
+	private $Height = '';
 	/**
 	 * @param int $Width  px
 	 * @param int $Height px
 	 *
-	 * @return void
+	 * @return $this|void
 	 */
 	public function SetPlayerSize( $Width, $Height ) {
-		// TODO: Implement SetPlayerSize() method.
+		return $this;
 	}
 
+	/** @var string $Source */
+	private $Source = '';
 	/**
 	 * @param string $Movie
 	 *
-	 * @return void
+	 * @return $this|void
 	 */
 	public function SetPlayerSource( $Movie ) {
-		// TODO: Implement SetPlayerSource() method.
+		$this->Source = $Movie;
+		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function GetPlayer() {
-		// TODO: Implement GetPlayer() method.
+	public function ExecutePlayer() {
+
+		static $PlayerId;
+		$PlayerId++;
+
+		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/FlowPlayer/' );
+		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
+
+		$Script = '<script type="text/javascript" src="'.Api::Module()->Drive()->File()->Open(
+			__DIR__.'/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
+		)->GetUrl().'"></script>';
+
+		$Script .= '<a id="FlowPlayer'.$PlayerId.'" href="'.$this->Source.'" style="display: block; width: '.$this->Width.'px; height:'.$this->Height.'px;"></a>'.
+		'<script type="text/javascript">'.
+			"flowplayer( 'FlowPlayer".$PlayerId."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."' );".
+		'</script>';
+
+		print $Script;
 	}
 }

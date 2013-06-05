@@ -41,12 +41,11 @@ namespace MOC\Plugin;
  */
 abstract class Hook {
 	/**
-	 * This method must be used to setup your plugin
+	 * This method is used to setup your plugin
 	 *
 	 * - called only once
 	 *
 	 * @return Hook
 	 */
 	abstract public function HookLoader();
-
 }

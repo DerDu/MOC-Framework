@@ -58,5 +58,5 @@ interface VideoPlayer {
 	/**
 	 * @return string
 	 */
-	public function GetPlayer();
+	public function ExecutePlayer();
 }

@@ -92,7 +92,7 @@ class Manager implements Plugin {
 		foreach( $Repository as $Plugin ) {
 			try {
 				$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
-				if( $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook' ) {
+				if( is_object( $Reflection->getParentClass() ) && $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook' ) {
 					/** @var Hook $Plugin */
 					$Plugin = $Reflection->newInstance();
 					$Plugin->HookLoader();
