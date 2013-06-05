@@ -92,7 +92,7 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
 
 		$Script = '<script type="text/javascript" src="'.Api::Module()->Drive()->File()->Open(
-			__DIR__.'/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
+			__DIR__.'/FlowPlayer/flowplayer-3.2.12.min.js'
 		)->GetUrl().'"></script>';
 
 		$Script .= '<a id="FlowPlayer'.$PlayerId.'" href="'.$this->Source.'" style="display: block; width: '.$this->Width.'px; height:'.$this->Height.'px;"></a>'.
