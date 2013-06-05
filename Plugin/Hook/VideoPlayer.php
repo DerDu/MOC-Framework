@@ -44,14 +44,14 @@ interface VideoPlayer {
 	 * @param int $Width px
 	 * @param int $Height px
 	 *
-	 * @return void
+	 * @return VideoPlayer
 	 */
 	public function SetPlayerSize( $Width, $Height );
 
 	/**
 	 * @param string $Movie
 	 *
-	 * @return void
+	 * @return VideoPlayer
 	 */
 	public function SetPlayerSource( $Movie );
 
