@@ -172,7 +172,7 @@ class Depending implements Core {
 				if( true === $Analyze->Compare( $Changelog->Version(), $Package->GetVersion() ) ) {
 					$Package->SetChangelog( $Changelog );
 					if( $Package->GetOptional() ) {
-						$Result->Optional( $Package );
+						$Result->UpdateOptional( $Package );
 					} else {
 						$Result->Update( $Package );
 					}
@@ -182,7 +182,7 @@ class Depending implements Core {
 				}
 			} else {
 				if( $Package->GetOptional() ) {
-					$Result->Optional( $Package );
+					$Result->InstallOptional( $Package );
 				} else {
 					$Result->Install( $Package );
 				}
