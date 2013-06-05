@@ -62,7 +62,7 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	 * @param int $Width  px
 	 * @param int $Height px
 	 *
-	 * @return $this|void
+	 * @return Hook\VideoPlayer
 	 */
 	public function SetPlayerSize( $Width, $Height ) {
 		return $this;
@@ -73,7 +73,7 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	/**
 	 * @param string $Movie
 	 *
-	 * @return $this|void
+	 * @return Hook\VideoPlayer
 	 */
 	public function SetPlayerSource( $Movie ) {
 		$this->Source = $Movie;
