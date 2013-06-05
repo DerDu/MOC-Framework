@@ -91,7 +91,7 @@ class HtmlPlayer extends Hook implements Hook\VideoPlayer {
 		$PlayerId++;
 
 		print '<video id="HtmlPlayer'.$PlayerId.'" controls="controls" width="'.$this->Width.'" height="'.$this->Height.'">
-            <source src="'.$this->Source.'" type="video/'.Api::Module()->Drive()->File()->Open( $this->Source )->GetExtension().'">
+            <source src="'.$this->Source.'">
             <p>Video Playback Not Supported</p>
         </video>';
 	}
