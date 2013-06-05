@@ -65,6 +65,8 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	 * @return Hook\VideoPlayer
 	 */
 	public function SetPlayerSize( $Width, $Height ) {
+		$this->Width = $Width;
+		$this->Height = $Height;
 		return $this;
 	}
 
