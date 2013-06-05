@@ -72,7 +72,7 @@ class Manager implements Plugin {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return object
+	 * @return Manager
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
@@ -81,28 +81,67 @@ class Manager implements Plugin {
 		} return self::$Singleton;
 	}
 
+	/** @var Hook[] $Repository */
+	private $Repository = array();
+
 	/**
 	 * Load Plugin-Repository
 	 */
 	private function __construct() {
 		$Repository = Api::Module()->Drive()->Directory()->Open( __DIR__.DIRECTORY_SEPARATOR.'Repository' )->FileList();
 		foreach( $Repository as $Plugin ) {
-			$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
-
-			var_dump( $Reflection );
-			//include_once( $Plugin->GetLocation() );
-
-			//$this->Repository
+			try {
+				$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
+				if( $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook' ) {
+					/** @var Hook $Plugin */
+					$Plugin = $Reflection->newInstance();
+					$Plugin->HookLoader();
+					$this->Repository[$Reflection->getShortName()] = $Plugin;
+				} else {
+					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Manager: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
+				}
+			} catch( \Exception $Exception  ) {
+				Api::Core()->Error()->Type()->Exception()->Trigger( $Exception->getMessage(), $Exception->getFile(), $Exception->getLine(), $Exception->getTraceAsString() );
+			}
 		}
 	}
 
-	/** @var Hook[] $Repository */
-	private $Repository = array();
 
 	/**
+	 * @param string $HookName
 	 * @param null|string $PluginName
+	 *
+	 * @return Hook
+	 */
+	private function RepositorySearch( $HookName, $PluginName = null ) {
+		if( $PluginName === null ) {
+			// Select first available plugin
+			foreach( $this->Repository as $Plugin ) {
+				$Reflection = new \ReflectionObject( $Plugin );
+				if( $Reflection->implementsInterface( 'MOC\\Plugin\\Hook\\'.$HookName ) ) {
+					return $Plugin;
+				}
+			}
+		} else {
+			// Use specific plugin
+			if( isset( $this->Repository[$PluginName] ) ) {
+				return $this->Repository[$PluginName];
+			}
+		}
+		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Manager: Missing '.$HookName.' plugin!', __FILE__, __LINE__ );
+		return false;
+	}
+
+
+	/**
+	 * Exposed Hook
+	 *
+	 * @param null|string $PluginName
+	 *
+	 * @return \MOC\Plugin\Hook\VideoPlayer
 	 */
 	public function VideoPlayer( $PluginName = null ) {
-
+		return $this->RepositorySearch( 'VideoPlayer', $PluginName );
 	}
+
 }
