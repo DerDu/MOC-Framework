@@ -35,62 +35,50 @@
  * Documentation
  * 19.02.2013 08:23
  */
-namespace MOC\Plugin;
+namespace MOC\Plugin\Repository;
 use MOC\Api;
-use MOC\Generic\Device\Plugin;
+use MOC\Plugin\Hook;
 use Nette\Config\Adapters\NeonAdapter;
 
 /**
  *
  */
-class Documentation implements Plugin {
+class Documentation extends Hook\Documentation {
+
 	/**
-	 * Get Changelog
+	 * This method is used to setup your plugin
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
+	 * - called only once
+	 *
+	 * @return Hook
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+	public function HookLoader() {
+		require_once( __DIR__.'/Documentation/3rdParty/libs/Nette/Nette/loader.php' );
 	}
 
 	/**
-	 * Get Dependencies
+	 * This method is used to determine if the plugin can handle the required task
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return bool
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function HookCapable() {
+		return true;
 	}
 
 	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Documentation
+	 * @return string
 	 */
-	public static function InterfaceInstance() {
-		Api::Extension()->ApiGen()->Create();
-		return new Documentation();
-	}
-
-	/**
-	 *
-	 */
-	public function Create() {
+	public function HookExecute() {
 
 		set_time_limit(120);
 
-		$Source = Api::Module()->Drive()->Directory()->Open( __DIR__.'/../' );
-		$Destination = Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content' );
 		$Configuration = Api::Module()->Drive()->File()->Open( __DIR__.'/Documentation/Config.neon' );
 
 		$Config = array(
 			// Source file or directory to parse
-			'source' => $Source->GetLocation(),
+			'source' => $this->configSource()->GetLocation(),
 			// Directory where to save the generated documentation
-			'destination' => $Destination->GetLocation(),
+			'destination' => $this->configDestination()->GetLocation(),
 			// List of allowed file extensions
 			'extensions' => array( 'php' ),
 			// Mask to exclude file or directory from processing
@@ -162,6 +150,6 @@ class Documentation implements Plugin {
 			'--config', $Configuration->GetLocation()
 		);
 
-		include( __DIR__.'/../Extension/ApiGen/3rdParty/apigen.php' );
+		include( __DIR__.'/Documentation/3rdParty/apigen.php' );
 	}
 }
