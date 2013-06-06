@@ -48,4 +48,11 @@ abstract class Hook {
 	 * @return Hook
 	 */
 	abstract public function HookLoader();
+
+	/**
+	 * This method is used to determine if the plugin can handle the required task
+	 *
+	 * @return bool
+	 */
+	abstract public function HookCapable();
 }

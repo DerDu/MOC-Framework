@@ -32,16 +32,16 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Manager
+ * Repository
  * 05.06.2013 13:30
  */
 namespace MOC\Plugin;
 use MOC\Api;
-use MOC\Generic\Device\Plugin;
+use MOC\Generic\Common;
 /**
  *
  */
-class Manager implements Plugin {
+class Repository implements Common {
 
 	/**
 	 * Get Changelog
@@ -65,19 +65,19 @@ class Manager implements Plugin {
 		// TODO: Implement InterfaceDepending() method.
 	}
 
-	/** @var Manager $Singleton */
+	/** @var Repository $Singleton */
 	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Manager
+	 * @return Repository
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new Manager();
+			self::$Singleton = new Repository();
 		} return self::$Singleton;
 	}
 
@@ -98,7 +98,7 @@ class Manager implements Plugin {
 					$Plugin->HookLoader();
 					$this->Repository[$Reflection->getShortName()] = $Plugin;
 				} else {
-					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Manager: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
+					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
 				}
 			} catch( \Exception $Exception  ) {
 				Api::Core()->Error()->Type()->Exception()->Trigger( $Exception->getMessage(), $Exception->getFile(), $Exception->getLine(), $Exception->getTraceAsString() );
@@ -113,7 +113,7 @@ class Manager implements Plugin {
 	 *
 	 * @return Hook
 	 */
-	private function RepositorySearch( $HookName, $PluginName = null ) {
+	protected function RepositorySearch( $HookName, $PluginName = null ) {
 		if( $PluginName === null ) {
 			// Select first available plugin
 			foreach( $this->Repository as $Plugin ) {
@@ -128,20 +128,8 @@ class Manager implements Plugin {
 				return $this->Repository[$PluginName];
 			}
 		}
-		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Manager: Missing '.$HookName.' plugin!', __FILE__, __LINE__ );
+		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing '.$HookName.' plugin!', __FILE__, __LINE__ );
 		return false;
-	}
-
-
-	/**
-	 * Exposed Hook
-	 *
-	 * @param null|string $PluginName
-	 *
-	 * @return \MOC\Plugin\Hook\VideoPlayer
-	 */
-	public function VideoPlayer( $PluginName = null ) {
-		return $this->RepositorySearch( 'VideoPlayer', $PluginName );
 	}
 
 }

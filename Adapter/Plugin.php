@@ -39,11 +39,12 @@ namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
 use MOC\Plugin\Documentation;
+use MOC\Plugin\Repository;
 
 /**
  * Class which provides an interface to the Plugin functionality of MOC
  */
-class Plugin implements Adapter {
+class Plugin extends Repository implements Adapter {
 
 	/** @var Plugin $Singleton */
 	private static $Singleton = null;
@@ -91,5 +92,18 @@ class Plugin implements Adapter {
 	 */
 	public function Documentation() {
 		return Documentation::InterfaceInstance();
+	}
+
+
+
+	/**
+	 * Exposed Hook
+	 *
+	 * @param null|string $PluginName
+	 *
+	 * @return \MOC\Plugin\Hook\VideoPlayer
+	 */
+	public function VideoPlayer( $PluginName = null ) {
+		return $this->RepositorySearch( 'VideoPlayer', $PluginName );
 	}
 }
