@@ -75,11 +75,7 @@ class Extension implements Adapter {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\ApiGen' )
-				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
 			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Excel' )
-				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
-			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\FlowPlayer' )
 				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
 			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Mail' )
 				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
@@ -152,23 +148,9 @@ class Extension implements Adapter {
 	}
 
 	/**
-	 * @return ApiGen
-	 */
-	public function ApiGen() {
-		return ApiGen::InterfaceInstance();
-	}
-
-	/**
 	 * @return YUICompressor
 	 */
 	public function YUICompressor() {
 		return YUICompressor::InterfaceInstance();
-	}
-
-	/**
-	 * @return FlowPlayer
-	 */
-	public function FlowPlayer() {
-		return FlowPlayer::InterfaceInstance();
 	}
 }
