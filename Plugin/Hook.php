@@ -57,7 +57,7 @@ abstract class Hook {
 	abstract public function HookCapable();
 
 	/**
-	 * @return string
+	 * @return void|mixed
 	 */
 	abstract public function HookExecute();
 

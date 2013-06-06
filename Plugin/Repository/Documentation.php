@@ -66,7 +66,7 @@ class Documentation extends Hook\Documentation {
 	}
 
 	/**
-	 * @return string
+	 * @return void
 	 */
 	public function HookExecute() {
 

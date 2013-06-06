@@ -68,7 +68,7 @@ class FlowPlayer extends Hook\VideoPlayer {
 	}
 
 	/**
-	 * @return string
+	 * @return void
 	 */
 	public function HookExecute() {
 
