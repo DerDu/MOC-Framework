@@ -36,7 +36,6 @@
  * 05.06.2013 16:00
  */
 namespace MOC\Plugin\Repository;
-use MOC\Api;
 use MOC\Plugin\Hook;
 /**
  *
@@ -72,11 +71,11 @@ class FlashPlayer extends Hook\VideoPlayer {
 		$PlayerId++;
 
 		print '
-		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="'.$this->Width.'" height="'.$this->Height.'" id="FlashPlayer'.$PlayerId.'" align="middle">
-		    <param name="movie" value="'.$this->Source.'"/>
+		<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="'.$this->configWidth().'" height="'.$this->configHeight().'" id="FlashPlayer'.$PlayerId.'" align="middle">
+		    <param name="movie" value="'.$this->configSource().'"/>
 		    <!--[if !IE]>-->
-		    <object type="application/x-shockwave-flash" data="'.$this->Source.'" width="'.$this->Width.'" height="'.$this->Height.'">
-		        <param name="movie" value="'.$this->Source.'"/>
+		    <object type="application/x-shockwave-flash" data="'.$this->configSource().'" width="'.$this->configWidth().'" height="'.$this->configHeight().'">
+		        <param name="movie" value="'.$this->configSource().'"/>
 		    <!--<![endif]-->
 		        <a href="http://www.adobe.com/go/getflash">
 		            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/>
