@@ -83,6 +83,15 @@ class Repository implements Common {
 
 	/** @var Hook[] $Repository */
 	private $Repository = array();
+	/** @var null|string $Plugin */
+	private $Plugin = null;
+
+	/**
+	 * @param null|string $Value
+	 */
+	protected function PluginName( $Value ) {
+		$this->Plugin = $Value;
+	}
 
 	/**
 	 * Load Plugin-Repository
@@ -118,13 +127,26 @@ class Repository implements Common {
 		foreach( $this->Repository as $Plugin ) {
 			$Reflection = new \ReflectionObject( $Plugin );
 			if( $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook\\'.$HookName ) {
-				$HookConfig = new \ReflectionClass( 'MOC\\Adapter\\Plugin' );
-				$HookParameter = $HookConfig->getMethod( $HookName )->getParameters();
-				foreach( $HookParameter as $Index => $Definition ) {
-					$Plugin->{'config'.$Definition->getName()}( $Parameter[$Index] );
-				}
-				if( $Plugin->HookCapable() ) {
-					return $Plugin;
+				if( null !== $this->Plugin ) {
+					if( basename( $Reflection->getName() ) == $this->Plugin ) {
+						$HookConfig = new \ReflectionClass( 'MOC\\Adapter\\Plugin' );
+						$HookParameter = $HookConfig->getMethod( $HookName )->getParameters();
+						foreach( $HookParameter as $Index => $Definition ) {
+							$Plugin->{'config'.$Definition->getName()}( $Parameter[$Index] );
+						}
+						if( $Plugin->HookCapable() ) {
+							return $Plugin;
+						}
+					}
+				} else {
+					$HookConfig = new \ReflectionClass( 'MOC\\Adapter\\Plugin' );
+					$HookParameter = $HookConfig->getMethod( $HookName )->getParameters();
+					foreach( $HookParameter as $Index => $Definition ) {
+						$Plugin->{'config'.$Definition->getName()}( $Parameter[$Index] );
+					}
+					if( $Plugin->HookCapable() ) {
+						return $Plugin;
+					}
 				}
 			}
 		}

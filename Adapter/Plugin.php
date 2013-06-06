@@ -38,8 +38,6 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-use MOC\Plugin\Hook\VideoPlayer;
-use MOC\Plugin\Hook\Documentation;
 use MOC\Plugin\Repository;
 
 /**
@@ -60,6 +58,13 @@ class Plugin extends Repository implements Adapter {
 		if( self::$Singleton === null ) {
 			self::$Singleton = new Plugin();
 		} return self::$Singleton;
+	}
+
+	/**
+	 * @param string $Value
+	 */
+	final public function InterfaceSelectPlugin( $Value = null ) {
+		$this->PluginName( $Value );
 	}
 
 	/**
@@ -92,18 +97,18 @@ class Plugin extends Repository implements Adapter {
 	}
 
 	/**
-	 * @return Documentation
+	 * @return mixed|void
 	 */
 	public function Documentation() {
 		return $this->RepositorySearch( 'Documentation' )->HookExecute();
 	}
 
 	/**
-	 * @param $Source
-	 * @param $Width
-	 * @param $Height
+	 * @param string $Source
+	 * @param int $Width
+	 * @param int $Height
 	 *
-	 * @return \MOC\Plugin\Hook
+	 * @return mixed|void
 	 */
 	public function VideoPlayer( $Source, $Width = 640, $Height = 480 ) {
 		return $this->RepositorySearch( 'VideoPlayer', array( $Source, $Width, $Height ) )->HookExecute();

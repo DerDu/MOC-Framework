@@ -46,14 +46,6 @@ use MOC\Plugin\Hook;
 abstract class Documentation extends Hook {
 
 	/**
-	 * Set Default-Directories
-	 */
-	function __construct() {
-		$this->configSource( Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../' ) );
-		$this->configDestination( Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content'  ) );
-	}
-
-	/**
 	 * @param null|Directory $Value
 	 *
 	 * @return Directory

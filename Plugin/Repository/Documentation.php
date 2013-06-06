@@ -53,6 +53,8 @@ class Documentation extends Hook\Documentation {
 	 * @return Hook
 	 */
 	public function HookLoader() {
+		$this->configSource( Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../' ) );
+		$this->configDestination( Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content'  ) );
 		require_once( __DIR__.'/Documentation/3rdParty/libs/Nette/Nette/loader.php' );
 	}
 
