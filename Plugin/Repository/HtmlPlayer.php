@@ -60,7 +60,10 @@ class HtmlPlayer extends Hook\VideoPlayer {
 	 * @return bool
 	 */
 	public function HookCapable() {
-		return false;
+		return in_array(
+			Api::Module()->Drive()->File()->Open( $this->configSource() )->GetExtension(),
+			array( 'mp4', 'webm', 'ogg' )
+		);
 	}
 
 
@@ -72,8 +75,8 @@ class HtmlPlayer extends Hook\VideoPlayer {
 		static $PlayerId;
 		$PlayerId++;
 
-		print '<video id="HtmlPlayer'.$PlayerId.'" controls="controls" width="'.$this->Width.'" height="'.$this->Height.'">
-            <source src="'.$this->Source.'">
+		print '<video id="HtmlPlayer'.$PlayerId.'" controls="controls" width="'.$this->configWidth().'" height="'.$this->configHeight().'">
+            <source src="'.$this->configSource().'">
             <p>Video Playback Not Supported</p>
         </video>';
 	}
