@@ -41,7 +41,7 @@ use MOC\Plugin\Hook;
 /**
  *
  */
-class HtmlPlayer extends Hook implements Hook\VideoPlayer {
+class HtmlPlayer extends Hook\VideoPlayer {
 
 	/**
 	 * This method is used to setup your plugin
@@ -54,38 +54,20 @@ class HtmlPlayer extends Hook implements Hook\VideoPlayer {
 		// TODO: Implement HookLoader() method.
 	}
 
-	/** @var int $Width */
-	private $Width = '';
-	/** @var int $Height */
-	private $Height = '';
 	/**
-	 * @param int $Width  px
-	 * @param int $Height px
+	 * This method is used to determine if the plugin can handle the required task
 	 *
-	 * @return Hook\VideoPlayer
+	 * @return bool
 	 */
-	public function SetPlayerSize( $Width, $Height ) {
-		$this->Width = $Width;
-		$this->Height = $Height;
-		return $this;
+	public function HookCapable() {
+		return false;
 	}
 
-	/** @var string $Source */
-	private $Source = '';
-	/**
-	 * @param string $Movie
-	 *
-	 * @return Hook\VideoPlayer
-	 */
-	public function SetPlayerSource( $Movie ) {
-		$this->Source = $Movie;
-		return $this;
-	}
 
 	/**
 	 * @return string
 	 */
-	public function ExecutePlayer() {
+	public function HookExecute() {
 
 		static $PlayerId;
 		$PlayerId++;
