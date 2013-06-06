@@ -41,7 +41,7 @@ use MOC\Plugin\Hook;
 /**
  *
  */
-class FlashPlayer extends Hook implements Hook\VideoPlayer {
+class FlashPlayer extends Hook\VideoPlayer {
 
 	/**
 	 * This method is used to setup your plugin
@@ -60,42 +60,13 @@ class FlashPlayer extends Hook implements Hook\VideoPlayer {
 	 * @return bool
 	 */
 	public function HookCapable() {
-		// TODO: Implement HookCapable() method.
-	}
-
-
-	/** @var int $Width */
-	private $Width = '';
-	/** @var int $Height */
-	private $Height = '';
-	/**
-	 * @param int $Width  px
-	 * @param int $Height px
-	 *
-	 * @return Hook\VideoPlayer
-	 */
-	public function SetPlayerSize( $Width, $Height ) {
-		$this->Width = $Width;
-		$this->Height = $Height;
-		return $this;
-	}
-
-	/** @var string $Source */
-	private $Source = '';
-	/**
-	 * @param string $Movie
-	 *
-	 * @return Hook\VideoPlayer
-	 */
-	public function SetPlayerSource( $Movie ) {
-		$this->Source = $Movie;
-		return $this;
+		return false;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function ExecutePlayer() {
+	public function HookExecute() {
 
 		static $PlayerId;
 		$PlayerId++;
