@@ -55,4 +55,41 @@ abstract class Hook {
 	 * @return bool
 	 */
 	abstract public function HookCapable();
+
+	/**
+	 * @return string
+	 */
+	abstract public function HookExecute();
+
+	/**
+	 * @var array
+	 */
+	private $Setting = array();
+
+	/**
+	 * Set a Custom Property
+	 *
+	 * @param string $Property
+	 * @param mixed $Value
+	 *
+	 * @return $this
+	 */
+	final protected function HookConfigSet( $Property, $Value ) {
+		$this->Setting[$Property] = $Value;
+		return $this;
+	}
+
+	/**
+	 * Get a Custom Property
+	 *
+	 * @param string $Property
+	 *
+	 * @return mixed
+	 */
+	final protected function HookConfigGet( $Property ) {
+		if( isset( $this->Setting[$Property] ) ) {
+			return $this->Setting[$Property];
+		}
+		return null;
+	}
 }

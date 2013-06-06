@@ -38,7 +38,8 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-use MOC\Plugin\Documentation;
+use MOC\Plugin\Hook\VideoPlayer;
+use MOC\Plugin\Hook\Documentation;
 use MOC\Plugin\Repository;
 
 /**
@@ -69,7 +70,9 @@ class Plugin extends Repository implements Adapter {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin' )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
+				->SetClass( 'VideoPlayer' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
 				->SetClass( 'Documentation' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
 		;
 	}
@@ -84,6 +87,7 @@ class Plugin extends Repository implements Adapter {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
 			->Build()->Clearance( '03.06.2013 16:17', 'Development' )
 			->Fix()->DocFix( '03.06.2013 16:18', 'Dependencies' )
+			->Fix()->DocFix( '06.06.2013 10:18', 'Dependencies' )
 		;
 	}
 
@@ -91,19 +95,17 @@ class Plugin extends Repository implements Adapter {
 	 * @return Documentation
 	 */
 	public function Documentation() {
-		return Documentation::InterfaceInstance();
+		return $this->RepositorySearch( 'Documentation' )->HookExecute();
 	}
 
-
-
 	/**
-	 * Exposed Hook
+	 * @param $Source
+	 * @param $Width
+	 * @param $Height
 	 *
-	 * @param null|string $PluginName
-	 *
-	 * @return \MOC\Plugin\Hook\VideoPlayer
+	 * @return \MOC\Plugin\Hook
 	 */
-	public function VideoPlayer( $PluginName = null ) {
-		return $this->RepositorySearch( 'VideoPlayer', $PluginName );
+	public function VideoPlayer( $Source, $Width = 640, $Height = 480 ) {
+		return $this->RepositorySearch( 'VideoPlayer', array( $Source, $Width, $Height ) )->HookExecute();
 	}
 }

@@ -87,12 +87,12 @@ class Repository implements Common {
 	/**
 	 * Load Plugin-Repository
 	 */
-	private function __construct() {
+	protected function __construct() {
 		$Repository = Api::Module()->Drive()->Directory()->Open( __DIR__.DIRECTORY_SEPARATOR.'Repository' )->FileList();
 		foreach( $Repository as $Plugin ) {
 			try {
 				$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
-				if( is_object( $Reflection->getParentClass() ) && $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook' ) {
+				if( is_object( $Reflection->getParentClass() ) && is_object( $Reflection->getParentClass()->getParentClass() ) && $Reflection->getParentClass()->getParentClass()->getName() == 'MOC\\Plugin\\Hook' ) {
 					/** @var Hook $Plugin */
 					$Plugin = $Reflection->newInstance();
 					$Plugin->HookLoader();
@@ -106,29 +106,29 @@ class Repository implements Common {
 		}
 	}
 
-
 	/**
+	 * Search for capable plugin
+	 *
 	 * @param string $HookName
-	 * @param null|string $PluginName
+	 * @param array  $Parameter
 	 *
 	 * @return Hook
 	 */
-	protected function RepositorySearch( $HookName, $PluginName = null ) {
-		if( $PluginName === null ) {
-			// Select first available plugin
-			foreach( $this->Repository as $Plugin ) {
-				$Reflection = new \ReflectionObject( $Plugin );
-				if( $Reflection->implementsInterface( 'MOC\\Plugin\\Hook\\'.$HookName ) ) {
+	protected function RepositorySearch( $HookName, $Parameter = array() ) {
+		foreach( $this->Repository as $Plugin ) {
+			$Reflection = new \ReflectionObject( $Plugin );
+			if( $Reflection->getParentClass()->getName() == 'MOC\\Plugin\\Hook\\'.$HookName ) {
+				$HookConfig = new \ReflectionClass( 'MOC\\Adapter\\Plugin' );
+				$HookParameter = $HookConfig->getMethod( $HookName )->getParameters();
+				foreach( $HookParameter as $Index => $Definition ) {
+					$Plugin->{'config'.$Definition->getName()}( $Parameter[$Index] );
+				}
+				if( $Plugin->HookCapable() ) {
 					return $Plugin;
 				}
 			}
-		} else {
-			// Use specific plugin
-			if( isset( $this->Repository[$PluginName] ) ) {
-				return $this->Repository[$PluginName];
-			}
 		}
-		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing '.$HookName.' plugin!', __FILE__, __LINE__ );
+		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing capable '.$HookName.' plugin!', __FILE__, __LINE__ );
 		return false;
 	}
 

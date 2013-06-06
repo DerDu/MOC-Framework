@@ -36,27 +36,44 @@
  * 05.06.2013 14:04
  */
 namespace MOC\Plugin\Hook;
+use MOC\Plugin\Hook;
+
 /**
  *
  */
-interface VideoPlayer {
-	/**
-	 * @param int $Width px
-	 * @param int $Height px
-	 *
-	 * @return VideoPlayer
-	 */
-	public function SetPlayerSize( $Width, $Height );
+abstract class VideoPlayer extends Hook {
 
 	/**
-	 * @param string $Movie
+	 * @param null|int $Value
 	 *
-	 * @return VideoPlayer
+	 * @return int
 	 */
-	public function SetPlayerSource( $Movie );
+	public function configWidth( $Value = null ) {
+		if( $Value !== null ) {
+			$this->HookConfigSet( 'Width', $Value );
+		} return $this->HookConfigGet( 'Width' );
+	}
 
 	/**
+	 * @param null|int $Value
+	 *
+	 * @return int
+	 */
+	public function configHeight( $Value = null ) {
+		if( $Value !== null ) {
+			$this->HookConfigSet( 'Height', $Value );
+		} return $this->HookConfigGet( 'Height' );
+	}
+
+	/**
+	 * @param null|string $Value
+	 *
 	 * @return string
 	 */
-	public function ExecutePlayer();
+	public function configSource( $Value = null ) {
+		if( $Value !== null ) {
+			$this->HookConfigSet( 'Source', $Value );
+		} return $this->HookConfigGet( 'Source' );
+	}
+
 }
