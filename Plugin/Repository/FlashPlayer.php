@@ -54,6 +54,16 @@ class FlashPlayer extends Hook implements Hook\VideoPlayer {
 		// TODO: Implement HookLoader() method.
 	}
 
+	/**
+	 * This method is used to determine if the plugin can handle the required task
+	 *
+	 * @return bool
+	 */
+	public function HookCapable() {
+		// TODO: Implement HookCapable() method.
+	}
+
+
 	/** @var int $Width */
 	private $Width = '';
 	/** @var int $Height */

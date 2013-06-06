@@ -51,7 +51,21 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	 * @return Hook
 	 */
 	public function HookLoader() {
+		var_dump( __METHOD__ );
 		// TODO: Implement HookLoader() method.
+	}
+
+	/**
+	 * This method is used to determine if the plugin can handle the required task
+	 *
+	 * @return bool
+	 */
+	public function HookCapable() {
+		// able to play the video?
+		return in_array(
+			Api::Module()->Drive()->File()->Open( $this->Source )->GetExtension(),
+			array( 'flv' )
+		);
 	}
 
 	/** @var int $Width */
