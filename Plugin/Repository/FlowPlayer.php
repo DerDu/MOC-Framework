@@ -41,7 +41,7 @@ use MOC\Plugin\Hook;
 /**
  *
  */
-class FlowPlayer extends Hook implements Hook\VideoPlayer {
+class FlowPlayer extends Hook\VideoPlayer {
 
 	/**
 	 * This method is used to setup your plugin
@@ -51,7 +51,6 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	 * @return Hook
 	 */
 	public function HookLoader() {
-		var_dump( __METHOD__ );
 		// TODO: Implement HookLoader() method.
 	}
 
@@ -63,55 +62,27 @@ class FlowPlayer extends Hook implements Hook\VideoPlayer {
 	public function HookCapable() {
 		// able to play the video?
 		return in_array(
-			Api::Module()->Drive()->File()->Open( $this->Source )->GetExtension(),
-			array( 'flv' )
+			Api::Module()->Drive()->File()->Open( $this->configSource() )->GetExtension(),
+			array( 'flv', 'mp4', 'mov', 'm4v', 'f4v' )
 		);
-	}
-
-	/** @var int $Width */
-	private $Width = '';
-	/** @var int $Height */
-	private $Height = '';
-	/**
-	 * @param int $Width  px
-	 * @param int $Height px
-	 *
-	 * @return Hook\VideoPlayer
-	 */
-	public function SetPlayerSize( $Width, $Height ) {
-		$this->Width = $Width;
-		$this->Height = $Height;
-		return $this;
-	}
-
-	/** @var string $Source */
-	private $Source = '';
-	/**
-	 * @param string $Movie
-	 *
-	 * @return Hook\VideoPlayer
-	 */
-	public function SetPlayerSource( $Movie ) {
-		$this->Source = $Movie;
-		return $this;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function ExecutePlayer() {
+	public function HookExecute() {
 
 		static $PlayerId;
 		$PlayerId++;
 
-		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/FlowPlayer/' );
+		$B = Api::Module()->Drive()->Directory()->Open( __DIR__.'/FlowPlayer/3rdParty/' );
 		$C = Api::Module()->Drive()->Directory()->Open( Api::Core()->Drive()->Directory()->DirectoryCurrent() );
 
 		$Script = '<script type="text/javascript" src="'.Api::Module()->Drive()->File()->Open(
-			__DIR__.'/FlowPlayer/flowplayer-3.2.12.min.js'
+			__DIR__.'/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js'
 		)->GetUrl().'"></script>';
 
-		$Script .= '<a id="FlowPlayer'.$PlayerId.'" href="'.$this->Source.'" style="display: block; width: '.$this->Width.'px; height:'.$this->Height.'px;"></a>'.
+		$Script .= '<a id="FlowPlayer'.$PlayerId.'" href="'.$this->configSource().'" style="display: block; width: '.$this->configWidth().'px; height:'.$this->configHeight().'px;"></a>'.
 		'<script type="text/javascript">'.
 			"flowplayer( 'FlowPlayer".$PlayerId."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."' );".
 		'</script>';
