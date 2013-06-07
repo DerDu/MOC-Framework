@@ -61,7 +61,7 @@ class Plugin extends Repository implements Adapter {
 	}
 
 	/**
-	 * @param string $Value
+	 * @param null|string $Value
 	 */
 	final public function InterfaceSelectPlugin( $Value = null ) {
 		$this->PluginName( $Value );
