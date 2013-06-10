@@ -33,54 +33,36 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * HtmlPlayer
- * 05.06.2013 16:00
+ * 10.06.2013 14:59
  */
 namespace MOC\Plugin\Repository;
 use MOC\Api;
-use MOC\Plugin\Hook;
+use MOC\Plugin\Gateway\VideoPlayer;
+
 /**
  *
  */
-class HtmlPlayer extends Hook\VideoPlayer {
+class HtmlPlayer extends VideoPlayer {
 
 	/**
-	 * This method is used to setup your plugin
-	 *
-	 * - called only once
-	 *
-	 * @return Hook
-	 */
-	public function HookLoader() {
-		// TODO: Implement HookLoader() method.
-	}
-
-	/**
-	 * This method is used to determine if the plugin can handle the required task
-	 *
 	 * @return bool
 	 */
-	public function HookCapable() {
+	public function PluginCapable() {
 		return in_array(
-			Api::Module()->Drive()->File()->Open( $this->configSource() )->GetExtension(),
+			Api::Module()->Drive()->File()->Open( $this->VideoSource() )->GetExtension(),
 			array( 'mp4', 'webm', 'ogg' )
 		);
 	}
 
-	/**
-	 * Called to run the video
-	 *
-	 * @return \MOC\Plugin\Hook\VideoPlayer
-	 */
-	public function Play() {
+	public function EmbedPlayer() {
 
 		static $PlayerId;
 		$PlayerId++;
 
-		print '<video id="HtmlPlayer'.$PlayerId.'" controls="controls" width="'.$this->configWidth().'" height="'.$this->configHeight().'">
-            <source src="'.$this->configSource().'">
-            <p>Video Playback Not Supported</p>
-        </video>';
-
-		return $this;
+		print '<video id="HtmlPlayer'.$PlayerId.'" controls="controls" width="'.$this->VideoWidth().'" height="'.$this->VideoHeight().'">
+			<source src="'.$this->VideoSource().'">
+			<p>Video Playback Not Supported</p>
+		</video>';
 	}
+
 }
