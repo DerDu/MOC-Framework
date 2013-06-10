@@ -96,6 +96,9 @@ class Repository implements Common {
 					&& $Reflection->getParentClass()->getParentClass()->getParentClass()->getName() == 'MOC\\Plugin\\Shared' ) {
 					/** @var Repository $Plugin */
 					$Plugin = $Reflection->newInstance();
+
+					// TODO: Init Plugin
+
 					$this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] = $Plugin;
 				} else {
 					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
