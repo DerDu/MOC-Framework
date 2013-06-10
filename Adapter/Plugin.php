@@ -45,7 +45,7 @@ use MOC\Plugin\Shared;
 /**
  * Class which provides an interface to the Plugin functionality of MOC
  */
-class Plugin extends Repository implements Adapter {
+class Plugin implements Adapter {
 
 	/** @var Plugin $Singleton */
 	private static $Singleton = null;
