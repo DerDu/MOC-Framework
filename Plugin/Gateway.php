@@ -32,17 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Repository
- * 10.06.2013 11:56
+ * Gateway
+ * 10.06.2013 12:47
  */
 namespace MOC\Plugin;
 use MOC\Api;
 use MOC\Generic\Common;
+use MOC\Plugin\Shared\VideoPlayer;
 
 /**
  *
  */
-class Repository implements Common {
+class Gateway implements Common {
 	/**
 	 * Get Changelog
 	 *
@@ -72,60 +73,19 @@ class Repository implements Common {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Repository
+	 * @return Gateway
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new Repository();
-			self::$Singleton->LoadRepository();
+			self::$Singleton = new Gateway();
 		} return self::$Singleton;
 	}
 
-	/** @var Shared[] $Repository */
-	private $Repository = array();
-
-	private function LoadRepository() {
-		$Repository = Api::Module()->Drive()->Directory()->Open( __DIR__.DIRECTORY_SEPARATOR.'Repository' )->FileList();
-		foreach( $Repository as $Plugin ) {
-			try {
-				$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
-				if( is_object( $Reflection->getParentClass() )
-					&& is_object( $Reflection->getParentClass()->getParentClass() )
-					&& is_object( $Reflection->getParentClass()->getParentClass()->getParentClass() )
-					&& $Reflection->getParentClass()->getParentClass()->getParentClass()->getName() == 'MOC\\Plugin\\Shared' ) {
-					/** @var Repository $Plugin */
-					$Plugin = $Reflection->newInstance();
-					$this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] = $Plugin;
-				} else {
-					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
-				}
-			} catch( \Exception $Exception  ) {
-				Api::Core()->Error()->Type()->Exception()->Trigger( $Exception->getMessage(), $Exception->getFile(), $Exception->getLine(), $Exception->getTraceAsString() );
-			}
-		}
-	}
-
 	/**
-	 * @param Shared $Shared
-	 *
-	 * @return Shared|null
+	 * @return VideoPlayer
 	 */
-	public function Execute( Shared $Shared ) {
-		$SharedReflection = new \ReflectionObject( $Shared );
-		$SharedPropertyList = $SharedReflection->getProperties();
-		$PluginGateway = 'MOC\\Plugin\\Gateway\\'.$SharedReflection->getShortName();
-		foreach( $this->Repository[$PluginGateway] as $Plugin ) {
-			/** @var Shared $Prospect */
-			$Prospect = clone $Plugin;
-			foreach( $SharedPropertyList as $Property ) {
-				$Prospect->{$Property->getName()}( $Shared->{$Property->getName()}() );
-			}
-			if( $Prospect->PluginCapable() ) {
-				return $Prospect;
-			}
-		}
-		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing capable '.$PluginGateway.' plugin!', __FILE__, __LINE__ );
-		return null;
+	public function VideoPlayer() {
+		return new Shared\VideoPlayer();
 	}
 }

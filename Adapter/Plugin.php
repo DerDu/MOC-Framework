@@ -38,7 +38,9 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
+use MOC\Plugin\Gateway;
 use MOC\Plugin\Repository;
+use MOC\Plugin\Shared;
 
 /**
  * Class which provides an interface to the Plugin functionality of MOC
@@ -61,25 +63,18 @@ class Plugin extends Repository implements Adapter {
 	}
 
 	/**
-	 * @param null|string $Value
-	 */
-	final public function InterfaceSelectPlugin( $Value = null ) {
-		$this->PluginName( $Value );
-	}
-
-	/**
 	 * Get Dependencies
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
+		return Api::Core()->Depending();/*
 			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
 				->SetClass( 'VideoPlayer' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
 			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
 				->SetClass( 'Documentation' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
-		;
+		;*/
 	}
 
 	/**
@@ -89,28 +84,26 @@ class Plugin extends Repository implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
+		return Api::Core()->Changelog();/*->Create( __CLASS__ )
 			->Build()->Clearance( '03.06.2013 16:17', 'Development' )
 			->Fix()->DocFix( '03.06.2013 16:18', 'Dependencies' )
 			->Fix()->DocFix( '06.06.2013 10:18', 'Dependencies' )
-		;
+		;*/
 	}
 
 	/**
-	 * @return mixed|void
+	 * @return Gateway
 	 */
-	public function Documentation() {
-		return $this->RepositorySearch( 'Documentation' )->HookExecute();
+	public function Get() {
+		return Gateway::InterfaceInstance();
 	}
 
 	/**
-	 * @param string $Source
-	 * @param int $Width
-	 * @param int $Height
-	 *
-	 * @return mixed|void
+	 * @param Shared $Shared
+	 * @return Shared|null
 	 */
-	public function VideoPlayer( $Source, $Width = 640, $Height = 480 ) {
-		return $this->RepositorySearch( 'VideoPlayer', array( $Source, $Width, $Height ) )->HookExecute();
+	public function Load( Shared $Shared ) {
+		return Repository::InterfaceInstance()->Execute( $Shared );
 	}
+
 }

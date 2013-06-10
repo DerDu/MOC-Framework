@@ -105,16 +105,10 @@ class Api {
 	}
 
 	/**
-	 * @param null $PluginName
-	 *  [null] -> Select Default-Plugin
-	 *  ['PluginName'] -> Select this plugin
-	 *
 	 * @return Adapter\Plugin
 	 */
-	public static function Plugin( $PluginName = null ) {
-		$Adapter = Adapter\Plugin::InterfaceInstance();
-		$Adapter->InterfaceSelectPlugin( $PluginName );
-		return $Adapter;
+	public static function Plugin() {
+		return Adapter\Plugin::InterfaceInstance();
 	}
 }
 
