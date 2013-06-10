@@ -32,31 +32,30 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * ApiDocGenerator
+ * Documentation
  * 10.06.2013 14:56
  */
 namespace MOC\Plugin\Repository;
 use MOC\Api;
-use MOC\Plugin\Gateway\Documentation;
+use Nette\Config\Adapters\NeonAdapter;
 
 /**
  *
  */
-class ApiDocGenerator extends Documentation {
+class Documentation extends \MOC\Plugin\Gateway\Documentation {
 
 	/**
 	 * @return bool
 	 */
 	public function PluginCapable() {
-		$this->DocSource( Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../' ) );
-		$this->DocDestination( Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content'  ) );
-		require_once( __DIR__.'/Documentation/3rdParty/libs/Nette/Nette/loader.php' );
 		return true;
 	}
 
 	public function CreateApiDocumentation() {
-		var_dump( $this );
-		return;
+
+		$this->DocSource( Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../' ) );
+		$this->DocDestination( Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content'  ) );
+		require_once( __DIR__.'/Documentation/3rdParty/libs/Nette/Nette/loader.php' );
 
 		set_time_limit(120);
 
@@ -64,9 +63,9 @@ class ApiDocGenerator extends Documentation {
 
 		$Config = array(
 			// Source file or directory to parse
-			'source' => $this->configSource()->GetLocation(),
+			'source' => $this->DocSource()->GetLocation(),
 			// Directory where to save the generated documentation
-			'destination' => $this->configDestination()->GetLocation(),
+			'destination' => $this->DocDestination()->GetLocation(),
 			// List of allowed file extensions
 			'extensions' => array( 'php' ),
 			// Mask to exclude file or directory from processing

@@ -38,6 +38,7 @@
 namespace MOC\Plugin;
 use MOC\Api;
 use MOC\Generic\Common;
+use MOC\Plugin\Shared\Documentation;
 use MOC\Plugin\Shared\VideoPlayer;
 
 /**
@@ -80,6 +81,13 @@ class Gateway implements Common {
 		if( self::$Singleton === null ) {
 			self::$Singleton = new Gateway();
 		} return self::$Singleton;
+	}
+
+	/**
+	 * @return Documentation
+	 */
+	public function Documentation() {
+		return new Shared\Documentation();
 	}
 
 	/**
