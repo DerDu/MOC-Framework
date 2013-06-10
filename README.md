@@ -62,106 +62,59 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Linking 3rd party software to the MOC-Framework
+### Linking 3rd-Party Software (3PS) to the MOC-Framework
 
-Note:
-- The term "3rd party software" will be substituted by "3PS" in the following section
+This can be achieved by two ways:
 
-To respect (most of) the licenses the 3PS author/owner may have chosen, this is achieved
-by using it with a kind of "plugin" architecture. This is (unfortunately) necessary because of the (e.g.) GPLv3 license.
+	* Extension
+		- Needs to be BSD-License compatible!
+	* Plugin
 
-After weeks of research (if i am allowed to do this) i found this way to add in GPLv3 3PS and still let the MOC-Framework be under BSD as a whole.
+#### Used 3PS in Extensions:
 
-> GPLv3 adds more clarity with regard to what constitutes a derivative work. For example, GPLv3 states that if the program
-> is "specifically designed" to work with a GPL-governed library, then the library is considered part of the overall work
-> and the entire application is governed by the GPL.
->
-> However, if one could swap out the GPL library for another library (i.e., if the application wasn't
-> "specifically designed" to work with the GPL library), then it's not part of the overall work and
-> would not be governed by the license.
->
-> Source: <http://www.ibm.com/developerworks/rational/library/edge/08/mar08/curran/>
-
-Loaded with this argument i can clearly say: So it is!
-
-- MOC-Framework is NOT "specifically designed" to work with a "specific" 3PS.
-- The 3PS is an interchangeable "Extension" to the MOC-Framework
-- The functionality of MOC is provided by a "Module" which COULD use a "Extension", but don't have to.
-
-Example:
-
-`Api::Module()->Office()->Document()->Pdf();`
-
-- This Pdf-Module uses the Pdf-Extension which is powered by 3PS from "tFPDF"
-- You are able to exchange this Pdf-Extension with one powered by 3PS from "tcPdf"
-- See? MOC-Framework is not "specifically designed" to work with "tFPDF" ;-)
-
-
-So there are three parts:
-
-MOC-Framework (BSD)
-- Provides an seamless API to the developer
-
-Module (BSD)
-- Provides the functionality to the API
-	- Case 1: it contains the code itself
-	- Case 2: it uses an Extension
-
-Extension (BSD)
-	- Case 1: it contains the code itself
-	- Case 2: it uses 3PS
-		- Loads and initializes the 3PS
-		- Provides the 3PS functionality to the Module
-		- Contains (File-System):
-			- Folder: "3rdParty" (>3PS-License<)
-				- Contains the complete and unmodified (AS IS) 3rd party application (including source code, if any)
-			- File: "Instance.php"
-				- A minimal interface (BSD) to load/boot/close the 3PS
-
-### Used 3rd party software
-
-
-#### apigen
-Used to create the MOC-Documentation
-- Project: <http://apigen.org>
-- License: BSD
-
-#### YUICompressor
+YUICompressor
 Add Packer:Script/Style capability
 - Project: <http://yui.github.com/yuicompressor>
 - License: BSD
 
-#### PHPExcel
+PHPExcel
 Add Office:Document:Excel capability
 - Project: <http://phpexcel.codeplex.com>
 - License: LGPL
 
-#### PHPWord
+PHPWord
 Add Office:Document:Word capability
 - Project: <http://phpword.codeplex.com>
 - License: LGPL
 
-#### tFPDF
+tFPDF
 Add Office:Document:PDF capability
 - Project: <http://fpdf.org/fr/script/script92.php>
 - License: LGPL
 
-#### PHPMailer
+PHPMailer
 Add Office:Mail:Smtp capability
 - Project: <http://sourceforge.net/projects/phpmailer>
 - License: LGPL
 
-#### PclZip
+PclZip
 Add Packer:Zip capability
 - Project: <http://www.phpconcept.net>
 - License: LGPL
 
-#### Flot
+Flot
 Add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
 
-#### FlowPlayer
+#### Used 3PS in Plugins:
+
+apigen
+Used to create the MOC-Documentation
+- Project: <http://apigen.org>
+- License: BSD
+
+FlowPlayer
 Add Office:Video capability
 - Lazy Extension: Is loaded on first use
 - Project: <http://flash.flowplayer.org>
