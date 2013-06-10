@@ -66,56 +66,45 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 This can be achieved by two ways:
 
-	* Extension
-		- Needs to be BSD-License compatible!
-	* Plugin
+	* Extension (needs to be BSD-License compatible!)
+	* Plugin (could be any FLOSS compatible license)
 
-#### Used 3PS in Extensions:
+#### Used 3PS Extensions:
 
-YUICompressor
-Add Packer:Script/Style capability
+YUICompressor to add Packer:Script/Style capability
 - Project: <http://yui.github.com/yuicompressor>
 - License: BSD
 
-PHPExcel
-Add Office:Document:Excel capability
+PHPExcel to add Office:Document:Excel capability
 - Project: <http://phpexcel.codeplex.com>
 - License: LGPL
 
-PHPWord
-Add Office:Document:Word capability
+PHPWord to add Office:Document:Word capability
 - Project: <http://phpword.codeplex.com>
 - License: LGPL
 
-tFPDF
-Add Office:Document:PDF capability
+tFPDF to add Office:Document:PDF capability
 - Project: <http://fpdf.org/fr/script/script92.php>
 - License: LGPL
 
-PHPMailer
-Add Office:Mail:Smtp capability
+PHPMailer to add Office:Mail:Smtp capability
 - Project: <http://sourceforge.net/projects/phpmailer>
 - License: LGPL
 
-PclZip
-Add Packer:Zip capability
+PclZip to add Packer:Zip capability
 - Project: <http://www.phpconcept.net>
 - License: LGPL
 
-Flot
-Add Office:Chart capability
+Flot to add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
 
-#### Used 3PS in Plugins:
+#### Used 3PS Plugins:
 
-apigen
-Used to create the MOC-Documentation
+apigen to create the MOC-Documentation
 - Project: <http://apigen.org>
 - License: BSD
 
-FlowPlayer
-Add Office:Video capability
-- Lazy Extension: Is loaded on first use
+FlowPlayer to add Office:Video capability
 - Project: <http://flash.flowplayer.org>
 - License: GPLv3
