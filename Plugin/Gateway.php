@@ -39,7 +39,7 @@ namespace MOC\Plugin;
 use MOC\Api;
 use MOC\Generic\Common;
 use MOC\Plugin\Shared\Documentation;
-use MOC\Plugin\Shared\VideoPlayer;
+use MOC\Plugin\Gateway\VideoPlayer;
 
 /**
  *

@@ -113,6 +113,9 @@ class Repository implements Common {
 	 */
 	public function Execute( Shared $Shared ) {
 		$SharedReflection = new \ReflectionObject( $Shared );
+		if( $SharedReflection->getNamespaceName() != 'MOC\\Plugin\\Shared' ) {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$SharedReflection->getName().' is not a valid plugin configuration!', __FILE__, __LINE__ );
+		}
 		$SharedPropertyList = $SharedReflection->getProperties();
 		$PluginGateway = 'MOC\\Plugin\\Gateway\\'.$SharedReflection->getShortName();
 		foreach( $this->Repository[$PluginGateway] as $Plugin ) {

@@ -41,6 +41,6 @@ namespace MOC\Plugin\Gateway;
  */
 abstract class Documentation extends \MOC\Plugin\Shared\Documentation {
 
-	abstract public function CreateApiDocumentation();
+	abstract public function CreateApiDoc();
 
 }

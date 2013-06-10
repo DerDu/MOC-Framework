@@ -51,7 +51,7 @@ class Documentation extends \MOC\Plugin\Gateway\Documentation {
 		return true;
 	}
 
-	public function CreateApiDocumentation() {
+	public function CreateApiDoc() {
 
 		$this->DocSource( Api::Module()->Drive()->Directory()->Open( __DIR__.'/../../' ) );
 		$this->DocDestination( Api::Module()->Drive()->Directory()->Open( __DIR__.'/Documentation/Content'  ) );
