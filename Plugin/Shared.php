@@ -44,6 +44,14 @@ abstract class Shared {
 	/**
 	 * @return string
 	 */
+	final public function PluginName() {
+		$Reflection = new \ReflectionObject( $this );
+		return $Reflection->getShortName();
+	}
+
+	/**
+	 * @return string
+	 */
 	final public function PluginGateway() {
 		$Reflection = new \ReflectionObject( $this );
 		return $Reflection->getParentClass()->getName();

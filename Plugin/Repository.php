@@ -111,10 +111,11 @@ class Repository implements Common {
 
 	/**
 	 * @param Shared $Shared
+	 * @param null|string $PluginName - Name of specific plugin to use
 	 *
 	 * @return Shared|null
 	 */
-	public function Execute( Shared $Shared ) {
+	public function Execute( Shared $Shared, $PluginName = null ) {
 		$SharedReflection = new \ReflectionObject( $Shared );
 		if( $SharedReflection->getNamespaceName() != 'MOC\\Plugin\\Shared' ) {
 			Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$SharedReflection->getName().' is not a valid plugin configuration!', __FILE__, __LINE__ );
@@ -122,6 +123,10 @@ class Repository implements Common {
 		$SharedPropertyList = $SharedReflection->getProperties();
 		$PluginGateway = 'MOC\\Plugin\\Gateway\\'.$SharedReflection->getShortName();
 		foreach( $this->Repository[$PluginGateway] as $Plugin ) {
+			/** @var Shared $Plugin  */
+			if( $PluginName !== null && $PluginName != $Plugin->PluginName() ) {
+				continue;
+			}
 			/** @var Shared $Prospect */
 			$Prospect = clone $Plugin;
 			foreach( $SharedPropertyList as $Property ) {
@@ -131,7 +136,11 @@ class Repository implements Common {
 				return $Prospect;
 			}
 		}
-		Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing capable '.$PluginGateway.' plugin!', __FILE__, __LINE__ );
+		if( $PluginName !== null ) {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$PluginName.' is either not available or not a capable plugin!', __FILE__, __LINE__ );
+		} else {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: Missing capable '.$PluginGateway.' plugin!', __FILE__, __LINE__ );
+		}
 		return null;
 	}
 }

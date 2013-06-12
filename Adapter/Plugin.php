@@ -100,10 +100,12 @@ class Plugin implements Adapter {
 
 	/**
 	 * @param Shared $Shared
+	 * @param null|string $PluginName - Use specific plugin, or select best fit automatically (null)
+	 *
 	 * @return Shared|null
 	 */
-	public function Load( Shared $Shared ) {
-		return Repository::InterfaceInstance()->Execute( $Shared );
+	public function Load( Shared $Shared, $PluginName = null ) {
+		return Repository::InterfaceInstance()->Execute( $Shared, $PluginName );
 	}
 
 }
