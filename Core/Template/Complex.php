@@ -37,7 +37,6 @@
  */
 namespace MOC\Core\Template;
 use MOC\Api;
-use MOC\Core\Template;
 use MOC\Generic\Device\Core;
 
 /**
