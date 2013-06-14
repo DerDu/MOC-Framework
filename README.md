@@ -62,7 +62,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-### Linking 3rd-Party Software (3PS) to the MOC-Framework
+### 3rd-Party Software (3PS) used by MOC-Framework
 
 This can be achieved by two ways:
 
