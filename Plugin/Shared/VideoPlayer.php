@@ -87,4 +87,12 @@ class VideoPlayer extends Shared {
 		} return $this->VideoSource;
 	}
 
+	/**
+	 * Dummy
+	 *
+	 * @return string
+	 */
+	function __toString() {
+		return '';
+	}
 }

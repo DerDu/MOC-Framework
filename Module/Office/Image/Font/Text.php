@@ -124,6 +124,7 @@ class Text implements Module {
 	 *
 	 * @return string
 	 */
+	/** @noinspection PhpUnusedPrivateMethodInspection */
 	private function ConvertToUtf8( $Text ) {
 		return Api::Core()->Encoding()->MixedToUtf8( $Text );
 	}

@@ -44,10 +44,13 @@ use MOC\Module\Drive\File;
  */
 abstract class Shared {
 
+	/**
+	 * @param File $File
+	 */
 	final public function PluginJavaScript( File $File ) {
-		Api::Plugin()->Load(
-			Api::Plugin()->Get()->mocJavaScriptHelper()
-		)->Register( $File );
+		/** @var Gateway\mocJavaScriptHelper $Plugin */
+		$Plugin = Api::Plugin()->Load( Api::Plugin()->Get()->mocJavaScriptHelper() );
+		$Plugin->Register( $File );
 	}
 
 	/**

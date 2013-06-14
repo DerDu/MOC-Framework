@@ -48,11 +48,26 @@ abstract class mocJavaScriptHelper extends \MOC\Plugin\Shared\mocJavaScriptHelpe
 	/** @var File[] $FileList */
 	private static $FileList = array();
 
+	/**
+	 * Register a JavaScript file to be loaded
+	 *
+	 * @param File $File
+	 * @param bool $asRaw
+	 *
+	 * @return mocJavaScriptHelper
+	 */
 	final public function Register( File $File, $asRaw = true ) {
 		self::$FileList[] = array( $File, $asRaw );
 		return $this;
 	}
 
+	/**
+	 * Create combined/compressed JavaScript file and return an URI-Location
+	 *
+	 * @param Directory $Directory
+	 *
+	 * @return string
+	 */
 	final public function Build( Directory $Directory ) {
 		$Hash = $this->HashStack();
 		$Build = Api::Module()->Drive()->File()->Open( $Directory->GetLocation().DIRECTORY_SEPARATOR.$Hash.'.js' );
@@ -66,8 +81,14 @@ abstract class mocJavaScriptHelper extends \MOC\Plugin\Shared\mocJavaScriptHelpe
 		return $Build->GetUrl();
 	}
 
+	/**
+	 * Create JavaScript Library-Hash
+	 *
+	 * @return string
+	 */
 	private function HashStack() {
 		$HashStack = array();
+		/** @var File[] $File */
 		foreach( self::$FileList as $File ) {
 			array_push( $HashStack, $File[0]->GetHash() );
 		}

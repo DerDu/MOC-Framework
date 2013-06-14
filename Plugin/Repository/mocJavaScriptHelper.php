@@ -41,6 +41,9 @@ namespace MOC\Plugin\Repository;
  */
 class mocJavaScriptHelper extends \MOC\Plugin\Gateway\mocJavaScriptHelper {
 
+	/**
+	 * @return bool
+	 */
 	public function PluginCapable() {
 		return true;
 	}

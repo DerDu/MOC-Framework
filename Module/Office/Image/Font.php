@@ -148,6 +148,7 @@ class Font implements Module {
 	 *
 	 * @return array
 	 */
+	/** @noinspection PhpUnusedPrivateMethodInspection */
 	private function ConvertHEXToRGBFloat( $Color ) {
 		$Hex = self::ConvertHEXToRGB( $Color );
 		foreach( (array)$Hex as $Index => $Color ){
