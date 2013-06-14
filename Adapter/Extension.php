@@ -38,9 +38,7 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-use MOC\Extension\ApiGen\Instance as ApiGen;
 use MOC\Extension\Excel\Instance as Excel;
-use MOC\Extension\FlowPlayer\Instance as FlowPlayer;
 use MOC\Extension\Mail\Instance as Mail;
 use MOC\Extension\Pdf\Instance as Pdf;
 use MOC\Extension\Word\Instance as Word;
