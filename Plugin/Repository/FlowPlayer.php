@@ -54,6 +54,12 @@ class FlowPlayer extends VideoPlayer {
 		);
 	}
 
+	public function PluginLoader() {
+		$this->PluginJavaScript(
+			Api::Module()->Drive()->File()->Open( __DIR__.'/FlowPlayer/3rdParty/flowplayer-3.2.12.min.js' )
+		);
+	}
+
 	public function EmbedPlayer() {
 
 		static $PlayerId;

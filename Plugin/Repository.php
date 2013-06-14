@@ -84,22 +84,38 @@ class Repository implements Common {
 
 	/** @var Shared[] $Repository */
 	private $Repository = array();
+	/** @var Shared[] $Helper */
+	private $Helper = array(
+		'mocJavaScriptHelper'
+	);
 
 	private function LoadRepository() {
 		$Repository = Api::Module()->Drive()->Directory()->Open( __DIR__.DIRECTORY_SEPARATOR.'Repository' )->FileList();
+
+		// HelperPlugins
+		foreach( $this->Helper as $Plugin ) {
+			$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin );
+			$Plugin = $Reflection->newInstance();
+			$this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] = $Plugin;
+		}
+
 		foreach( $Repository as $Plugin ) {
 			try {
 				$Reflection = new \ReflectionClass( 'MOC\\Plugin\\Repository\\'.$Plugin->GetName() );
 				if( is_object( $Reflection->getParentClass() )
 					&& is_object( $Reflection->getParentClass()->getParentClass() )
 					&& is_object( $Reflection->getParentClass()->getParentClass()->getParentClass() )
-					&& $Reflection->getParentClass()->getParentClass()->getParentClass()->getName() == 'MOC\\Plugin\\Shared' ) {
-					/** @var Repository $Plugin */
+					&& $Reflection->getParentClass()->getParentClass()->getParentClass()->getName() == 'MOC\\Plugin\\Shared'
+				) {
+
+					/** @var Shared $Plugin */
 					$Plugin = $Reflection->newInstance();
-
-					// TODO: Init Plugin
-
-					$this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] = $Plugin;
+					if( !isset( $this->Repository[$Reflection->getParentClass()->getName()] )
+						|| !isset( $this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] )
+					) {
+						$this->Repository[$Reflection->getParentClass()->getName()][$Reflection->getShortName()] = $Plugin;
+						$Plugin->PluginLoader();
+					}
 				} else {
 					Api::Core()->Error()->Type()->Exception()->Trigger( 'Plugin-Repository: '.$Reflection->getName().' is not a plugin!', $Plugin->GetLocation(), $Reflection->getStartLine() );
 				}

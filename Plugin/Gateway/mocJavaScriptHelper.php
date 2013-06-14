@@ -32,76 +32,45 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Gateway
- * 10.06.2013 12:47
+ * mocJavaScriptHelper
+ * 12.06.2013 12:55
  */
-namespace MOC\Plugin;
+namespace MOC\Plugin\Gateway;
 use MOC\Api;
-use MOC\Generic\Common;
-use MOC\Plugin\Shared\Documentation;
-use MOC\Plugin\Shared\VideoPlayer;
-use MOC\Plugin\Shared\mocJavaScriptHelper;
+use MOC\Module\Drive\Directory;
+use MOC\Module\Drive\File;
 
 /**
  *
  */
-class Gateway implements Common {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceChangelog() {
-		Api::Core()->Changelog();
+abstract class mocJavaScriptHelper extends \MOC\Plugin\Shared\mocJavaScriptHelper {
+
+	/** @var File[] $FileList */
+	private static $FileList = array();
+
+	final public function Register( File $File, $asRaw = true ) {
+		self::$FileList[] = array( $File, $asRaw );
+		return $this;
 	}
 
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceDepending() {
-		Api::Core()->Depending();
+	final public function Build( Directory $Directory ) {
+		$Hash = $this->HashStack();
+		$Build = Api::Module()->Drive()->File()->Open( $Directory->GetLocation().DIRECTORY_SEPARATOR.$Hash.'.js' );
+		if( !$Build->Exists() ) {
+			$Yui = Api::Module()->Packer()->Yui()->Script();
+			foreach( self::$FileList as $Job ) {
+				$Yui->AddFile( $Job[0], $Job[1] );
+			}
+			$Yui->SaveAs( $Build );
+		}
+		return $Build->GetUrl();
 	}
 
-	/** @var Repository $Singleton */
-	private static $Singleton = null;
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Gateway
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Gateway();
-		} return self::$Singleton;
-	}
-
-	/**
-	 * @return Documentation
-	 */
-	public function Documentation() {
-		return new Shared\Documentation();
-	}
-
-	/**
-	 * @return mocJavaScriptHelper
-	 */
-	public function mocJavaScriptHelper() {
-		return new Shared\mocJavaScriptHelper();
-	}
-
-	/**
-	 * @return VideoPlayer
-	 */
-	public function VideoPlayer() {
-		return new Shared\VideoPlayer();
+	private function HashStack() {
+		$HashStack = array();
+		foreach( self::$FileList as $File ) {
+			array_push( $HashStack, $File[0]->GetHash() );
+		}
+		return sha1( implode( '-', $HashStack ) );
 	}
 }

@@ -36,10 +36,19 @@
  * 10.06.2013 13:16
  */
 namespace MOC\Plugin;
+use MOC\Api;
+use MOC\Module\Drive\File;
+
 /**
  *
  */
 abstract class Shared {
+
+	final public function PluginJavaScript( File $File ) {
+		Api::Plugin()->Load(
+			Api::Plugin()->Get()->mocJavaScriptHelper()
+		)->Register( $File );
+	}
 
 	/**
 	 * @return string
@@ -64,5 +73,14 @@ abstract class Shared {
 	 */
 	public function PluginCapable() {
 		return false;
+	}
+
+	/**
+	 * This method is used to determine if the plugin can handle the required task
+	 *
+	 * @return bool
+	 */
+	public function PluginLoader() {
+
 	}
 }
