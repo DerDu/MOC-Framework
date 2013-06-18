@@ -78,6 +78,7 @@ abstract class mocStyleSheetHelper extends \MOC\Plugin\Shared\mocStyleSheetHelpe
 			}
 			$Yui->SaveAs( $Build );
 		}
+		self::$FileList = array();
 		return $Build->GetUrl();
 	}
 

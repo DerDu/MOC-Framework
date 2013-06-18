@@ -78,6 +78,7 @@ abstract class mocJavaScriptHelper extends \MOC\Plugin\Shared\mocJavaScriptHelpe
 			}
 			$Yui->SaveAs( $Build );
 		}
+		self::$FileList = array();
 		return $Build->GetUrl();
 	}
 
