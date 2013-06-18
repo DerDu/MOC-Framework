@@ -3,6 +3,13 @@ The easy way to OOP
 
 > Simple, fast, extensible, unified interface to unlimited possibilities.
 >
+> * It empowers you to succeed office tasks like using excel / charts / video / word / mail / pdf / xml / archives / images / ...
+> * Simplified database access to e.g. mysql / mssql / oracle / ...
+> * Independent filesystem access and networking abilities e.g. http / ftp / proxy / ...
+> * Powerful templating engine and much much more right at your fingertips available to your php application
+>
+> Not satisfied yet? Let me know whats missing, or integrate it yourself
+
 > Mind the task - forget the obstacles...
 
 ------------------------------------------------------------------------------------------------------------------------
