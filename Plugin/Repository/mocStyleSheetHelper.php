@@ -32,84 +32,20 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Gateway
- * 10.06.2013 12:47
+ * mocStyleSheetHelper
+ * 17.06.2013 08:37
  */
-namespace MOC\Plugin;
-use MOC\Api;
-use MOC\Generic\Common;
-use MOC\Plugin\Shared\Documentation;
-use MOC\Plugin\Shared\mocJavaScriptHelper;
-use MOC\Plugin\Shared\mocStyleSheetHelper;
-use MOC\Plugin\Shared\VideoPlayer;
-
+namespace MOC\Plugin\Repository;
 /**
  *
  */
-class Gateway implements Common {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceChangelog() {
-		Api::Core()->Changelog();
-	}
+class mocStyleSheetHelper extends \MOC\Plugin\Gateway\mocStyleSheetHelper {
 
 	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return bool
 	 */
-	public static function InterfaceDepending() {
-		Api::Core()->Depending();
+	public function PluginCapable() {
+		return true;
 	}
 
-	/** @var Repository $Singleton */
-	private static $Singleton = null;
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Gateway
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Gateway();
-		} return self::$Singleton;
-	}
-
-	/**
-	 * @return Documentation
-	 */
-	public function Documentation() {
-		return new Shared\Documentation();
-	}
-
-	/**
-	 * @return mocJavaScriptHelper
-	 */
-	public function mocJavaScriptHelper() {
-		return new Shared\mocJavaScriptHelper();
-	}
-
-	/**
-	 * @return mocStyleSheetHelper
-	 */
-	public function mocStyleSheetHelper() {
-		return new Shared\mocStyleSheetHelper();
-	}
-
-	/**
-	 * @return VideoPlayer
-	 */
-	public function VideoPlayer() {
-		return new Shared\VideoPlayer();
-	}
 }
