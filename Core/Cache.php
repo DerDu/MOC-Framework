@@ -65,7 +65,7 @@ class Cache implements Core {
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:52', 'Alpha' )
+			->Build()->Clearance( '03.06.2013 14:43', 'Development' )
 		;
 	}
 
@@ -76,8 +76,7 @@ class Cache implements Core {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1)->Update(3) );
+		return Api::Core()->Depending();
 	}
 
 	/** @var Drive\Directory $CacheDirectory */

@@ -49,7 +49,6 @@ class Xml implements Module {
 	 *
 	 * @static
 	 * @return Xml
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Xml();

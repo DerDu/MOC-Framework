@@ -48,12 +48,9 @@ class Post implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 14:13', 'Dev' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -61,7 +58,6 @@ class Post implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -72,7 +68,6 @@ class Post implements Module {
 	 *
 	 * @static
 	 * @return Post
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Post();
@@ -85,7 +80,7 @@ class Post implements Module {
 	 * @return bool|string
 	 */
 	public function Request( $Url, $Data = array() ) {
-		set_time_limit(5);
+
 		$Uri = Uri::InterfaceInstance()->Load( $Url );
 
 		foreach( (array)$Data as $Key => $Value ) {
@@ -171,7 +166,6 @@ class UriQuery implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -182,7 +176,6 @@ class UriQuery implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -193,7 +186,6 @@ class UriQuery implements Module {
 	 *
 	 * @static
 	 * @return UriQuery
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new UriQuery();
@@ -245,7 +237,6 @@ class UriScheme implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -256,7 +247,6 @@ class UriScheme implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -267,7 +257,6 @@ class UriScheme implements Module {
 	 *
 	 * @static
 	 * @return UriScheme
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new UriScheme();
@@ -315,7 +304,6 @@ class Uri implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -326,7 +314,6 @@ class Uri implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -337,7 +324,6 @@ class Uri implements Module {
 	 *
 	 * @static
 	 * @return Uri
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		$Instance = new Uri();

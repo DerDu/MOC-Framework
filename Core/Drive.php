@@ -65,7 +65,7 @@ class Drive implements Core {
 	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -75,8 +75,7 @@ class Drive implements Core {
 	 * @return Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Error', Version::InterfaceInstance()->Build(1) );
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -85,6 +84,7 @@ class Drive implements Core {
 	public function Directory() {
 		return Drive\Directory::InterfaceInstance();
 	}
+
 	/**
 	 * @return Drive\File
 	 */

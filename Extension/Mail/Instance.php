@@ -52,7 +52,6 @@ class Instance implements Extension {
 	 *
 	 * @static
 	 * @return Instance
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		require_once( '3rdParty/class.phpmailer.php' );
@@ -68,7 +67,6 @@ class Instance implements Extension {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
@@ -81,7 +79,6 @@ class Instance implements Extension {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();

@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class for common HTTP requests
  */
 class Http implements Module {
 
@@ -66,9 +66,7 @@ class Http implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Method Post()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -82,6 +80,8 @@ class Http implements Module {
 	}
 
 	/**
+	 * Gets HTTP Post request
+	 * 
 	 * @return Http\Post
 	 */
 	public function Post() {
@@ -89,6 +89,8 @@ class Http implements Module {
 	}
 
 	/**
+	 * Gets HTTP Get request
+	 * 
 	 * @return Http\Get
 	 */
 	public function Get() {

@@ -38,7 +38,6 @@
 namespace MOC\Module\Office\Chart\Data;
 use MOC\Api;
 use MOC\Generic\Device\Module;
-use MOC\Module\Office\Document\Pdf\Font\Color;
 
 /**
  *
@@ -50,7 +49,6 @@ class Config implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -61,7 +59,6 @@ class Config implements Module {
 	 *
 	 * @static
 	 * @return Config
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Config();
@@ -72,7 +69,6 @@ class Config implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );

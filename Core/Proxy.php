@@ -75,8 +75,7 @@ class Proxy implements Core {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Drive', Version::InterfaceInstance()->Build(1)->Update(2)->Fix(1) );
+		return Api::Core()->Depending();
 	}
 
 	const PROXY_NONE = 0;

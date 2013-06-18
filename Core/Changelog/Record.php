@@ -48,7 +48,6 @@ class Record implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -59,7 +58,6 @@ class Record implements Core {
 	 *
 	 * @static
 	 * @return Record
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Record();
@@ -70,18 +68,15 @@ class Record implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:18', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	private $Timestamp = '';
 	private $Method = '';
 	private $Message = '';
-	private $Location = '';
+	//private $Location = '';
 
 	/**
 	 * @param null $Timestamp
@@ -119,15 +114,16 @@ class Record implements Core {
 			$this->Message = $Message;
 		} return $this->Message;
 	}
-
+/*
 	/**
 	 * @param null $Location
 	 *
 	 * @return null|string
 	 */
-	public function Location( $Location = null ) {
+/*	public function Location( $Location = null ) {
 		if( null !== $Location ) {
 			$this->Location = $Location;
 		} return $this->Location;
 	}
+*/
 }

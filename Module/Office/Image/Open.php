@@ -49,10 +49,9 @@ class Open implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -60,7 +59,6 @@ class Open implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -71,7 +69,6 @@ class Open implements Module {
 	 *
 	 * @static
 	 * @return Open
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Open();
@@ -101,6 +98,10 @@ class Open implements Module {
 		if( $File->Exists() ) {
 			$Factory = $this->GetLoadFactory( $File );
 			$Resource = $Factory( $File->GetLocation() );
+			if( $this->GetTypeFactory( $File ) == 'png' ) {
+				imageAlphaBlending($Resource, true);
+				imageSaveAlpha($Resource, true);
+			}
 			Api::Module()->Office()->Image()->_openResource( $Resource );
 		}
 		return Api::Module()->Office()->Image();

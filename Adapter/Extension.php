@@ -38,9 +38,15 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-
+use MOC\Extension\Excel\Instance as Excel;
+use MOC\Extension\Mail\Instance as Mail;
+use MOC\Extension\Pdf\Instance as Pdf;
+use MOC\Extension\Word\Instance as Word;
+use MOC\Extension\Xml\Instance as Xml;
+use MOC\Extension\YUICompressor\Instance as YUICompressor;
+use MOC\Extension\Zip\Instance as Zip;
 /**
- *
+ * Class which provides an interface to the Extension functionality of MOC
  */
 class Extension implements Adapter {
 
@@ -67,11 +73,20 @@ class Extension implements Adapter {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->Package( '\MOC\Extension\Excel\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Mail\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Pdf\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\Zip\Instance', Api::Core()->Version() )
-			->Package( '\MOC\Extension\ApiGen\Instance', Api::Core()->Version() )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Excel' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Mail' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Pdf' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Word' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Xml' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\YUICompressor' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Extension\Zip' )
+				->SetClass( 'Instance' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
 		;
 	}
 
@@ -83,83 +98,57 @@ class Extension implements Adapter {
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 10:02', 'Alpha' )
-			->Build()->Clearance( '18.02.2013 11:31', 'Beta' )
-			->Fix()->BugFix( '18.02.2013 13:57', 'Depending' )
-			->Update()->Added( '19.02.2013 8:29', 'ApiGen()' )
-			->Update()->Added( '01.03.2013 14:25', 'Word()' )
+			->Build()->Clearance( '03.06.2013 15:16', 'Development' )
+			->Fix()->DocFix( '03.06.2013 15:17', 'Dependencies' )
 		;
 	}
 
 	/**
-	 * @return \MOC\Extension\Excel\Instance
+	 * @return Excel
 	 */
 	public function Excel() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Excel\Instance::InterfaceInstance();
+		return Excel::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Mail\Instance
+	 * @return Mail
 	 */
 	public function Mail() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Mail\Instance::InterfaceInstance();
+		return Mail::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Pdf\Instance
+	 * @return Pdf
 	 */
 	public function Pdf() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Pdf\Instance::InterfaceInstance();
+		return Pdf::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Word\Instance
+	 * @return Word
 	 */
 	public function Word() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Word\Instance::InterfaceInstance();
+		return Word::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Xml\Instance
+	 * @return Xml
 	 */
 	public function Xml() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Xml\Instance::InterfaceInstance();
+		return Xml::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\Zip\Instance
+	 * @return Zip
 	 */
 	public function Zip() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\Zip\Instance::InterfaceInstance();
+		return Zip::InterfaceInstance();
 	}
 
 	/**
-	 * @return \MOC\Extension\ApiGen\Instance
-	 */
-	public function ApiGen() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\ApiGen\Instance::InterfaceInstance();
-	}
-
-	/**
-	 * @return \MOC\Extension\YUICompressor\Instance
+	 * @return YUICompressor
 	 */
 	public function YUICompressor() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\YUICompressor\Instance::InterfaceInstance();
-	}
-
-	/**
-	 * @return \MOC\Extension\FlowPlayer\Instance
-	 */
-	public function FlowPlayer() {
-		/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
-		return \MOC\Extension\FlowPlayer\Instance::InterfaceInstance();
+		return YUICompressor::InterfaceInstance();
 	}
 }

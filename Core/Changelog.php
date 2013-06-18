@@ -51,7 +51,6 @@ class Changelog implements Core {
 	 *
 	 * @static
 	 * @return Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -62,7 +61,6 @@ class Changelog implements Core {
 	 *
 	 * @static
 	 * @return object
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
@@ -75,13 +73,10 @@ class Changelog implements Core {
 	 *
 	 * @static
 	 * @return Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:52', 'Alpha' )
-			->Update()->Added( '19.02.2013 20:49', 'Protocol()' )
-			->Fix()->BugFix( '20.02.2013 13:46', 'Protocol() reported wrong [Version]' )
+			->Build()->Clearance( '03.06.2013 14:43', 'Development' )
 		;
 	}
 
@@ -141,7 +136,8 @@ class Changelog implements Core {
 		$Protocol = array();
 		/** @var Changelog\Record $Record */
 		foreach( (array)$this->RecordList as $Record ) {
-			$rMethod = new \ReflectionMethod( $Record->Method() );
+			$Suspect = explode( '::', $Record->Method() );
+			$rMethod = new \ReflectionMethod( $Suspect[0], $Suspect[1] );
 			$ClassName = $rMethod->getDeclaringClass()->getShortName();
 			$MethodName = $rMethod->getName();
 			switch( $ClassName ) {
@@ -191,9 +187,9 @@ class Changelog implements Core {
 
 			$ChangeLogEntry = Changelog\Entry::InterfaceInstance();
 
-			$ChangeLogEntry->Location( $this->RecordClass );
+//			$ChangeLogEntry->Location( $this->RecordClass );
 			$ChangeLogEntry->Message( 'MISSING CHANGELOG' );
-			//$ChangeLogEntry->Timestamp( '-NA-' );
+			$ChangeLogEntry->Timestamp( '-NA-' );
 
 			$this->Log[] = $ChangeLogEntry;
 
@@ -201,7 +197,8 @@ class Changelog implements Core {
 
 			/** @var Changelog\Record $Record */
 			foreach( (array)$this->RecordList as $Record ) {
-				$rMethod = new \ReflectionMethod( $Record->Method() );
+				$Suspect = explode( '::', $Record->Method() );
+				$rMethod = new \ReflectionMethod( $Suspect[0], $Suspect[1] );
 				$ClassName = $rMethod->getDeclaringClass()->getShortName();
 				$MethodName = $rMethod->getName();
 				$ChangeLogEntry = Changelog\Entry::InterfaceInstance();
@@ -238,7 +235,7 @@ class Changelog implements Core {
 				$ChangeLogEntry->Type( $ClassName );
 				$ChangeLogEntry->Cause( $MethodName );
 				$ChangeLogEntry->Message( $Record->Message() );
-				$ChangeLogEntry->Location( $Record->Location() );
+				//$ChangeLogEntry->Location( $Record->Location() );
 				$this->Log[] = $ChangeLogEntry;
 			}
 

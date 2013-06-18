@@ -37,18 +37,20 @@
  */
 namespace MOC\Module\Image\Font;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+
 /**
  *
  */
-class Text implements \MOC\Implement\Common {
+class Text implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return \MOC\Module\Image\Font\Text
+	 * @return Text
 	 */
 	public static function InterfaceInstance() {
-		return new \MOC\Module\Image\Font\Text();
+		return new Text();
 	}
 
 	/**
@@ -62,13 +64,13 @@ class Text implements \MOC\Implement\Common {
 	}
 
 	/**
-	 * Get Version
+	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Version
+	 * @return \MOC\Core\Changelog
 	 */
-	public static function InterfaceVersion() {
-		return Api::Core()->Version();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -100,7 +102,8 @@ class Text implements \MOC\Implement\Common {
 	 * @param $Size
 	 *
 	 * @return number
-	 */public function TextHeight( $Text, $Font, $Size ) {
+	 */
+	public function TextHeight( $Text, $Font, $Size ) {
 		// Fetch Font-Box
 		$TextBox = imagettfbbox( $Size, 0, $Font, $Text );
 		// Fetch Dimension
@@ -120,7 +123,9 @@ class Text implements \MOC\Implement\Common {
 	 * @param $Text
 	 *
 	 * @return string
-	 */private function ConvertToUtf8( $Text ) {
+	 */
+	/** @noinspection PhpUnusedPrivateMethodInspection */
+	private function ConvertToUtf8( $Text ) {
 		return Api::Core()->Encoding()->MixedToUtf8( $Text );
 	}
 
@@ -128,7 +133,8 @@ class Text implements \MOC\Implement\Common {
 	 * @param $Text
 	 *
 	 * @return string
-	 */private function ConvertToNCR( $Text ) {
+	 */
+	private function ConvertToNCR( $Text ) {
 		$Result = '';
 		$Length = strlen( $Text );
 		for( $Run = 0; $Run < $Length; $Run++ ) {

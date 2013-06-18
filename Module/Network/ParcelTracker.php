@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class which provides access to German parcel tracking services
  */
 class ParcelTracker implements Module {
 	/**
@@ -70,46 +70,52 @@ class ParcelTracker implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\DHLGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\UPSGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\DPDGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\GLSGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\TOFGermany', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network\ParcelTracker\Carrier\HermesGermany', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**
+	 * DHL Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\DHLGermany
 	 */
 	public function DHLGermany() {
 		return ParcelTracker\Carrier\DHLGermany::InterfaceInstance();
 	}
 	/**
+	 * UPS Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\UPSGermany
 	 */
 	public function UPSGermany() {
 		return ParcelTracker\Carrier\UPSGermany::InterfaceInstance();
 	}
 	/**
+	 * DPD Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\DPDGermany
 	 */
 	public function DPDGermany() {
 		return ParcelTracker\Carrier\DPDGermany::InterfaceInstance();
 	}
 	/**
+	 * GLS Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\GLSGermany
 	 */
 	public function GLSGermany() {
 		return ParcelTracker\Carrier\GLSGermany::InterfaceInstance();
 	}
 	/**
+	 * TOF Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\TOFGermany
 	 */
 	public function TOFGermany() {
 		return ParcelTracker\Carrier\TOFGermany::InterfaceInstance();
 	}
 	/**
+	 * Hermes Germany parcel tracking
+	 * 
 	 * @return ParcelTracker\Carrier\HermesGermany
 	 */
 	public function HermesGermany() {

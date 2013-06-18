@@ -40,7 +40,7 @@ use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * Class for tasks with directories
  */
 class Directory implements Module {
 
@@ -48,7 +48,7 @@ class Directory implements Module {
 	private $Resource = null;
 
 	/**
-	 * Get Singleton/Instance
+	 * Gets Singleton/Instance
 	 *
 	 * @static
 	 * @return Directory
@@ -60,7 +60,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get Changelog
+	 * Gets Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
@@ -72,7 +72,7 @@ class Directory implements Module {
 	}
 
 	/**
-	 * Get Dependencies
+	 * Gets Dependencies
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
@@ -82,6 +82,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Opens directory
+	 * 
 	 * @param string $Location
 	 *
 	 * @return Directory
@@ -92,6 +94,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets name
+	 * 
 	 * @return null|string
 	 */
 	public function GetName() {
@@ -99,6 +103,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets location
+	 * 
 	 * @return null|string
 	 */
 	public function GetLocation() {
@@ -106,6 +112,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets relative path of the directory
+	 * 
 	 * @param Directory $Directory
 	 *
 	 * @return string
@@ -131,6 +139,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets path
+	 * 
 	 * @return null|string
 	 */
 	public function GetPath() {
@@ -138,6 +148,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets time
+	 * 
 	 * @return int|null
 	 */
 	public function GetTime() {
@@ -145,6 +157,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets hash
+	 * 
 	 * @return null|string
 	 */
 	public function GetHash() {
@@ -152,6 +166,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets a list of all files (with recursive option)
+	 * 
 	 * @param bool $doRecursive
 	 *
 	 * @return File[]
@@ -178,6 +194,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets a list of all directories (with recursive option)
+	 * 
 	 * @param bool $doRecursive
 	 *
 	 * @return Directory[]
@@ -204,6 +222,8 @@ class Directory implements Module {
 	}
 
 	/**
+	 * Gets resource
+	 * 
 	 * @return \MOC\Core\Drive\Directory|null
 	 */
 	private function Resource() {

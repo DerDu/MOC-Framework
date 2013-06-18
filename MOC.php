@@ -103,6 +103,7 @@ class Api {
 	public static function Module() {
 		return Adapter\Module::InterfaceInstance();
 	}
+
 	/**
 	 * @return Adapter\Plugin
 	 */

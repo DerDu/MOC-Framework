@@ -48,7 +48,6 @@ class Update implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -59,7 +58,6 @@ class Update implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog\Update
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Update();
@@ -70,16 +68,9 @@ class Update implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 11:24', 'Alpha' )
-			->Update()->Added( '18.02.2013 12:58', 'Method Added' )
-			->Update()->Deprecated( '18.02.2013 13:10', 'Rename Updated() to Added()' )
-			->Build()->Clearance( '18.02.2013 14:14', 'Remove Method Updated' )
-			->Update()->Added( '25.02.2013 15:17', 'Method Changed3rdParty()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**

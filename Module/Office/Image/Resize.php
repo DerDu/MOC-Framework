@@ -37,19 +37,21 @@
  */
 namespace MOC\Module\Office\Image;
 use MOC\Api;
+use MOC\Generic\Device\Module;
+use MOC\Module\Office\Image\Resource;
+
 /**
  *
  */
-class Resize implements \MOC\Generic\Device\Module {
+class Resize implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		// TODO: Implement InterfaceChangelog() method.
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -57,10 +59,9 @@ class Resize implements \MOC\Generic\Device\Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
-		// TODO: Implement InterfaceDepending() method.
+		return Api::Core()->Depending();
 	}
 
 	/**
@@ -68,21 +69,20 @@ class Resize implements \MOC\Generic\Device\Module {
 	 *
 	 * @static
 	 * @return Resize
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		// TODO: Implement InterfaceInstance() method.
+		return new Resize();
 	}
 
-	/** @var null|\MOC\Module\Image\Resource $Resource */
+	/** @var Resource $Resource */
 	private $Resource = null;
 
 	/**
-	 * @param \MOC\Module\Image\Resource|Resource $Resource $Resource
+	 * @param Resource $Resource
 	 *
-	 * @return Resize
+	 * @return $this
 	 */
-	public function UseResource( \MOC\Module\Image\Resource $Resource ) {
+	public function UseResource( Resource $Resource ) {
 		$this->Resource = $Resource;
 		return $this;
 	}
@@ -121,7 +121,7 @@ class Resize implements \MOC\Generic\Device\Module {
 			$Width = ( $Width === null ? $ResourceWidth : $Width );
 			$Height = ( $Height === null ? $ResourceHeight : $Height );
 		}
-		$Resource = \MOC\Module\Image\Resource::InterfaceInstance()->Create( $Width, $Height );
+		$Resource = Resource::InterfaceInstance()->Create( $Width, $Height );
 		imagecopyresampled( $Resource->Get(), $this->Resource->Get(), 0, 0, 0, 0, $Width, $Height, $ResourceWidth, $ResourceHeight );
 		return $this;
 	}

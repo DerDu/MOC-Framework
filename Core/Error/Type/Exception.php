@@ -62,7 +62,6 @@ class Exception implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -73,23 +72,20 @@ class Exception implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 10:37', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
 	 * @param null  $Message
 	 * @param null  $File
 	 * @param null  $Line
-	 * @param array $Trace
+	 * @param string $Trace
 	 *
 	 * @return void
 	 */
-	public function Trigger( $Message = null, $File = null, $Line = null, $Trace = array() ) {
+	public function Trigger( $Message = null, $File = null, $Line = null, $Trace = '' ) {
 		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".nl2br($Trace)."\n\n".'Trigger in '.$File.' at line '.$Line );
 		if( Reporting::$Display ) {
 			die( str_replace( array(

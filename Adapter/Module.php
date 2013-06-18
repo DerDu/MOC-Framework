@@ -40,14 +40,13 @@ use MOC\Api;
 use MOC\Generic\Device\Adapter;
 use MOC\Module\Database;
 use MOC\Module\Drive;
-use MOC\Module\Installer;
 use MOC\Module\Network;
 use MOC\Module\Office;
 use MOC\Module\Packer;
 use MOC\Module\Template;
 
 /**
- *
+ * Class which provides an interface to the Module functionality of MOC
  */
 class Module implements Adapter {
 
@@ -74,11 +73,18 @@ class Module implements Adapter {
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Drive', Api::Core()->Version() )
-			->Package( '\MOC\Module\Network', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office', Api::Core()->Version() )
-			->Package( '\MOC\Module\Packer', Api::Core()->Version() )
-			->Package( '\MOC\Module\Installer', Api::Core()->Version() )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Database' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Drive' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Network' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Office' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Packer' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Module' )
+				->SetClass( 'Template' )->SetOptional( false )->SetVersion( Api::Core()->Version() ) )
 		;
 	}
 
@@ -90,9 +96,8 @@ class Module implements Adapter {
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 10:02', 'Alpha' )
-			->Build()->Clearance( '18.02.2013 11:31', 'Beta' )
-			->Fix()->BugFix( '18.02.2013 14:03', 'Depending' )
+			->Build()->Clearance( '03.06.2013 15:17', 'Development' )
+			->Fix()->DocFix( '03.06.2013 15:18', 'Dependencies' )
 		;
 	}
 
@@ -138,10 +143,4 @@ class Module implements Adapter {
 		return Database::InterfaceInstance();
 	}
 
-	/**
-	 * @return Installer
-	 */
-	public function Installer() {
-		return Installer::InterfaceInstance();
-	}
 }

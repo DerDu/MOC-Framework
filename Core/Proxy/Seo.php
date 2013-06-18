@@ -60,7 +60,6 @@ class Seo implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -71,12 +70,9 @@ class Seo implements Common {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Fix()->BugFix( '22.02.2013 15:20', 'UrlPath() has created unnecessary directories' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/** @var File $SeoFile */

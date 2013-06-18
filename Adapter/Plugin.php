@@ -38,10 +38,12 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
-use MOC\Plugin\Documentation;
+use MOC\Plugin\Gateway;
+use MOC\Plugin\Repository;
+use MOC\Plugin\Shared;
 
 /**
- *
+ * Class which provides an interface to the Plugin functionality of MOC
  */
 class Plugin implements Adapter {
 
@@ -67,9 +69,12 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Plugin\Documentation', Api::Core()->Version() )
-		;
+		return Api::Core()->Depending();/*
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
+				->SetClass( 'VideoPlayer' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
+			->AddPackage( Api::Core()->Depending()->NewPackage()->SetNamespace( 'MOC\Plugin\Repository' )
+				->SetClass( 'Documentation' )->SetOptional( true )->SetVersion( Api::Core()->Version() ) )
+		;*/
 	}
 
 	/**
@@ -79,15 +84,28 @@ class Plugin implements Adapter {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '19.02.2013 09:04', 'Dev' )
-		;
+		return Api::Core()->Changelog();/*->Create( __CLASS__ )
+			->Build()->Clearance( '03.06.2013 16:17', 'Development' )
+			->Fix()->DocFix( '03.06.2013 16:18', 'Dependencies' )
+			->Fix()->DocFix( '06.06.2013 10:18', 'Dependencies' )
+		;*/
 	}
 
 	/**
-	 * @return Documentation
+	 * @return Gateway
 	 */
-	public function Documentation() {
-		return Documentation::InterfaceInstance();
+	public function Get() {
+		return Gateway::InterfaceInstance();
 	}
+
+	/**
+	 * @param Shared $Shared
+	 * @param null|string $PluginName - Use specific plugin, or select best fit automatically (null)
+	 *
+	 * @return Shared|null
+	 */
+	public function Load( Shared $Shared, $PluginName = null ) {
+		return Repository::InterfaceInstance()->Execute( $Shared, $PluginName );
+	}
+
 }

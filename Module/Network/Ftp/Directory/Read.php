@@ -52,10 +52,9 @@ class Read extends Write implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -63,7 +62,6 @@ class Read extends Write implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -74,7 +72,6 @@ class Read extends Write implements Module {
 	 *
 	 * @static
 	 * @return Read
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Read();
@@ -118,7 +115,7 @@ class Read extends Write implements Module {
 	}
 
 	/**
-	 * @return \MOC\Core\Drive\File[]
+	 * @return \MOC\Module\Drive\File[]
 	 */
 	public function FileListRecursive() {
 /*		if( is_dir( $this->Location() ) ) {

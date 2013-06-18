@@ -35,9 +35,10 @@
  * Filter
  * 13.09.2012 23:20
  */
-namespace MOC\Module\Image;
+namespace MOC\Module\Office\Image;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Office\Image\Resource;
 
 /**
  *
@@ -68,22 +69,21 @@ class Filter implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
 	}
 
 
-	/** @var null|\MOC\Module\Image\Resource $Resource */
+	/** @var Resource $Resource */
 	private $Resource = null;
 
 	/**
-	 * @param \MOC\Module\Image\Resource|Resource $Resource $Resource
+	 * @param Resource $Resource
 	 *
 	 * @return Filter
 	 */
-	public function UseResource( \MOC\Module\Image\Resource $Resource ) {
+	public function UseResource( Resource $Resource ) {
 		$this->Resource = $Resource;
 		return $this;
 	}

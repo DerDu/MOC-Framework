@@ -38,7 +38,6 @@
 namespace MOC\Module\Office;
 use MOC\Api;
 use MOC\Generic\Device\Module;
-
 /**
  *
  */
@@ -66,7 +65,7 @@ class Image implements Module{
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**

@@ -60,7 +60,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -70,10 +70,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Module\Office\Document\Excel', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Pdf', Api::Core()->Version() )
-			->Package( '\MOC\Module\Office\Document\Xml', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

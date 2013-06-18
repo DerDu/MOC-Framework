@@ -37,7 +37,7 @@
  */
 namespace MOC\Core\Depending;
 use MOC\Api;
-use MOC\Core\Version;
+use MOC\Core\Changelog;
 use MOC\Generic\Device\Core;
 
 /**
@@ -48,13 +48,10 @@ class Result implements Core {
 	 * Get Changelog
 	 *
 	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Build()->Clearance( '18.02.2013 13:18', 'Alpha' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -62,7 +59,6 @@ class Result implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -72,7 +68,6 @@ class Result implements Core {
 	 * Get Singleton/Instance
 	 *
 	 * @return \MOC\Core\Depending\Result
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Result();
@@ -80,30 +75,62 @@ class Result implements Core {
 
 	private $Install = array();
 	private $Update = array();
+	private $Available = array();
+	private $UpdateOptional = array();
+	private $InstallOptional = array();
 
 	/**
-	 * @param null              $Namespace
-	 * @param null              $Class
-	 * @param Version $Version
+	 * @param Package|null $Package
 	 *
-	 * @return array
+	 * @return Package[]
 	 */
-	public function Install( $Namespace = null, $Class = null, Version $Version = null ) {
-		if( $Namespace !== null && $Class !== null && $Version !== null ) {
-			$this->Install[$Namespace][$Class] = $Version;
+	public function Install( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->Install[$Package->GetFQN()] = $Package;
 		} return $this->Install;
 	}
 
 	/**
-	 * @param null              $Namespace
-	 * @param null              $Class
-	 * @param Version $Version
+	 * @param Package|null $Package
 	 *
-	 * @return array
+	 * @return Package[]
 	 */
-	public function Update( $Namespace = null, $Class = null, Version $Version = null ) {
-		if( $Namespace !== null && $Class !== null && $Version !== null ) {
-			$this->Update[$Namespace][$Class] = $Version;
+	public function InstallOptional( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->InstallOptional[$Package->GetFQN()] = $Package;
+		} return $this->InstallOptional;
+	}
+
+	/**
+	 * @param Package|null $Package
+	 *
+	 * @return Package[]
+	 */
+	public function Update( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->Update[$Package->GetFQN()] = $Package;
 		} return $this->Update;
+	}
+
+	/**
+	 * @param Package|null $Package
+	 *
+	 * @return Package[]
+	 */
+	public function UpdateOptional( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->UpdateOptional[$Package->GetFQN()] = $Package;
+		} return $this->UpdateOptional;
+	}
+
+	/**
+	 * @param Package|null $Package
+	 *
+	 * @return Package[]
+	 */
+	public function Available( Package $Package = null ) {
+		if( $Package !== null ) {
+			$this->Available[$Package->GetFQN()] = $Package;
+		} return $this->Available;
 	}
 }

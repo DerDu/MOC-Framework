@@ -48,7 +48,6 @@ class Worksheet implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -59,7 +58,6 @@ class Worksheet implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -70,7 +68,6 @@ class Worksheet implements Module {
 	 *
 	 * @static
 	 * @return Worksheet
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Worksheet();
@@ -114,6 +111,7 @@ class Worksheet implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Select( $Name ) {
+		/** @noinspection PhpParamsInspection */
 		Api::Extension()->Excel()->Current()->setActiveSheetIndex(
 			Api::Extension()->Excel()->Current()->getIndex(
 				Api::Extension()->Excel()->Current()->getSheetByName( $Name )
@@ -126,6 +124,7 @@ class Worksheet implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Remove() {
+		/** @noinspection PhpParamsInspection */
 		Api::Extension()->Excel()->Current()->removeSheetByIndex(
 			Api::Extension()->Excel()->Current()->getIndex( $this->getActiveSheet() )
 		);

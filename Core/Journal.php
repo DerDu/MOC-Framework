@@ -75,8 +75,7 @@ class Journal implements Core {
 	 * @return \MOC\Core\Depending
 	 */
 	public static function InterfaceDepending() {
-		return Api::Core()->Depending()
-			->Package( '\MOC\Core\Journal\Write', Api::Core()->Version() );
+		return Api::Core()->Depending();
 	}
 
 	/**

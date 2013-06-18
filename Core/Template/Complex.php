@@ -48,7 +48,6 @@ class Complex implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog()->Create( __CLASS__ );
@@ -59,7 +58,6 @@ class Complex implements Core {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
@@ -70,7 +68,6 @@ class Complex implements Core {
 	 *
 	 * @static
 	 * @return Complex
-	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
 		return new Complex();
@@ -81,7 +78,7 @@ class Complex implements Core {
 
 	/** @var string $Identifier */
 	private $Identifier = '';
-	/** @var \MOC\Core\Template|null $TplEngine */
+	/** @var Template|null $TplEngine */
 	private $Engine = null;
 
 	/**
@@ -95,11 +92,11 @@ class Complex implements Core {
 	}
 
 	/**
-	 * @param \MOC\Core\Template $Engine
+	 * @param Template $Engine
 	 *
 	 * @return Complex
 	 */
-	public function AssignEngine( \MOC\Core\Template $Engine = null ) {
+	public function AssignEngine( Template $Engine = null ) {
 		$this->Engine = $Engine;
 		return $this;
 	}
