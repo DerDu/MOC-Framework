@@ -32,17 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Worksheet
- * 25.02.2013 16:06
+ * Dimension
+ * 18.06.2013 13:26
  */
-namespace MOC\Module\Office\Document\Excel;
+namespace MOC\Module\Office\Document\Excel\Worksheet;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Worksheet implements Module {
+class Dimension implements Module {
+
 	/**
 	 * Get Changelog
 	 *
@@ -67,67 +68,27 @@ class Worksheet implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Worksheet
+	 * @return Dimension
 	 */
 	public static function InterfaceInstance() {
-		return new Worksheet();
+		return new Dimension();
 	}
 
-	/**
-	 * @param string $Name
-	 *
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Create( $Name ){
-		Api::Extension()->Excel()->Current()->createSheet();
-		$Max = Api::Extension()->Excel()->Current()->getSheetCount();
-
-		Api::Extension()->Excel()->Current()->getSheet( $Max -1 )->setTitle( $Name );
-		$this->Select( $Name );
-
-		return Api::Module()->Office()->Document()->Excel();
-	}
 
 	/**
-	 * @return \PHPExcel_Worksheet
+	 * @return int
 	 */
-	public function Current() {
-		return $this->getActiveSheet();
-	}
-
-	/**
-	 * @param string $Name
-	 *
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Rename( $Name ) {
-		$this->getActiveSheet()->setTitle( $Name );
-		return Api::Module()->Office()->Document()->Excel();
-	}
-
-	/**
-	 * @return Worksheet\Select
-	 */
-	public function Select() {
-		return Worksheet\Select::InterfaceInstance();
-	}
-
-	/**
-	 * @return Worksheet\Dimension
-	 */
-	public function Dimension() {
-		return Worksheet\Dimension::InterfaceInstance();
-	}
-
-	/**
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Remove() {
-		/** @noinspection PhpParamsInspection */
-		Api::Extension()->Excel()->Current()->removeSheetByIndex(
-			Api::Extension()->Excel()->Current()->getIndex( $this->getActiveSheet() )
+	public function GetWidth() {
+		return \PHPExcel_Cell::columnIndexFromString(
+			$this->getActiveSheet()->getHighestDataColumn()
 		);
-		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return int
+	 */
+	public function GetHeight() {
+		return $this->getActiveSheet()->getHighestDataRow();
 	}
 
 	/**

@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Worksheet
- * 25.02.2013 16:06
+ * Select
+ * 18.06.2013 13:26
  */
-namespace MOC\Module\Office\Document\Excel;
+namespace MOC\Module\Office\Document\Excel\Worksheet;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Worksheet implements Module {
+class Select implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,73 +67,34 @@ class Worksheet implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Worksheet
+	 * @return Select
 	 */
 	public static function InterfaceInstance() {
-		return new Worksheet();
+		return new Select();
 	}
 
 	/**
 	 * @param string $Name
-	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Create( $Name ){
-		Api::Extension()->Excel()->Current()->createSheet();
-		$Max = Api::Extension()->Excel()->Current()->getSheetCount();
-
-		Api::Extension()->Excel()->Current()->getSheet( $Max -1 )->setTitle( $Name );
-		$this->Select( $Name );
-
-		return Api::Module()->Office()->Document()->Excel();
-	}
-
-	/**
-	 * @return \PHPExcel_Worksheet
-	 */
-	public function Current() {
-		return $this->getActiveSheet();
-	}
-
-	/**
-	 * @param string $Name
-	 *
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Rename( $Name ) {
-		$this->getActiveSheet()->setTitle( $Name );
-		return Api::Module()->Office()->Document()->Excel();
-	}
-
-	/**
-	 * @return Worksheet\Select
-	 */
-	public function Select() {
-		return Worksheet\Select::InterfaceInstance();
-	}
-
-	/**
-	 * @return Worksheet\Dimension
-	 */
-	public function Dimension() {
-		return Worksheet\Dimension::InterfaceInstance();
-	}
-
-	/**
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Remove() {
+	public function ByName( $Name ) {
 		/** @noinspection PhpParamsInspection */
-		Api::Extension()->Excel()->Current()->removeSheetByIndex(
-			Api::Extension()->Excel()->Current()->getIndex( $this->getActiveSheet() )
+		Api::Extension()->Excel()->Current()->setActiveSheetIndex(
+			Api::Extension()->Excel()->Current()->getIndex(
+				Api::Extension()->Excel()->Current()->getSheetByName( $Name )
+			)
 		);
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return \PHPExcel_Worksheet
+	 * @param int $Index 0..n
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	private function getActiveSheet() {
-		return Api::Extension()->Excel()->Current()->getActiveSheet();
+	public function ByIndex( $Index = 0 ) {
+		/** @noinspection PhpParamsInspection */
+		Api::Extension()->Excel()->Current()->setActiveSheetIndex( $Index );
+		return Api::Module()->Office()->Document()->Excel();
 	}
+
 }
