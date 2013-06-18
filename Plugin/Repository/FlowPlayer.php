@@ -50,7 +50,7 @@ class FlowPlayer extends VideoPlayer {
 	public function PluginCapable() {
 		return in_array(
 			Api::Module()->Drive()->File()->Open( $this->VideoSource() )->GetExtension(),
-			array( 'flv', 'mp4', 'mov', 'm4v', 'f4v' )
+			array( 'flv', 'mp4', 'mov', 'm4v', 'f4v', 'mp3' )
 		);
 	}
 
@@ -70,7 +70,14 @@ class FlowPlayer extends VideoPlayer {
 
 		$Script = '<a id="FlowPlayer'.$PlayerId.'" href="'.$this->VideoSource().'" style="display: block; width: '.$this->VideoWidth().'px; height:'.$this->VideoHeight().'px;"></a>'.
 		'<script type="text/javascript">'.
-			"flowplayer( 'FlowPlayer".$PlayerId."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."' );".
+			"flowplayer( 'FlowPlayer".$PlayerId."', '".$B->GetLocationRelative( $C ).'/flowplayer-3.2.16.swf'."', ".
+			"{".
+				"plugins: { ".
+					"audio: { ".
+						"url: '".$B->GetLocationRelative( $C )."/plugin/flowplayer.audio-3.2.10.swf'".
+					"}".
+				"}".
+			"});".
 		'</script>';
 
 		print $Script;
