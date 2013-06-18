@@ -7,8 +7,8 @@
 
 	<title>File MOC.php</title>
 
-	<script type="text/javascript" src="resources/combined.js?3300334335"></script>
-	<script type="text/javascript" src="elementlist.js?3062788967"></script>
+	<script type="text/javascript" src="resources/combined.js?3468674304"></script>
+	<script type="text/javascript" src="elementlist.js?2284700091"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4203613748" />
 
 </head>
@@ -57,13 +57,9 @@
 							</ul></li>
 				<li class="main"><a href="namespace-MOC.Extension.html">Extension<span></span></a>
 						<ul>
-				<li class="main"><a href="namespace-MOC.Extension.ApiGen.html">ApiGen</a>
-						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
-						</li>
-				<li class="main"><a href="namespace-MOC.Extension.FlowPlayer.html">FlowPlayer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
@@ -175,10 +171,7 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Content.html">Content</a>
 						</li>
-							</ul></li>
-				<li class="main"><a href="namespace-MOC.Module.Office.Video.html">Video</a>
-						</li>
-							</ul></li>
+							</ul></li></ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
@@ -189,9 +182,15 @@
 				<li class="main"><a href="namespace-MOC.Module.Template.html">Template</a>
 						</li>
 							</ul></li>
-				<li class="main"><a href="namespace-MOC.Plugin.html">Plugin</a>
+				<li class="main"><a href="namespace-MOC.Plugin.html">Plugin<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Plugin.Gateway.html">Gateway</a>
 						</li>
-							</ul></li>
+				<li class="main"><a href="namespace-MOC.Plugin.Repository.html">Repository</a>
+						</li>
+				<li class="main"><a href="namespace-MOC.Plugin.Shared.html">Shared</a>
+						</li>
+							</ul></li></ul></li>
 				<li><a href="namespace-PHP.html">PHP</a>
 						</li>
 			</ul>
@@ -360,19 +359,20 @@
 </span><span id="103" class="l"><a class="l" href="#103">103: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_Module" href="#_Module">Module</a>() {
 </span><span id="104" class="l"><a class="l" href="#104">104: </a>        <span class="php-keyword1">return</span> Adapter\Module::InterfaceInstance();
 </span><span id="105" class="l"><a class="l" href="#105">105: </a>    }
-</span><span id="106" class="l"><a class="l" href="#106">106: </a>    <span class="php-comment">/**
-</span></span><span id="107" class="l"><a class="l" href="#107">107: </a><span class="php-comment">     * @return Adapter\Plugin
-</span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment">     */</span>
-</span><span id="109" class="l"><a class="l" href="#109">109: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_Plugin" href="#_Plugin">Plugin</a>() {
-</span><span id="110" class="l"><a class="l" href="#110">110: </a>        <span class="php-keyword1">return</span> Adapter\Plugin::InterfaceInstance();
-</span><span id="111" class="l"><a class="l" href="#111">111: </a>    }
-</span><span id="112" class="l"><a class="l" href="#112">112: </a>}
-</span><span id="113" class="l"><a class="l" href="#113">113: </a>
-</span><span id="114" class="l"><a class="l" href="#114">114: </a><span class="php-comment">/**
-</span></span><span id="115" class="l"><a class="l" href="#115">115: </a><span class="php-comment"> * Startup MOC-API
-</span></span><span id="116" class="l"><a class="l" href="#116">116: </a><span class="php-comment"> */</span>
-</span><span id="117" class="l"><a class="l" href="#117">117: </a>Api::Setup();
-</span><span id="118" class="l"><a class="l" href="#118">118: </a></span></code></pre>
+</span><span id="106" class="l"><a class="l" href="#106">106: </a>
+</span><span id="107" class="l"><a class="l" href="#107">107: </a>    <span class="php-comment">/**
+</span></span><span id="108" class="l"><a class="l" href="#108">108: </a><span class="php-comment">     * @return Adapter\Plugin
+</span></span><span id="109" class="l"><a class="l" href="#109">109: </a><span class="php-comment">     */</span>
+</span><span id="110" class="l"><a class="l" href="#110">110: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">static</span> <span class="php-keyword1">function</span> <a id="_Plugin" href="#_Plugin">Plugin</a>() {
+</span><span id="111" class="l"><a class="l" href="#111">111: </a>        <span class="php-keyword1">return</span> Adapter\Plugin::InterfaceInstance();
+</span><span id="112" class="l"><a class="l" href="#112">112: </a>    }
+</span><span id="113" class="l"><a class="l" href="#113">113: </a>}
+</span><span id="114" class="l"><a class="l" href="#114">114: </a>
+</span><span id="115" class="l"><a class="l" href="#115">115: </a><span class="php-comment">/**
+</span></span><span id="116" class="l"><a class="l" href="#116">116: </a><span class="php-comment"> * Startup MOC-API
+</span></span><span id="117" class="l"><a class="l" href="#117">117: </a><span class="php-comment"> */</span>
+</span><span id="118" class="l"><a class="l" href="#118">118: </a>Api::Setup();
+</span><span id="119" class="l"><a class="l" href="#119">119: </a></span></code></pre>
 
 	<div id="footer">
 		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>

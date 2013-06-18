@@ -5,10 +5,10 @@
 	<meta name="generator" content="ApiGen 2.8.0" />
 	<meta name="robots" content="noindex" />
 
-	<title>File Generic/Device/Plugin.php</title>
+	<title>File Plugin/Shared/VideoPlayer.php</title>
 
-	<script type="text/javascript" src="resources/combined.js?3300334335"></script>
-	<script type="text/javascript" src="elementlist.js?3062788967"></script>
+	<script type="text/javascript" src="resources/combined.js?3468674304"></script>
+	<script type="text/javascript" src="elementlist.js?2284700091"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?4203613748" />
 
 </head>
@@ -57,13 +57,9 @@
 							</ul></li>
 				<li class="main"><a href="namespace-MOC.Extension.html">Extension<span></span></a>
 						<ul>
-				<li class="main"><a href="namespace-MOC.Extension.ApiGen.html">ApiGen</a>
-						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Excel.html">Excel</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Flot.html">Flot</a>
-						</li>
-				<li class="main"><a href="namespace-MOC.Extension.FlowPlayer.html">FlowPlayer</a>
 						</li>
 				<li class="main"><a href="namespace-MOC.Extension.Mail.html">Mail</a>
 						</li>
@@ -78,11 +74,11 @@
 				<li class="main"><a href="namespace-MOC.Extension.Zip.html">Zip</a>
 						</li>
 							</ul></li>
-				<li class="active main"><a href="namespace-MOC.Generic.html">Generic<span></span></a>
+				<li class="main"><a href="namespace-MOC.Generic.html">Generic<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Generic.Common.html">Common</a>
 						</li>
-				<li class="active main"><a href="namespace-MOC.Generic.Device.html">Device<span></span></a>
+				<li class="main"><a href="namespace-MOC.Generic.Device.html">Device<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Generic.Device.Extension.html">Extension</a>
 						</li>
@@ -175,10 +171,7 @@
 						</li>
 				<li class="main"><a href="namespace-MOC.Module.Office.Mail.Content.html">Content</a>
 						</li>
-							</ul></li>
-				<li class="main"><a href="namespace-MOC.Module.Office.Video.html">Video</a>
-						</li>
-							</ul></li>
+							</ul></li></ul></li>
 				<li class="main"><a href="namespace-MOC.Module.Packer.html">Packer<span></span></a>
 						<ul>
 				<li class="main"><a href="namespace-MOC.Module.Packer.Yui.html">Yui</a>
@@ -189,9 +182,15 @@
 				<li class="main"><a href="namespace-MOC.Module.Template.html">Template</a>
 						</li>
 							</ul></li>
-				<li class="main"><a href="namespace-MOC.Plugin.html">Plugin</a>
+				<li class="active main"><a href="namespace-MOC.Plugin.html">Plugin<span></span></a>
+						<ul>
+				<li class="main"><a href="namespace-MOC.Plugin.Gateway.html">Gateway</a>
 						</li>
-							</ul></li>
+				<li class="main"><a href="namespace-MOC.Plugin.Repository.html">Repository</a>
+						</li>
+				<li class="active main"><a href="namespace-MOC.Plugin.Shared.html">Shared</a>
+						</li>
+							</ul></li></ul></li>
 				<li><a href="namespace-PHP.html">PHP</a>
 						</li>
 			</ul>
@@ -201,15 +200,14 @@
 
 
 		<div id="elements">
-
-			<h3>Interfaces</h3>
+			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-MOC.Generic.Device.Adapter.html">Adapter</a></li>
-				<li><a href="class-MOC.Generic.Device.Core.html">Core</a></li>
-				<li><a href="class-MOC.Generic.Device.Extension.html">Extension</a></li>
-				<li><a href="class-MOC.Generic.Device.Module.html">Module</a></li>
-				<li class="active"><a href="class-MOC.Generic.Device.Plugin.html">Plugin</a></li>
+				<li><a href="class-MOC.Plugin.Shared.Documentation.html">Documentation</a></li>
+				<li><a href="class-MOC.Plugin.Shared.mocJavaScriptHelper.html">mocJavaScriptHelper</a></li>
+				<li><a href="class-MOC.Plugin.Shared.mocStyleSheetHelper.html">mocStyleSheetHelper</a></li>
+				<li class="active"><a href="class-MOC.Plugin.Shared.VideoPlayer.html">VideoPlayer</a></li>
 			</ul>
+
 
 
 
@@ -235,10 +233,10 @@
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
 			<li>
-				<a href="namespace-MOC.Generic.Device.html" title="Summary of MOC\Generic\Device"><span>Namespace</span></a>
+				<a href="namespace-MOC.Plugin.Shared.html" title="Summary of MOC\Plugin\Shared"><span>Namespace</span></a>
 			</li>
 			<li>
-				<a href="class-MOC.Generic.Device.Plugin.html" title="Summary of MOC\Generic\Device\Plugin"><span>Class</span></a>
+				<a href="class-MOC.Plugin.Shared.VideoPlayer.html" title="Summary of MOC\Plugin\Shared\VideoPlayer"><span>Class</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -263,7 +261,7 @@
 </span><span id="2" class="l"><a class="l" href="#2"> 2: </a><span class="php-comment">/**
 </span></span><span id="3" class="l"><a class="l" href="#3"> 3: </a><span class="php-comment"> * LICENSE (BSD)
 </span></span><span id="4" class="l"><a class="l" href="#4"> 4: </a><span class="php-comment"> *
-</span></span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-comment"> * Copyright (c) 2012, Gerd Christian Kunze
+</span></span><span id="5" class="l"><a class="l" href="#5"> 5: </a><span class="php-comment"> * Copyright (c) 2013, Gerd Christian Kunze
 </span></span><span id="6" class="l"><a class="l" href="#6"> 6: </a><span class="php-comment"> * All rights reserved.
 </span></span><span id="7" class="l"><a class="l" href="#7"> 7: </a><span class="php-comment"> *
 </span></span><span id="8" class="l"><a class="l" href="#8"> 8: </a><span class="php-comment"> * Redistribution and use in source and binary forms, with or without
@@ -293,19 +291,71 @@
 </span></span><span id="32" class="l"><a class="l" href="#32">32: </a><span class="php-comment"> * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 </span></span><span id="33" class="l"><a class="l" href="#33">33: </a><span class="php-comment"> * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </span></span><span id="34" class="l"><a class="l" href="#34">34: </a><span class="php-comment"> *
-</span></span><span id="35" class="l"><a class="l" href="#35">35: </a><span class="php-comment"> * Plugin
-</span></span><span id="36" class="l"><a class="l" href="#36">36: </a><span class="php-comment"> * 18.02.2012 15:02
+</span></span><span id="35" class="l"><a class="l" href="#35">35: </a><span class="php-comment"> * VideoPlayer
+</span></span><span id="36" class="l"><a class="l" href="#36">36: </a><span class="php-comment"> * 10.06.2013 12:49
 </span></span><span id="37" class="l"><a class="l" href="#37">37: </a><span class="php-comment"> */</span>
-</span><span id="38" class="l"><a class="l" href="#38">38: </a><span class="php-keyword1">namespace</span> MOC\Generic\Device;
-</span><span id="39" class="l"><a class="l" href="#39">39: </a><span class="php-keyword1">use</span> MOC\Generic\Common;
-</span><span id="40" class="l"><a class="l" href="#40">40: </a>
-</span><span id="41" class="l"><a class="l" href="#41">41: </a><span class="php-comment">/**
-</span></span><span id="42" class="l"><a class="l" href="#42">42: </a><span class="php-comment"> *
-</span></span><span id="43" class="l"><a class="l" href="#43">43: </a><span class="php-comment"> */</span>
-</span><span id="44" class="l"><a class="l" href="#44">44: </a><span class="php-keyword1">interface</span> <a id="Plugin" href="#Plugin">Plugin</a> <span class="php-keyword1">extends</span> Common {
-</span><span id="45" class="l"><a class="l" href="#45">45: </a>
-</span><span id="46" class="l"><a class="l" href="#46">46: </a>}
-</span><span id="47" class="l"><a class="l" href="#47">47: </a></span></code></pre>
+</span><span id="38" class="l"><a class="l" href="#38">38: </a><span class="php-keyword1">namespace</span> MOC\Plugin\Shared;
+</span><span id="39" class="l"><a class="l" href="#39">39: </a>
+</span><span id="40" class="l"><a class="l" href="#40">40: </a><span class="php-keyword1">use</span> MOC\Plugin\Shared;
+</span><span id="41" class="l"><a class="l" href="#41">41: </a>
+</span><span id="42" class="l"><a class="l" href="#42">42: </a><span class="php-comment">/**
+</span></span><span id="43" class="l"><a class="l" href="#43">43: </a><span class="php-comment"> *
+</span></span><span id="44" class="l"><a class="l" href="#44">44: </a><span class="php-comment"> */</span>
+</span><span id="45" class="l"><a class="l" href="#45">45: </a><span class="php-keyword1">class</span> <a id="VideoPlayer" href="#VideoPlayer">VideoPlayer</a> <span class="php-keyword1">extends</span> Shared {
+</span><span id="46" class="l"><a class="l" href="#46">46: </a>
+</span><span id="47" class="l"><a class="l" href="#47">47: </a>    <span class="php-comment">/** @var int $VideoWidth */</span>
+</span><span id="48" class="l"><a class="l" href="#48">48: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$VideoWidth" href="#$VideoWidth">$VideoWidth</a></span> = <span class="php-num">640</span>;
+</span><span id="49" class="l"><a class="l" href="#49">49: </a>    <span class="php-comment">/** @var int $VideoHeight */</span>
+</span><span id="50" class="l"><a class="l" href="#50">50: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$VideoHeight" href="#$VideoHeight">$VideoHeight</a></span> = <span class="php-num">480</span>;
+</span><span id="51" class="l"><a class="l" href="#51">51: </a>    <span class="php-comment">/** @var string $VideoSource */</span>
+</span><span id="52" class="l"><a class="l" href="#52">52: </a>    <span class="php-keyword1">private</span> <span class="php-var"><a id="$VideoSource" href="#$VideoSource">$VideoSource</a></span> = <span class="php-quote">''</span>;
+</span><span id="53" class="l"><a class="l" href="#53">53: </a>
+</span><span id="54" class="l"><a class="l" href="#54">54: </a>    <span class="php-comment">/**
+</span></span><span id="55" class="l"><a class="l" href="#55">55: </a><span class="php-comment">     * @param null|int $Value
+</span></span><span id="56" class="l"><a class="l" href="#56">56: </a><span class="php-comment">     *
+</span></span><span id="57" class="l"><a class="l" href="#57">57: </a><span class="php-comment">     * @return int|VideoPlayer
+</span></span><span id="58" class="l"><a class="l" href="#58">58: </a><span class="php-comment">     */</span>
+</span><span id="59" class="l"><a class="l" href="#59">59: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_VideoWidth" href="#_VideoWidth">VideoWidth</a>( <span class="php-var">$Value</span> = <span class="php-keyword1">null</span> ) {
+</span><span id="60" class="l"><a class="l" href="#60">60: </a>        <span class="php-keyword1">if</span>( <span class="php-var">$Value</span> !== <span class="php-keyword1">null</span> ) {
+</span><span id="61" class="l"><a class="l" href="#61">61: </a>            <span class="php-var">$this</span>-&gt;VideoWidth = <span class="php-var">$Value</span>;
+</span><span id="62" class="l"><a class="l" href="#62">62: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="63" class="l"><a class="l" href="#63">63: </a>        } <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;VideoWidth;
+</span><span id="64" class="l"><a class="l" href="#64">64: </a>    }
+</span><span id="65" class="l"><a class="l" href="#65">65: </a>
+</span><span id="66" class="l"><a class="l" href="#66">66: </a>    <span class="php-comment">/**
+</span></span><span id="67" class="l"><a class="l" href="#67">67: </a><span class="php-comment">     * @param null|int $Value
+</span></span><span id="68" class="l"><a class="l" href="#68">68: </a><span class="php-comment">     *
+</span></span><span id="69" class="l"><a class="l" href="#69">69: </a><span class="php-comment">     * @return int|VideoPlayer
+</span></span><span id="70" class="l"><a class="l" href="#70">70: </a><span class="php-comment">     */</span>
+</span><span id="71" class="l"><a class="l" href="#71">71: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_VideoHeight" href="#_VideoHeight">VideoHeight</a>( <span class="php-var">$Value</span> = <span class="php-keyword1">null</span> ) {
+</span><span id="72" class="l"><a class="l" href="#72">72: </a>        <span class="php-keyword1">if</span>( <span class="php-var">$Value</span> !== <span class="php-keyword1">null</span> ) {
+</span><span id="73" class="l"><a class="l" href="#73">73: </a>            <span class="php-var">$this</span>-&gt;VideoHeight = <span class="php-var">$Value</span>;
+</span><span id="74" class="l"><a class="l" href="#74">74: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="75" class="l"><a class="l" href="#75">75: </a>        } <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;VideoHeight;
+</span><span id="76" class="l"><a class="l" href="#76">76: </a>    }
+</span><span id="77" class="l"><a class="l" href="#77">77: </a>
+</span><span id="78" class="l"><a class="l" href="#78">78: </a>    <span class="php-comment">/**
+</span></span><span id="79" class="l"><a class="l" href="#79">79: </a><span class="php-comment">     * @param null|string $Url
+</span></span><span id="80" class="l"><a class="l" href="#80">80: </a><span class="php-comment">     *
+</span></span><span id="81" class="l"><a class="l" href="#81">81: </a><span class="php-comment">     * @return string|VideoPlayer
+</span></span><span id="82" class="l"><a class="l" href="#82">82: </a><span class="php-comment">     */</span>
+</span><span id="83" class="l"><a class="l" href="#83">83: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_VideoSource" href="#_VideoSource">VideoSource</a>( <span class="php-var">$Url</span> = <span class="php-keyword1">null</span> ) {
+</span><span id="84" class="l"><a class="l" href="#84">84: </a>        <span class="php-keyword1">if</span>( <span class="php-var">$Url</span> !== <span class="php-keyword1">null</span> ) {
+</span><span id="85" class="l"><a class="l" href="#85">85: </a>            <span class="php-var">$this</span>-&gt;VideoSource = <span class="php-var">$Url</span>;
+</span><span id="86" class="l"><a class="l" href="#86">86: </a>            <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="87" class="l"><a class="l" href="#87">87: </a>        } <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;VideoSource;
+</span><span id="88" class="l"><a class="l" href="#88">88: </a>    }
+</span><span id="89" class="l"><a class="l" href="#89">89: </a>
+</span><span id="90" class="l"><a class="l" href="#90">90: </a>    <span class="php-comment">/**
+</span></span><span id="91" class="l"><a class="l" href="#91">91: </a><span class="php-comment">     * Dummy
+</span></span><span id="92" class="l"><a class="l" href="#92">92: </a><span class="php-comment">     *
+</span></span><span id="93" class="l"><a class="l" href="#93">93: </a><span class="php-comment">     * @return string
+</span></span><span id="94" class="l"><a class="l" href="#94">94: </a><span class="php-comment">     */</span>
+</span><span id="95" class="l"><a class="l" href="#95">95: </a>    <span class="php-keyword1">function</span> <a id="___toString" href="#___toString">__toString</a>() {
+</span><span id="96" class="l"><a class="l" href="#96">96: </a>        <span class="php-keyword1">return</span> <span class="php-quote">''</span>;
+</span><span id="97" class="l"><a class="l" href="#97">97: </a>    }
+</span><span id="98" class="l"><a class="l" href="#98">98: </a>}
+</span><span id="99" class="l"><a class="l" href="#99">99: </a></span></code></pre>
 
 	<div id="footer">
 		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
