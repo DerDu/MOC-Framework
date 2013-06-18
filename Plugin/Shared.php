@@ -45,6 +45,10 @@ use MOC\Module\Drive\File;
 abstract class Shared {
 
 	/**
+	 * Register javascript files to load
+	 *
+	 * THIS SHOULD BE USED IN PluginLoader()
+	 *
 	 * @param File $File
 	 */
 	final public function PluginJavaScript( File $File ) {
@@ -52,8 +56,22 @@ abstract class Shared {
 		$Plugin = Api::Plugin()->Load( Api::Plugin()->Get()->mocJavaScriptHelper() );
 		$Plugin->Register( $File );
 	}
+	/**
+	 * Register stylesheet files to load
+	 *
+	 * THIS SHOULD BE USED IN PluginLoader()
+	 *
+	 * @param File $File
+	 */
+	final public function PluginStyleSheet( File $File ) {
+		/** @var Gateway\mocStyleSheetHelper $Plugin */
+		$Plugin = Api::Plugin()->Load( Api::Plugin()->Get()->mocStyleSheetHelper() );
+		$Plugin->Register( $File );
+	}
 
 	/**
+	 * Determine the name of the plugin
+	 *
 	 * @return string
 	 */
 	final public function PluginName() {
@@ -62,6 +80,8 @@ abstract class Shared {
 	}
 
 	/**
+	 * Determine the gateway used by the plugin
+	 *
 	 * @return string
 	 */
 	final public function PluginGateway() {
@@ -72,6 +92,16 @@ abstract class Shared {
 	/**
 	 * This method is used to determine if the plugin can handle the required task
 	 *
+	 * Return TRUE if your plugin is able to handle the task specified by the configuration
+	 *
+	 * Example:
+	 *
+	 * VideoPlayer-Plugin can handle only flv ?
+	 *
+	 * - Return only true if the source IS flv
+	 *
+	 * This way the manager is able to search for another plugin to handle other formats
+	 *
 	 * @return bool
 	 */
 	public function PluginCapable() {
@@ -79,7 +109,7 @@ abstract class Shared {
 	}
 
 	/**
-	 * This method is used to determine if the plugin can handle the required task
+	 * This method is used to execute pre-usage code
 	 *
 	 * @return bool
 	 */
