@@ -86,6 +86,7 @@ class Repository implements Common {
 	private $Repository = array();
 	/** @var Shared[] $Helper */
 	private $Helper = array(
+		'mocStyleSheetHelper',
 		'mocJavaScriptHelper'
 	);
 
