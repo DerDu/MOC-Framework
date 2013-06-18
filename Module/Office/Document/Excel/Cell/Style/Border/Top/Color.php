@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Border
- * 25.02.2013 16:06
+ * Color
+ * 18.02.2013 13:55
  */
-namespace MOC\Module\Office\Document\Excel\Cell\Style;
+namespace MOC\Module\Office\Document\Excel\Cell\Style\Border\Top;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Border implements Module {
+class Color implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,37 +67,76 @@ class Border implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Border
+	 * @return Color
 	 */
 	public static function InterfaceInstance() {
-		return new Border();
+		return new Color();
 	}
 
 	/**
-	 * @return Border\Top
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Top() {
-		return Border\Top::InterfaceInstance();
+	public function Black() {
+		$this->getColor()->setARGB( \PHPExcel_Style_Color::COLOR_BLACK );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Border\Right
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Right() {
-		return Border\Right::InterfaceInstance();
+	public function Blue() {
+		$this->getColor()->setARGB( \PHPExcel_Style_Color::COLOR_BLUE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Border\Bottom
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Bottom() {
-		return Border\Bottom::InterfaceInstance();
+	public function Green() {
+		$this->getColor()->setARGB( \PHPExcel_Style_Color::COLOR_GREEN );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Border\Left
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Left() {
-		return Border\Left::InterfaceInstance();
+	public function Red() {
+		$this->getColor()->setARGB( \PHPExcel_Style_Color::COLOR_RED );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Yellow() {
+		$this->getColor()->setARGB( \PHPExcel_Style_Color::COLOR_YELLOW );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @param int $Red
+	 * @param int $Green
+	 * @param int $Blue
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Custom( $Red = 0, $Green = 0, $Blue = 0 ) {
+		$this->getColor()->setRGB( bin2hex( $Red ).bin2hex( $Green ).bin2hex( $Blue ) );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \PHPExcel_Style_Color
+	 */
+	private function getColor() {
+		return Api::Extension()->Excel()->Current()
+			->getActiveSheet()
+			->getStyle(
+				Api::Module()->Office()->Document()->Excel()
+					->Cell()->Select()->Current()
+			)
+			->getBorders()
+			->getTop()
+			->getColor();
 	}
 }

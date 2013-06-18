@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Border
- * 25.02.2013 16:06
+ * Left
+ * 18.06.2013 13:48
  */
-namespace MOC\Module\Office\Document\Excel\Cell\Style;
+namespace MOC\Module\Office\Document\Excel\Cell\Style\Border;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Border implements Module {
+class Left implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,37 +67,24 @@ class Border implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Border
+	 * @return Left
 	 */
 	public static function InterfaceInstance() {
-		return new Border();
+		return new Left();
 	}
 
 	/**
-	 * @return Border\Top
+	 * @return Left\Color
 	 */
-	public function Top() {
-		return Border\Top::InterfaceInstance();
+	public function Color() {
+		return Left\Color::InterfaceInstance();
 	}
 
 	/**
-	 * @return Border\Right
+	 * @return Left\Style
 	 */
-	public function Right() {
-		return Border\Right::InterfaceInstance();
+	public function Style() {
+		return Left\Style::InterfaceInstance();
 	}
 
-	/**
-	 * @return Border\Bottom
-	 */
-	public function Bottom() {
-		return Border\Bottom::InterfaceInstance();
-	}
-
-	/**
-	 * @return Border\Left
-	 */
-	public function Left() {
-		return Border\Left::InterfaceInstance();
-	}
 }
