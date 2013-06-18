@@ -32,92 +32,39 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Gateway
- * 10.06.2013 12:47
+ * FlashMp3Player
+ * 18.06.2013 11:20
  */
-namespace MOC\Plugin;
+namespace MOC\Plugin\Repository;
 use MOC\Api;
-use MOC\Generic\Common;
-use MOC\Plugin\Shared\Documentation;
-use MOC\Plugin\Shared\mocJavaScriptHelper;
-use MOC\Plugin\Shared\mocStyleSheetHelper;
-use MOC\Plugin\Shared\MusicPlayer;
-use MOC\Plugin\Shared\VideoPlayer;
+use MOC\Plugin\Gateway\MusicPlayer;
 
 /**
  *
  */
-class Gateway implements Common {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceChangelog() {
-		Api::Core()->Changelog();
-	}
+class FlashMp3Player extends MusicPlayer {
 
 	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return bool
 	 */
-	public static function InterfaceDepending() {
-		Api::Core()->Depending();
+	public function PluginCapable() {
+		return in_array(
+			Api::Module()->Drive()->File()->Open( $this->PlayerSource() )->GetExtension(),
+			array( 'mp3' )
+		);
 	}
 
-	/** @var Repository $Singleton */
-	private static $Singleton = null;
+	public function EmbedPlayer() {
 
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Gateway
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Gateway();
-		} return self::$Singleton;
+		static $PlayerId;
+		$PlayerId++;
+
+		print '<object type="application/x-shockwave-flash" data="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" width="'.$this->PlayerWidth().'" height="'.$this->PlayerHeight().'">
+			<param name="movie" value="http://flash-mp3-player.net/medias/player_mp3_maxi.swf" />
+			<param name="bgcolor" value="#ffffff" />
+			<param name="FlashVars" value="mp3='.$this->PlayerSource().'&amp;showstop=1&amp;showvolume=1" />
+			<p>Playback Not Supported</p>
+		</object>';
 	}
 
-	/**
-	 * @return Documentation
-	 */
-	public function Documentation() {
-		return new Shared\Documentation();
-	}
-
-	/**
-	 * @return mocJavaScriptHelper
-	 */
-	public function mocJavaScriptHelper() {
-		return new Shared\mocJavaScriptHelper();
-	}
-
-	/**
-	 * @return mocStyleSheetHelper
-	 */
-	public function mocStyleSheetHelper() {
-		return new Shared\mocStyleSheetHelper();
-	}
-
-	/**
-	 * @return VideoPlayer
-	 */
-	public function VideoPlayer() {
-		return new Shared\VideoPlayer();
-	}
-
-	/**
-	 * @return MusicPlayer
-	 */
-	public function MusicPlayer() {
-		return new Shared\MusicPlayer();
-	}
 }

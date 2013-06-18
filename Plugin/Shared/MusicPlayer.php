@@ -32,92 +32,67 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Gateway
- * 10.06.2013 12:47
+ * MusicPlayer
+ * 18.06.2013 11:10
  */
-namespace MOC\Plugin;
-use MOC\Api;
-use MOC\Generic\Common;
-use MOC\Plugin\Shared\Documentation;
-use MOC\Plugin\Shared\mocJavaScriptHelper;
-use MOC\Plugin\Shared\mocStyleSheetHelper;
-use MOC\Plugin\Shared\MusicPlayer;
-use MOC\Plugin\Shared\VideoPlayer;
+namespace MOC\Plugin\Shared;
+
+use MOC\Plugin\Shared;
 
 /**
  *
  */
-class Gateway implements Common {
+class MusicPlayer extends Shared {
+
+	/** @var int $PlayerWidth */
+	private $PlayerWidth = 200;
+	/** @var int $PlayerHeight */
+	private $PlayerHeight = 20;
+	/** @var string $PlayerSource */
+	private $PlayerSource = '';
+
 	/**
-	 * Get Changelog
+	 * @param null|int $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return int|MusicPlayer
 	 */
-	public static function InterfaceChangelog() {
-		Api::Core()->Changelog();
+	public function PlayerWidth( $Value = null ) {
+		if( $Value !== null ) {
+			$this->PlayerWidth = $Value;
+			return $this;
+		} return $this->PlayerWidth;
 	}
 
 	/**
-	 * Get Dependencies
+	 * @param null|int $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return int|MusicPlayer
 	 */
-	public static function InterfaceDepending() {
-		Api::Core()->Depending();
+	public function PlayerHeight( $Value = null ) {
+		if( $Value !== null ) {
+			$this->PlayerHeight = $Value;
+			return $this;
+		} return $this->PlayerHeight;
 	}
 
-	/** @var Repository $Singleton */
-	private static $Singleton = null;
-
 	/**
-	 * Get Singleton/Instance
+	 * @param null|string $Url
 	 *
-	 * @static
-	 * @return Gateway
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return string|MusicPlayer
 	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Gateway();
-		} return self::$Singleton;
+	public function PlayerSource( $Url = null ) {
+		if( $Url !== null ) {
+			$this->PlayerSource = $Url;
+			return $this;
+		} return $this->PlayerSource;
 	}
 
 	/**
-	 * @return Documentation
+	 * Dummy
+	 *
+	 * @return string
 	 */
-	public function Documentation() {
-		return new Shared\Documentation();
-	}
-
-	/**
-	 * @return mocJavaScriptHelper
-	 */
-	public function mocJavaScriptHelper() {
-		return new Shared\mocJavaScriptHelper();
-	}
-
-	/**
-	 * @return mocStyleSheetHelper
-	 */
-	public function mocStyleSheetHelper() {
-		return new Shared\mocStyleSheetHelper();
-	}
-
-	/**
-	 * @return VideoPlayer
-	 */
-	public function VideoPlayer() {
-		return new Shared\VideoPlayer();
-	}
-
-	/**
-	 * @return MusicPlayer
-	 */
-	public function MusicPlayer() {
-		return new Shared\MusicPlayer();
+	function __toString() {
+		return '';
 	}
 }
