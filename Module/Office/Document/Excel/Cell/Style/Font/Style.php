@@ -32,17 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Font
- * 25.02.2013 16:06
+ * Style
+ * 18.06.2013 13:40
  */
-namespace MOC\Module\Office\Document\Excel\Cell\Style;
+namespace MOC\Module\Office\Document\Excel\Cell\Style\Font;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Font implements Module {
+class Style implements Module {
+
 	/**
 	 * Get Changelog
 	 *
@@ -67,38 +68,52 @@ class Font implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Font
+	 * @return Style
 	 */
 	public static function InterfaceInstance() {
-		return new Font();
+		return new Style();
 	}
 
 	/**
-	 * @return Font\Family
+	 * @param bool $Toggle
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Family() {
-		return Font\Family::InterfaceInstance();
+	public function Bold( $Toggle = true ) {
+		$this->getFont()->setBold( $Toggle );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Font\Color
+	 * @param bool $Toggle
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Color() {
-		return Font\Color::InterfaceInstance();
+	public function Italic( $Toggle = true ) {
+		$this->getFont()->setItalic( $Toggle );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Font\Size
+	 * @param bool $Toggle
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Size() {
-		return Font\Size::InterfaceInstance();
+	public function Underline( $Toggle = true ) {
+		$this->getFont()->setUnderline( $Toggle );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Font\Style
+	 * @return \PHPExcel_Style_Font
 	 */
-	public function Style() {
-		return Font\Style::InterfaceInstance();
+	private function getFont() {
+		return Api::Extension()->Excel()->Current()
+			->getActiveSheet()
+			->getStyle(
+				Api::Module()->Office()->Document()->Excel()
+					->Cell()->Select()->Current()
+			)
+			->getFont();
 	}
-
 }

@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Font
- * 25.02.2013 16:06
+ * Size
+ * 18.06.2013 13:33
  */
-namespace MOC\Module\Office\Document\Excel\Cell\Style;
+namespace MOC\Module\Office\Document\Excel\Cell\Style\Font;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Font implements Module {
+class Size implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,38 +67,38 @@ class Font implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Font
+	 * @return Size
 	 */
 	public static function InterfaceInstance() {
-		return new Font();
+		return new Size();
 	}
 
 	/**
-	 * @return Font\Family
+	 * @param float $Size
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Family() {
-		return Font\Family::InterfaceInstance();
+	public function Set( $Size = 10.0 ) {
+		$this->getFont()->setSize( $Size );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return Font\Color
+	 * @return float
 	 */
-	public function Color() {
-		return Font\Color::InterfaceInstance();
+	public function Get() {
+		return $this->getFont()->getSize();
 	}
 
 	/**
-	 * @return Font\Size
+	 * @return \PHPExcel_Style_Font
 	 */
-	public function Size() {
-		return Font\Size::InterfaceInstance();
+	private function getFont() {
+		return Api::Extension()->Excel()->Current()
+			->getActiveSheet()
+			->getStyle(
+				Api::Module()->Office()->Document()->Excel()
+					->Cell()->Select()->Current()
+			)
+			->getFont();
 	}
-
-	/**
-	 * @return Font\Style
-	 */
-	public function Style() {
-		return Font\Style::InterfaceInstance();
-	}
-
 }
