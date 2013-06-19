@@ -82,7 +82,7 @@ class Width implements Module {
 	}
 
 	/**
-	 * @param float $Value
+	 * @param float $Value in Pixel
 	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
