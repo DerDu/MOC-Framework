@@ -95,6 +95,13 @@ class Style implements Module {
 	}
 
 	/**
+	 * @return Style\Color
+	 */
+	public function Color() {
+		return Style\Color::InterfaceInstance();
+	}
+
+	/**
 	 * @return Style\Width
 	 */
 	public function Width() {
