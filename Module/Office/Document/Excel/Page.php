@@ -87,4 +87,18 @@ class Page implements Module {
 		return Page\Orientation::InterfaceInstance();
 	}
 
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Fit() {
+		$this->getActiveSheet()->getPageSetup()->setHorizontalCentered( true )->setVerticalCentered( false );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \PHPExcel_Worksheet
+	 */
+	private function getActiveSheet() {
+		return Api::Extension()->Excel()->Current()->getActiveSheet();
+	}
 }
