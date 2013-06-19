@@ -32,27 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Orientation
+ * 19.06.2013 15:35
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Word\Page;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Orientation implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +50,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +64,29 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Orientation
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Orientation();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
+	public function Landscape() {
+		Api::Module()->Office()->Document()->Word()->Page()->Current()->getSettings()->setLandscape();
+		return Api::Module()->Office()->Document()->Word();
 	}
 
 	/**
-	 * @return Document\Pdf
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
+	public function Portrait() {
+		Api::Module()->Office()->Document()->Word()->Page()->Current()->getSettings()->setPortrait();
+		return Api::Module()->Office()->Document()->Word();
 	}
 
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
-	}
 }

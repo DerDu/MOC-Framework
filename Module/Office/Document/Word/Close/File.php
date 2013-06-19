@@ -32,27 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * File
+ * 19.06.2013 15:06
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Word\Close;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class File implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +50,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +64,25 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return File
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new File();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @param \MOC\Module\Drive\File $File
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
+	public function Word2007( \MOC\Module\Drive\File $File ) {
+		$Instance = Api::Extension()->Word()->Current();
+		$Writer = new \PHPWord_Writer_Word2007( $Instance );
+		$Writer->save( $File->GetLocation() );
+		Api::Extension()->Word()->Destroy();
+		return Api::Module()->Office()->Document()->Word();
 	}
 
-	/**
-	 * @return Document\Pdf
-	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
-	}
-
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
-	}
 }

@@ -32,27 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Open
+ * 19.06.2013 15:00
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Word;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Open implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +51,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +65,23 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Open
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Open();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
+	public function Blank(){
+		Api::Extension()->Word()->Create();
+		// Create Page at Index: 0
+		Api::Extension()->Word()->Current()->createSection();
+		return Api::Module()->Office()->Document()->Word();
 	}
 
-	/**
-	 * @return Document\Pdf
-	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
-	}
-
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
-	}
 }

@@ -32,27 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Select
+ * 19.06.2013 15:12
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Word\Page;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Select implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +50,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +64,32 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Select
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Select();
+	}
+
+	/** @var int $Index */
+	private static $Index = 0;
+
+	/**
+	 * @param int $Number 0..n
+	 *
+	 * @return \MOC\Module\Office\Document\Word
+	 */
+	public function ByIndex( $Number = 0 ) {
+		self::$Index = $Number;
+		return Api::Module()->Office()->Document()->Word();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @return int
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
-	}
-
-	/**
-	 * @return Document\Pdf
-	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
-	}
-
-	/**
-	 * @return Document\Xml
-	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function Current() {
+		return self::$Index;
 	}
 }

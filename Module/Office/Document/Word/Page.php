@@ -32,27 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Page
+ * 19.06.2013 15:08
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document\Word;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Page implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +50,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +64,60 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Page
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Page();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @return Page\Select
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
+	public function Select() {
+		return Page\Select::InterfaceInstance();
 	}
 
 	/**
-	 * @return Document\Pdf
+	 * @return \PHPWord_Section
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
+	public function Current() {
+		return $this->getCurrent();
 	}
 
 	/**
-	 * @return Document\Xml
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function Create() {
+		Api::Extension()->Word()->Current()->createSection();
+		$this->Select()->ByIndex(
+			$this->Select()->Current() +1
+		);
+		return Api::Module()->Office()->Document()->Word();
+	}
+
+	/**
+	 * @return \MOC\Module\Office\Document\Word
+	 */
+	public function Feed() {
+		$this->Current()->addPageBreak();
+		return Api::Module()->Office()->Document()->Word();
+	}
+
+	/**
+	 * @return Page\Orientation
+	 */
+	public function Orientation() {
+		return Page\Orientation::InterfaceInstance();
+	}
+
+	/**
+	 * @return \PHPWord_Section
+	 */
+	private function getCurrent() {
+		$SectionList = Api::Extension()->Word()->Current()->getSections();
+		return $SectionList[Page\Select::InterfaceInstance()->Current()];
 	}
 }

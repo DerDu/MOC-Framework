@@ -32,27 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Document
- * 11.02.2013 12:34
+ * Word
+ * 19.06.2013 14:58
  */
-namespace MOC\Module\Office;
+namespace MOC\Module\Office\Document;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Document implements Module {
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Document
-	 */
-	public static function InterfaceInstance() {
-		return new Document();
-	}
-
+class Word implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -60,7 +50,7 @@ class Document implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -74,30 +64,33 @@ class Document implements Module {
 	}
 
 	/**
-	 * @return Document\Excel
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Word
 	 */
-	public function Excel() {
-		return Document\Excel::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Word();
 	}
 
 	/**
-	 * @return Document\Word
+	 * @return Word\Open
 	 */
-	public function Word() {
-		return Document\Word::InterfaceInstance();
+	public function Open(){
+		return Word\Open::InterfaceInstance();
 	}
 
 	/**
-	 * @return Document\Pdf
+	 * @return Word\Page
 	 */
-	public function Pdf() {
-		return Document\Pdf::InterfaceInstance();
+	public function Page(){
+		return Word\Page::InterfaceInstance();
 	}
 
 	/**
-	 * @return Document\Xml
+	 * @return Word\Close
 	 */
-	public function Xml() {
-		return Document\Xml::InterfaceInstance();
+	public function Close(){
+		return Word\Close::InterfaceInstance();
 	}
 }
