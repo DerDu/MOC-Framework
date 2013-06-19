@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Style
- * 25.02.2013 16:06
+ * Align
+ * 19.06.2013 09:10
  */
-namespace MOC\Module\Office\Document\Excel\Cell;
+namespace MOC\Module\Office\Document\Excel\Cell\Style;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Style implements Module {
+class Align implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,80 +67,105 @@ class Style implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Style
+	 * @return Align
 	 */
 	public static function InterfaceInstance() {
-		return new Style();
+		return new Align();
 	}
 
 	/**
-	 * @return Style\Border
-	 */
-	public function Border() {
-		return Style\Border::InterfaceInstance();
-	}
-
-	/**
-	 * @return Style\Font
-	 */
-	public function Font() {
-		return Style\Font::InterfaceInstance();
-	}
-
-	/**
-	 * @return Style\Align
-	 */
-	public function Align() {
-		return Style\Align::InterfaceInstance();
-	}
-
-	/**
-	 * e.g Current-Cell = 'A1' and $CellRightBottom = 'B2' -> 'A1:B2' will merge 'A1,B1,A2,B2' into one cell
-	 *
-	 * EVERY FOLLOWING ACTION FOR THIS MERGED CELL MUST BE EXECUTED AT (in this case) 'A1' !!!
-	 *
-	 * BECAUSE ITS THE ORIGIN CELL FOR THIS RANGE
-	 *
-	 * @param string $CellRightBottom
-	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Merge( $CellRightBottom ) {
-		$this->getActiveSheet()->mergeCells(
-			$this->getCell()->getCoordinate().':'.$CellRightBottom
-		);
+	public function CenterHorizontal() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * Wrap cell content
-	 *
-	 * @static
-	 * @param bool $Toggle
-	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Wrap( $Toggle = true ) {
-		$this->getActiveSheet()->getStyle( $this->getCell()->getCoordinate() )->getAlignment()->setWrapText( $Toggle );
+	public function CenterHorizontalContinuous() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_CENTER_CONTINUOUS );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return \PHPExcel_Worksheet
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	private function getActiveSheet() {
-		return Api::Extension()->Excel()->Current()->getActiveSheet();
+	public function General() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_GENERAL );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function JustifyHorizontal() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_JUSTIFY );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Left() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Right() {
+		$this->getAlign()->setHorizontal( \PHPExcel_Style_Alignment::HORIZONTAL_RIGHT );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return \PHPExcel_Cell
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	private function getCell() {
+	public function Bottom() {
+		$this->getAlign()->setVertical( \PHPExcel_Style_Alignment::VERTICAL_BOTTOM );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function CenterVertical() {
+		$this->getAlign()->setVertical( \PHPExcel_Style_Alignment::VERTICAL_CENTER );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function JustifyVertical() {
+		$this->getAlign()->setVertical( \PHPExcel_Style_Alignment::VERTICAL_JUSTIFY );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Top() {
+		$this->getAlign()->setVertical( \PHPExcel_Style_Alignment::VERTICAL_TOP );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \PHPExcel_Style_Alignment
+	 */
+	private function getAlign() {
 		return Api::Extension()->Excel()->Current()
 			->getActiveSheet()
-			->getCell(
+			->getStyle(
 				Api::Module()->Office()->Document()->Excel()
 					->Cell()->Select()->Current()
-			);
+			)
+			->getAlignment();
 	}
 }
