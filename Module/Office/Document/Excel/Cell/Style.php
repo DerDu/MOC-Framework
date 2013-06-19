@@ -86,4 +86,41 @@ class Style implements Module {
 	public function Font() {
 		return Style\Font::InterfaceInstance();
 	}
+
+	/**
+	 * e.g Current-Cell = 'A1' and $CellRightBottom = 'B2' -> 'A1:B2' will merge 'A1,B1,A2,B2' into one cell
+	 *
+	 * EVERY FOLLOWING ACTION FOR THIS MERGED CELL MUST BE EXECUTED AT (in this case) 'A1' !!!
+	 *
+	 * BECAUSE ITS THE ORIGIN CELL FOR THIS RANGE
+	 *
+	 * @param string $CellRightBottom
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Merge( $CellRightBottom ) {
+		$this->getActiveSheet()->mergeCells(
+			$this->getCell()->getCoordinate().':'.$CellRightBottom
+		);
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
+	 * @return \PHPExcel_Worksheet
+	 */
+	private function getActiveSheet() {
+		return Api::Extension()->Excel()->Current()->getActiveSheet();
+	}
+
+	/**
+	 * @return \PHPExcel_Cell
+	 */
+	private function getCell() {
+		return Api::Extension()->Excel()->Current()
+			->getActiveSheet()
+			->getCell(
+				Api::Module()->Office()->Document()->Excel()
+					->Cell()->Select()->Current()
+			);
+	}
 }
