@@ -77,6 +77,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Black() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_BLACK ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_BLACK ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -86,6 +87,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Blue() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_BLUE ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_BLUE ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -95,6 +97,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function DarkBlue() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKBLUE ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKBLUE ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -104,6 +107,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function DarkGreen() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKGREEN ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKGREEN ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -113,6 +117,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function DarkRed() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKRED ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKRED ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -122,6 +127,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function DarkYellow() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKYELLOW ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_DARKYELLOW ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -131,6 +137,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Green() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_GREEN ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_GREEN ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -140,6 +147,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Red() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_RED ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_RED ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -149,6 +157,7 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function White() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_WHITE ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_WHITE ) );
 		return Api::Module()->Office()->Document()->Excel();
@@ -158,21 +167,9 @@ class Color implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Yellow() {
+		$this->getColor()->setFillType( \PHPExcel_Style_Fill::FILL_SOLID );
 		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_YELLOW ) );
 		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( \PHPExcel_Style_Color::COLOR_YELLOW ) );
-		return Api::Module()->Office()->Document()->Excel();
-	}
-
-	/**
-	 * @param int $Red
-	 * @param int $Green
-	 * @param int $Blue
-	 *
-	 * @return \MOC\Module\Office\Document\Excel
-	 */
-	public function Custom( $Red = 0, $Green = 0, $Blue = 0 ) {
-		$this->getColor()->setStartColor( new \PHPExcel_Style_Color( bin2hex( $Red ).bin2hex( $Green ).bin2hex( $Blue ).bin2hex( 0 ) ) );
-		$this->getColor()->setEndColor( new \PHPExcel_Style_Color( bin2hex( $Red ).bin2hex( $Green ).bin2hex( $Blue ).bin2hex( 0 ) ) );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
