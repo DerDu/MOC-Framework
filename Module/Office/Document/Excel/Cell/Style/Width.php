@@ -87,6 +87,8 @@ class Width implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function Set( $Value ) {
+		// FIX: Pixel to Excel-Non-Pixel-Whatever-Value
+		$Value = 100 / 705 * $Value;
 		$this->getWidth()->setAutoSize( false )->setWidth( $Value );
 		return Api::Module()->Office()->Document()->Excel();
 	}
@@ -99,9 +101,9 @@ class Width implements Module {
 			->getActiveSheet()
 			->getColumnDimensionByColumn(
 				\PHPExcel_Cell::columnIndexFromString(
-					Api::Module()->Office()->Document()->Excel()
-					->Cell()->Select()->Current()
-				)
+					preg_replace( '![0-9]+$!is', '', Api::Module()->Office()->Document()->Excel()
+					->Cell()->Select()->Current() )
+				) -1
 			);
 	}
 }
