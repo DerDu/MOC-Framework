@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Excel
- * 25.02.2013 16:06
+ * Page
+ * 19.06.2013 09:28
  */
-namespace MOC\Module\Office\Document;
+namespace MOC\Module\Office\Document\Excel;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Excel implements Module {
+class Page implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,44 +67,24 @@ class Excel implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Excel
+	 * @return Page
 	 */
 	public static function InterfaceInstance() {
-		return new Excel();
+		return new Page();
 	}
 
 	/**
-	 * @return Excel\Open
+	 * @return Page\Size
 	 */
-	public function Open(){
-		return Excel\Open::InterfaceInstance();
+	public function Size() {
+		return Page\Size::InterfaceInstance();
 	}
 
 	/**
-	 * @return Excel\Worksheet
+	 * @return Page\Orientation
 	 */
-	public function Worksheet(){
-		return Excel\Worksheet::InterfaceInstance();
+	public function Orientation() {
+		return Page\Orientation::InterfaceInstance();
 	}
 
-	/**
-	 * @return Excel\Cell
-	 */
-	public function Cell(){
-		return Excel\Cell::InterfaceInstance();
-	}
-
-	/**
-	 * @return Excel\Page
-	 */
-	public function Page(){
-		return Excel\Page::InterfaceInstance();
-	}
-
-	/**
-	 * @return Excel\Close
-	 */
-	public function Close(){
-		return Excel\Close::InterfaceInstance();
-	}
 }
