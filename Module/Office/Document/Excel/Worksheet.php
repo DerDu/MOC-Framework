@@ -136,8 +136,7 @@ class Worksheet implements Module {
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
 	public function AutoFilter( $Row = 1 ) {
-		var_dump( 'A'.$Row.':'.\PHPExcel_Cell::stringFromColumnIndex( $this->Dimension()->GetWidth() -1 ).$Row );
-		$this->getActiveSheet()->setAutoFilter( 'A'.$Row.':'.\PHPExcel_Cell::stringFromColumnIndex( $this->Dimension()->GetWidth() ).$Row );
+		$this->getActiveSheet()->setAutoFilter( 'A'.$Row.':'.\PHPExcel_Cell::stringFromColumnIndex( $this->Dimension()->GetWidth() -1 ).$Row );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
