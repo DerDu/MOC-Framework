@@ -131,6 +131,14 @@ class Worksheet implements Module {
 	}
 
 	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function AutoFilter() {
+		$this->getActiveSheet()->setAutoFilter( new \PHPExcel_Worksheet_AutoFilter() );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
 	 * @return \PHPExcel_Worksheet
 	 */
 	private function getActiveSheet() {
