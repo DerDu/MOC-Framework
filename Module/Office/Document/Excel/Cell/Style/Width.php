@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Style
- * 25.02.2013 16:06
+ * Width
+ * 19.06.2013 09:17
  */
-namespace MOC\Module\Office\Document\Excel\Cell;
+namespace MOC\Module\Office\Document\Excel\Cell\Style;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Style implements Module {
+class Width implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,87 +67,41 @@ class Style implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Style
+	 * @return Width
 	 */
 	public static function InterfaceInstance() {
-		return new Style();
+		return new Width();
 	}
 
 	/**
-	 * @return Style\Border
-	 */
-	public function Border() {
-		return Style\Border::InterfaceInstance();
-	}
-
-	/**
-	 * @return Style\Font
-	 */
-	public function Font() {
-		return Style\Font::InterfaceInstance();
-	}
-
-	/**
-	 * @return Style\Align
-	 */
-	public function Align() {
-		return Style\Align::InterfaceInstance();
-	}
-
-	/**
-	 * @return Style\Width
-	 */
-	public function Width() {
-		return Style\Width::InterfaceInstance();
-	}
-
-	/**
-	 * e.g Current-Cell = 'A1' and $CellRightBottom = 'B2' -> 'A1:B2' will merge 'A1,B1,A2,B2' into one cell
-	 *
-	 * EVERY FOLLOWING ACTION FOR THIS MERGED CELL MUST BE EXECUTED AT (in this case) 'A1' !!!
-	 *
-	 * BECAUSE ITS THE ORIGIN CELL FOR THIS RANGE
-	 *
-	 * @param string $CellRightBottom
-	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Merge( $CellRightBottom ) {
-		$this->getActiveSheet()->mergeCells(
-			$this->getCell()->getCoordinate().':'.$CellRightBottom
-		);
+	public function Auto() {
+		$this->getWidth()->setWidth()->setAutoSize( true );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * Wrap cell content
-	 *
-	 * @static
-	 * @param bool $Toggle
+	 * @param float $Value
 	 *
 	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function Wrap( $Toggle = true ) {
-		$this->getActiveSheet()->getStyle( $this->getCell()->getCoordinate() )->getAlignment()->setWrapText( $Toggle );
+	public function Set( $Value ) {
+		$this->getWidth()->setAutoSize( false )->setWidth( $Value );
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
-	 * @return \PHPExcel_Worksheet
+	 * @return \PHPExcel_Worksheet_ColumnDimension
 	 */
-	private function getActiveSheet() {
-		return Api::Extension()->Excel()->Current()->getActiveSheet();
-	}
-
-	/**
-	 * @return \PHPExcel_Cell
-	 */
-	private function getCell() {
+	private function getWidth() {
 		return Api::Extension()->Excel()->Current()
 			->getActiveSheet()
-			->getCell(
-				Api::Module()->Office()->Document()->Excel()
+			->getColumnDimensionByColumn(
+				\PHPExcel_Cell::columnIndexFromString(
+					Api::Module()->Office()->Document()->Excel()
 					->Cell()->Select()->Current()
+				)
 			);
 	}
 }
