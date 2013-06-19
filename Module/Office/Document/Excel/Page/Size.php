@@ -73,203 +73,467 @@ class Size implements Module {
 		return new Size();
 	}
 
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
 	public function Letter() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LetterSmall() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LetterSmall() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_SMALL );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Tabloid() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Tabloid() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Ledger() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Ledger() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEDGER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Legal() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Legal() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Statement() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Statement() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STATEMENT );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Executive() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Executive() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_EXECUTIVE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A3() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A3() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A4() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A4() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A4Small() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A4Small() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_SMALL );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A5() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A5() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function B4() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function B4() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_B4 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function B5() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function B5() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_B5 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Folio() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Folio() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Quarto() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Quarto() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_QUARTO );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Standard1() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Standard1() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_1 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Standard2() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Standard2() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_2 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function Note() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function Note() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NOTE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No9Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No9Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO9_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No10Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No10Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO10_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No11Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No11Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO11_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No12Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No12Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO12_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No14Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No14Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO14_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function D() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function D() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_D );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function E() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function E() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_E );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function DlEnvelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function DlEnvelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_DL_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C5Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C5Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C5_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C3Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C3Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C3_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C4Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C4Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C4_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C6Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C6Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C6_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function C65Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function C65Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_C65_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function B4Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function B4Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_B4_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function B5Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function B5Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_B5_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function B6Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function B6Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_B6_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function ItalyEnvelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function ItalyEnvelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_ITALY_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function MonarchEnvelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function MonarchEnvelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_MONARCH_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function No634Envelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function No634Envelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_6_3_4_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function UsStandardFanfold() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function UsStandardFanfold() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_US_STANDARD_FANFOLD );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function GermanStandardFanfold() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function GermanStandardFanfold() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_GERMAN_STANDARD_FANFOLD );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function GermanLegalFanfold() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function GermanLegalFanfold() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_GERMAN_LEGAL_FANFOLD );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function IsoB4() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function IsoB4() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B4 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function JapaneseDoublePostcard() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function JapaneseDoublePostcard() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_JAPANESE_DOUBLE_POSTCARD );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function StandardPaper1() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function StandardPaper1() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_1 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function StandardPaper2() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function StandardPaper2() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_2 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function StandardPaper3() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function StandardPaper3() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_3 );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function InviteEnvelope() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function InviteEnvelope() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_INVITE_ENVELOPE );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LetterExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LetterExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LegalExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LegalExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LabloidExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LabloidExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A4ExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A4ExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LetterTransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LetterTransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A4TransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A4TransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LetterExtraTransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LetterExtraTransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_EXTRA_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function SuperaSuperaA4Paper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function SuperaSuperaA4Paper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_SUPERA_SUPERA_A4_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function SuperbSuperbA3Paper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function SuperbSuperbA3Paper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_SUPERB_SUPERB_A3_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function LetterPlusPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function LetterPlusPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_PLUS_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A4PlusPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A4PlusPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_PLUS_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A5TransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A5TransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function JisB5TransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function JisB5TransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_JIS_B5_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A3ExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A3ExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A5ExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A5ExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function IsoB5ExtraPaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function IsoB5ExtraPaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B5_EXTRA_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A2Paper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A2Paper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A2_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A3TransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A3TransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
-	public function A3ExtraTransversePaper() {
+	/**
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public  function A3ExtraTransversePaper() {
 		$this->getActiveSheet()->getPageSetup()->setPaperSize( \PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_EXTRA_TRANSVERSE_PAPER );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**
