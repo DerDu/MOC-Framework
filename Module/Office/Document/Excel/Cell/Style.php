@@ -106,6 +106,19 @@ class Style implements Module {
 	}
 
 	/**
+	 * Wrap cell content
+	 *
+	 * @static
+	 * @param bool $Toggle
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
+	 */
+	public function Wrap( $Toggle = true ) {
+		$this->getActiveSheet()->getStyle( $this->getCell()->getCoordinate() )->getAlignment()->setWrapText( $Toggle );
+		return Api::Module()->Office()->Document()->Excel();
+	}
+
+	/**
 	 * @return \PHPExcel_Worksheet
 	 */
 	private function getActiveSheet() {
