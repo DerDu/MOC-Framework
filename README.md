@@ -32,7 +32,7 @@ The easy way to OOP
 	print Api::Module()->Drive()->File()->Open('README.md')->Read();
 	```
 
-Full API-Documentation visit http://derdu.github.io/MOC-Framework
+Full API-Documentation visit <http://derdu.github.io/MOC-Framework>
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -117,3 +117,7 @@ apigen to create the MOC-Documentation
 FlowPlayer to add Office:Video capability
 - Project: <http://flash.flowplayer.org>
 - License: GPLv3
+
+FlashMp3Player to add Office:Music capability
+- Project: <http://flash-mp3-player.net>
+- License: MPL 1.1

@@ -95,6 +95,13 @@ class Excel implements Module {
 	}
 
 	/**
+	 * @return Excel\Page
+	 */
+	public function Page(){
+		return Excel\Page::InterfaceInstance();
+	}
+
+	/**
 	 * @return Excel\Close
 	 */
 	public function Close(){

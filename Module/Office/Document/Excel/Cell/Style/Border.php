@@ -73,5 +73,31 @@ class Border implements Module {
 		return new Border();
 	}
 
+	/**
+	 * @return Border\Top
+	 */
+	public function Top() {
+		return Border\Top::InterfaceInstance();
+	}
 
+	/**
+	 * @return Border\Right
+	 */
+	public function Right() {
+		return Border\Right::InterfaceInstance();
+	}
+
+	/**
+	 * @return Border\Bottom
+	 */
+	public function Bottom() {
+		return Border\Bottom::InterfaceInstance();
+	}
+
+	/**
+	 * @return Border\Left
+	 */
+	public function Left() {
+		return Border\Left::InterfaceInstance();
+	}
 }

@@ -106,18 +106,17 @@ class Worksheet implements Module {
 	}
 
 	/**
-	 * @param string $Name
-	 *
-	 * @return \MOC\Module\Office\Document\Excel
+	 * @return Worksheet\Select
 	 */
-	public function Select( $Name ) {
-		/** @noinspection PhpParamsInspection */
-		Api::Extension()->Excel()->Current()->setActiveSheetIndex(
-			Api::Extension()->Excel()->Current()->getIndex(
-				Api::Extension()->Excel()->Current()->getSheetByName( $Name )
-			)
-		);
-		return Api::Module()->Office()->Document()->Excel();
+	public function Select() {
+		return Worksheet\Select::InterfaceInstance();
+	}
+
+	/**
+	 * @return Worksheet\Dimension
+	 */
+	public function Dimension() {
+		return Worksheet\Dimension::InterfaceInstance();
 	}
 
 	/**
@@ -132,19 +131,13 @@ class Worksheet implements Module {
 	}
 
 	/**
-	 * @return int
+	 * @param int $Row
+	 *
+	 * @return \MOC\Module\Office\Document\Excel
 	 */
-	public function GetDataWidth() {
-		return \PHPExcel_Cell::columnIndexFromString(
-			$this->getActiveSheet()->getHighestDataColumn()
-		);
-	}
-
-	/**
-	 * @return int
-	 */
-	public function GetDataHeight() {
-		return $this->getActiveSheet()->getHighestDataRow();
+	public function AutoFilter( $Row = 1 ) {
+		$this->getActiveSheet()->setAutoFilter( 'A'.$Row.':'.\PHPExcel_Cell::stringFromColumnIndex( $this->Dimension()->GetWidth() -1 ).$Row );
+		return Api::Module()->Office()->Document()->Excel();
 	}
 
 	/**

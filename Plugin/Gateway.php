@@ -41,6 +41,7 @@ use MOC\Generic\Common;
 use MOC\Plugin\Shared\Documentation;
 use MOC\Plugin\Shared\mocJavaScriptHelper;
 use MOC\Plugin\Shared\mocStyleSheetHelper;
+use MOC\Plugin\Shared\MusicPlayer;
 use MOC\Plugin\Shared\VideoPlayer;
 
 /**
@@ -111,5 +112,12 @@ class Gateway implements Common {
 	 */
 	public function VideoPlayer() {
 		return new Shared\VideoPlayer();
+	}
+
+	/**
+	 * @return MusicPlayer
+	 */
+	public function MusicPlayer() {
+		return new Shared\MusicPlayer();
 	}
 }

@@ -88,18 +88,17 @@ class Font implements Module {
 	}
 
 	/**
-	 * @param int $Size
-	 * @return \MOC\Module\Office\Document\Excel
+	 * @return Font\Size
 	 */
-	public function Size( $Size = 10 ) {
-		Api::Extension()->Excel()->Current()
-			->getActiveSheet()
-			->getStyle(
-			Api::Module()->Office()->Document()->Excel()
-				->Cell()->Select()->Current()
-			)
-			->getFont()
-			->setSize( $Size );
-		return Api::Module()->Office()->Document()->Excel();
+	public function Size() {
+		return Font\Size::InterfaceInstance();
 	}
+
+	/**
+	 * @return Font\Style
+	 */
+	public function Style() {
+		return Font\Style::InterfaceInstance();
+	}
+
 }
