@@ -14,6 +14,12 @@ The easy way to OOP
 
 ------------------------------------------------------------------------------------------------------------------------
 
+Please take into account that current versions of MOC-Framework and plugins could contain serious bugs.
+Don't use them in production environments. All problems or comments regarding current versions please insert into
+<https://github.com/DerDu/MOC-Framework/issues>.
+
+------------------------------------------------------------------------------------------------------------------------
+
 ### Usage
 
 1. Get in the MOC
