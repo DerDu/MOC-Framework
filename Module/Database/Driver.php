@@ -153,7 +153,7 @@ abstract class Driver extends Configuration {
 	final protected function GetQuery() {
 		if( $this->StatementCount > 0 ) {
 			$Statement = array_pop( $this->Statement );
-			$this->DebugMessage( 'Statement: '.$Statement );
+			$this->DebugMessage( 'Statement: '.$Statement, 3 );
 			if( isset( $this->Parameter[$this->StatementCount] ) ) {
 				$ParameterList = array_pop( $this->Parameter );
 			} else {
@@ -223,11 +223,11 @@ abstract class Driver extends Configuration {
 						break;
 					}
 				}
-				$this->DebugMessage( 'Parameter-Key: '.$Parameter[1].' Parameter-Value: '.$Parameter[0].' Parameter-Type: '.$Parameter[2] );
+				$this->DebugMessage( 'Parameter-Key: '.$Parameter[1].' Parameter-Value: '.$Parameter[0].' Parameter-Type: '.$Parameter[2], 3 );
 				$Statement = preg_replace( '!'.$this->RegExpEncode( $Parameter[1] ).'!s', $Parameter[0], $Statement, 1 );
 			}
 			$this->StatementCount--;
-			$this->DebugMessage( 'Query: '.$Statement );
+			$this->DebugMessage( 'Query: '.$Statement, 2 );
 			return $Statement;
 		} else {
 			return false;
@@ -283,15 +283,12 @@ abstract class Driver extends Configuration {
 		}
 		return true;
 	}
-	final protected function DebugMessage( $Content ) {
+	final protected function DebugMessage( $Content, $Level = 1 ) {
 		if( !$this->Debug ) {
 			return false;
 		}
-		switch( $this->Debug ) {
-			default: {
-				$this->DebugAsHtml( $Content );
-				break;
-			}
+		if( $this->Debug === true || $this->Debug <= $Level ) {
+			$this->DebugAsHtml( $Content );
 		}
 		return true;
 	}

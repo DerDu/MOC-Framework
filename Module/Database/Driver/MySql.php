@@ -39,12 +39,12 @@ namespace MOC\Module\Database\Driver;
 use MOC\Module\Database\Driver;
 
 /**
- * Class which provides an interface to a MySQL database 
+ * Class which provides an interface to a MySQL database
  */
 class Mysql extends Driver {
 
 	/**
-	 * Constructor which sets database system specific options 
+	 * Constructor which sets database system specific options
 	 */
 	function __construct() {
 		$this->OptionQuote("'");
@@ -68,6 +68,7 @@ class Mysql extends Driver {
 			if( strlen( $Error = mysql_error() ) ) { $this->DebugError( mysql_error().' '.$Error ); }
 			return false;
 		} else {
+			mysql_select_db( $Database );
 			$this->SetResource( $Resource );
 			return true;
 		}
@@ -86,7 +87,7 @@ class Mysql extends Driver {
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		if( false === ( $Result = mysql_query( $this->GetQuery(), $this->GetResource() ) ) ) {
-			if( strlen( $Error = mysql_error() ) ) { $this->DebugError( mysql_error().' '.$Error."\n\n".$this->GetQuery() ); }
+			if( strlen( $Error = mysql_error() ) ) { $this->DebugError( $Error."\n\n".$this->GetQuery() ); }
 			return false;
 		}
 		switch( $FETCH_AS ) {
@@ -109,6 +110,7 @@ class Mysql extends Driver {
 	protected function FetchAsArray( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
+		if( $Result === true ) { return $Return; }
 		$RowCount = mysql_num_rows( $Result );
 		while( false !== ( $Row = mysql_fetch_array( $Result ) ) ) {
 			array_push( $Return, array_values( $Row ) );
@@ -129,6 +131,7 @@ class Mysql extends Driver {
 	protected function FetchAsArrayAssoc( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
+		if( $Result === true ) { return $Return; }
 		$RowCount = mysql_num_rows( $Result );
 		while( false !== ( $Row = mysql_fetch_array( $Result ) ) ) {
 			array_push( $Return, $Row );
