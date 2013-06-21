@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Word
- * 19.06.2013 14:58
+ * Text
+ * 20.06.2013 10:01
  */
-namespace MOC\Module\Office\Document;
+namespace MOC\Module\Office\Document\Word\Element;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Word implements Module {
+class Text implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,37 +67,19 @@ class Word implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Word
+	 * @return Text
 	 */
 	public static function InterfaceInstance() {
-		return new Word();
+		return new Text();
 	}
 
 	/**
-	 * @return Word\Open
+	 * @param $String
+	 *
+	 * @return \MOC\Module\Office\Document\Word
 	 */
-	public function Open(){
-		return Word\Open::InterfaceInstance();
-	}
-
-	/**
-	 * @return Word\Page
-	 */
-	public function Page(){
-		return Word\Page::InterfaceInstance();
-	}
-
-	/**
-	 * @return Word\Element
-	 */
-	public function Element(){
-		return Word\Element::InterfaceInstance();
-	}
-
-	/**
-	 * @return Word\Close
-	 */
-	public function Close(){
-		return Word\Close::InterfaceInstance();
+	public function Set( $String ) {
+		Api::Module()->Office()->Document()->Word()->Page()->Current()->addText( $String );
+		return Api::Module()->Office()->Document()->Word();
 	}
 }
