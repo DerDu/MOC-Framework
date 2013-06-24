@@ -45,7 +45,7 @@ class Odbc extends Driver {
 
 	/**
 	 * Opens a ODBC database connection
-	 * 
+	 *
 	 * @param string $DSN
 	 * @param string $User
 	 * @param string $Password
@@ -66,7 +66,7 @@ class Odbc extends Driver {
 
 	/**
 	 * Executes a SQL query
-	 * 
+	 *
 	 * @param int $FETCH_AS
 	 *
 	 * @return array|bool
@@ -81,6 +81,9 @@ class Odbc extends Driver {
 			return false;
 		}
 		switch( $FETCH_AS ) {
+			case self::RESULT_AS_RESOURCE: {
+				return $Result;
+			}
 			case self::RESULT_AS_ARRAY_ASSOC: {
 				return $this->FetchAsArrayAssoc( $Result );
 			}
@@ -92,7 +95,7 @@ class Odbc extends Driver {
 
 	/**
 	 * Fetches a query result as an array
-	 * 
+	 *
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -113,7 +116,7 @@ class Odbc extends Driver {
 
 	/**
 	 * Fetches a query result as an associative array
-	 * 
+	 *
 	 * @param resource $Result
 	 *
 	 * @return array
@@ -140,7 +143,7 @@ class Odbc extends Driver {
 		odbc_close( $this->GetResource() );
 		$this->SetResource(null);
 	}
-		
+
 	/**
 	 * Starts a Transaction
 	 */
@@ -150,7 +153,7 @@ class Odbc extends Driver {
 	}
 
 	/**
-	 * Ends a Transaction with Commit 
+	 * Ends a Transaction with Commit
 	 */
 	public function TransactionCommit() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
@@ -159,7 +162,7 @@ class Odbc extends Driver {
 	}
 
 	/**
-	 * Ends a Transaction with Rollback 
+	 * Ends a Transaction with Rollback
 	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );

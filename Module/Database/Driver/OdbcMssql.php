@@ -39,12 +39,12 @@ namespace MOC\Module\Database\Driver;
 require_once('Odbc.php');
 
 /**
- * Class which provides an ODBC interface for a MSSQL database system 
+ * Class which provides an ODBC interface for a MSSQL database system
  */
 class OdbcMssql extends Odbc {
 
 	/**
-	 * Constructor which sets database system specific options 
+	 * Constructor which sets database system specific options
 	 */
 	function __construct() {
 		$this->OptionQuote("'");

@@ -73,6 +73,7 @@ class Constant {
 	 * Result
 	 */
 
+	const RESULT_AS_RESOURCE = 0;
 	const RESULT_AS_ARRAY = 1;
 	const RESULT_AS_ARRAY_ASSOC = 2;
 
