@@ -76,7 +76,7 @@ class Tokenizer implements Core {
 
 
 	private $Content = '';
-	private $PatternTokenizer = '!(?<=<)[^\?<>]*?(?=>)!is';
+	private $PatternTokenizer = '!(?<=<)[^?][^<>]*?(?=>)!is';
 	private $PatternComment = '!(?<=<\!--).*?(?=//-->)!is';
 	private $PatternCDATA = '!(?<=<\!\[CDATA\[).*?(?=\]\]>)!is';
 	private $Result = array();
