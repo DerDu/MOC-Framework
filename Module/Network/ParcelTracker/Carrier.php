@@ -37,12 +37,12 @@
  */
 namespace MOC\Module\Network\ParcelTracker;
 use MOC\Api;
-use MOC\Generic\Package;
+use MOC\Generic\Device\Module;
 
 /**
  *
  */
-abstract class Carrier  implements Package {
+abstract class Carrier implements Module {
 	/**
 	 * Get Dependencies
 	 *

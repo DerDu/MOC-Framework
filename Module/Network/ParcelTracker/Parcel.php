@@ -37,12 +37,23 @@
  */
 namespace MOC\Module\Network\ParcelTracker;
 use MOC\Api;
-use MOC\Generic\Package;
+use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Parcel implements Package {
+class Parcel implements Module {
+	/**
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return object
+	 * @noinspection PhpAbstractStaticMethodInspection
+	 */
+	public static function InterfaceInstance() {
+		// TODO: Implement InterfaceInstance() method.
+	}
+
 	/**
 	 * Get Dependencies
 	 *
