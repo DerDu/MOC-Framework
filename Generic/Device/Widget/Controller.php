@@ -36,9 +36,19 @@
  * 18.02.2013 15:01
  */
 namespace MOC\Generic\Device\Widget;
+use MOC\Api;
+use MOC\Generic\Common;
+
 /**
  *
  */
-abstract class Controller implements \MOC\Generic\Common {
-
+abstract class Controller implements Common {
+	/**
+	 * Get \MOC\Module\Database
+	 *
+	 * @return \MOC\Module\Database
+	 */
+	final public function getDatabase() {
+		return Api::Module()->Database();
+	}
 }

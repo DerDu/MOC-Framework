@@ -36,11 +36,12 @@
  * 18.02.2013 15:01
  */
 namespace MOC\Generic\Device\Widget;
-use \MOC\Core\Template\Variable;
+use MOC\Core\Template\Variable;
+use MOC\Generic\Common;
 /**
  *
  */
-abstract class View implements \MOC\Generic\Common {
+abstract class View implements Common {
 	/**
 	 * Create Output
 	 *
