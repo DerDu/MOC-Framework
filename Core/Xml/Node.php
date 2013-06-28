@@ -175,13 +175,14 @@ class Node implements Core {
 	 * @param null $AttributeList
 	 * @param null $Index
 	 * @param bool $Recursive
+	 * @param bool $NameIsRegExp
 	 *
 	 * @return bool|Node|object
 	 */
-	public function GetChild( $Name, $AttributeList = null, $Index = null, $Recursive = true ) {
+	public function GetChild( $Name, $AttributeList = null, $Index = null, $Recursive = true, $NameIsRegExp = false ) {
 		/** @var Node $Node */
 		foreach( $this->ChildList as $Node ) {
-			if( $Node->GetName() == $Name ) {
+			if( $Node->GetName() == $Name || ( $NameIsRegExp && preg_match( $Name, $Node->GetName() ) ) ) {
 				if( $AttributeList === null && $Index === null ) {
 					return $Node;
 				} else if( $Index === null ) {
@@ -203,7 +204,7 @@ class Node implements Core {
 				}
 			}
 			if( true === $Recursive && !empty( $Node->ChildList ) ) {
-				if( false !== ( $Result = $Node->GetChild( $Name, $AttributeList, $Index, $Recursive ) ) ) {
+				if( false !== ( $Result = $Node->GetChild( $Name, $AttributeList, $Index, $Recursive, $NameIsRegExp ) ) ) {
 					if( !is_object( $Result ) ) {
 						$Index = $Result;
 					} else {
