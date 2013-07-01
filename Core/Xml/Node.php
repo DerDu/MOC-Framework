@@ -82,6 +82,7 @@ class Node implements Core {
 	/** @var null|int $Position */
 	private $Position = null;
 	private $Parent = null;
+	/** @var Node[] $ChildList */
 	private $ChildList = array();
 
 	private $Name = null;
@@ -221,7 +222,7 @@ class Node implements Core {
 	}
 
 	/**
-	 * @return array
+	 * @return Node[]
 	 */
 	public function GetChildList() {
 		return $this->ChildList;
