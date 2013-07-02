@@ -81,6 +81,7 @@ class Node implements Core {
 	private $Type = self::TYPE_CONTENT;
 	/** @var null|int $Position */
 	private $Position = null;
+	/** @var null|Node $Parent */
 	private $Parent = null;
 	/** @var Node[] $ChildList */
 	private $ChildList = array();
@@ -152,22 +153,47 @@ class Node implements Core {
 	}
 
 	/**
-	 * @return null
+	 * @return null|Node
 	 */
 	public function GetParent() {
 		return $this->Parent;
 	}
 
 	/**
-	 * @param Node $Value
+	 * @param Node $Node
+	 * @param null|Node $After
 	 *
 	 * @return Node
 	 */
-	public function AddChild( Node $Value ) {
-		$Value->SetParent( $this );
-		array_push( $this->ChildList, $Value );
-		$this->Content = null;
-		$this->SetType( self::TYPE_STRUCTURE );
+	public function AddChild( Node $Node, Node $After = null ) {
+		if( $After === null ) {
+			$Node->SetParent( $this );
+			array_push( $this->ChildList, $Node );
+			$this->Content = null;
+			$this->SetType( self::TYPE_STRUCTURE );
+		} else {
+			$this->injectChild( $Node, $After );
+		}
+		return $this;
+	}
+
+	private function injectChild( Node $Inject, Node $After ) {
+		$Index = array_search( $After, $this->ChildList ) +1;
+		$Left = array_slice( $this->ChildList, 0, $Index, true );
+		$Right = array_slice( $this->ChildList, $Index, null, true );
+		$this->SetChildList( array_merge( $Left, array( $Inject ), $Right ) );
+	}
+
+	/**
+	 * @param Node[] $NodeList
+	 *
+	 * @return Node
+	 */
+	public function SetChildList( $NodeList ) {
+		$this->ChildList = array();
+		foreach( $NodeList as $Node ) {
+			$this->AddChild( $Node );
+		}
 		return $this;
 	}
 
@@ -219,6 +245,19 @@ class Node implements Core {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @param Node $Child
+	 *
+	 * @return Node
+	 */
+	public function RemoveChild( Node $Child ) {
+		if( false !== $Index = array_search( $Child, $this->ChildList ) ) {
+			$this->ChildList[$Index]->__destruct();
+			unset( $this->ChildList[$Index] );
+		}
+		return $this;
 	}
 
 	/**
