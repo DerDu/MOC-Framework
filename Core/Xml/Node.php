@@ -178,7 +178,7 @@ class Node implements Core {
 	 * @param bool $Recursive
 	 * @param bool $NameIsRegExp
 	 *
-	 * @return bool|Node|object
+	 * @return bool|Node
 	 */
 	public function GetChild( $Name, $AttributeList = null, $Index = null, $Recursive = true, $NameIsRegExp = false ) {
 		/** @var Node $Node */
@@ -219,6 +219,13 @@ class Node implements Core {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * @return int
+	 */
+	public function GetChildListCount() {
+		return count( $this->GetChildList() );
 	}
 
 	/**
