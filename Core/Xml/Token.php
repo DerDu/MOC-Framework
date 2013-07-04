@@ -110,7 +110,7 @@ class Token implements Core {
 		$Token = explode(' ', $Content[0] );
 		$this->Name = preg_replace( '!/$!is', '', array_shift( $Token ) );
 
-		preg_match_all( '![\w]+="[^"]*?"!is', $Content[0], $Matches );
+		preg_match_all( '![\w:]+="[^"]*?"!is', $Content[0], $Matches );
 		$Token = $Matches[0];
 
 		$Attribute = array();
