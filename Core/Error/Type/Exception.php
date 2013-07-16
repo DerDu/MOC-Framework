@@ -89,9 +89,9 @@ class Exception implements Common {
 		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".nl2br($Trace)."\n\n".'Trigger in '.$File.' at line '.$Line );
 		if( Reporting::$Display ) {
 			die( str_replace( array(
-					'{Message}'
+					'{Message}', '{File}', '{Position}',
 				), array(
-					nl2br($Message)
+					nl2br($Message), $File, $Line
 				), $this->TemplateTrigger() )
 			);
 		} else {
@@ -136,8 +136,9 @@ class Exception implements Common {
 		return '<div style="color: #F00; border: 1px dotted #F00; padding: 15px; margin-top: 1px; font-family: monospace; background-color: #FFEEAA;">'.
 			'<div style="margin: 5px; margin-left: 0; font-weight: bold;">Exception</div>'.
 			'<div style="margin: 5px;">{Message}</div>'.
+			'<div style="margin: 5px; font-size: 11px;">in {File} at line {Position}</div>'.
 			'<div style="margin: 5px; margin-left: 0;">Expected - Execution has been stopped!</div>'.
-			'</div>';
+		'</div>';
 	}
 
 	/**
