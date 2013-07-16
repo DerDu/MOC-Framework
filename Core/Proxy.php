@@ -172,6 +172,30 @@ class Proxy implements Core {
 	}
 
 	/**
+	 * @return Proxy\Server|null
+	 */
+	public function GetServer() {
+		return $this->Server;
+	}
+
+	/**
+	 * @return Proxy\Credentials|null
+	 */
+	public function GetCredentials() {
+		return $this->Credentials;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function IsDefined() {
+		if( false === $this->IsProxy() ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * @return bool|int
 	 */
 	private function IsProxy() {
