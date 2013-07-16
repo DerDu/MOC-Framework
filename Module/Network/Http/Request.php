@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2012, Gerd Christian Kunze
+ * Copyright (c) 2013, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,38 +32,23 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Http
- * 15.10.2012 15:36
+ * Request
+ * 16.07.2013 12:47
  */
-namespace MOC\Module\Network;
+namespace MOC\Module\Network\Http;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- * Class for common HTTP requests
+ *
  */
-class Http implements Module {
-
-	/** @var Http $Singleton */
-	private static $Singleton = null;
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Http
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Http();
-		} return self::$Singleton;
-	}
-
+class Request implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
@@ -74,35 +59,84 @@ class Http implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * Gets HTTP Post request
+	 * Get Singleton/Instance
 	 *
-	 * @return Http\Post
+	 * @static
+	 * @return Request
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Post() {
-		return Http\Post::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Request();
+	}
+
+	/** @var null|string $Name */
+	private $Name = null;
+	private $Index = array();
+
+	/**
+	 * @param string $Name
+	 *
+	 * Index List after Name e.g. Select( 'Key' [,'Index-Dim-1'] [,'Index-Dim-2'] [,...] )
+	 *
+	 * @return Request
+	 */
+	public function Select( $Name ) {
+		if( func_num_args() > 1 ) {
+			$Index = func_get_args();
+			array_shift( $Index );
+			$this->Index = $Index;
+		} else {
+			$this->Index = array();
+		}
+
+		if( isset( $_REQUEST[$Name] ) ) {
+			$this->Name = $Name;
+		} else {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'The selected key ['.$Name.'] is not available!', __FILE__, __LINE__ );
+		}
+		return $this;
 	}
 
 	/**
-	 * Gets HTTP Get request
-	 *
-	 * @return Http\Get
+	 * @return Request\Validation
+	 */
+	public function Check() {
+		return new Request\Validation( $this );
+	}
+
+	/**
+	 * @return mixed
 	 */
 	public function Get() {
-		return Http\Get::InterfaceInstance();
-	}
-
-	/**
-	 * Gets HTTP Request-Payload
-	 *
-	 * @return Http\Request
-	 */
-	public function Request() {
-		return Http\Request::InterfaceInstance();
+		if( isset( $_REQUEST[$this->Name] ) ) {
+			if( empty( $this->Index ) ) {
+				if( is_array( $_REQUEST[$this->Name] ) ) {
+					Api::Core()->Error()->Type()->Exception()->Trigger( 'Get() may return single values only!', __FILE__, __LINE__ );
+				}
+				return $_REQUEST[$this->Name];
+			} else {
+				$Request = $_REQUEST[$this->Name];
+				$IndexCount = count( $this->Index );
+				for( $I = 0; $I < $IndexCount; $I++ ) {
+					if( isset( $Request[$this->Index[$I]] ) ) {
+						$Request = $Request[$this->Index[$I]];
+					} else {
+						return null;
+					}
+				}
+				if( is_array( $Request ) ) {
+					Api::Core()->Error()->Type()->Exception()->Trigger( 'Get() may return single values only!', __FILE__, __LINE__ );
+				}
+				return $Request;
+			}
+		}
+		return null;
 	}
 }

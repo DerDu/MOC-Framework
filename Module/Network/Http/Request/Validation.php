@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2012, Gerd Christian Kunze
+ * Copyright (c) 2013, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,38 +32,24 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Http
- * 15.10.2012 15:36
+ * Validation
+ * 16.07.2013 12:53
  */
-namespace MOC\Module\Network;
+namespace MOC\Module\Network\Http\Request;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Http\Request;
 
 /**
- * Class for common HTTP requests
+ *
  */
-class Http implements Module {
-
-	/** @var Http $Singleton */
-	private static $Singleton = null;
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Http
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Http();
-		} return self::$Singleton;
-	}
-
+class Validation implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
@@ -74,35 +60,82 @@ class Http implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * Gets HTTP Post request
+	 * Get Singleton/Instance
 	 *
-	 * @return Http\Post
+	 * @static
+	 * @return Validation
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Post() {
-		return Http\Post::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Validation();
+	}
+
+	function __construct( Request $Value = null ) {
+		$this->Request = $Value;
+	}
+
+	/** @var null|Request */
+	private $Request = null;
+
+	/**
+	 * @return bool
+	 */
+	public function IsEmpty() {
+		$Value = $this->Request->Get();
+		return empty( $Value );
 	}
 
 	/**
-	 * Gets HTTP Get request
-	 *
-	 * @return Http\Get
+	 * @return bool
 	 */
-	public function Get() {
-		return Http\Get::InterfaceInstance();
+	public function IsNotEmpty() {
+		$Value = $this->Request->Get();
+		return !empty( $Value );
 	}
 
 	/**
-	 * Gets HTTP Request-Payload
-	 *
-	 * @return Http\Request
+	 * @return bool
 	 */
-	public function Request() {
-		return Http\Request::InterfaceInstance();
+	public function IsInteger() {
+		return $this->IsPattern( '!^[0-9]+$!is' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function IsCharacter() {
+		return $this->IsPattern( '!^[a-z]{1}$!is' );
+	}
+
+	/**
+	 * @param string $RegExp
+	 *
+	 * @return bool
+	 */
+	public function IsPattern( $RegExp ) {
+		if( preg_match( $RegExp, $this->Request->Get() ) > 0 ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @param mixed $Value
+	 *
+	 * @return bool
+	 */
+	public function IsEqual( $Value ) {
+		if( $Value == $this->Request->Get() ) {
+			return true;
+		}
+		return false;
 	}
 }
+
