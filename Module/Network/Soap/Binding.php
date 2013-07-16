@@ -32,38 +32,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Binding
+ * 02.07.2013 11:32
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Soap\Binding\Operation;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Binding implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +61,42 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Binding
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Binding();
 	}
 
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
-	}
+	/** @var Operation[] $Operation */
+	private $Operation = array();
 
 	/**
-	 * @return Network\Soap
+	 * @param Node $Binding
+	 *
+	 * @return Binding
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
+	public function Definition( Node $Binding ) {
+
+		$OperationIndex = 0;
+		while( false != ( $Operation = $Binding->GetChild('!:?operation!is', null, $OperationIndex++, false, true ) ) ) {
+			$Instance = new Operation();
+			$Instance->Definition( $Operation );
+			$this->Operation[] = $Instance;
+		}
+
+		$Binding->GetParent()->RemoveChild( $Binding );
+		return $this;
 	}
 
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
-	}
 }

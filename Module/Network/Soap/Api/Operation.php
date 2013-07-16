@@ -32,38 +32,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Operation
+ * 02.07.2013 11:42
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap\Api;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Operation implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +60,69 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Operation
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Operation();
+	}
+
+	/** @var string $Name */
+	private $Name = '';
+	/** @var string $Input */
+	private $Input = '';
+	/** @var string $Output */
+	private $Output = '';
+
+	/**
+	 * @param Node $Operation
+	 * @param Node $Wsdl
+	 *
+	 * @return Operation
+	 */
+	public function Definition( Node $Operation, Node $Wsdl ) {
+
+		$this->Name = $Operation
+			->GetAttribute('name')
+		;
+
+		$this->Input = new Message();
+		$this->Input->Definition( $Operation->GetChild( '!:?input!is', null, null, false, true ), $Wsdl );
+
+		$this->Output = new Message();
+		$this->Output->Definition( $Operation->GetChild( '!:?output!is', null, null, false, true ), $Wsdl );
+
+		return $this;
 	}
 
 	/**
-	 * @return Network\Http
+	 * @return string
 	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
+	public function GetName() {
+		return $this->Name;
 	}
 
 	/**
-	 * @return Network\Soap
+	 * @return string
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
+	public function GetInputMessage() {
+		return $this->Input;
 	}
 
 	/**
-	 * @return Network\ParcelTracker
+	 * @return string
 	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
+	public function GetOutputMessage() {
+		return $this->Output;
 	}
 }

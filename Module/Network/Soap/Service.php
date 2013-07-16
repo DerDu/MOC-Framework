@@ -32,38 +32,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Service
+ * 02.07.2013 11:06
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Soap\Service\Endpoint;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Service implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +61,64 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Service
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Service();
+	}
+
+	/** @var string $Name */
+	private $Name = '';
+	/** @var Endpoint[] $Endpoint */
+	private $Endpoint = array();
+
+	/**
+	 * @param Node $Service
+	 *
+	 * @return Service
+	 */
+	public function Definition( Node $Service ) {
+		$this->Name = $Service->GetAttribute('name');
+		// WSDL 1.0
+		$EndpointIndex = 0;
+		while( false != ( $Endpoint = $Service->GetChild('!:?port!is', null, $EndpointIndex++, false, true ) ) ) {
+			$Instance = new Endpoint();
+			$Instance->Definition( $Endpoint );
+			$this->Endpoint[] = $Instance;
+		}
+		// WSDL 2.0
+		$EndpointIndex = 0;
+		while( false != ( $Endpoint = $Service->GetChild('!:?endpoint!is', null, $EndpointIndex++, false, true ) ) ) {
+			$Instance = new Endpoint();
+			$Instance->Definition( $Endpoint );
+			$this->Endpoint[] = $Instance;
+		}
+		$Service->GetParent()->RemoveChild( $Service );
+		return $this;
 	}
 
 	/**
-	 * @return Network\Http
+	 * @return string
 	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
+	public function GetName() {
+		return $this->Name;
 	}
 
 	/**
-	 * @return Network\Soap
+	 * @return Service\Endpoint[]
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
+	public function GetEndpointList() {
+		return $this->Endpoint;
 	}
 }

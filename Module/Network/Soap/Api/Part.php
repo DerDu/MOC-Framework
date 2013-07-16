@@ -32,38 +32,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Part
+ * 02.07.2013 14:12
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap\Api;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Soap\Type;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Part implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +61,50 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Part
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Part();
 	}
 
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
-	}
+	/** @var string $Name */
+	private $Name = '';
+
+	/** @var Type $Element */
+	private $Type = null;
 
 	/**
-	 * @return Network\Soap
+	 * @param Node $Part
+	 * @param Node $Wsdl
+	 *
+	 * @return Part
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
+	public function Definition( Node $Part, Node $Wsdl ) {
 
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
+		$this->Name = preg_replace( '!^([^:]*:)!is', '', $Part->GetAttribute( 'element' ) );
+
+		$Schema = $Wsdl->GetChild('!:?schema!is', null, null, true, true );
+		$TypeIndex = 0;
+		while( false != ( $Element = $Schema->GetChild('!:?element!is', null, $TypeIndex++, false, true ) ) ) {
+			if( $this->Name == $Element->GetAttribute('name') ) {
+				$Instance = new Type();
+//				$Instance->Definition( $this->Name );
+				$this->Type = $Instance;
+				break;
+			}
+		}
+
+		return $this;
 	}
 }

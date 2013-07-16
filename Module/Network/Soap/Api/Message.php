@@ -32,38 +32,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Message
+ * 02.07.2013 13:59
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap\Api;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Message implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +60,72 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Message
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Message();
+	}
+
+	/** @var string $Name */
+	private $Name = '';
+	/** @var string $Action */
+	private $Action = '';
+	/** @var Part[] $Part */
+	private $Part = '';
+
+	/**
+	 * @param Node $Message
+	 * @param Node $Wsdl
+	 *
+	 * @return Message
+	 */
+	public function Definition( Node $Message, Node $Wsdl ) {
+
+		$this->Name = preg_replace( '!^([^:]*:)!is', '', $Message->GetAttribute('message') );
+		$this->Action = $Message->GetAttribute('Action');
+
+		$MessageIndex = 0;
+		while( false != ( $Node = $Wsdl->GetChild('!:?message!is', null, $MessageIndex++, false, true ) ) ) {
+
+			if( $this->Name == $Node->GetAttribute('name') ) {
+				$PartIndex = 0;
+				while( false != ( $Part = $Node->GetChild('!:?part!is', null, $PartIndex++, false, true ) ) ) {
+					$Instance = new Part();
+					$Instance->Definition( $Part, $Wsdl );
+					$this->Part[] = $Instance;
+				}
+
+				$Node->GetParent()->RemoveChild( $Node );
+				break;
+			}
+		}
+
+
+		return $this;
 	}
 
 	/**
-	 * @return Network\Http
+	 * @return string
 	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
+	public function GetName() {
+		return $this->Name;
 	}
 
 	/**
-	 * @return Network\Soap
+	 * @return string
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
+	public function GetAction() {
+		return $this->Action;
 	}
 }

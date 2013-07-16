@@ -32,38 +32,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Endpoint
+ * 02.07.2013 11:07
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Soap\Service;
 use MOC\Api;
+use MOC\Core\Xml\Node;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Network implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
-
+class Endpoint implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -71,36 +60,69 @@ class Network implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return Endpoint
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new Endpoint();
+	}
+
+	/** @var string $Name */
+	private $Name = '';
+	/** @var string $Name */
+	private $Binding = '';
+	/** @var string $Address */
+	private $Address = '';
+
+	/**
+	 * @param Node $Endpoint
+	 *
+	 * @return Endpoint
+	 */
+	public function Definition( Node $Endpoint ) {
+
+		$this->Name = $Endpoint
+			->GetAttribute('name')
+		;
+		$this->Binding = preg_replace( '!^([^:]*:)!is', '', $Endpoint
+			->GetAttribute('binding') )
+		;
+		$this->Address = $Endpoint
+			->GetChild('!:?address!is', null, null, false, true )
+			->GetAttribute('location')
+		;
+
+		return $this;
 	}
 
 	/**
-	 * @return Network\Http
+	 * @return string
 	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
+	public function GetName() {
+		return $this->Name;
 	}
 
 	/**
-	 * @return Network\Soap
+	 * @return string
 	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
+	public function GetBinding() {
+		return $this->Binding;
 	}
 
 	/**
-	 * @return Network\ParcelTracker
+	 * @return string
 	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
+	public function GetAddress() {
+		return $this->Address;
 	}
 }

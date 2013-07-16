@@ -1,0 +1,38 @@
+/**
+ * Pattern
+ */
+class ${ClassName} {
+
+	static public function Create( $Value ) {
+		return new ${ClassName}( $Value );
+	}
+
+	public function Container() {
+		$Container = new \stdClass();
+		$Reflection = new \ReflectionObject( $this );
+		$PropertyList = $Reflection->getProperties( \ReflectionProperty::IS_PRIVATE );
+		foreach( $PropertyList as $Property ) {
+			$Name = $Property->getName();
+			$Value = $this->{'get'.$Name}();
+			if( is_object( $Value ) ) {
+				$Value = $Value->Container();
+			}
+			$Container->{$Name} = $Value;
+		}
+		return $Container;
+	}
+
+	private $Pattern = "!${Pattern}!";
+	private $Value = null;
+
+	final private function __construct( $Value ) {
+		if( preg_match( $this->Pattern, $Value ) ) {
+			$this->Value = $Value;
+		} else {
+			$this->Value = null;
+		}
+	}
+	final public function getValue() {
+		return $this->Value;
+	}
+}

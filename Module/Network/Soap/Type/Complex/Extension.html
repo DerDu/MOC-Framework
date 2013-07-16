@@ -1,0 +1,26 @@
+/**
+ * Extension (Complex)
+ */
+class ${ClassName} extends ${Extension} {
+
+	static public function Create() {
+		return new ${ClassName}();
+	}
+
+	public function Container() {
+		$Container = new \stdClass();
+		$Reflection = new \ReflectionObject( $this );
+		$PropertyList = $Reflection->getProperties( \ReflectionProperty::IS_PRIVATE );
+		foreach( $PropertyList as $Property ) {
+			$Name = $Property->getName();
+			$Value = $this->{'get'.$Name}();
+			if( is_object( $Value ) ) {
+				$Value = $Value->Container();
+			}
+			$Container->{$Name} = $Value;
+		}
+		return $Container;
+	}
+
+$(Method)
+}
