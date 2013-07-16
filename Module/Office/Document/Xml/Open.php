@@ -38,6 +38,7 @@
 namespace MOC\Module\Office\Document\Xml;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Drive\File;
 
 /**
  *
@@ -79,7 +80,20 @@ class Open implements Module {
 	 * @return \MOC\Module\Office\Document\Xml
 	 */
 	public function Blank( $RootNode = 'Root' ){
-		Api::Extension()->Xml()->Create()->Current()->Create( $RootNode );
+		Api::Extension()->Xml()->Create()->Define(
+			Api::Extension()->Xml()->Current()->Create( $RootNode )
+		);
+		return Api::Module()->Office()->Document()->Xml();
+	}
+
+	/**
+	 * @param File $File
+	 * @return \MOC\Module\Office\Document\Xml
+	 */
+	public function File( File $File ){
+		Api::Extension()->Xml()->Create()->Define(
+			Api::Extension()->Xml()->Current()->Parse( $File->Read() )
+		);
 		return Api::Module()->Office()->Document()->Xml();
 	}
 }

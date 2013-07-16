@@ -130,7 +130,8 @@ class Instance implements Extension {
 	 * @return \MOC\Generic\Device\Extension
 	 */
 	public function Define( $Instance ) {
-		// TODO: Implement Define() method.
+		$this->InstanceCurrent = $Instance;
+		return $this;
 	}
 
 	/**

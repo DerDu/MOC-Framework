@@ -88,4 +88,7 @@ class Xml implements Module {
 		return Xml\Close::InterfaceInstance();
 	}
 
+	public function Code() {
+		return Api::Extension()->Xml()->Current();
+	}
 }
