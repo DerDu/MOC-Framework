@@ -55,6 +55,9 @@ class String extends Type {
 		}
 	}
 
+	/**
+	 * @return string
+	 */
 	function __toString() {
 		return $this->Value;
 	}
