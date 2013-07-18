@@ -41,6 +41,9 @@ namespace MOC\Generic\Type;
  */
 class Enum extends Type {
 
+	/**
+	 * @param array $Value
+	 */
 	function __construct( $Value ) {
 		$this->Value = $Value;
 		$this->checkType();

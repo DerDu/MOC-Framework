@@ -41,6 +41,9 @@ namespace MOC\Generic\Type;
  */
 class Integer extends Type {
 
+	/**
+	 * @param integer $Value
+	 */
 	function __construct( $Value ) {
 		$this->Value = $Value;
 		$this->checkType();

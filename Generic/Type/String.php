@@ -41,6 +41,9 @@ namespace MOC\Generic\Type;
  */
 class String extends Type {
 
+	/**
+	 * @param string $Value
+	 */
 	function __construct( $Value ) {
 		$this->Value = $Value;
 		$this->checkType();

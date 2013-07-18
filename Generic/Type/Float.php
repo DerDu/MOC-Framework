@@ -41,6 +41,9 @@ namespace MOC\Generic\Type;
  */
 class Float extends Type {
 
+	/**
+	 * @param float $Value
+	 */
 	function __construct( $Value ) {
 		$this->Value = $Value;
 		$this->checkType();
