@@ -87,6 +87,13 @@ class Validation implements Module {
 	/**
 	 * @return bool
 	 */
+	public function IsAvailable() {
+		return isset( $_REQUEST[$this->Request->Name()] );
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function IsEmpty() {
 		$Value = $this->Request->Get();
 		return empty( $Value );

@@ -95,13 +95,12 @@ class Request implements Module {
 		} else {
 			$this->Index = array();
 		}
-
-		if( isset( $_REQUEST[$Name] ) ) {
-			$this->Name = $Name;
-		} else {
-			Api::Core()->Error()->Type()->Exception()->Trigger( 'The selected key ['.$Name.'] is not available!', __FILE__, __LINE__ );
-		}
+		$this->Name = $Name;
 		return $this;
+	}
+
+	public function Name() {
+		return $this->Name;
 	}
 
 	/**
@@ -136,7 +135,10 @@ class Request implements Module {
 				}
 				return $Request;
 			}
+		} else {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'The selected key ['.$this->Name.'] is not available!', __FILE__, __LINE__ );
 		}
+
 		return null;
 	}
 }
