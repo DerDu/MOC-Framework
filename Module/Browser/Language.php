@@ -78,13 +78,13 @@ class Language implements Module {
 	/**
 	 * @return int
 	 */
-	public function GetMaxPriority() {
+	public function GetOptionCount() {
 		$this->DetectLanguages();
 		return $this->LanguageCount;
 	}
 
 	/**
-	 * @param int $Priority
+	 * @param int $Priority Option
 	 *
 	 * @return string
 	 */
@@ -94,7 +94,7 @@ class Language implements Module {
 	}
 
 	/**
-	 * @param int $Priority
+	 * @param int $Priority Option
 	 *
 	 * @return string
 	 */
