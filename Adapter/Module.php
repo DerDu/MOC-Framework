@@ -38,6 +38,7 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
+use MOC\Module\Browser;
 use MOC\Module\Database;
 use MOC\Module\Drive;
 use MOC\Module\Network;
@@ -106,6 +107,13 @@ class Module implements Adapter {
 	 */
 	public function Drive() {
 		return Drive::InterfaceInstance();
+	}
+
+	/**
+	 * @return Browser
+	 */
+	public function Browser() {
+		return Browser::InterfaceInstance();
 	}
 
 	/**
