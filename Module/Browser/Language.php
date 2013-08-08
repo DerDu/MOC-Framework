@@ -76,6 +76,8 @@ class Language implements Module {
 	private $LanguageCount = 0;
 
 	/**
+	 * Get Option (Priority)
+	 *
 	 * @return int
 	 */
 	public function GetOptionCount() {
