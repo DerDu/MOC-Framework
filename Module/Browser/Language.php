@@ -80,7 +80,7 @@ class Language implements Module {
 	 *
 	 * @return int
 	 */
-	public function GetOptionCount() {
+	public function GetCount() {
 		$this->DetectLanguages();
 		return $this->LanguageCount;
 	}
@@ -90,7 +90,7 @@ class Language implements Module {
 	 *
 	 * @return string
 	 */
-	public function GetLanguage( $Priority = 0 ) {
+	public function GetCode( $Priority = 0 ) {
 		$this->DetectLanguages();
 		return strtoupper( $this->LanguageList[$Priority][0] );
 	}
