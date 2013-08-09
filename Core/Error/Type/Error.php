@@ -81,12 +81,13 @@ class Error implements Common {
 	 * @param null $Message
 	 * @param null $File
 	 * @param null $Line
+	 * @param bool $Silent false
 	 *
 	 * @return void
 	 */
-	public function Trigger( $Message = null, $File = null, $Line = null ) {
+	public function Trigger( $Message = null, $File = null, $Line = null, $Silent = false ) {
 		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".'Trigger in '.$File.' at line '.$Line );
-		if( Reporting::$Display ) {
+		if( Reporting::$Display && $Silent == false ) {
 			print str_replace( array(
 				'{Message}',
 			), array(
