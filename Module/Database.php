@@ -149,13 +149,44 @@ class Database implements Module {
 		return $this;
 	}
 
+	private $Cache = null;
+	/**
+	 * @param int $Timeout 60 seconds
+	 *
+	 * @return Database
+	 */
+	public function Cache( $Timeout = 60 ) {
+		if( is_integer( $Timeout ) && $Timeout > 0 ) {
+			$this->Cache = $Timeout;
+		}
+		return $this;
+	}
+
 	/**
 	 * @param int $FETCH_AS
 	 *
 	 * @return mixed
 	 */
 	public function Execute( $FETCH_AS = Database\Driver::RESULT_AS_ARRAY_ASSOC ) {
-		return $this->_getResource()->Execute( $FETCH_AS );
+		if( $this->Cache !== null ) {
+			// Build Cache
+			$Cache = Api::Core()->Cache()
+				->Group( __CLASS__ )
+				->Identifier( serialize($this->Current) )
+				->Timeout( $this->Cache )
+				->Extension('db');
+			// Reset Cache
+			$this->Cache = null;
+			// Get Cache
+			if( false === ( $Content = $Cache->Get() ) ) {
+				$Cache->Set( serialize( $Content = $this->_getResource()->Execute( $FETCH_AS ) ) );
+			} else {
+				$Content = unserialize( $Content->Content() );
+			}
+			return $Content;
+		} else {
+			return $this->_getResource()->Execute( $FETCH_AS );
+		}
 	}
 
 	/**
