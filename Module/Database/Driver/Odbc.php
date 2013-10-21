@@ -36,7 +36,9 @@
  * 14.01.2013 20:33
  */
 namespace MOC\Module\Database\Driver;
+use MOC\Api;
 use MOC\Module\Database\Driver;
+use MOC\Module\Database\Result;
 
 /**
  * Class which provides a common ODBC interface
@@ -76,11 +78,17 @@ class Odbc extends Driver {
 			return false;
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false === ( $Result = odbc_exec( $this->GetResource(), $this->GetQuery() ) ) ) {
-			if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error."\n\n".$this->GetQuery() ); }
+		if( false === ( $Result = odbc_exec( $this->GetResource(), $Query = $this->GetQuery() ) ) ) {
+			if( strlen( $Error = odbc_errormsg() ) ) {
+				$this->DebugError( odbc_error().' '.$Error."\n\n".$Query );
+				Api::Core()->Error()->Type()->Error()->Trigger( odbc_error().' '.$Error."\n\n".$Query, __FILE__, __LINE__, true );
+			}
 			return false;
 		}
 		switch( $FETCH_AS ) {
+			case self::RESULT_AS_OBJECT: {
+				return $this->FetchAsObject( $Result );
+			}
 			case self::RESULT_AS_RESOURCE: {
 				return $Result;
 			}
@@ -130,9 +138,22 @@ class Odbc extends Driver {
 			array_push( $Return, $Row );
 		}
 		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = odbc_num_rows( $Result ) : $RowCount ) );
-		//$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
+		$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
 		odbc_free_result( $Result );
 		return $Return;
+	}
+
+	/**
+	 * Fetches a query result as an associative array
+	 *
+	 * @param resource $Result
+	 *
+	 * @return array
+	 */
+	protected function FetchAsObject( $Result ) {
+		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
+		$Return = $this->FetchAsArrayAssoc( $Result );
+		return new Result( $Return );
 	}
 
 	/**

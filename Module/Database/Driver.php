@@ -36,7 +36,7 @@
  * 14.01.2013 20:35
  */
 namespace MOC\Module\Database;
-require_once('Configuration.php');
+require_once( __DIR__.'/Configuration.php' );
 /**
  *
  */
@@ -296,14 +296,14 @@ abstract class Driver extends Configuration {
 		if( is_array( $Content ) ) {
 			print '<div style="font-family: arial; font-size: 12px; background-color: #F3F3F3; color: #999999; border: 1px dotted #CCCCCC; margin: 1px; padding: 5px;">Sample:<pre>'.htmlspecialchars(print_r($Content,true)).'</pre></div>';
 		} else {
-			print '<div style="font-family: arial; font-size: 12px; background-color: #F3F3F3; color: #999999; border: 1px dotted #CCCCCC; margin: 1px; padding: 5px;">'.nl2br($Content).'</div>';
+			print '<div style="font-family: arial; font-size: 12px; background-color: #F3F3F3; color: #999999; border: 1px dotted #CCCCCC; margin: 1px; padding: 5px;">'.nl2br(htmlspecialchars($Content)).'</div>';
 		}
 	}
 	final private function DebugErrorAsHtml( $Content ) {
 		if( is_array( $Content ) ) {
 			print '<div style="font-family: arial; font-size: 12px; background-color: #FFF3F3; color: #FF9999; border: 1px dotted #FFCCCC; margin: 1px; padding: 5px;">Sample:<pre>'.htmlspecialchars(print_r($Content,true)).'</pre></div>';
 		} else {
-			print '<div style="font-family: arial; font-size: 12px; background-color: #FFF3F3; color: #FF9999; border: 1px dotted #FFCCCC; margin: 1px; padding: 5px;">'.nl2br($Content).'</div>';
+			print '<div style="font-family: arial; font-size: 12px; background-color: #FFF3F3; color: #FF9999; border: 1px dotted #FFCCCC; margin: 1px; padding: 5px;">'.nl2br(htmlspecialchars($Content)).'</div>';
 		}
 	}
 }
