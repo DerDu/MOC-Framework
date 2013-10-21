@@ -32,32 +32,43 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Configuration
- * 16.01.2013 09:31
+ * Result
+ * 04.10.2013 14:30
  */
 namespace MOC\Module\Database;
-require_once( __DIR__.'/Constant.php' );
+
+use MOC\Module\Database\Result\Record;
+
 /**
  *
  */
-class Configuration extends Constant {
-	private $Quote = "'";
-	private $EscapeQuoteWith = "'";
-	private $DateTimeFormat = 'Y-m-d H:i:s.u';
+class Result {
 
-	final protected function OptionQuote( $Value = null ) {
-		if( null !== $Value ) {
-			$this->Quote = $Value;
-		} return $this->Quote;
+	private $Timestamp = null;
+
+	/** @var Record[] $RecordList */
+	private $RecordList = array();
+
+	function __construct( $RESULT_AS_ARRAY_ASSOC, $Timestamp = null ) {
+		if( $Timestamp === null ) {
+			$this->Timestamp = time();
+		} else {
+			$this->Timestamp = $Timestamp;
+		}
+		foreach( (array)$RESULT_AS_ARRAY_ASSOC as $Record ) {
+			array_push( $this->RecordList, new Record( $Record ) );
+		}
 	}
-	final protected function OptionEscapeQuoteWith( $Value = null ) {
-		if( null !== $Value ) {
-			$this->EscapeQuoteWith = $Value;
-		} return $this->EscapeQuoteWith;
+
+	/**
+	 * @return Result\Record[]
+	 */
+	public function GetRecordList() {
+		return $this->RecordList;
 	}
-	final protected function OptionDateTimeFormat( $Value = null ) {
-		if( null !== $Value ) {
-			$this->DateTimeFormat = $Value;
-		} return $this->DateTimeFormat;
+
+	public function GetTimestamp() {
+		return $this->Timestamp;
 	}
+
 }

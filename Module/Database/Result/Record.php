@@ -32,32 +32,27 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Configuration
- * 16.01.2013 09:31
+ * Record
+ * 04.10.2013 14:35
  */
-namespace MOC\Module\Database;
-require_once( __DIR__.'/Constant.php' );
+namespace MOC\Module\Database\Result;
 /**
  *
  */
-class Configuration extends Constant {
-	private $Quote = "'";
-	private $EscapeQuoteWith = "'";
-	private $DateTimeFormat = 'Y-m-d H:i:s.u';
+class Record {
 
-	final protected function OptionQuote( $Value = null ) {
-		if( null !== $Value ) {
-			$this->Quote = $Value;
-		} return $this->Quote;
+	private $DataList = array();
+
+	function __construct( $RESULT_AS_ARRAY_ASSOC ) {
+		foreach( (array)$RESULT_AS_ARRAY_ASSOC as $Key => $Value ) {
+			$this->DataList[$Key] = $Value;
+		}
 	}
-	final protected function OptionEscapeQuoteWith( $Value = null ) {
-		if( null !== $Value ) {
-			$this->EscapeQuoteWith = $Value;
-		} return $this->EscapeQuoteWith;
+
+	public function GetValue( $Key ) {
+		return $this->DataList[$Key];
 	}
-	final protected function OptionDateTimeFormat( $Value = null ) {
-		if( null !== $Value ) {
-			$this->DateTimeFormat = $Value;
-		} return $this->DateTimeFormat;
+	public function GetValueList() {
+		return $this->DataList;
 	}
 }
