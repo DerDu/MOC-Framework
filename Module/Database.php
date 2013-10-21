@@ -172,7 +172,7 @@ class Database implements Module {
 			// Build Cache
 			$Cache = Api::Core()->Cache()
 				->Group( __CLASS__ )
-				->Identifier( serialize($this->Current) )
+				->Identifier( $this->Current )
 				->Timeout( $this->Cache )
 				->Extension('db');
 			// Reset Cache
