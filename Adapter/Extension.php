@@ -38,6 +38,7 @@
 namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
+use MOC\Extension\AppGati\Instance as AppGati;
 use MOC\Extension\Excel\Instance as Excel;
 use MOC\Extension\Mail\Instance as Mail;
 use MOC\Extension\Pdf\Instance as Pdf;
@@ -150,5 +151,12 @@ class Extension implements Adapter {
 	 */
 	public function YUICompressor() {
 		return YUICompressor::InterfaceInstance();
+	}
+
+	/**
+	 * @return AppGati
+	 */
+	public function AppGati() {
+		return AppGati::InterfaceInstance();
 	}
 }
