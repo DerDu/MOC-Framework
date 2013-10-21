@@ -102,4 +102,18 @@ class Type implements Core {
 	public function Message() {
 		return Type\Message::InterfaceInstance();
 	}
+
+	/**
+	 * @return Type\Language|null
+	 */
+	public function Language() {
+		return Type\Language::InterfaceInstance();
+	}
+
+	/**
+	 * @return Type\Custom|null
+	 */
+	public function Custom() {
+		return Type\Custom::InterfaceInstance();
+	}
 }

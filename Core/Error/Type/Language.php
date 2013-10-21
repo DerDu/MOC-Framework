@@ -32,8 +32,8 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Exception
- * 31.07.2012 17:00
+ * Language
+ * 06.09.2012 13:56
  */
 namespace MOC\Core\Error\Type;
 use MOC\Api;
@@ -44,16 +44,16 @@ use MOC\Generic\Common;
 /**
  *
  */
-class Exception implements Common {
-	/** @var null|Exception $Singleton */
+class Language implements Common {
+	/** @var null|Language $Singleton */
 	private static $Singleton = null;
 
 	/**
-	 * @return Exception|null
+	 * @return Language|null
 	 */
 	public static function InterfaceInstance() {
 		if( self::$Singleton === null ) {
-			self::$Singleton = new Exception();
+			self::$Singleton = new Language();
 		} return self::$Singleton;
 	}
 
@@ -78,55 +78,20 @@ class Exception implements Common {
 	}
 
 	/**
-	 * @param null  $Message
-	 * @param null  $File
-	 * @param null  $Line
-	 * @param string $Trace
+	 * @param null $Message
+	 * @param bool $Silent false
 	 *
 	 * @return void
 	 */
-	public function Trigger( $Message = null, $File = null, $Line = null, $Trace = '' ) {
-		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".nl2br($Trace)."\n\n".'Trigger in '.$File.' at line '.$Line );
-		if( Reporting::$Display ) {
-			die( str_replace( array(
-					'{Message}', '{File}', '{Position}', '{Trace}'
-				), array(
-					nl2br($Message), $File, $Line, $Trace
-				), $this->TemplateTrigger() )
-			);
-		} else {
-			die();
-		}
-	}
-
-	/**
-	 * @param $Code
-	 * @param $Message
-	 * @param $Trace
-	 * @param $File
-	 * @param $Line
-	 */
-	public function Handler( $Code, $Message, $Trace, $File, $Line ) {
-		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message)))."\n\n".nl2br($Trace)."\n\n".'Code ['.$Code.'] thrown in '.$File.' at line '.$Line );
-		if( Reporting::$Display ) {
+	public function Trigger( $Message = null, $Silent = false ) {
+		$this->Journal( trim(strip_tags(str_replace(array('<br />','<br/>','<br>'),"\n",$Message))) );
+		if( Reporting::$Display && $Silent == false ) {
 			print str_replace( array(
-				'{Code}', '{Message}', '{Trace}', '{File}', '{Position}',
+				'{Message}',
 			), array(
-				$Code, $Message, nl2br($Trace), $File, $Line
-			), $this->TemplateHandler() );
+				$Message
+			), $this->TemplateTrigger() );
 		}
-	}
-
-	/**
-	 * @return string
-	 */
-	private function TemplateHandler() {
-		return '<div style="color: #F00; border: 1px dotted #F00; padding: 15px; margin-top: 1px; font-family: monospace; background-color: #FFEEAA;">'.
-			'<div style="margin: 5px; margin-left: 0;">Exception</div>'.
-			'<div style="margin: 5px; margin-left: 0; font-weight: bold;">{Message}</div>'.
-			'<div style="margin: 5px;">{Trace}</div>'.
-			'<div style="margin: 5px; margin-left: 0;">Code {Code} in {File} at line {Position}</div>'.
-			'</div>';
 	}
 
 	/**
@@ -134,12 +99,10 @@ class Exception implements Common {
 	 */
 	private function TemplateTrigger() {
 		return '<div style="color: #F00; border: 1px dotted #F00; padding: 15px; margin-top: 1px; font-family: monospace; background-color: #FFEEAA;">'.
-			'<div style="margin: 5px; margin-left: 0; font-weight: bold;">Exception</div>'.
+			'<div style="margin: 5px; margin-left: 0; font-weight: bold;">Language</div>'.
 			'<div style="margin: 5px;">{Message}</div>'.
-			'<div style="margin: 5px;">{Trace}</div>'.
-			'<div style="margin: 5px; font-size: 11px;">in {File} at line {Position}</div>'.
-			'<div style="margin: 5px; margin-left: 0;">Expected - Execution has been stopped!</div>'.
-		'</div>';
+			'<div style="margin: 5px; margin-left: 0;">Expected - Execution has been continued!</div>'.
+			'</div>';
 	}
 
 	/**
