@@ -110,15 +110,38 @@ class Request implements Module {
 		return new Request\Validation( $this );
 	}
 
+	public function Count() {
+		$Value = $this->GetValue();
+		if( is_array( $Value ) ) {
+			return count( $Value );
+		} else {
+			return 1;
+		}
+	}
+	public function IndexList() {
+		$Value = $this->GetValue();
+		if( is_array( $Value ) ) {
+			return array_keys( $Value );
+		} else {
+			return array();
+		}
+	}
+	public function Get() {
+		$Value = $this->GetValue();
+		if( is_array( $Value ) ) {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'Get() may return single values only!', __FILE__, __LINE__ );
+			return null;
+		} else {
+			return $Value;
+		}
+	}
+
 	/**
 	 * @return mixed
 	 */
-	public function Get() {
+	private function GetValue() {
 		if( isset( $_REQUEST[$this->Name] ) ) {
 			if( empty( $this->Index ) ) {
-				if( is_array( $_REQUEST[$this->Name] ) ) {
-					Api::Core()->Error()->Type()->Exception()->Trigger( 'Get() may return single values only!', __FILE__, __LINE__ );
-				}
 				return $_REQUEST[$this->Name];
 			} else {
 				$Request = $_REQUEST[$this->Name];
@@ -130,15 +153,22 @@ class Request implements Module {
 						return null;
 					}
 				}
-				if( is_array( $Request ) ) {
-					Api::Core()->Error()->Type()->Exception()->Trigger( 'Get() may return single values only!', __FILE__, __LINE__ );
-				}
 				return $Request;
 			}
 		} else {
 			Api::Core()->Error()->Type()->Exception()->Trigger( 'The selected key ['.$this->Name.'] is not available!', __FILE__, __LINE__ );
 		}
-
 		return null;
+	}
+
+	/**
+	 * @param $Value
+	 */
+	public function Set( $Value ) {
+		if( isset( $_REQUEST[$this->Name] ) ) {
+			$_REQUEST[$this->Name] = $Value;
+		} else {
+			Api::Core()->Error()->Type()->Exception()->Trigger( 'The selected key ['.$this->Name.'] is not available!', __FILE__, __LINE__ );
+		}
 	}
 }
