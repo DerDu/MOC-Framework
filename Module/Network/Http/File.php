@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2012, Gerd Christian Kunze
+ * Copyright (c) 2013, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,38 +32,22 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Http
- * 15.10.2012 15:36
+ * File
+ * 17.10.2013 16:00
  */
-namespace MOC\Module\Network;
+namespace MOC\Module\Network\Http;
 use MOC\Api;
 use MOC\Generic\Device\Module;
-
 /**
- * Class for common HTTP requests
+ *
  */
-class Http implements Module {
-
-	/** @var Http $Singleton */
-	private static $Singleton = null;
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Http
-	 */
-	public static function InterfaceInstance() {
-		if( self::$Singleton === null ) {
-			self::$Singleton = new Http();
-		} return self::$Singleton;
-	}
-
+class File implements Module {
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
 		return Api::Core()->Changelog();
@@ -74,44 +58,56 @@ class Http implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * Gets HTTP Post request
+	 * Get Singleton/Instance
 	 *
-	 * @return Http\Post
+	 * @static
+	 * @return File
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function Post() {
-		return Http\Post::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new File();
 	}
 
-	/**
-	 * Gets HTTP Get request
-	 *
-	 * @return Http\Get
-	 */
-	public function Get() {
-		return Http\Get::InterfaceInstance();
+	private $FILE = array();
+
+	function __construct() {
+		$this->FILE = $this->ReOrderFILE();
 	}
 
-	/**
-	 * Gets HTTP Request-Payload
-	 *
-	 * @return Http\Request
-	 */
-	public function Request() {
-		return Http\Request::InterfaceInstance();
+	public function GetRawData() {
+		return $this->FILE;
 	}
 
-	/**
-	 * Gets HTTP File-Payload
-	 *
-	 * @return Http\File
-	 */
-	public function File() {
-		return Http\File::InterfaceInstance();
+	private function ReOrderFILE( $isFirstChild = true ) {
+		$Result = array();
+		foreach( $_FILES as $Identifier => $File ) {
+			if( $isFirstChild ) {
+				$ChildIdentifier = $File['name'];
+			} else {
+				$ChildIdentifier = $Identifier;
+			}
+			if( is_array( $ChildIdentifier ) ){
+				foreach( array_keys( $ChildIdentifier ) as $Key ) {
+					$Result[$Identifier][$Key] = array(
+						'name' => $File['name'][$Key],
+						'type' => $File['type'][$Key],
+						'tmp_name' => $File['tmp_name'][$Key],
+						'error' => $File['error'][$Key],
+						'size' => $File['size'][$Key]
+					);
+					$Result[$Identifier] = $this->ReOrderFILE( $Result[$Identifier], false );
+				}
+			}else{
+				$Result[$Identifier] = $File;
+			}
+		}
+		return $Result;
 	}
 }
