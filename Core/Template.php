@@ -170,6 +170,28 @@ class Template implements Core {
 	 * @return mixed|string
 	 */
 	public function GetPayload( $doCleanUp = false ) {
+
+		// Insert Request-Values $<Name> (if available)
+		$REGEX_PATTERN_LEFT = '!(\$\<(';
+		$REGEX_PATTERN_RIGHT = ')\>)!s';
+		if( preg_match_all( $REGEX_PATTERN_LEFT.'.*?'.$REGEX_PATTERN_RIGHT, $this->Content, $RequestFieldSet ) ) {
+			foreach( (array)$RequestFieldSet[2] as $RequestField ) {
+				$Payload = Api::Module()->Network()->Http()->Request()->Select( $RequestField );
+				if( $Payload->Check()->IsAvailable() ) {
+					$Payload = $Payload->Get();
+				} else {
+					$Payload = '';
+				}
+				$this->Content = preg_replace(
+					$REGEX_PATTERN_LEFT
+						.$RequestField
+						.$REGEX_PATTERN_RIGHT,
+					$Payload,
+					$this->Content
+				);
+			}
+		}
+
 		if( $doCleanUp ) {
 			$this->Content = preg_replace(
 				Template\Complex::REGEX_PATTERN_LEFT.'.*?'

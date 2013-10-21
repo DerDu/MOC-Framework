@@ -34,6 +34,9 @@ Complex $[name]
 	- GetIdentifier() -> string
 	- GetPayload() -> string
 
+Request $<name>
+	- insert Api::Module()->Network()->Http()->Request()->Select(name)->Get()
+
 Template
 	- new( Template|null )
 	- UseTemplate( Template ) -> Template
