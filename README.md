@@ -114,6 +114,10 @@ Flot to add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
 
+AppGati to add Benchmark capability
+- Project: <http://fotuzlab.github.io/appgati>
+- License: Copyright (see Project)
+
 #### Used 3PS Plugins:
 
 apigen to create the MOC-Documentation
