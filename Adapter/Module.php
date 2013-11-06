@@ -41,6 +41,7 @@ use MOC\Generic\Device\Adapter;
 use MOC\Module\Browser;
 use MOC\Module\Database;
 use MOC\Module\Drive;
+use MOC\Module\Html;
 use MOC\Module\Network;
 use MOC\Module\Office;
 use MOC\Module\Packer;
@@ -149,6 +150,13 @@ class Module implements Adapter {
 	 */
 	public function Database() {
 		return Database::InterfaceInstance();
+	}
+
+	/**
+	 * @return Html
+	 */
+	public function Html() {
+		return Html::InterfaceInstance();
 	}
 
 }

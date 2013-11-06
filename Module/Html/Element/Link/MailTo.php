@@ -32,17 +32,15 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Element
- * 16.07.2013 12:39
+ * MailTo
+ * 06.11.2013 10:12
  */
-namespace MOC\Module\Html;
+namespace MOC\Module\Html\Element\Link;
 use MOC\Api;
-use MOC\Generic\Device\Module;
-
 /**
  *
  */
-class Element implements Module {
+class MailTo extends Link {
 
 	/**
 	 * Get Changelog
@@ -70,24 +68,59 @@ class Element implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Element
+	 * @return MailTo
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Element();
+		return new MailTo();
 	}
 
 	/**
-	 * @return Element\Input
+	 * @param $Value
+	 *
+	 * @return MailTo
 	 */
-	public function Input() {
-		return new Element\Input();
+	public function SetHref( $Value ) {
+		return parent::SetHref( $Value );
 	}
 
 	/**
-	 * @return Element\Link
+	 * @param $Value
+	 *
+	 * @return MailTo
 	 */
-	public function Link() {
-		return new Element\Link();
+	public function SetClass( $Value ) {
+		return parent::SetClass( $Value );
 	}
+
+	/**
+	 * @param $Value
+	 *
+	 * @return MailTo
+	 */
+	public function SetValue( $Value ) {
+		return parent::SetValue( $Value );
+	}
+
+	/**
+	 * @param $Value
+	 *
+	 * @return MailTo
+	 */
+	public function SetSubject( $Value ) {
+		return parent::SetSubject( $Value );
+	}
+
+	public function __toString() {
+		$Factory = Api::Module()->Template();
+		$Template = $Factory->Engine()->Draft( $Factory->Draft()->File(
+			Api::Module()->Drive()->File()->Open( __DIR__.'/MailTo.html' )
+		));
+		$Template->Variable( $Factory->Variable()->Identifier('MailTo-Id')->Content( $this->Attribute()->GetId() ) );
+		$Template->Variable( $Factory->Variable()->Identifier('MailTo-Href')->Content( str_rot13( $this->Attribute()->GetHref().'?subject='.$this->Attribute()->GetSubject() ) ) );
+		$Template->Variable( $Factory->Variable()->Identifier('MailTo-Class')->Content( $this->Attribute()->GetClass() ) );
+		$Template->Variable( $Factory->Variable()->Identifier('MailTo-Value')->Content( $this->Attribute()->GetValue() ) );
+		return $Template->Content( true );
+	}
+
 }

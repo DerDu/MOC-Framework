@@ -1,0 +1,10 @@
+<a id="${MailTo-Id}" href="${MailTo-Href}" class="${MailTo-Class}">${MailTo-Value}</a>
+<script type="text/javascript">
+	if( typeof jQuery != 'undefined' ) {
+		jQuery(document).ready(function(){
+			var Link = jQuery( 'a#${MailTo-Id}' );
+			Link.attr( 'href', 'mailto:'+String( Link.attr( 'href' ) ).replace(/[a-zA-Z]/g,function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}) );
+		});
+	}
+</script>
+

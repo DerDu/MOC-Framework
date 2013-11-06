@@ -32,62 +32,49 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Element
- * 16.07.2013 12:39
+ * Link
+ * 06.11.2013 10:07
  */
-namespace MOC\Module\Html;
-use MOC\Api;
+namespace MOC\Module\Html\Element\Link;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Element implements Module {
+abstract class Link implements Module {
+
+	/** @var null|Attribute $Attribute */
+	private $Attribute = null;
 
 	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return Attribute
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog();
+	final protected function Attribute() {
+		if( null === $this->Attribute ) {
+			$this->Attribute = new Attribute( $this );
+		}
+		return $this->Attribute;
+	}
+
+	public function SetHref( $Value ) {
+		return $this->Attribute()->SetHref( $Value );
+	}
+	public function SetClass( $Value ) {
+		return $this->Attribute()->SetClass( $Value );
+	}
+	public function SetValue( $Value ) {
+		return $this->Attribute()->SetValue( $Value );
+	}
+	public function SetSubject( $Value ) {
+		return $this->Attribute()->SetSubject( $Value );
+	}
+
+	public function GetId() {
+		return $this->Attribute()->GetId();
 	}
 
 	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 * @noinspection PhpAbstractStaticMethodInspection
+	 * @return string
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Element
-	 * @noinspection PhpAbstractStaticMethodInspection
-	 */
-	public static function InterfaceInstance() {
-		return new Element();
-	}
-
-	/**
-	 * @return Element\Input
-	 */
-	public function Input() {
-		return new Element\Input();
-	}
-
-	/**
-	 * @return Element\Link
-	 */
-	public function Link() {
-		return new Element\Link();
-	}
+	abstract function __toString();
 }

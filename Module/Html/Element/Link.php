@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Element
- * 16.07.2013 12:39
+ * Link
+ * 06.11.2013 13:51
  */
-namespace MOC\Module\Html;
+namespace MOC\Module\Html\Element;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Element implements Module {
+class Link implements Module {
 
 	/**
 	 * Get Changelog
@@ -70,24 +70,17 @@ class Element implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Element
+	 * @return Link
 	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceInstance() {
-		return new Element();
+		return new Link();
 	}
 
 	/**
-	 * @return Element\Input
+	 * @return Link\MailTo
 	 */
-	public function Input() {
-		return new Element\Input();
-	}
-
-	/**
-	 * @return Element\Link
-	 */
-	public function Link() {
-		return new Element\Link();
+	public function MailTo() {
+		return Link\MailTo::InterfaceInstance();
 	}
 }
