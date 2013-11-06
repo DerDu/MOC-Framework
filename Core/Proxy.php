@@ -370,7 +370,7 @@ class Proxy implements Core {
 				return $Content;
 			}
 			default: {
-				trigger_error( __CLASS__.': Status-Code '.$Match[0] );
+				trigger_error( __CLASS__.': Status-Code '.$Match[0].'<br/><hr/><div>'.$Content.'</div>' );
 				return $Content;
 			}
 		}
