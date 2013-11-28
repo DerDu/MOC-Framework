@@ -161,6 +161,16 @@ class Node implements Core {
 
 	/**
 	 * @param Node $Node
+	 */
+	public function ReplaceWith( Node $Node ) {
+		$Node->SetParent( $this->GetParent() );
+		$Node->SetPosition( $this->GetPosition() );
+		$this->injectChild( $Node, $this );
+		$this->GetParent()->RemoveChild( $this );
+	}
+
+	/**
+	 * @param Node $Node
 	 * @param null|Node $After
 	 *
 	 * @return Node
