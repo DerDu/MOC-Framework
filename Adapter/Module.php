@@ -41,6 +41,7 @@ use MOC\Generic\Device\Adapter;
 use MOC\Module\Browser;
 use MOC\Module\Database;
 use MOC\Module\Drive;
+use MOC\Module\Encoding;
 use MOC\Module\Html;
 use MOC\Module\Network;
 use MOC\Module\Office;
@@ -159,4 +160,10 @@ class Module implements Adapter {
 		return Html::InterfaceInstance();
 	}
 
+	/**
+	 * @return Encoding
+	 */
+	public function Encoding() {
+		return Encoding::InterfaceInstance();
+	}
 }

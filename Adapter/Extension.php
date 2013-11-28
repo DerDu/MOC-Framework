@@ -39,9 +39,11 @@ namespace MOC\Adapter;
 use MOC\Api;
 use MOC\Generic\Device\Adapter;
 use MOC\Extension\AppGati\Instance as AppGati;
+use MOC\Extension\BarcodeGenerator\Instance as BarcodeGenerator;
 use MOC\Extension\Excel\Instance as Excel;
 use MOC\Extension\Mail\Instance as Mail;
 use MOC\Extension\Pdf\Instance as Pdf;
+use MOC\Extension\QrCode\Instance as QrCode;
 use MOC\Extension\Word\Instance as Word;
 use MOC\Extension\Xml\Instance as Xml;
 use MOC\Extension\YUICompressor\Instance as YUICompressor;
@@ -158,5 +160,19 @@ class Extension implements Adapter {
 	 */
 	public function AppGati() {
 		return AppGati::InterfaceInstance();
+	}
+
+	/**
+	 * @return QRcode
+	 */
+	public function QrCode() {
+		return QRcode::InterfaceInstance();
+	}
+
+	/**
+	 * @return BarcodeGenerator
+	 */
+	public function BarcodeGenerator() {
+		return BarcodeGenerator::InterfaceInstance();
 	}
 }
