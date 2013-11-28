@@ -110,6 +110,14 @@ PclZip to add Packer:Zip capability
 - Project: <http://www.phpconcept.net>
 - License: LGPL
 
+PHPQRCode to add Encoding:QRCode capability
+- Project: <http://phpqrcode.sourceforge.net>
+- License: LGPL
+
+2D-3D-Barcodes-Generator to add Encoding:DataMatrix capability
+- Project: <https://github.com/dineshrabara/2D-3D-Barcodes-Generator>
+- License: Copyright (see Project)
+
 Flot to add Office:Chart capability
 - Project: <http://www.flotcharts.org>
 - License: Copyright (see Project)
