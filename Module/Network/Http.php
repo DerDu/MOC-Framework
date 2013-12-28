@@ -114,4 +114,11 @@ class Http implements Module {
 	public function File() {
 		return Http\File::InterfaceInstance();
 	}
+
+	/**
+	 * @return Http\Header
+	 */
+	public function Header() {
+		return Http\Header::InterfaceInstance();
+	}
 }
