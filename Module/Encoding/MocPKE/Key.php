@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2012, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,66 +32,30 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * Key
+ * 26.10.2012 14:47
  */
-namespace MOC\Module;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Encoding\MocPKE;
 /**
  *
  */
-class Encoding implements Module {
+class Key {
+	private $Modulo;
+	private $Key;
 
 	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Encoding
+	 * @param $Modulo
+	 * @param $Key
 	 */
-	public static function InterfaceInstance() {
-		return new Encoding();
+	function __construct( $Modulo, $Key ) {
+		$this->Modulo = $Modulo;
+		$this->Key = $Key;
 	}
 
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+	function Modulo() {
+		return $this->Modulo;
 	}
-
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * @return Encoding\QRCode
-	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\DataMatrix
-	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	function Key() {
+		return $this->Key;
 	}
 }

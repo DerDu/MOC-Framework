@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2012, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,66 +32,61 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * Message
+ * 26.10.2012 14:50
  */
-namespace MOC\Module;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Encoding\MocPKE;
 /**
  *
  */
-class Encoding implements Module {
+class Message {
+	/** @var string $Payload */
+	private $Payload = '';
+	/** @var string $Token */
+	private $Token = '';
+	/** @var Signature $Signature */
+	private $Signature = false;
 
 	/**
-	 * Get Singleton/Instance
+	 * @param null|string $Value
 	 *
-	 * @static
-	 * @return Encoding
+	 * @return Message|string
 	 */
-	public static function InterfaceInstance() {
-		return new Encoding();
+	public function Payload( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Payload = $Value;
+			return $this;
+		} return $this->Payload;
 	}
 
 	/**
-	 * Get Changelog
+	 * @param null|string $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
+	 * @return Message|string
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+	public function Token( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Token = $Value;
+			return $this;
+		} return $this->Token;
 	}
 
 	/**
-	 * Get Dependencies
+	 * @param null|Signature|bool $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Message|Signature
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function Signature( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Signature = $Value;
+			return $this;
+		} return $this->Signature;
 	}
 
 	/**
-	 * @return Encoding\QRCode
+	 * @return string
 	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\DataMatrix
-	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	function __toString() {
+		return '';
 	}
 }

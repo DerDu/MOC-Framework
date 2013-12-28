@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2012, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,66 +32,32 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * SignatureFactory
+ * 26.10.2012 14:49
  */
-namespace MOC\Module;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Encoding\MocPKE;
 /**
  *
  */
-class Encoding implements Module {
+class SignatureFactory extends CryptEngine {
 
 	/**
-	 * Get Singleton/Instance
+	 * @param     $Message
+	 * @param Key $PrivateKey
 	 *
-	 * @static
-	 * @return Encoding
+	 * @return Signature
 	 */
-	public static function InterfaceInstance() {
-		return new Encoding();
+	public function Create( $Message, Key $PrivateKey ) {
+		return new Signature( $this->Encode( md5( $Message ), $PrivateKey ) );
 	}
 
 	/**
-	 * Get Changelog
+	 * @param           $Message
+	 * @param Signature $Signature
+	 * @param Key       $PublicKey
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
-	}
-
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * @return Encoding\QRCode
-	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\DataMatrix
-	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	 * @return bool
+	 */public function Check( $Message, Signature $Signature, Key $PublicKey ) {
+		return md5( $Message ) == $this->Decode( $Signature->Payload(), $PublicKey );
 	}
 }

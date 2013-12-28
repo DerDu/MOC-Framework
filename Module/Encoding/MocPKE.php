@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2012, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,36 +32,26 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * MocPKE
+ * 26.10.2012 14:53
  */
-namespace MOC\Module;
+namespace MOC\Module\Encoding;
 use MOC\Api;
 use MOC\Generic\Device\Module;
-
 /**
  *
  */
-class Encoding implements Module {
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Encoding
-	 */
-	public static function InterfaceInstance() {
-		return new Encoding();
-	}
+class MocPKE implements Module {
 
 	/**
 	 * Get Changelog
 	 *
 	 * @static
 	 * @return \MOC\Core\Changelog
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog()->Create(__CLASS__);
 	}
 
 	/**
@@ -69,29 +59,64 @@ class Encoding implements Module {
 	 *
 	 * @static
 	 * @return \MOC\Core\Depending
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
 	public static function InterfaceDepending() {
 		return Api::Core()->Depending();
 	}
 
 	/**
-	 * @return Encoding\QRCode
+	 * Get Singleton/Instance
+	 *
+	 * @static
+	 * @return MocPKE
+	 * @noinspection PhpAbstractStaticMethodInspection
 	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
+	public static function InterfaceInstance() {
+		return new MocPKE();
 	}
 
 	/**
-	 * @return Encoding\DataMatrix
+	 * @param int $Secure
+	 *
+	 * @return MocPKE\KeyPair
 	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
+	public function CreateKeyPair( $Secure = 10 ) {
+		$Factory = new MocPKE\KeyFactory();
+		return $Factory->KeyPair( $Secure );
 	}
 
 	/**
-	 * @return Encoding\MocPKE
+	 * @param            $Payload
+	 * @param MocPKE\Key $PublicKeyRecipient
+	 * @param MocPKE\Key $PrivateKeySender
+	 *
+	 * @return MocPKE\Message
 	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	public function Encode( $Payload, MocPKE\Key $PublicKeyRecipient, MocPKE\Key $PrivateKeySender ) {
+		$Factory = new MocPKE\MessageFactory();
+		return $Factory->Create( $Payload, $PrivateKeySender, $PublicKeyRecipient );
+	}
+
+	/**
+	 * @param            $Payload
+	 * @param MocPKE\Key $PublicKeySender
+	 *
+	 * @return bool
+	 */
+	public function Check( $Payload, MocPKE\Key $PublicKeySender ) {
+		$Factory = new MocPKE\MessageFactory();
+		return $Factory->Check( $Payload, $PublicKeySender );
+	}
+
+	/**
+	 * @param MocPKE\Message $Message
+	 * @param MocPKE\Key     $PrivateKeyRecipient
+	 *
+	 * @return bool
+	 */
+	public function Decode( MocPKE\Message $Message, MocPKE\Key $PrivateKeyRecipient ) {
+		$Factory = new MocPKE\MessageFactory();
+		return $Factory->Open( $Message, $PrivateKeyRecipient );
 	}
 }
