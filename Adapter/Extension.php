@@ -47,6 +47,7 @@ use MOC\Extension\QrCode\Instance as QrCode;
 use MOC\Extension\Word\Instance as Word;
 use MOC\Extension\Xml\Instance as Xml;
 use MOC\Extension\YUICompressor\Instance as YUICompressor;
+use MOC\Extension\HuffmanCompressor\Instance as HuffmanCompressor;
 use MOC\Extension\Zip\Instance as Zip;
 /**
  * Class which provides an interface to the Extension functionality of MOC
@@ -153,6 +154,13 @@ class Extension implements Adapter {
 	 */
 	public function YUICompressor() {
 		return YUICompressor::InterfaceInstance();
+	}
+
+	/**
+	 * @return HuffmanCompressor
+	 */
+	public function HuffmanCompressor() {
+		return HuffmanCompressor::InterfaceInstance();
 	}
 
 	/**
