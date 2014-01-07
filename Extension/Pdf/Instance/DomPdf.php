@@ -32,20 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Instance
- * 14.02.2013 11:25
+ * DomPdf
+ * 29.11.2013 14:25
  */
-namespace MOC\Extension\Pdf;
+namespace MOC\Extension\Pdf\Instance;
 use MOC\Api;
-use MOC\Generic\Device\Adapter;
-use MOC\Extension\Pdf\Instance\FPdf;
-use MOC\Extension\Pdf\Instance\DomPdf;
+use MOC\Generic\Device\Extension;
 /**
  *
  */
-class Instance implements Adapter {
+class DomPdf implements Extension {
 
-	/** @var Instance $Singleton */
+	/** @var DomPdf $Singleton */
 	private static $Singleton = null;
 
 	/**
@@ -53,11 +51,12 @@ class Instance implements Adapter {
 	 *
 	 * @static
 	 * @throws \Exception
-	 * @return Instance
+	 * @return DomPdf
 	 */
 	public static function InterfaceInstance() {
+		require_once( __DIR__.'/../3rdParty/domPdf/dompdf_config.inc.php' );
 		if( self::$Singleton === null ) {
-			self::$Singleton = new Instance();
+			self::$Singleton = new DomPdf();
 		} return self::$Singleton;
 	}
 
@@ -82,16 +81,76 @@ class Instance implements Adapter {
 	}
 
 	/**
-	 * @return FPdf
+	 * Set external Extension-Instance
+	 *
+	 * Contains:
+	 * - Set new (external created) 3rdParty Instance to Current
+	 *
+	 * @param $Instance
+	 *
+	 * @return Extension
 	 */
-	public function Factory() {
-		return FPdf::InterfaceInstance();
+	public function Define( $Instance ) {
+		// TODO: Implement Define() method.
+	}
+
+	/**
+	 * Select Index as active 3rdParty Instance
+	 *
+	 * @param int $Index
+	 *
+	 * @return Extension
+	 */
+	public function Select( $Index ) {
+		// TODO: Implement Select() method.
+	}
+
+	/**
+	 * Get Index for Select() from Current() 3rdParty Instance
+	 *
+	 * @return int
+	 */
+	public function Index() {
+		// TODO: Implement Index() method.
+	}
+
+
+	/** @var \DOMPDF[] $Queue */
+	private $Queue = array();
+	/** @var \DOMPDF $Current */
+	private $Current = null;
+
+	/**
+	 * @return DomPdf
+	 */
+	public function Create() {
+		$Instance = new \DOMPDF();
+		if( null === $this->Current ) {
+			$this->Current = $Instance;
+			return $this;
+		} else {
+			array_push( $this->Queue, $this->Current );
+			$this->Current = $Instance;
+			return $this;
+		}
+	}
+
+	/**
+	 * @return null|\DOMPDF
+	 */
+	public function Current() {
+		return $this->Current;
 	}
 
 	/**
 	 * @return DomPdf
 	 */
-	public function Generator() {
-		return DomPdf::InterfaceInstance();
+	public function Destroy() {
+		if( count( $this->Queue ) ) {
+			$this->Current = array_pop( $this->Queue );
+		} else {
+			$this->Current = null;
+		}
+		return $this;
 	}
 }
