@@ -111,6 +111,11 @@ class Request implements Module {
 	}
 
 	public function Count() {
+
+		if( $this->Name === null ) {
+			return count( $_REQUEST );
+		}
+
 		$Value = $this->GetValue();
 		if( is_array( $Value ) ) {
 			return count( $Value );

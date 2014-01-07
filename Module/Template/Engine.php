@@ -134,4 +134,8 @@ class Engine implements Module {
 	public function Content( $Clean = false ) {
 		return $this->Engine->GetPayload( $Clean );
 	}
+
+	function __toString() {
+		return $this->Content( true );
+	}
 }

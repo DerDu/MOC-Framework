@@ -190,6 +190,30 @@ class Database implements Module {
 	}
 
 	/**
+	 * @return Database
+	 */
+	public function TransactionStart() {
+		$this->_getResource()->TransactionStart();
+		return $this;
+	}
+
+	/**
+	 * @return Database
+	 */
+	public function TransactionCommit() {
+		$this->_getResource()->TransactionCommit();
+		return $this;
+	}
+
+	/**
+	 * @return Database
+	 */
+	public function TransactionRollback() {
+		$this->_getResource()->TransactionRollback();
+		return $this;
+	}
+
+	/**
 	 * @param Database\Driver $Resource
 	 *
 	 * @return Database

@@ -109,27 +109,31 @@ class Language implements Module {
 	 *
 	 */
 	private function DetectLanguages() {
-		$AcceptedLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-		$AcceptedLanguageList = explode(',', $AcceptedLanguage );
-		$AcceptedLanguageListLength = count( $AcceptedLanguageList );
-		for( $Run = 0; $Run < $AcceptedLanguageListLength; $Run++ ) {
-			$Qualifier = strchr( $AcceptedLanguageList[$Run], ";" );
-			if( $Qualifier === false ) {
-				$this->LanguageList += array( $AcceptedLanguageList[$Run] => 100 );
-			} else {
-				$Qualifier = explode( ';', $AcceptedLanguageList[$Run] );
-				$Local = $Qualifier[0];
-				$Qualifier = explode( '=', $Qualifier[1] );
-				$this->LanguageList += array( $Local => ( $Qualifier[1] * 100 ) );
+		if( isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+			$AcceptedLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+			$AcceptedLanguageList = explode(',', $AcceptedLanguage );
+			$AcceptedLanguageListLength = count( $AcceptedLanguageList );
+			for( $Run = 0; $Run < $AcceptedLanguageListLength; $Run++ ) {
+				$Qualifier = strchr( $AcceptedLanguageList[$Run], ";" );
+				if( $Qualifier === false ) {
+					$this->LanguageList += array( $AcceptedLanguageList[$Run] => 100 );
+				} else {
+					$Qualifier = explode( ';', $AcceptedLanguageList[$Run] );
+					$Local = $Qualifier[0];
+					$Qualifier = explode( '=', $Qualifier[1] );
+					$this->LanguageList += array( $Local => ( $Qualifier[1] * 100 ) );
+				}
+				$this->LanguageCount++;
 			}
-			$this->LanguageCount++;
+			arsort( $this->LanguageList );
+			$LanguagePriority = array();
+			foreach( $this->LanguageList as $Language => $Qualifier ) {
+				$LanguageDefinition = explode( '-', $Language );
+				$LanguagePriority[] = array( $LanguageDefinition[0], ( isset( $LanguageDefinition[1] ) ? $LanguageDefinition[1] : false ) );
+			}
+			$this->LanguageList = $LanguagePriority;
+		} else {
+			$this->LanguageList = array( array( "en", false ) );
 		}
-		arsort( $this->LanguageList );
-		$LanguagePriority = array();
-		foreach( $this->LanguageList as $Language => $Qualifier ) {
-			$LanguageDefinition = explode( '-', $Language );
-			$LanguagePriority[] = array( $LanguageDefinition[0], ( isset( $LanguageDefinition[1] ) ? $LanguageDefinition[1] : false ) );
-		}
-		$this->LanguageList = $LanguagePriority;
 	}
 }
