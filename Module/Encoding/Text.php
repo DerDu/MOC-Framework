@@ -32,26 +32,31 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * Text
+ * 13.12.2013 13:13
  */
-namespace MOC\Module;
+namespace MOC\Module\Encoding;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Encoding implements Module {
+class Text implements Module {
+
+	/** @var Text $Singleton */
+	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Encoding
+	 * @return Text
 	 */
 	public static function InterfaceInstance() {
-		return new Encoding();
+		if( self::$Singleton === null ) {
+			self::$Singleton = new Text();
+		} return self::$Singleton;
 	}
 
 	/**
@@ -61,7 +66,7 @@ class Encoding implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -75,44 +80,20 @@ class Encoding implements Module {
 	}
 
 	/**
-	 * @return Encoding\QRCode
+	 * @param string $Text
+	 *
+	 * @return string
 	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
+	public function ToLatin1( $Text ) {
+		return Api::Core()->Encoding()->MixedToLatin1( $Text );
 	}
 
 	/**
-	 * @return Encoding\DataMatrix
+	 * @param string $Text
+	 *
+	 * @return string
 	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function Color() {
-		return Encoding\Color::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\Text
-	 */
-	public function Text() {
-		return Encoding\Text::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\UuidGenerator
-	 */
-	public function Uuid() {
-		return Encoding\UuidGenerator::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	public function ToUtf8( $Text ) {
+		return Api::Core()->Encoding()->MixedToUtf8( $Text );
 	}
 }

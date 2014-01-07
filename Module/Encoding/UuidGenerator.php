@@ -32,26 +32,32 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Encoding
- * 28.11.2013 11:18
+ * Generator
+ * 13.12.2013 12:56
  */
-namespace MOC\Module;
+namespace MOC\Module\Encoding;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
- *
+ * @package AIOSystem\Module
+ * @subpackage UuidGenerator
  */
-class Encoding implements Module {
+class UuidGenerator implements Module {
+
+	/** @var QRCode $Singleton */
+	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Encoding
+	 * @return QRCode
 	 */
 	public static function InterfaceInstance() {
-		return new Encoding();
+		if( self::$Singleton === null ) {
+			self::$Singleton = new QRCode();
+		} return self::$Singleton;
 	}
 
 	/**
@@ -61,7 +67,7 @@ class Encoding implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+		return Api::Core()->Changelog();
 	}
 
 	/**
@@ -74,45 +80,20 @@ class Encoding implements Module {
 		return Api::Core()->Depending();
 	}
 
-	/**
-	 * @return Encoding\QRCode
-	 */
-	public function QRCode() {
-		return Encoding\QRCode::InterfaceInstance();
+	public function UUIDv1( $Node = '_DUMMY' ) {
+		$Generator = Api::Extension()->UuidGenerator()->Current();
+		return $Generator->generate( $Generator::UUID_TIME, $Generator::FMT_STRING, $Node );
 	}
-
-	/**
-	 * @return Encoding\DataMatrix
-	 */
-	public function DataMatrix() {
-		return Encoding\DataMatrix::InterfaceInstance();
+	public function UUIDv3( $Node, $NameSpace ) {
+		$Generator = Api::Extension()->UuidGenerator()->Current();
+		return $Generator->generate( $Generator::UUID_NAME_MD5, $Generator::FMT_STRING, $Node, $NameSpace );
 	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function Color() {
-		return Encoding\Color::InterfaceInstance();
+	public function UUIDv4() {
+		$Generator = Api::Extension()->UuidGenerator()->Current();
+		return $Generator->generate( $Generator::UUID_RANDOM, $Generator::FMT_STRING );
 	}
-
-	/**
-	 * @return Encoding\Text
-	 */
-	public function Text() {
-		return Encoding\Text::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\UuidGenerator
-	 */
-	public function Uuid() {
-		return Encoding\UuidGenerator::InterfaceInstance();
-	}
-
-	/**
-	 * @return Encoding\MocPKE
-	 */
-	public function MocPKE() {
-		return Encoding\MocPKE::InterfaceInstance();
+	public function UUIDv5( $Node, $NameSpace ) {
+		$Generator = Api::Extension()->UuidGenerator()->Current();
+		return $Generator->generate( $Generator::UUID_NAME_SHA1, $Generator::FMT_STRING, $Node, $NameSpace );
 	}
 }
