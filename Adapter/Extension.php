@@ -44,11 +44,13 @@ use MOC\Extension\Excel\Instance as Excel;
 use MOC\Extension\Mail\Instance as Mail;
 use MOC\Extension\Pdf\Instance as Pdf;
 use MOC\Extension\QrCode\Instance as QrCode;
+use MOC\Extension\Uuid\Instance as UuidGenerator;
 use MOC\Extension\Word\Instance as Word;
 use MOC\Extension\Xml\Instance as Xml;
 use MOC\Extension\YUICompressor\Instance as YUICompressor;
 use MOC\Extension\HuffmanCompressor\Instance as HuffmanCompressor;
 use MOC\Extension\Zip\Instance as Zip;
+
 /**
  * Class which provides an interface to the Extension functionality of MOC
  */
@@ -122,10 +124,17 @@ class Extension implements Adapter {
 	}
 
 	/**
-	 * @return Pdf
+	 * @return Pdf\FPdf
 	 */
 	public function Pdf() {
-		return Pdf::InterfaceInstance();
+		return Pdf::InterfaceInstance()->Factory();
+	}
+
+	/**
+	 * @return Pdf\DomPdf
+	 */
+	public function PdfGenerator() {
+		return Pdf::InterfaceInstance()->Generator();
 	}
 
 	/**
@@ -182,5 +191,12 @@ class Extension implements Adapter {
 	 */
 	public function BarcodeGenerator() {
 		return BarcodeGenerator::InterfaceInstance();
+	}
+
+	/**
+	 * @return UuidGenerator
+	 */
+	public function UuidGenerator() {
+		return UuidGenerator::InterfaceInstance();
 	}
 }
