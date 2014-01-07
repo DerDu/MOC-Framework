@@ -164,6 +164,16 @@ class Cache implements Core {
 	}
 
 	/**
+	 * @return bool|\MOC\Module\Drive\File
+	 */
+	public function GetCacheFile() {
+		if( false == ( $File = $this->Get() ) ) {
+			return false;
+		}
+		return Api::Module()->Drive()->File()->Open( $File->Location() );
+	}
+
+	/**
 	 * @param mixed $Data
 	 *
 	 * @return Drive\File
@@ -175,6 +185,35 @@ class Cache implements Core {
 			->Content( $Data );
 		$Cache->Save();
 		return $Cache;
+	}
+
+	/**
+	 * @param null|mixed $Data
+	 *
+	 * @return Cache
+	 */
+	public function SetCacheData( $Data = null ) {
+		if( null === $Data ) {
+			$this->Set( '' );
+		} else {
+			$this->Set( serialize( $Data ) );
+		}
+		return $this;
+	}
+
+	/**
+	 * @return bool|mixed
+	 */
+	public function GetCacheData() {
+		if( false == ( $File = $this->GetCacheFile() ) ) {
+			return false;
+		}
+		$Data = $File->Read();
+		if( strlen( $Data ) > 0 ) {
+			return unserialize( $Data );
+		} else {
+			return null;
+		}
 	}
 
 	public function Purge() {
