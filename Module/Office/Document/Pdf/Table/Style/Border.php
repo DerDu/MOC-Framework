@@ -32,62 +32,57 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Border
+ * 13.12.2013 12:32
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Office\Document\Pdf\Table\Style;
 /**
  *
  */
-class Right implements Module {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+class Border {
+
+	private $Top = null;
+	private $Right = null;
+	private $Bottom = null;
+	private $Left = null;
+
+	function __construct() {
+		$this->Top = new Border\Top();
+		$this->Right = new Border\Right();
+		$this->Bottom = new Border\Bottom();
+		$this->Left = new Border\Left();
+	}
+
+	public function Top() {
+		return $this->Top;
+	}
+	public function Right() {
+		return $this->Right;
+	}
+	public function Bottom() {
+		return $this->Bottom;
+	}
+	public function Left() {
+		return $this->Left;
 	}
 
 	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @param float $Size
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function AllSize( $Size ) {
+		$this->Top()->Size( $Size );
+		$this->Right()->Size( $Size );
+		$this->Bottom()->Size( $Size );
+		$this->Left()->Size( $Size );
 	}
 
 	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
+	 * @param string $Color
 	 */
-	public static function InterfaceInstance() {
-		return new Right();
-	}
-
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
+	public function AllColor( $Color ) {
+		$this->Top()->Color( $Color );
+		$this->Right()->Color( $Color );
+		$this->Bottom()->Color( $Color );
+		$this->Left()->Color( $Color );
 	}
 }

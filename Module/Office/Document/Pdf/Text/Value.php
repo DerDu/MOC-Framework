@@ -97,7 +97,7 @@ class Value implements Module {
 	 * @return int mm
 	 */
 	public function GetHeight( $Text, $MaxWidth ) {
-		return ceil( ( Api::Extension()->Pdf()->Current()->FontSizePt / 2.5 ) * $this->GetLineCount( $Text, $MaxWidth ) );
+		return ceil( ( Api::Extension()->Pdf()->Current()->FontSizePt / 2 ) * $this->GetLineCount( $Text, $MaxWidth ) );
 	}
 
 	/**
@@ -135,11 +135,11 @@ class Value implements Module {
 	 *
 	 * @return \MOC\Module\Office\Document\Pdf
 	 */
-	public function Block( $Text, $MaxWidth ) {
+	public function Block( $Text, $MaxWidth, $Border = false ) {
 		Api::Extension()->Pdf()->Current()
 			->MultiCell(
 				$MaxWidth, ( Api::Extension()->Pdf()->Current()->FontSizePt / 2 ),
-				$Text, 0, Api::Module()->Office()->Document()->Pdf()->Text()->Align()->Current()
+				$Text, ( $Border ? 1 : 0 ), Api::Module()->Office()->Document()->Pdf()->Text()->Align()->Current()
 		);
 		return Api::Module()->Office()->Document()->Pdf();
 	}

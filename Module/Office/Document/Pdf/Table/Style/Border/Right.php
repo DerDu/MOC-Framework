@@ -33,61 +33,40 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * Right
- * 27.02.2013 16:06
+ * 13.12.2013 12:53
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
+namespace MOC\Module\Office\Document\Pdf\Table\Style\Border;
 use MOC\Api;
-use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Right implements Module {
+class Right {
+
+	private $Size = 1.0;
+	private $Color = '#000000';
+
 	/**
-	 * Get Changelog
+	 * @param float $Size
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
+	 * @return float
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+	public function Size( $Size = null ) {
+		if( null !== $Size ) {
+			$this->Size = $Size;
+		}
+		return $this->Size;
 	}
 
 	/**
-	 * Get Dependencies
+	 * @param string $Color Hex
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return string
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
-	 */
-	public static function InterfaceInstance() {
-		return new Right();
-	}
-
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
+	public function Color( $Color = null ) {
+		if( null !== $Color ) {
+			$this->Color = $Color;
+		}
+		return $this->Color;
 	}
 }

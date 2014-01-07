@@ -32,62 +32,29 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Align
+ * 12.12.2013 09:19
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Office\Document\Pdf\Table\Style;
 /**
  *
  */
-class Right implements Module {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+class Align extends Constant {
+
+	private $Horizontal = self::TEXT_ALIGN_LEFT;
+	private $Vertical = self::TEXT_ALIGN_TOP;
+
+	public function Horizontal( $TEXT_ALIGN_TYPE = null ){
+		if( null !== $TEXT_ALIGN_TYPE ) {
+			$this->Horizontal = $TEXT_ALIGN_TYPE;
+		}
+		return $this->Horizontal;
+	}
+	public function Vertical( $TEXT_ALIGN_TYPE = null ){
+		if( null !== $TEXT_ALIGN_TYPE ) {
+			$this->Vertical = $TEXT_ALIGN_TYPE;
+		}
+		return $this->Vertical;
 	}
 
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
-	 */
-	public static function InterfaceInstance() {
-		return new Right();
-	}
-
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
-	}
 }

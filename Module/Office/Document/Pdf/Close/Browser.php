@@ -32,17 +32,17 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Browser
+ * 12.12.2013 08:21
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
+namespace MOC\Module\Office\Document\Pdf\Close;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Right implements Module {
+class Browser implements Module {
 	/**
 	 * Get Changelog
 	 *
@@ -67,27 +67,18 @@ class Right implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Right
+	 * @return Browser
 	 */
 	public static function InterfaceInstance() {
-		return new Right();
+		return new Browser();
 	}
 
 	/**
-	 * @param int $Value mm
-	 *
 	 * @return \MOC\Module\Office\Document\Pdf
 	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
+	public function Output() {
+		$Instance = Api::Extension()->Pdf()->Current();
+		$Instance->Output();
 	}
 
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
-	}
 }

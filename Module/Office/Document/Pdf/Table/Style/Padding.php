@@ -32,62 +32,52 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Padding
+ * 12.12.2013 09:16
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Office\Document\Pdf\Table\Style;
 /**
  *
  */
-class Right implements Module {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+class Padding extends Constant {
+
+	private $Top = 0;
+	private $Right = 0;
+	private $Bottom = 0;
+	private $Left = 0;
+
+	public function All( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Top = $Value;
+			$this->Right = $Value;
+			$this->Bottom = $Value;
+			$this->Left = $Value;
+		}
+		return $this->Top;
+	}
+	public function Top( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Top = $Value;
+		}
+		return $this->Top;
+	}
+	public function Right( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Right = $Value;
+		}
+		return $this->Right;
+	}
+	public function Bottom( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Bottom = $Value;
+		}
+		return $this->Bottom;
+	}
+	public function Left( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Left = $Value;
+		}
+		return $this->Left;
 	}
 
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
-	 */
-	public static function InterfaceInstance() {
-		return new Right();
-	}
-
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
-	}
 }

@@ -32,62 +32,80 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Box
+ * 12.12.2013 08:14
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Office\Document\Pdf\Table;
 /**
  *
  */
-class Right implements Module {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+class Box extends Adapter {
+
+	private $Style = null;
+
+	private $Text = null;
+
+	function __construct( Text $Text, Style $Style ) {
+		$this->Text = $Text;
+		$this->Style = $Style;
+	}
+
+	public function Style( Style $Style = null ) {
+		if( null !== $Style ) {
+			$this->Style = $Style;
+		}
+		return $this->Style;
+	}
+
+	public function Valid() {
+		$WordList = $this->Text->GetWordList();
+		/** @var Word $Word */
+		foreach( (array)$WordList as $Word ) {
+			if( $Word->GetWidth() > $this->Style()->Box()->Width() ) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
-	 * Get Dependencies
+	 * @param $Index
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Text|false
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function Text( $Index ) {
+		$TextList = $this->TextList();
+		return (isset($TextList[$Index])?$TextList[$Index]:false);
 	}
 
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
-	 */
-	public static function InterfaceInstance() {
-		return new Right();
+	public function Height() {
+		return ( $this->GetStringHeight() * count( $this->TextList() ) )
+			+ ( $this->Style()->Box()->Padding()->Top() + $this->Style()->Box()->Padding()->Bottom() );
 	}
 
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
+	private function TextList() {
+		$WordList = $this->Text->GetWordList();
+		$TextWidth = 0;
+		$TextList = array();
+		$TextContent = '';
+		/** @var Word $Word */
+		foreach( (array)$WordList as $Word ) {
+			// Fit into Box
+			if( ( $TextWidth += $Word->GetWidth() )
+				<= (
+					$this->Style()->Box()->Width()
+					- ( $this->Style()->Box()->Padding()->Left()
+						+ $this->Style()->Box()->Padding()->Right()
+					)
+			)) {
+				$TextContent .= $Word->GetContent();
+			} else {
+				$TextList[] = new Text( $TextContent );
+				$TextContent = $Word->GetContent();
+				$TextWidth = $Word->GetWidth();
+			}
+		}
+		$TextList[] = new Text( $TextContent );
+		return $TextList;
 	}
 }

@@ -32,17 +32,18 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Style
+ * 12.12.2013 08:15
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
+namespace MOC\Module\Office\Document\Pdf\Table;
 use MOC\Api;
 use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Right implements Module {
+class Style extends Adapter implements Module {
+
 	/**
 	 * Get Changelog
 	 *
@@ -67,27 +68,77 @@ class Right implements Module {
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Right
+	 * @return Style
 	 */
 	public static function InterfaceInstance() {
-		return new Right();
+		return new Style();
 	}
 
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
+	private $Text = null;
+	private $Box = null;
+
+	function __construct() {
+		$this->Text = new StyleText();
+		$this->Box = new StyleBox();
 	}
 
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
+	public function Text() {
+		return $this->Text;
 	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
+
+	public function Box() {
+		return $this->Box;
 	}
+
+}
+
+/**
+ *
+ */
+class StyleBox {
+
+	private $Width = 0;
+	private $Padding = null;
+
+	function __construct() {
+		$this->Padding = new Style\Padding();
+		$this->Border = new Style\Border();
+	}
+
+	public function Padding() {
+		return $this->Padding;
+	}
+	public function Border() {
+		return $this->Border;
+	}
+
+	public function Width( $Value = null ) {
+		if( null !== $Value ) {
+			$this->Width = $Value;
+		}
+		return $this->Width;
+	}
+
+}
+
+/**
+ *
+ */
+class StyleText {
+
+	private $Font = null;
+	private $Align = null;
+
+	function __construct() {
+		$this->Font = new Style\Font();
+		$this->Align = new Style\Align();
+	}
+
+	public function Font() {
+		return $this->Font;
+	}
+	public function Align() {
+		return $this->Align;
+	}
+
 }

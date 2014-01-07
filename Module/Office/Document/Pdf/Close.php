@@ -79,4 +79,11 @@ class Close implements Module {
 	public function File(){
 		return Close\File::InterfaceInstance();
 	}
+
+	/**
+	 * @return Close\Browser
+	 */
+	public function Browser(){
+		return Close\Browser::InterfaceInstance();
+	}
 }

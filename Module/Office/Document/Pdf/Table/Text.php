@@ -32,62 +32,49 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Right
- * 27.02.2013 16:06
+ * Text
+ * 12.12.2013 08:13
  */
-namespace MOC\Module\Office\Document\Pdf\Page\Margin;
+namespace MOC\Module\Office\Document\Pdf\Table;
 use MOC\Api;
-use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Right implements Module {
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ );
+class Text extends Adapter {
+
+	private $Content = '';
+
+	private $WordSeparator = ' ';
+	private $WordList = array();
+
+	function __construct( $Content ) {
+		$this->Content = Api::Module()->Encoding()->Text()->ToLatin1( trim( $Content ) );
+		// Parse Text to Words
+		$WordList = explode( $this->WordSeparator, $this->Content );
+		foreach( (array)$WordList as $Index => $Word ) {
+			if( $Index != 0 ) {
+				array_push( $this->WordList, new Word( $this->WordSeparator ) );
+			}
+			array_push( $this->WordList, new Word( $Word ) );
+		}
 	}
 
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function GetWordList() {
+		return $this->WordList;
 	}
-
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Right
-	 */
-	public static function InterfaceInstance() {
-		return new Right();
+	public function GetContent() {
+		return $this->Content;
 	}
-
-	/**
-	 * @param int $Value mm
-	 *
-	 * @return \MOC\Module\Office\Document\Pdf
-	 */
-	public function Size( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
+	public function GetWidth() {
+		$Result = 0;
+		/** @var Word $Word */
+		foreach( (array)$this->WordList as $Word ) {
+			$Result += $Word->GetWidth();
+		}
+		return $Result;
 	}
-
-	public function Set( $Value ) {
-		Api::Extension()->Pdf()->Current()->SetRightMargin( $Value );
-		return Api::Module()->Office()->Document()->Pdf();
-	}
-	public function Get() {
-		return Api::Extension()->Pdf()->Current()->rMargin;
+	public function GetHeight() {
+		return $this->GetStringHeight();
 	}
 }

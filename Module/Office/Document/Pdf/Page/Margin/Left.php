@@ -82,4 +82,12 @@ class Left implements Module {
 		Api::Extension()->Pdf()->Current()->SetLeftMargin( $Value );
 		return Api::Module()->Office()->Document()->Pdf();
 	}
+
+	public function Set( $Value ) {
+		Api::Extension()->Pdf()->Current()->SetLeftMargin( $Value );
+		return Api::Module()->Office()->Document()->Pdf();
+	}
+	public function Get() {
+		return Api::Extension()->Pdf()->Current()->lMargin;
+	}
 }
