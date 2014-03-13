@@ -41,7 +41,7 @@ require_once( __DIR__.'/Configuration.php' );
  *
  */
 abstract class Driver extends Configuration {
-	/** @var null|\resource $Resource */
+	/** @var null|\resource|\PDO $Resource */
 	private $Resource = null;
 	/** @var array $Statement */
 	private $Statement = array();
@@ -235,14 +235,14 @@ abstract class Driver extends Configuration {
 	}
 
 	/**
-	 * @param null|\resource $Resource
+	 * @param null|\resource|\PDO $Resource
 	 */
 	final protected function SetResource( $Resource ) {
 		$this->Resource = $Resource;
 	}
 
 	/**
-	 * @return null|\resource
+	 * @return null|\resource|\PDO
 	 */
 	final protected function GetResource() {
 		return $this->Resource;

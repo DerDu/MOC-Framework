@@ -81,6 +81,8 @@ class Database implements Module {
 	const DRIVER_MYSQL = 10;
 	const DRIVER_ODBC_MSSQL = 101;
 	const DRIVER_ODBC_ORACLE = 102;
+	const DRIVER_PDO = 20;
+	const DRIVER_PDO_MSSQL = 201;
 
 	/**
 	 * @param int $DRIVER
@@ -99,6 +101,14 @@ class Database implements Module {
 			}
 			case self::DRIVER_ODBC_ORACLE: {
 				$this->_openResource( new Database\Driver\OdbcOracle() );
+				break;
+			}
+			case self::DRIVER_PDO: {
+				$this->_openResource( new Database\Driver\Pdo() );
+				break;
+			}
+			case self::DRIVER_PDO_MSSQL: {
+				$this->_openResource( new Database\Driver\PdoMssql() );
 				break;
 			}
 		}
@@ -156,6 +166,10 @@ class Database implements Module {
 	 * @return Database
 	 */
 	public function Cache( $Timeout = 60 ) {
+		if( $this->_getResource() instanceof \MOC\Module\Database\Driver\Pdo ) {
+			$this->Cache = null;
+			return $this;
+		}
 		if( is_integer( $Timeout ) && $Timeout > 0 ) {
 			$this->Cache = $Timeout;
 		}
