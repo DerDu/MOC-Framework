@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2014, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,82 +32,16 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Constants
+ * 13.01.2014 08:48
  */
-namespace MOC\Module;
-use MOC\Api;
-use MOC\Generic\Device\Module;
-
+namespace MOC\Module\Network\Feed\Generator;
 /**
  *
  */
-class Network implements Module {
+class Constants {
 
-	/**
-	 * Get Singleton/Instance
-	 *
-	 * @static
-	 * @return Network
-	 */
-	public static function InterfaceInstance() {
-		return new Network();
-	}
+	const TYPE_RSS = 0;
+	const TYPE_ATOM = 1;
 
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
-	}
-
-	/**
-	 * Get Dependencies
-	 *
-	 * @static
-	 * @return \MOC\Core\Depending
-	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
-	}
-
-	/**
-	 * @return Network\Ftp
-	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Soap
-	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Feed
-	 */
-	public function Feed() {
-		return Network\Feed::InterfaceInstance();
-	}
 }

@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2014, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,26 +32,32 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Feed
+ * 13.01.2014 08:26
  */
-namespace MOC\Module;
+namespace MOC\Module\Network;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Feed\Generator;
 
 /**
  *
  */
-class Network implements Module {
+class Feed implements Module {
+
+	/** @var Feed $Singleton */
+	private static $Singleton = null;
 
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Network
+	 * @return Feed
 	 */
 	public static function InterfaceInstance() {
-		return new Network();
+		if( self::$Singleton === null ) {
+			self::$Singleton = new Feed();
+		} return self::$Singleton;
 	}
 
 	/**
@@ -61,9 +67,7 @@ class Network implements Module {
 	 * @return \MOC\Core\Changelog
 	 */
 	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
 	/**
@@ -77,37 +81,9 @@ class Network implements Module {
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * @return Generator
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Soap
-	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Feed
-	 */
-	public function Feed() {
-		return Network\Feed::InterfaceInstance();
+	public function Generator() {
+		return Generator::InterfaceInstance();
 	}
 }

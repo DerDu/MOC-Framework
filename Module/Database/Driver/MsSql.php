@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2014, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,21 +32,28 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Odbc
- * 14.01.2013 20:33
+ * MsSql
+ * 13.03.2014 13:46
  */
 namespace MOC\Module\Database\Driver;
-use MOC\Api;
 use MOC\Module\Database\Driver;
-use MOC\Module\Database\Result;
 
 /**
- * Class which provides a common ODBC interface
+ * Class which provides an interface to a MySQL database
  */
-class Odbc extends Driver {
+class MsSql extends Driver {
 
 	/**
-	 * Opens a ODBC database connection
+	 * Constructor which sets database system specific options
+	 */
+	function __construct() {
+		$this->OptionQuote("'");
+		$this->OptionEscapeQuoteWith("\\");
+		$this->OptionDateTimeFormat("Y-d-m H:i:s");
+	}
+
+	/**
+	 * Opens a Mssql database connection
 	 *
 	 * @param string $DSN
 	 * @param string $User
@@ -57,10 +64,11 @@ class Odbc extends Driver {
 	 */
 	public function Open( $DSN, $User, $Password, $Database = null ){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		if( false == ( $Resource = odbc_connect( $DSN, $User, $Password ) ) ) {
-			if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
+		if( false == ( $Resource = mssql_connect( $DSN, $User, $Password ) ) ) {
+			if( strlen( $Error = mssql_get_last_message() ) ) { $this->DebugError( mssql_get_last_message().' '.$Error ); }
 			return false;
 		} else {
+			mssql_select_db( $Database );
 			$this->SetResource( $Resource );
 			return true;
 		}
@@ -78,29 +86,11 @@ class Odbc extends Driver {
 			return false;
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-
-//		$Benchmark = Api::Extension()->AppGati()->Create()->Current();
-//		$Benchmark->Step('Start Query');
-
-		if( false === ( $Result = odbc_exec( $this->GetResource(), $Query = $this->GetQuery() ) ) ) {
-			if( strlen( $Error = odbc_errormsg() ) ) {
-				$this->DebugError( odbc_error().' '.$Error."\n\n".$Query );
-				Api::Core()->Error()->Type()->Error()->Trigger( odbc_error().' '.$Error."\n\n".$Query, __FILE__, __LINE__, true );
-			}
+		if( false === ( $Result = mssql_query( $this->GetQuery(), $this->GetResource() ) ) ) {
+			if( strlen( $Error = mssql_get_last_message() ) ) { $this->DebugError( $Error."\n\n".$this->GetQuery() ); }
 			return false;
 		}
-
-//		$Benchmark->Step('Stop Query');
-//		Api::Core()->Error()->Type()->Custom()->Trigger( print_r( $Query, true )."\n".print_r( $Benchmark->Report('Start Query','Stop Query'), true ), 'Benchmark-Odbc', __FILE__, __LINE__, true );
-
-
 		switch( $FETCH_AS ) {
-			case self::RESULT_AS_OBJECT: {
-				return $this->FetchAsObject( $Result );
-			}
-			case self::RESULT_AS_RESOURCE: {
-				return $Result;
-			}
 			case self::RESULT_AS_ARRAY_ASSOC: {
 				return $this->FetchAsArrayAssoc( $Result );
 			}
@@ -120,14 +110,14 @@ class Odbc extends Driver {
 	protected function FetchAsArray( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = odbc_num_rows( $Result );
-		while( false !== ( $Row = odbc_fetch_array( $Result ) ) ) {
-			//if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
+		if( $Result === true ) { return $Return; }
+		$RowCount = mssql_num_rows( $Result );
+		while( false !== ( $Row = mssql_fetch_array( $Result ) ) ) {
 			array_push( $Return, array_values( $Row ) );
 		}
-		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = odbc_num_rows( $Result ) : $RowCount ) );
+		$this->DebugMessage( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = mssql_num_rows( $Result ) : $RowCount ) );
 		$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
-		odbc_free_result( $Result );
+		mssql_free_result( $Result );
 		return $Return;
 	}
 
@@ -141,28 +131,14 @@ class Odbc extends Driver {
 	protected function FetchAsArrayAssoc( $Result ) {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		$Return = array();
-		$RowCount = odbc_num_rows( $Result );
-		while( false !== ( $Row = odbc_fetch_array( $Result ) ) ) {
-			//if( strlen( $Error = odbc_errormsg() ) ) { $this->DebugError( odbc_error().' '.$Error ); }
+		if( $Result === true ) { return $Return; }
+		$RowCount = mssql_num_rows( $Result );
+		while( false !== ( $Row = mssql_fetch_array( $Result ) ) ) {
 			array_push( $Return, $Row );
 		}
-		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = odbc_num_rows( $Result ) : $RowCount ) );
-		$this->DebugMessage( array_slice( $Return, 0, ( $RowCount > 1 ? 1 : $RowCount ), true ) );
-		odbc_free_result( $Result );
+		$this->DebugError( 'Affected Rows: '.( $RowCount == -1 ? $RowCount = mssql_num_rows( $Result ) : $RowCount ) );
+		mssql_free_result( $Result );
 		return $Return;
-	}
-
-	/**
-	 * Fetches a query result as an associative array
-	 *
-	 * @param resource $Result
-	 *
-	 * @return array
-	 */
-	protected function FetchAsObject( $Result ) {
-		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		$Return = $this->FetchAsArrayAssoc( $Result );
-		return new Result( $Return );
 	}
 
 	/**
@@ -170,33 +146,34 @@ class Odbc extends Driver {
 	 */
 	public function Close(){
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		odbc_close( $this->GetResource() );
+		mssql_close( $this->GetResource() );
 		$this->SetResource(null);
 	}
 
 	/**
 	 * Starts a Transaction
+	 *
+	 * @todo Implement Transaction
 	 */
 	public function TransactionStart() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		odbc_autocommit( $this->GetResource(), false );
 	}
 
 	/**
 	 * Ends a Transaction with Commit
+	 *
+	 * @todo Implement Commit
 	 */
 	public function TransactionCommit() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		odbc_commit( $this->GetResource() );
-		odbc_autocommit( $this->GetResource(), true );
 	}
 
 	/**
 	 * Ends a Transaction with Rollback
+	 *
+	 * @todo Implement Rollback
 	 */
 	public function TransactionRollback() {
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
-		odbc_rollback( $this->GetResource() );
-		odbc_autocommit( $this->GetResource(), true );
 	}
 }

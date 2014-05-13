@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2014, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,82 +32,78 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Item
+ * 13.01.2014 08:44
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Feed\Generator;
 use MOC\Api;
-use MOC\Generic\Device\Module;
 
 /**
  *
  */
-class Network implements Module {
+class Item extends Constants {
+
+	/** @var int $Type */
+	private $Type = self::TYPE_RSS;
+
+	/** @var string $Title */
+	private $Title = '';
+	/** @var string $Link */
+	private $Link = '';
+	/** @var string $Description */
+	private $Description = '';
 
 	/**
-	 * Get Singleton/Instance
+	 * @param int $Type
+	 */
+	function __construct( $Type ) {
+		$this->Type = $Type;
+	}
+
+	/**
+	 * @param $Value
 	 *
-	 * @static
-	 * @return Network
+	 * @return Item
 	 */
-	public static function InterfaceInstance() {
-		return new Network();
+	public function SetTitle( $Value ) {
+		$this->Title = $Value;
+		return $this;
 	}
 
 	/**
-	 * Get Changelog
+	 * @param $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
+	 * @return Item
 	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+	public function SetLink( $Value ) {
+		$this->Link = $Value;
+		return $this;
 	}
 
 	/**
-	 * Get Dependencies
+	 * @param $Value
 	 *
-	 * @static
-	 * @return \MOC\Core\Depending
+	 * @return Item
 	 */
-	public static function InterfaceDepending() {
-		return Api::Core()->Depending();
+	public function SetDescription( $Value ) {
+		$this->Description = $Value;
+		return $this;
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * @return \MOC\Core\Xml\Node
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	function GetItem() {
+		switch( $this->Type ) {
+			case self::TYPE_RSS:
+			default: {
+				$Node = Api::Core()->Xml()->Create( 'item' );
+				$Node->AddChild( Api::Core()->Xml()->Create( 'title' )->SetContent( $this->Title ) );
+				$Node->AddChild( Api::Core()->Xml()->Create( 'link' )->SetContent( $this->Link ) );
+				$Node->AddChild( Api::Core()->Xml()->Create( 'description' )->SetContent( $this->Description ) );
+			}
+		}
+		return $Node;
 	}
 
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Soap
-	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Feed
-	 */
-	public function Feed() {
-		return Network\Feed::InterfaceInstance();
-	}
 }

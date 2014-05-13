@@ -59,7 +59,7 @@ class Pdo extends Driver {
 		Api::Core()->Error()->Reporting()->Debug(true)->Display(true)->Apply();
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		if( false == ( $Resource = new \PDO("dblib:host=".$Host.";dbname=".$Database, $User, $Password) ) ) {
-			if( strlen( $Error = $Resource->errorInfo() ) ) { $this->DebugError( $Resource->errorInfo().' '.$Error ); }
+//			if( strlen( $Error = $Resource->errorInfo() ) ) { $this->DebugError( $Resource->errorInfo().' '.$Error ); }
 			return false;
 		} else {
 			$this->SetResource( $Resource );
@@ -80,10 +80,10 @@ class Pdo extends Driver {
 		}
 		$this->DebugMessage( get_class( $this ).'::'.__FUNCTION__ );
 		if( false === ( $Result = $this->GetResource()->query( $Query = $this->GetQuery() ) ) ) {
-			if( strlen( $Error = $this->GetResource()->errorInfo() ) ) {
-				$this->DebugError( $this->GetResource()->errorInfo().' '.$Error."\n\n".$Query );
-				Api::Core()->Error()->Type()->Error()->Trigger( $this->GetResource()->errorInfo().' '.$Error."\n\n".$Query, __FILE__, __LINE__, true );
-			}
+//			if( strlen( $Error = $this->GetResource()->errorCode() ) ) {
+//				$this->DebugError( $this->GetResource()->errorInfo().' '.$Error."\n\n".$Query );
+//				Api::Core()->Error()->Type()->Error()->Trigger( $this->GetResource()->errorInfo().' '.$Error."\n\n".$Query, __FILE__, __LINE__, true );
+//			}
 			return false;
 		}
 		switch( $FETCH_AS ) {

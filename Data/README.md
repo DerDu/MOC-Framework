@@ -4,3 +4,4 @@ currently used for
 
 - Cache
 - Journal
+- Feed (RSS, .htaccess 'Allow from All'  )

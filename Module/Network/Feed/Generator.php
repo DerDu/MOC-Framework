@@ -2,7 +2,7 @@
 /**
  * LICENSE (BSD)
  *
- * Copyright (c) 2013, Gerd Christian Kunze
+ * Copyright (c) 2014, Gerd Christian Kunze
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,38 +32,26 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * Network
- * 13.02.2013 09:33
+ * Generator
+ * 13.01.2014 08:33
  */
-namespace MOC\Module;
+namespace MOC\Module\Network\Feed;
 use MOC\Api;
 use MOC\Generic\Device\Module;
+use MOC\Module\Network\Feed\Generator\Envelope;
 
 /**
  *
  */
-class Network implements Module {
-
+class Generator implements Module {
 	/**
 	 * Get Singleton/Instance
 	 *
 	 * @static
-	 * @return Network
+	 * @return Generator
 	 */
 	public static function InterfaceInstance() {
-		return new Network();
-	}
-
-	/**
-	 * Get Changelog
-	 *
-	 * @static
-	 * @return \MOC\Core\Changelog
-	 */
-	public static function InterfaceChangelog() {
-		return Api::Core()->Changelog()->Create( __CLASS__ )
-			->Update()->Added( '18.02.2013 21:10', 'Http()' )
-		;
+		return new Generator();
 	}
 
 	/**
@@ -77,37 +65,17 @@ class Network implements Module {
 	}
 
 	/**
-	 * @return Network\Ftp
+	 * Get Changelog
+	 *
+	 * @static
+	 * @return \MOC\Core\Changelog
 	 */
-	public function Ftp() {
-		return Network\Ftp::InterfaceInstance();
+	public static function InterfaceChangelog() {
+		return Api::Core()->Changelog()->Create( __CLASS__ );
 	}
 
-	/**
-	 * @return Network\Http
-	 */
-	public function Http() {
-		return Network\Http::InterfaceInstance();
+	public function Envelope() {
+		return new Envelope();
 	}
 
-	/**
-	 * @return Network\Soap
-	 */
-	public function Soap() {
-		return Network\Soap::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\ParcelTracker
-	 */
-	public function ParcelTracker() {
-		return Network\ParcelTracker::InterfaceInstance();
-	}
-
-	/**
-	 * @return Network\Feed
-	 */
-	public function Feed() {
-		return Network\Feed::InterfaceInstance();
-	}
 }
