@@ -97,14 +97,22 @@ class Script implements Module {
 	/**
 	 * @param File $File
 	 * @param bool $asRaw
+	 * @param bool $useShrink
 	 *
 	 * @return $this
 	 */
-	public function AddFile( File $File, $asRaw = false ) {
-		if( $asRaw ) {
-			$this->Content .= $File->Read();
+	public function AddFile( File $File, $asRaw = false, $useShrink = false ) {
+
+		if( $useShrink ) {
+			$Content = $this->Shrink( $File->Read() );
 		} else {
-			$this->Content .= $this->Compress( $File->Read() );
+			$Content = $File->Read();
+		}
+
+		if( $asRaw ) {
+			$this->Content .= $Content;
+		} else {
+			$this->Content .= $this->Compress( $Content );
 		}
 		return $this;
 	}
@@ -131,5 +139,21 @@ class Script implements Module {
 		$Yui->setOption( 'nooptimize', false );
 		$Yui->addString( $String );
 		return implode( "\n", $Yui->compress() );
+	}
+
+	private function Shrink( $JS ){
+		/* Strips Comments */
+			$JS = preg_replace('!/\*.*?\*/!s',"\n", $JS);
+			$JS = preg_replace('!\s+//\s*[^\n]*?(?=\n)!m','', $JS);
+			$JS = preg_replace('!\n\s*\n!',"\n", $JS);
+			$JS = preg_replace('!^\s+!','', $JS);
+		/* Minifies */
+//			$JS = preg_replace('/[\n\r \t]/',' ', $JS);
+//			$CSS = preg_replace('/ +/',' ', $CSS);
+//			$CSS = preg_replace('/ ?([,:;{}]) ?/','$1',$CSS);
+		/* Kill Trailing Semicolon, Contributed by Oliver */
+//			$CSS = preg_replace('/;}/','}',$CSS);
+		/* Return Minified CSS */
+		return $JS;
 	}
 }
