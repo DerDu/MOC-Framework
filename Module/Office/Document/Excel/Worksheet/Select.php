@@ -97,4 +97,11 @@ class Select implements Module {
 		return Api::Module()->Office()->Document()->Excel();
 	}
 
+	/**
+	 * @return integer
+	 */
+	public function GetSheetCount() {
+		return Api::Extension()->Excel()->Current()->getSheetCount();
+	}
+
 }
