@@ -18,6 +18,8 @@ Please take into account that current versions of MOC-Framework and plugins coul
 Don't use them in production environments. All problems or comments regarding current versions please report to
 <https://github.com/DerDu/MOC-Framework/issues>.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/33310b34-b44b-48db-bbf7-ba9c87f101e9/small.png)](https://insight.sensiolabs.com/projects/33310b34-b44b-48db-bbf7-ba9c87f101e9)
+
 ------------------------------------------------------------------------------------------------------------------------
 
 ### Usage
