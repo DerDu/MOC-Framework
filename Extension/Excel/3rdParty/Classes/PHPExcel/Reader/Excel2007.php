@@ -1811,13 +1811,11 @@ class PHPExcel_Reader_Excel2007 implements PHPExcel_Reader_IReader
 							$objChart = PHPExcel_Reader_Excel2007_Chart::readChart($chartElements,basename($chartEntryRef,'.xml'));
 
 //							echo 'Chart ',$chartEntryRef,'<br />';
-//							var_dump($charts[$chartEntryRef]);
 //
 							if (isset($charts[$chartEntryRef])) {
 								$chartPositionRef = $charts[$chartEntryRef]['sheet'].'!'.$charts[$chartEntryRef]['id'];
 //								echo 'Position Ref ',$chartPositionRef,'<br />';
 								if (isset($chartDetails[$chartPositionRef])) {
-//									var_dump($chartDetails[$chartPositionRef]);
 
 									$excel->getSheetByName($charts[$chartEntryRef]['sheet'])->addChart($objChart);
 									$objChart->setWorksheet($excel->getSheetByName($charts[$chartEntryRef]['sheet']));

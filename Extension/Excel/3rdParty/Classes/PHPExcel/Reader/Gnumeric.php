@@ -355,7 +355,6 @@ class PHPExcel_Reader_Gnumeric implements PHPExcel_Reader_IReader
 		$xml = simplexml_load_string($gFileData);
 		$namespacesMeta = $xml->getNamespaces(true);
 
-//		var_dump($namespacesMeta);
 //
 		$gnmXML = $xml->children($namespacesMeta['gnm']);
 
@@ -615,7 +614,6 @@ class PHPExcel_Reader_Gnumeric implements PHPExcel_Reader_IReader
 //					echo $cellRange,'<br />';
 
 					$styleAttributes = $styleRegion->Style->attributes();
-//					var_dump($styleAttributes);
 //					echo '<br />';
 
 					//	We still set the number format mask for date/time values, even if _readDataOnly is true
@@ -801,7 +799,6 @@ class PHPExcel_Reader_Gnumeric implements PHPExcel_Reader_IReader
 								$hyperlink = $styleRegion->Style->HyperLink->attributes();
 							}
 						}
-//						var_dump($styleArray);
 //						echo '<br />';
 						$objPHPExcel->getActiveSheet()->getStyle($cellRange)->applyFromArray($styleArray);
 					}

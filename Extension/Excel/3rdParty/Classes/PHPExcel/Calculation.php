@@ -2683,7 +2683,6 @@ class PHPExcel_Calculation {
 			//	Find out if we're currently at the beginning of a number, variable, cell reference, function, parenthesis or operand
 			$isOperandOrFunction = preg_match($regexpMatchString, substr($formula, $index), $match);
 //			echo '$isOperandOrFunction is '.(($isOperandOrFunction) ? 'True' : 'False').'<br />';
-//			var_dump($match);
 
 			if ($opCharacter == '-' && !$expectingOperator) {				//	Is it a negation instead of a minus?
 //				echo 'Element is a Negation operator<br />';
@@ -3709,7 +3708,6 @@ class PHPExcel_Calculation {
 
 			// Extract range
 			$aReferences = PHPExcel_Cell::extractAllCellReferencesInRange($pRange);
-//			var_dump($aReferences);
 			if (!isset($aReferences[1])) {
 				//	Single cell (or single column or row) in range
 				list($currentCol,$currentRow) = PHPExcel_Cell::coordinateFromString($aReferences[0]);

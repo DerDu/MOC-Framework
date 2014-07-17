@@ -98,7 +98,6 @@ class Read extends Write implements Module {
 			$RawData = RawData::InterfaceInstance();
 			foreach( (array)$FileList as $File ) {
 				$RawData->Determine( $File );
-				var_dump( $File );
 				if( $RawData->RawDataType() == $RawData::RAW_DATA_TYPE_FILE ) {
 					array_push( $List, File::InterfaceInstance() );
 					/** @var File $Current */

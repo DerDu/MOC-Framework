@@ -940,7 +940,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 			// treat OBJ records
 			foreach ($this->_objs as $n => $obj) {
 //				echo '<hr /><b>Object</b> reference is ',$n,'<br />';
-//				var_dump($obj);
 //				echo '<br />';
 
 				// the first shape container never has a corresponding OBJ record, hence $n + 1
@@ -1055,7 +1054,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 						}
 					}
 //					echo '<b>Cell annotation ',$note,'</b><br />';
-//					var_dump($noteDetails);
 //					echo '<br />';
 					$cellAddress = str_replace('$','',$noteDetails['cellRef']);
 					$this->_phpSheet->getComment( $cellAddress )
@@ -1625,7 +1623,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 			 );
 
 //		echo '<b>_readTextObject()</b><br />';
-//		var_dump($this->_textObjects[$this->textObjRef]);
 //		echo '<br />';
 	}
 
@@ -4866,7 +4863,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 			// 1. BITMAPCOREHEADER
 			// offset: 0; size: 4; bcSize, Specifies the number of bytes required by the structure
 			$bcSize = self::_GetInt4d($iData, 0);
-//			var_dump($bcSize);
 
 			// offset: 4; size: 2; bcWidth, specifies the width of the bitmap, in pixels
 			$bcWidth = self::_GetInt2d($iData, 4);
@@ -4874,7 +4870,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 
 			// offset: 6; size: 2; bcHeight, specifies the height of the bitmap, in pixels.
 			$bcHeight = self::_GetInt2d($iData, 6);
-//			var_dump($bcHeight);
 			$ih = imagecreatetruecolor($bcWidth, $bcHeight);
 
 			// offset: 8; size: 2; bcPlanes, specifies the number of planes for the target device. This value must be 1
@@ -5065,7 +5060,6 @@ class PHPExcel_Reader_Excel5 implements PHPExcel_Reader_IReader
 			$formulaData = substr($formulaData, $token['size']);
 
 			// for debug: dump the token
-			//var_dump($token);
 		}
 
 		$formulaString = $this->_createFormulaFromTokens($tokens, $additionalData);

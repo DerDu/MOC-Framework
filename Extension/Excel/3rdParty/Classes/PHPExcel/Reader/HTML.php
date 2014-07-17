@@ -469,9 +469,6 @@ class PHPExcel_Reader_HTML implements PHPExcel_Reader_IReader
 		$content = '';
 		$this->_processDomElement($dom,$objPHPExcel->getActiveSheet(),$row,$column,$content);
 
-		echo '<hr />';
-		var_dump($this->_dataArray);
-
 		// Return
 		return $objPHPExcel;
 	}

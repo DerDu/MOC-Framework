@@ -179,7 +179,6 @@ class Directory extends Directory\Read implements Module {
 	public function DirectoryList( $Recursive = false ) {
 		$ResultList = array();
 		if( false !== ( $ItemList = @ftp_rawlist( $this->Connection()->Handler(), $this->Name(), $Recursive ) ) ) {
-			var_dump( $ItemList );
 			foreach( (array)$ItemList as $Item ) {
 				$Data = new \MOC\Module\Network\Ftp\RawData();
 				$Data->ListItem( $Item );

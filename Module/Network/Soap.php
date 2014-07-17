@@ -93,30 +93,6 @@ class Soap implements Module {
 	private $SoapApi = null;
 
 	public function Call() {
-
-		$Login = Login::Create()->setUsername( 'Mercedes' )->setPassword( 'hby8IxD8hd' );
-		$GetClaimById = GetClaimById::Create()->setLoggedIn( $Login )->setClaimExtId( 211 );
-		$GetProducts = GetProducts::Create()->setLoggedIn( $Login );
-
-		var_dump( $this->SoapClient->__getFunctions() );
-/*
-		$Container = $GetProducts->Container();
-		var_dump( $Result = $this->SoapClient->{'GetProducts'}( array( array( 'parameters' => $Container ) ) ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastRequest() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastRequestHeaders() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastResponse() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastResponseHeaders() ) );
-
-		$Container = $GetClaimById->Container();
-		var_dump( $Result = $this->SoapClient->{'GetClaimById'}( array( $Container ) ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastRequest() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastRequestHeaders() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastResponse() ) );
-		var_dump( htmlspecialchars( $this->SoapClient->__getLastResponseHeaders() ) );
-*/
-		//var_dump( $Container );
-		//var_dump( $this->SoapClient->{'GetProducts'}( array( 'parameters' => $Container )  ) );
-
 		return $this->SoapApi;
 	}
 
@@ -405,7 +381,6 @@ class Soap implements Module {
  */
 //		$this->debugNode( $this->Wsdl );
 //		print '<pre>';
-//		var_dump( $this->SoapApi );
 	}
 
 	/**
@@ -599,7 +574,7 @@ class Soap implements Module {
 	 * @param Node $Node
 	 */
 	private function debugNode( Node $Node ) {
-		print '<pre><span style="color: silver;">';var_dump( htmlspecialchars( $Node->Code() ) );print '</span></pre>';
+		print '<pre><span style="color: silver;">';print htmlspecialchars( $Node->Code() );print '</span></pre>';
 	}
 
 	private function debugPhp( $String ) {

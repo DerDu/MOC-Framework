@@ -535,7 +535,6 @@ class PHPExcel_Calculation_LookupRef {
 		// find the match
 		// **
 		// loop on the cells
-//		var_dump($lookup_array);
 //		echo '<br />';
 		foreach($lookup_array as $i => $lookupArrayValue) {
 			if (($match_type == 0) && ($lookupArrayValue == $lookup_value)) {
@@ -543,10 +542,8 @@ class PHPExcel_Calculation_LookupRef {
 				return ++$i;
 			} elseif (($match_type == -1) && ($lookupArrayValue <= $lookup_value)) {
 //				echo '$i = '.$i.' => ';
-//				var_dump($lookupArrayValue);
 //				echo '<br />';
 //				echo 'Keyset = ';
-//				var_dump($keySet);
 //				echo '<br />';
 				$i = array_search($i,$keySet);
 //				echo '$i='.$i.'<br />';
@@ -560,10 +557,8 @@ class PHPExcel_Calculation_LookupRef {
 				}
 			} elseif (($match_type == 1) && ($lookupArrayValue >= $lookup_value)) {
 //				echo '$i = '.$i.' => ';
-//				var_dump($lookupArrayValue);
 //				echo '<br />';
 //				echo 'Keyset = ';
-//				var_dump($keySet);
 //				echo '<br />';
 				$i = array_search($i,$keySet);
 //				echo '$i='.$i.'<br />';

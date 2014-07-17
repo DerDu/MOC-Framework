@@ -197,8 +197,6 @@ class Chart implements Module{
 		$DataList	= str_replace( '"[', "[", $DataList );
 		$DataList	= str_replace( ']"', "]", $DataList );
 
-		//var_dump( $this->Axis()->_getConfiguration() );
-
 		$Script = '<script type="text/javascript">'.
 			"jQuery('#".$this->Container()->_getIdentifier()."').css({'width':'".$this->Container()->_getWidth()."','height':'".$this->Container()->_getHeight()."'});".
 			"jQuery.plot('#".$this->Container()->_getIdentifier()."', ".$DataList.", {"
