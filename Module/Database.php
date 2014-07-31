@@ -148,6 +148,9 @@ class Database implements Module {
 	}
 
 	/**
+     * SQL parameter binding. Sets the parameter for the default key '?' in a query<br/>
+     * If you have a string as parameter and it contains a '?' then you should assign a custom key to avoid failures.
+     *
 	 * @param mixed $Value
 	 * @param null|string $Key
 	 * @param int $Type
