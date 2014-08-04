@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="MOC.php" colors="true">
+
+	<testsuites>
+		<testsuite name="TravisCI">
+			<directory>./TestUnit/</directory>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<whitelist>
+			<directory>./</directory>
+			<exclude>
+				<directory>./TestUnit</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+</phpunit>
