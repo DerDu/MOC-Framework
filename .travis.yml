@@ -33,3 +33,6 @@ script: phpunit --configuration phpunit.xml
 # configure notifications (email, IRC, campfire etc)
 # notifications:
 #  irc: "irc.freenode.org#yourfavouriteroomfortravis"
+
+notifications:
+  email: false
